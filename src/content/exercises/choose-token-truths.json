@@ -1,0 +1,34 @@
+{
+  "engine": "model-choice",
+  "title": "Which statement about tokens is accurate?",
+  "scenario": "You are budgeting an AI feature and want to reason correctly about limits and costs.",
+  "task": "Which statement is the most accurate?",
+  "options": [
+    {
+      "text": "One token always equals one word.",
+      "correct": false,
+      "feedback": "A helpful myth — token counts depend on the tokenizer. “Cat” is often one token; “internationalization” is several; emojis can be multiple."
+    },
+    {
+      "text": "Token counts are approximate and depend on the model, the language and the content.",
+      "correct": true,
+      "feedback": "Yes — which is exactly why the ¾-word rule is only an estimate, and why dense text, code and other languages cost more."
+    },
+    {
+      "text": "Only your messages count; the model's replies are free.",
+      "correct": false,
+      "feedback": "Both input and output are counted — long answers add to the bill and fill the window too."
+    },
+    {
+      "text": "Accents and emojis never affect token counts.",
+      "correct": false,
+      "feedback": "Unusual characters are often split into multiple tokens — they can cost several times what plain letters do."
+    }
+  ],
+  "hints": ["The honest answer contains the word “depends”."],
+  "explanation": "Tokens are slices, not words: the count depends on the model's tokenizer, the language and the content. Practical consequences: estimate with the ¾-word rule, expect code and emojis to cost more, and remember that both input and output count.",
+  "skills": ["costs and limits"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/tokens-simply"],
+  "draft": false
+}

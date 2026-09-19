@@ -1,0 +1,67 @@
+---
+title: Context windows
+description: "The context window is everything a model can see at once — and it is finite. Learn why long chats forget and how to work within the limit."
+track: ai-foundations
+order: 4
+level: beginner
+estimatedMinutes: 6
+skills: ["foundations", "long input"]
+prerequisites: ["ai-foundations/tokens-simply"]
+learningOutcome: "Explain what fits in a context window and what happens at the limit."
+class: evergreen
+sources: []
+seo:
+  intent: "what is a context window — why chats forget and how to work with the limit"
+  cluster: "A6"
+exercises: ["fix-the-forgetting-chat"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+A [context window](/glossary/context-window) is the total amount of text a model can consider at one time. Your current message, earlier turns, pasted documents and the model's own replies all share it. When people say a model "remembers" — this is what they mean: the text still inside the window.
+
+## No window, no memory
+
+Outside the window there is no memory to search, because there is no store: the model reads what it is given, each time. A new conversation starts with an empty window — which is why a chat that "knows" your project today knows nothing about it tomorrow unless you bring the context along.
+
+## What happens at the limit
+
+Two things, and both matter:
+
+- **Truncation.** Systems cut from the oldest end first — measured in [tokens](/glossary/token), the start of a long chat is the first to fall out. Some tools warn you; many do not.
+- **Attention dilution.** Even content still inside a very large window competes for attention. Instructions buried deep in a 100-page paste are easier to lose than the same instruction stated right where it is needed.
+
+## A bad example
+
+> Three hours into a working session you ask: "Based on what I told you at the start, which vendor did I prefer?"
+>
+> The first hour may have fallen out of the window already. The model answers from what remains — and rather than say "that part is gone", it may guess. Fluently.
+
+## A better example
+
+> **Ask:** "Summarize the decisions we've made so far as bullets. Then I'll start a fresh chat and paste that."
+>
+> A fresh window full of relevant, compact context beats a stale window full of transcript. This carry-forward habit is the single most useful long-session tactic.
+
+## Why it works
+
+Treat the window as working memory you manage:
+
+- **Keep what is relevant.** Summarize and carry forward; drop the rest deliberately.
+- **Restate what matters.** If a rule is critical, say it near the work it governs — not three hours earlier.
+- **Start fresh when it gets muddy.** A new chat with a good brief beats a long one with a bad memory.
+
+## Practice
+
+<ExerciseCard id="fix-the-forgetting-chat" />
+
+## Transfer
+
+- Long drafting project: keep a running "brief" to paste at the top of new sessions.
+- Research with many sources: work one source at a time, extract notes, then combine.
+- Any answer that contradicts something you said early: suspect the window before the model.
+
+## Next
+
+Next: **[Why AI makes things up](/learn/ai-foundations/why-ai-makes-things-up)** — the failure mode both mechanisms predict. The [context window glossary entry](/glossary/context-window) covers the basics.

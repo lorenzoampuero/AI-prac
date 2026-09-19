@@ -1,0 +1,34 @@
+{
+  "engine": "model-choice",
+  "title": "Fix the forgetting chat",
+  "scenario": "You have been working in one long chat for hours. You ask about a preference you stated near the beginning, and the answer is confidently wrong — the start of the conversation has fallen out of the context window.",
+  "task": "What is the best next step?",
+  "options": [
+    {
+      "text": "Repeat “please remember everything I said” and ask again.",
+      "correct": false,
+      "feedback": "Wishing does not widen the window. The dropped text is gone — an instruction cannot bring it back."
+    },
+    {
+      "text": "Ask for a summary of the decisions so far, then start a fresh chat with that summary and your question.",
+      "correct": true,
+      "feedback": "Yes — carry forward a compact summary into a clean window. This beats a long chat with missing context in almost every case."
+    },
+    {
+      "text": "Say the preference again as a single line and continue in the same chat.",
+      "correct": false,
+      "feedback": "Better than nothing — but the long chat is still crowded, and the next hundred messages may push your line out again. A clean window with a compact brief is more reliable."
+    },
+    {
+      "text": "Nothing — models eventually remember everything from the session.",
+      "correct": false,
+      "feedback": "There is no store behind the window. If it is not in the current context, it is not available."
+    }
+  ],
+  "hints": ["What is the smallest, most relevant context you could bring to a clean window?"],
+  "explanation": "The window is finite working memory, and the oldest content falls out first. The durable fix is a carry-forward habit: summarize the essentials, start fresh, paste the brief. Restating a line helps briefly; managing the window deliberately helps permanently.",
+  "skills": ["long input", "context management"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/context-windows"],
+  "draft": false
+}
