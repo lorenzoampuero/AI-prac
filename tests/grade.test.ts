@@ -13,6 +13,7 @@ import {
   isFixPrompt,
   isImplementedEngine,
   isOrderSteps,
+  isRealChallenge,
   isUsableSubmission,
   toOptions,
   type FindProblem,
@@ -97,7 +98,8 @@ describe('choice engines — grading', () => {
     expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
     expect(isImplementedEngine({ engine: 'order-steps' })).toBe(true);
     expect(isImplementedEngine({ engine: 'evaluate-output' })).toBe(true);
-    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'image-prompt-builder' })).toBe(false);
   });
 });
 
@@ -130,7 +132,7 @@ describe('find-the-problem engine — grading', () => {
 
   it('is recognized as an implemented engine', () => {
     expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
-    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'image-prompt-builder' })).toBe(false);
   });
 });
 
@@ -214,6 +216,22 @@ describe('evaluate-output engine', () => {
   it('is classified and registered as implemented', () => {
     expect(isEvaluateOutput({ engine: 'evaluate-output' })).toBe(true);
     expect(isImplementedEngine({ engine: 'evaluate-output' })).toBe(true);
-    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'image-prompt-builder' })).toBe(false);
+  });
+});
+
+describe('real-challenge engine', () => {
+  it('is classified and registered as implemented', () => {
+    expect(isRealChallenge({ engine: 'real-challenge' })).toBe(true);
+    expect(isRealChallenge({ engine: 'fix-prompt' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(true);
+  });
+
+  it('opens with the same usable-submission gate as the other open-ended family', () => {
+    expect(isUsableSubmission('')).toBe(false);
+    expect(isUsableSubmission('See above.')).toBe(false);
+    expect(
+      isUsableSubmission('I will paste only the report text and verify every figure against the source.'),
+    ).toBe(true);
   });
 });

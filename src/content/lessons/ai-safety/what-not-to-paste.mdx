@@ -1,0 +1,67 @@
+---
+title: What not to paste
+description: "Secrets, personal data and confidential numbers do not belong in a chat box — what to classify before pasting, and the scrub-and-placeholder fix for everything else."
+track: ai-safety
+order: 1
+level: beginner
+estimatedMinutes: 6
+skills: ["privacy", "verification"]
+prerequisites: ["ai-coding/describe-vet-never-blind-run"]
+learningOutcome: "Classify what can and cannot be pasted into an AI tool, and scrub the rest."
+class: evergreen
+sources: []
+seo:
+  intent: "what not to paste into ai chats — secrets, personal data, confidential info"
+  cluster: "H2"
+exercises: ["spot-what-should-not-be-pasted"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Three categories never belong in a chat box: **secrets** (keys, passwords, tokens), **other people's personal data**, and your **organization's confidential material**. Almost everything else can go in — after a quick scrub. The skill is classification, and it takes ten seconds.
+
+## The three buckets
+
+1. **Secrets.** API keys, passwords, tokens, connection strings. A pasted key is a leaked key: remove it, rotate it, and describe the problem without it. The same rule as [hardcoded keys in code](/learn/ai-coding/describe-vet-never-blind-run) — here the leak is the paste itself.
+2. **Personal data.** Names, emails, purchase histories, health or personnel records of real people. The task almost never needs the identities — replace them: `Client A`, `a@example.com`. The structure teaches the AI everything; the identities only add risk.
+3. **Confidential material.** Unreleased pricing, contracts, financials, strategy. Check your organization's rules first; when there is no rule, generalize — describe the shape ("a SaaS contract with a 60-day termination clause") instead of pasting the document.
+
+## The scrub habit
+
+Two moves make most content safe:
+
+- **Replace** specific values with placeholders — `[amount]`, `[customer name]` — the same convention that keeps [drafts honest](/glossary/placeholder).
+- **Generalize** the details that do not affect the task. "A client in the EU" carries the same meaning for drafting purposes as the actual client's name.
+
+Paste the scrubbed version; keep the original where it lives. If the answer seems off because you scrubbed too much, re-add detail category by category — never identity.
+
+## What "pasted" really means
+
+Treat anything you paste as leaving your building: depending on the tool and its settings, it may be stored, reviewed or used to improve systems. That does not make AI unusable — it makes the ten-second classification the first step of every task. Provider specifics vary and change; they get their own dated, sourced lesson in a later wave.
+
+## A bad example
+
+> **Paste:** "Our API key sk_live_… stopped working, and here's the full customer export to debug with."
+>
+> One message, two rotatable disasters — a credential and thousands of people's data, now outside your control.
+
+## A better example
+
+> **Paste:** "An API key that looks like `sk_live_[REDACTED]` suddenly returns 'invalid key' this morning. Nothing changed on our side. What are the likely causes?"
+>
+> Same debugging help, no secrets, nothing to rotate.
+
+## Practice
+
+<ExerciseCard id="spot-what-should-not-be-pasted" />
+
+## Transfer
+
+- Debugging sessions: error messages yes, keys never.
+- Meeting notes: summarize internal-but-not-secret content freely; scrub figures you are not allowed to share.
+- Photos and screenshots: check what is visible before they travel — a dashboard screenshot is a data dump.
+
+## Next
+
+Next: **[Prompt injection, simply](/learn/ai-safety/prompt-injection-simply)** — the other direction of the same boundary: what happens when untrusted content comes *in* and carries instructions with it.

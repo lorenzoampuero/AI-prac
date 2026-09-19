@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Choose the right coding task",
+  "scenario": "You are not a programmer. You want AI help with something small, and you are deciding which kind of task fits what code generation actually does well on a first pass.",
+  "task": "Pick the task that fits AI code generation well — as a draft to review.",
+  "options": [
+    {
+      "text": "Write a short script that renames every image in a folder to a numbered sequence — for me to review before use.",
+      "correct": true,
+      "feedback": "Small, precisely described, with checkable behavior and a review step built in — exactly the shape generation handles well."
+    },
+    {
+      "text": "Guarantee that our customer portal is secure against attacks.",
+      "correct": false,
+      "feedback": "Security work is verification-heavy and consequence-heavy — no tool can guarantee anything, and the checking is the actual job."
+    },
+    {
+      "text": "Find which line of our 40,000-line codebase causes a login bug that appears once a week.",
+      "correct": false,
+      "feedback": "It cannot see your codebase or run it. Diagnosing a live bug needs context, reproduction and inspection — AI can assist inside that process, not replace it."
+    },
+    {
+      "text": "Decide whether we should rebuild our checkout system or patch it.",
+      "correct": false,
+      "feedback": "An engineering and product judgment with long consequences — the kind of decision that stays human."
+    }
+  ],
+  "hints": [
+    "Which task has a small, checkable outcome?",
+    "Which tasks ask for guarantees or judgment rather than a draft?"
+  ],
+  "explanation": "The four limits do the sorting: no guarantee, no context, no responsibility, uncertain freshness. Small draft-and-review tasks survive all four; guarantees, context-heavy debugging and product judgment run straight into them.",
+  "skills": ["coding", "evaluation"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-coding/what-ai-can-do-with-code"],
+  "draft": false
+}

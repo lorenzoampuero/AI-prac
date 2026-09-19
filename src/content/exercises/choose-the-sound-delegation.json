@@ -1,0 +1,22 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Choose the sound delegation",
+  "scenario": "Your landlord kept part of your deposit and sent a letter explaining why. You want AI help responding — and you are deciding what to actually ask it for.",
+  "task": "Pick the request that delegates the right things to AI.",
+  "promptA": "Here is my landlord's letter about the deposit. Am I legally right to get the full amount back? Answer yes or no, and write the final reply I should send.",
+  "promptB": "Here is my landlord's letter about the deposit. (1) Summarize it in three points. (2) List what I should verify under the tenancy rules. (3) Draft a neutral request for the remainder, for my review — and flag anything that reads as legal advice so I check it with a tenancy advisor.",
+  "better": "B",
+  "feedback": {
+    "a": "Asking for a legal verdict and a final reply delegates the two things that must stay human: the judgment and the accountability. A confident yes-or-no is exactly the wrong output shape for a real consequence.",
+    "b": "It uses AI for what it does well — compressing the letter, listing what to check, drafting for review — and routes the legal judgment to the advisor and the decision to you."
+  },
+  "hints": [
+    "Which request treats the model as an assistant, and which treats it as a lawyer?",
+    "After each reply is sent: who is accountable if it is wrong?"
+  ],
+  "explanation": "The three-tier rule decides it: drafting and summarizing sit in 'delegate or assist', a legal verdict sits in 'keep human'. Prompt B keeps the material-production on the AI side and the consequence-bearing judgment where a professional can own it — with flags so advice-shaped output gets caught before it is acted on.",
+  "skills": ["judgment"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-safety/when-not-to-rely-on-ai"],
+  "draft": false
+}

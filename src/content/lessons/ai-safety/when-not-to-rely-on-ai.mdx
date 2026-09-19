@@ -1,0 +1,66 @@
+---
+title: When not to rely on AI
+description: "Delegation follows consequence: use AI freely where mistakes are reversible, and keep the judgment calls — legal, medical, financial — in human hands."
+track: ai-safety
+order: 3
+level: intermediate
+estimatedMinutes: 6
+skills: ["judgment", "verification"]
+prerequisites: ["ai-safety/prompt-injection-simply"]
+learningOutcome: "Decide what to delegate to AI based on consequence, reversibility and accountability."
+class: evergreen
+sources: []
+seo:
+  intent: "when not to rely on ai — consequence-based delegation"
+  cluster: "H6"
+exercises: ["choose-the-sound-delegation"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Delegate by consequence: use AI freely where being wrong is cheap and reversible, let it assist where the stakes rise, and keep the decision with a human where the outcome is irreversible or someone has to be accountable. Three tiers, one question each.
+
+## The three tiers
+
+1. **Delegate.** Reversible, low-stakes, verifiable: drafting, summarizing, brainstorming, formatting, transforming. A mistake costs minutes and gets caught by a skim. Most everyday use lives here — enjoy it without ceremony.
+2. **Assist.** Real stakes, human decides: research synthesis to be [verified](/learn/ai-research/inspect-the-citations), client-facing drafts to be [reviewed](/learn/ai-work/email-that-sounds-like-you), analyses to be checked. AI produces material; you produce the judgment.
+3. **Keep human.** Legal, medical and financial decisions about people; safety; anything irreversible; anything with a name on it. AI can still prepare: "list the questions to ask my lawyer" is a perfect request. "Tell me whether I am legally right" is not — a confident verdict is [exactly the wrong output shape](/learn/ai-research/ask-for-uncertainty) when the consequence is real.
+
+## Why the line sits there
+
+Three properties mark the "keep human" zone: **consequence** (how much a mistake costs), **reversibility** (can it be undone), and **accountability** (who signs). The model cannot hold the third one — responsibility does not travel to a language model, whatever its tone suggests. And confident fluency is everywhere: the same mechanism that makes it [make things up](/learn/ai-foundations/why-ai-makes-things-up) also makes it sound right about them.
+
+## The uncomfortable middle
+
+Professionals use AI for exactly these topics — legally, well and daily. The discipline is not avoiding the tool; it is routing the parts correctly:
+
+- **AI → materials**: summaries, question lists, draft language, options with trade-offs.
+- **You → the decision**, informed by those materials.
+- **A qualified human → the verdict**, whenever the consequence earns one.
+
+## A bad example
+
+> **Ask:** "Am I legally entitled to my full deposit back? Answer yes or no, and write the final reply."
+>
+> You are asking a system that cannot be accountable for a verdict — and inviting it to sound certain regardless.
+
+## A better example
+
+> **Ask:** "Summarize this letter in three points. List what I should verify under the tenancy rules. Draft a neutral request I can review — and flag anything that reads as legal advice so I check it with an advisor."
+>
+> AI does the compression and construction; the verdict goes to the professional; the decision and the signature stay with you.
+
+## Practice
+
+<ExerciseCard id="choose-the-sound-delegation" />
+
+## Transfer
+
+- Health: organize information and questions; the diagnosis belongs to the doctor.
+- Money: model scenarios as worksheets; the commitment is yours to make.
+- People decisions: hiring, firing, discipline — AI drafts nothing that carries consequences for a person without full human judgment in the loop.
+
+## Next
+
+Next: **[Using AI at work: judgment calls](/learn/ai-safety/using-ai-at-work)** — the last safety skill: your personal usage plan, written once and reused everywhere.

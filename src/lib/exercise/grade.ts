@@ -244,6 +244,21 @@ export function gradeEvaluateOutput(
 }
 
 // ---------------------------------------------------------------------------------------------------
+// real-challenge — open judgment: the learner plans how they would handle a real scenario, self-checks
+// against a rubric, then compares with a model answer. Open-ended by design: the same usable-submission
+// gate as fix-prompt (self-assessment, §19).
+
+export interface RealChallenge {
+  engine: 'real-challenge';
+  rubric: { id: string; label: string }[];
+  modelAnswer: string;
+}
+
+export function isRealChallenge(value: { engine: string }): value is RealChallenge {
+  return value.engine === 'real-challenge';
+}
+
+// ---------------------------------------------------------------------------------------------------
 // Engine registry — every engine with a working UI must be listed here; the content contract tests
 // refuse to publish exercises whose engine is missing (no phantom UI ships).
 
@@ -254,6 +269,7 @@ export function isImplementedEngine(value: { engine: string }): boolean {
     isFixPrompt(value) ||
     isOrderSteps(value) ||
     isBuildPrompt(value) ||
-    isEvaluateOutput(value)
+    isEvaluateOutput(value) ||
+    isRealChallenge(value)
   );
 }

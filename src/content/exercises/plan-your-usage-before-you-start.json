@@ -1,0 +1,23 @@
+{
+  "engine": "real-challenge",
+  "title": "Plan your usage before you start",
+  "scenario": "You are about to use AI to draft a quarterly report section. It will include customer examples and figures from three internal dashboards. Your workplace has no explicit AI policy yet — and the section goes out under your name.",
+  "task": "Write your usage plan before you start: what you will paste, what stays out, what you will verify, and what you will disclose. Then self-check it against the rubric and compare with a model answer.",
+  "rubric": [
+    { "id": "paste", "label": "Says what will actually be pasted — the scrubbed, safe version" },
+    { "id": "never", "label": "Names what stays out: secrets, personal data, confidential figures" },
+    { "id": "verify", "label": "Lists verification steps for every figure, name and claim" },
+    { "id": "disclose", "label": "States how and to whom the AI assistance will be disclosed" },
+    { "id": "human", "label": "Keeps a human checkpoint before anything ships" }
+  ],
+  "modelAnswer": "Plan:\n\n1. Paste: the section outline, my own draft paragraphs, and the three dashboards' structure with fake sample values. Customer examples become 'Client A / Client B, typical usage ranges'.\n\n2. Never paste: customer names, emails or contract values; raw dashboard exports; anything marked confidential; unreleased numbers.\n\n3. Verify: every figure checked against its dashboard before it reaches the report; every customer example fictionalized or cleared for use; numbers re-typed by me into the final document, not copy-pasted from a draft.\n\n4. Disclose: since no policy exists, I will note in the document's change log that AI assisted the draft, and flag the missing policy to my manager so we set a team rule.\n\n5. Human checkpoint: I review the full section against the source dashboards line by line before it goes anywhere — the signature stays mine.",
+  "hints": [
+    "Four lines: paste / never / verify / disclose.",
+    "What does 'under your name' change about the final step?"
+  ],
+  "explanation": "A complete plan answers all four lines and keeps the checkpoint explicit: scrubbed inputs, named exclusions, figure-level verification, honest disclosure of both the assistance and the missing policy. The last line is the one people drop — and the one the signature depends on.",
+  "skills": ["judgment", "privacy", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-safety/using-ai-at-work"],
+  "draft": false
+}

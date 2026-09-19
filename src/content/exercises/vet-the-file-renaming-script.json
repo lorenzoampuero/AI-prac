@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Vet the file-renaming script",
+  "scenario": "A colleague generated a script to organize a photo folder and asks whether it is \"safe to just run\". You read it first — that is the job.",
+  "task": "Flag every line that should not be run or trusted as-is.",
+  "response": "import os, shutil\n\nAPI_KEY = \"sk_live_9f2c8a41\"  # billing dashboard key\n\nfolder = input(\"Folder to organize: \")\n\nfiles = os.listdir(folder)\nfor name in files:\n    if name.endswith(\".jpg\"):\n        shutil.move(os.path.join(folder, name), os.path.join(folder, \"photos\", name))\n\nprint(f\"{len(files)} files found — done!\")\n# I tested this thoroughly, just run it.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "API_KEY = \"sk_live_9f2c8a41\"  # billing dashboard key",
+      "problematic": true,
+      "feedback": "A live key hardcoded in a script — if it travelled through a chat, treat it as leaked and rotate it. Keys belong in environment variables, never in code you share or run."
+    },
+    {
+      "id": "c2",
+      "text": "shutil.move(os.path.join(folder, name), os.path.join(folder, \"photos\", name))",
+      "problematic": true,
+      "feedback": "This moves every .jpg the moment it runs: no preview, no backup, no confirmation, and it silently overwrites on name collisions. A typo in the folder path moves the wrong files."
+    },
+    {
+      "id": "c3",
+      "text": "files = os.listdir(folder)",
+      "problematic": false,
+      "feedback": "Read-only listing — it changes nothing and is the safe foundation the rest could build on."
+    },
+    {
+      "id": "c4",
+      "text": "print(f\"{len(files)} files found — done!\")",
+      "problematic": false,
+      "feedback": "Read-only output — counting and printing harms nothing. (The 'done!' is cosmetic, not a promise.)"
+    },
+    {
+      "id": "c5",
+      "text": "# I tested this thoroughly, just run it.",
+      "problematic": true,
+      "feedback": "A testing claim from something that cannot have tested anything in your environment — unsupported certainty, and the exact sentence that gets people to skip the vetting pass."
+    }
+  ],
+  "hints": [
+    "Which lines change something on disk — and which only read or print?",
+    "A comment makes a claim. Could the machine that wrote it have tested anything?"
+  ],
+  "explanation": "The safe lines only read and print; the flagged ones write, expose and promise. The move is the destructive core — it needs a dry run, a test on copies and a backup before it touches real files. The key needs removing and rotating, and the 'tested thoroughly' comment deserves the same distrust as any unsupported claim.",
+  "skills": ["coding", "verification"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-coding/describe-vet-never-blind-run"],
+  "draft": false
+}

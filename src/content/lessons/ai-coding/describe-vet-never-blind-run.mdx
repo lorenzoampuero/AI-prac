@@ -1,0 +1,66 @@
+---
+title: Describe, vet, never blind-run
+description: "Treat generated code like a draft from a fast stranger: read it before running, check the destructive lines, test on copies — and never execute what you cannot explain."
+track: ai-coding
+order: 2
+level: beginner
+estimatedMinutes: 7
+skills: ["coding", "verification"]
+prerequisites: ["ai-coding/what-ai-can-do-with-code"]
+learningOutcome: "Read, test and explain generated code before it touches anything real."
+class: evergreen
+sources: []
+seo:
+  intent: "is ai generated code safe to run — vet before you execute"
+  cluster: "F6"
+exercises: ["vet-the-file-renaming-script"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Generated code is a draft from a fast stranger who will never be blamed for it. Three habits make it safe: **describe** what you want precisely, **vet** what you get before executing, and never **blind-run** — execute something you cannot explain. The middle verb is the one people skip, and it is the one that matters.
+
+## The vetting pass
+
+Read the draft with a specific checklist:
+
+1. **Find the dangerous verbs.** Delete, move, overwrite, send, install, fetch a URL, anything touching passwords or keys. Those lines decide everything.
+2. **Check paths and inputs.** Where does it actually operate? A wrong variable means the wrong folder. Pick a folder name with spaces and odd characters as your test — that is where naive scripts break.
+3. **Look for secrets.** API keys and passwords must never be hardcoded — in generated code or any other. They belong in environment variables.
+4. **Distrust the comments.** "I tested this thoroughly" is a claim by a system that cannot have tested anything here — the same unsupported certainty from [the research track](/learn/ai-research/find-the-unsupported-claim), in a comment.
+5. **Write the dry-run line yourself.** Ask for a version that only prints what it *would* do. Run that first — the list of intended actions is cheap to read and catches the expensive mistakes.
+
+## Test on copies
+
+Run the script on a copy folder with a few fake files, including one with a tricky name. Confirm the behavior. Then — with a backup in place — run it on the real folder. Destructive steps earn their way in one at a time, never as a batch.
+
+## A bad example
+
+> **You:** paste the script into a terminal on the folder with the originals. It runs "successfully". The photos are now inside `photos/photos/`, some overwritten, and the original layout is gone.
+>
+> Nothing errored. That is exactly how blind-running fails — silently.
+
+## A better example
+
+> **You:** run the dry-run version first. It prints twelve "would move" lines. One of them is wrong — a file you wanted to keep. You fix the filter, re-run the dry-run, then execute with a backup.
+>
+> Two minutes of reading; the folder survives either way.
+
+## When you cannot read it
+
+If you cannot explain what a line does, you have exactly two honest options: ask for the explanation and keep re-reading until you can, or **shrink the task** until the whole script fits in your head. There is no third option where you run it anyway — that one is a bet, not a workflow.
+
+## Practice
+
+<ExerciseCard id="vet-the-file-renaming-script" />
+
+## Transfer
+
+- Automation scripts: dry-run, copy-test, then execute — in that order, every time.
+- Snippets from anywhere: the checklist works on human-written and generated code alike.
+- Commands pasted from chats: same rules as code — read the destructive verbs first.
+
+## Next
+
+Next: **[What not to paste](/learn/ai-safety/what-not-to-paste)** — the data side of the same discipline: what should never travel into a chat box at all.

@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot what should not be pasted",
+  "scenario": "A colleague drafted one request for an AI chat tool. You get a single review pass before it is pasted — check what travels and what must not.",
+  "task": "Flag every part that should not be pasted as-is.",
+  "response": "Help me with several things. Our billing API key sk_live_4d91 stopped working this morning, and this error keeps appearing: 'ECONNREFUSED'. Also, summarize the attached customer_export.csv (12,000 rows with names, emails and purchase history) into our top segments. For tone, check the screenshot of our unreleased Q4 pricing page. Finally, fix this paragraph about the office party — here it is.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "our billing API key sk_live_4d91 stopped working",
+      "problematic": true,
+      "feedback": "A live credential. Anything pasted should be assumed to have left your building — remove the key, rotate it, and describe the symptom without the secret."
+    },
+    {
+      "id": "c2",
+      "text": "summarize the attached customer_export.csv (12,000 rows with names, emails and purchase history)",
+      "problematic": true,
+      "feedback": "Personal data of thousands of real people. The segmentation task needs the structure, not the identities — replace with a fake sample (Client A, a@example.com) before pasting."
+    },
+    {
+      "id": "c3",
+      "text": "check the screenshot of our unreleased Q4 pricing page",
+      "problematic": true,
+      "feedback": "Unreleased pricing is confidential business material — check policy first, and prefer a generalized description ('a three-tier pricing page') over the actual numbers."
+    },
+    {
+      "id": "c4",
+      "text": "this error keeps appearing: 'ECONNREFUSED'",
+      "problematic": false,
+      "feedback": "A bare error message contains no secrets or personal data — exactly the kind of technical detail that is fine (and useful) to paste."
+    },
+    {
+      "id": "c5",
+      "text": "fix this paragraph about the office party — here it is",
+      "problematic": false,
+      "feedback": "Your own text about a party carries no secrets, no personal data of others, nothing confidential — paste away."
+    }
+  ],
+  "hints": [
+    "Sort each item into a bucket: secret, personal data, confidential, or fine?",
+    "Which items would still work for the AI after a scrub — and which must simply leave the request?"
+  ],
+  "explanation": "Three buckets, three flags: a credential, other people's personal data, and unreleased business numbers. The error message and the party paragraph carry none of that — they can stay as they are. The fix for the middle is not 'never use AI' but scrub: placeholders for identities and values, generalize the rest.",
+  "skills": ["privacy", "verification"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-safety/what-not-to-paste"],
+  "draft": false
+}

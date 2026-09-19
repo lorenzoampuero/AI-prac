@@ -7,12 +7,14 @@ import {
   isFindProblem,
   isFixPrompt,
   isOrderSteps,
+  isRealChallenge,
   toOptions,
   type BuildPrompt,
   type ChoiceOption,
   type EvaluateOutput,
   type FindProblemClaim,
   type FixPrompt,
+  type RealChallenge,
 } from '../lib/exercise/grade';
 
 interface Props {
@@ -32,6 +34,7 @@ let fix: FixPrompt | null = null;
 let order: string[] | null = null;
 let build: BuildPrompt | null = null;
 let evaluate: EvaluateOutput | null = null;
+let challenge: RealChallenge | null = null;
 let aiResponse = '';
 if (entry && published) {
   if (isChoiceFamily(entry.data)) {
@@ -47,6 +50,8 @@ if (entry && published) {
     build = entry.data;
   } else if (isEvaluateOutput(entry.data)) {
     evaluate = entry.data;
+  } else if (isRealChallenge(entry.data)) {
+    challenge = entry.data;
   }
 }
 
@@ -63,7 +68,9 @@ const config =
             ? JSON.stringify({ id: entry.id, kind: 'evaluate-output', verdict: evaluate.verdict })
             : entry && build
               ? JSON.stringify({ id: entry.id, kind: 'build-prompt', fields: build.fields })
-              : '';
+              : entry && challenge
+                ? JSON.stringify({ id: entry.id, kind: 'real-challenge' })
+                : '';
 
 // Fixed rotated presentation (never the canonical order) so the answer is not visible before interaction.
 let presented: { index: number; text: string }[] = [];
@@ -75,7 +82,7 @@ if (order) {
 ---
 
 {
-  entry && published && (options || claims || fix || order || build || evaluate) && (
+  entry && published && (options || claims || fix || order || build || evaluate || challenge) && (
     <section class="exercise" data-exercise data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
       <h3 id={`ex-${entry.id}-title`} class={showHeading ? undefined : 'visually-hidden'}>
         {entry.data.title}
@@ -302,6 +309,44 @@ if (order) {
         </div>
       )}
 
+      {challenge && (
+        <div>
+          <form>
+            <label class="field-label" for={`challenge-input-${entry.id}`}>
+              Your plan
+            </label>
+            <textarea
+              id={`challenge-input-${entry.id}`}
+              class="prompt-editor"
+              rows="6"
+              data-challenge-input
+              placeholder="Write your plan here — even bullet points are enough…"
+            />
+            <fieldset>
+              <legend class="meta-line">Self-check — does your plan cover these?</legend>
+              <div class="claims">
+                {challenge.rubric.map((item) => (
+                  <label class="claim">
+                    <input type="checkbox" value={item.id} data-challenge-criterion />
+                    <span>{item.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="exercise-actions">
+              <button class="button" type="button" data-check>
+                Compare with a model answer
+              </button>
+              <span class="xp-note" data-xp hidden />
+            </div>
+          </form>
+          <details data-solution hidden>
+            <summary>A model answer (self-assessment — not machine-graded)</summary>
+            <p class="solution-text">{challenge.modelAnswer}</p>
+          </details>
+        </div>
+      )}
+
       <div class="feedback" data-feedback role="status" hidden />
 
       {entry.data.hints.length > 0 && (
@@ -326,12 +371,14 @@ if (order) {
         import { initFindProblemExercises } from '../scripts/exercise-find-problem';
         import { initFixPromptExercises } from '../scripts/exercise-fix-prompt';
         import { initOrderStepsExercises } from '../scripts/exercise-order-steps';
+        import { initRealChallengeExercises } from '../scripts/exercise-real-challenge';
         initBuildPromptExercises();
         initChoiceExercises();
         initEvaluateOutputExercises();
         initFindProblemExercises();
         initFixPromptExercises();
         initOrderStepsExercises();
+        initRealChallengeExercises();
       </script>
     </section>
   )
