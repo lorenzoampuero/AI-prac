@@ -1,0 +1,67 @@
+---
+title: "Spreadsheets: describe, don't guess"
+description: "AI does not know your sheet: describe the real columns and ranges, ask for assumptions and a test — then prove the formula on a copy with known values."
+track: ai-for-work
+order: 6
+level: intermediate
+estimatedMinutes: 7
+skills: ["spreadsheets", "verification"]
+prerequisites: ["ai-for-work/classify-and-triage-text"]
+learningOutcome: "Get spreadsheet formulas with assumptions surfaced and a way to test them."
+class: evergreen
+sources: []
+seo:
+  intent: "spreadsheet formulas from ai — describe your structure, check assumptions"
+  cluster: "C5"
+exercises: ["assemble-a-spreadsheet-help-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Ask for "a formula to total my expenses" and you get a confident answer that references columns you do not have. The model cannot see your sheet — it fills every blank with the most average spreadsheet in its training data. The discipline is in the name: **describe, don't guess** — yours and the model's.
+
+## Describe your actual structure
+
+Before the ask, state what exists: which columns, what lives in each, which rows are data, where the summary block should sit. "Column C holds the category text, column D the amount; data rows 2 to 340." Ten seconds of description removes the entire class of invented-column answers.
+
+## The four-part request
+
+1. **Structure** — the real columns, ranges and one sample row.
+2. **Outcome** — the exact result in sheet terms: "a running total per category for a chosen month".
+3. **Format** — how the answer must come back: assumptions first, then the formula, then a plain-language walkthrough of each part, then one test with values you already know.
+4. **Guard** — "do not reference anything I did not describe; if something is unspecified, ask instead of assuming".
+
+## The test step is not optional
+
+A formula is a hypothesis about your sheet until proven. The request asks for a test case — "what should this show for these three rows?" — and you run it on a **copy** of the sheet with values you can verify by hand: three rows, five seconds, and the formula is either trusted or fixed. This is the spreadsheet version of [verifying before you ship](/learn/prompting/evaluate-before-you-ship): cheap check, expensive mistake avoided.
+
+## A bad example
+
+> **Ask:** "Give me a formula to sum expenses by category."
+>
+> The answer assumes one header row, categories in column B and amounts in column F. Your categories are in C and your amounts in D. Wrong sheet, confident formula.
+
+## A better example
+
+> **Ask:** "My sheet has one receipt per row: A = date, B = vendor, C = category, D = amount; data rows 2–340. I want a per-category total for a month I pick in a cell. First state any assumptions, then the formula, then a walkthrough of each part, then one test I can run with three known rows. Do not reference columns I did not describe."
+>
+> Now the formula fits the sheet you have — and you can prove it before anyone else sees it.
+
+## Data hygiene, briefly
+
+Describe structure, not contents. Your real employee names, salaries or customer records do not need to travel with the formula — sample rows with made-up values communicate structure just as well, and some of it should not leave your machine at all. That principle gets its own full treatment in the safety track; here it has one form: **structure in, no real data out**.
+
+## Practice
+
+<ExerciseCard id="assemble-a-spreadsheet-help-prompt" />
+
+## Transfer
+
+- Reporting: monthly summaries from a described sheet, tested on a copy.
+- Cleanup: "describe the transformation, then show it applied to three sample rows".
+- Handover: the walkthrough becomes the comment you leave for colleagues.
+
+## Next
+
+That closes the work track — all six lessons: summary, action table, email, extraction, triage, spreadsheets. Take the [practice floor](/practice) for mixed repetitions. Next wave: coding and safety join the curriculum.

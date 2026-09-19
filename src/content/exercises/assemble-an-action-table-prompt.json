@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Assemble an action-table prompt",
+  "scenario": "A 90-minute project meeting produced two pages of messy notes: commitments, tangents, side agreements and three open questions. The absent team lead needs the actions, not the story.",
+  "task": "Fill every field to assemble a prompt that turns the notes into an action table — then compare with a strong example.",
+  "fields": [
+    {
+      "id": "outcome",
+      "label": "Outcome — what to produce",
+      "placeholder": "Turn the meeting notes into an action table…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "Format — name every column",
+      "placeholder": "Columns: Action, Owner, Due date, Status (decided/open)",
+      "required": true
+    },
+    {
+      "id": "missing",
+      "label": "Missing values — when the notes name no owner or date",
+      "placeholder": "Write 'unassigned' or 'no date' in that cell…",
+      "required": true
+    },
+    {
+      "id": "guard",
+      "label": "Guard — what the model must not do",
+      "placeholder": "Only what is in the notes; never invent owners or deadlines",
+      "required": true
+    }
+  ],
+  "sampleSolution": "Turn the meeting notes below into an action table with exactly these columns: Action | Owner | Due date | Status (decided / open). Put one action per row, using the notes' own words for each commitment.\n\nWhen the notes name no owner or no date, write 'unassigned' or 'no date' in that cell — never guess or infer one.\n\nUse only what is in the notes: no invented owners, dates or actions. Keep open questions as rows with Status 'open'.\n\nFinally, group the rows by owner.\n\nNotes:\n[paste the notes]",
+  "hints": [
+    "A column list is a format; 'clearer' is a wish.",
+    "What should happen when the notes are silent on an owner?"
+  ],
+  "explanation": "The assembled prompt fixes the columns, enforces one action per row and — critically — turns missing owners and dates into visible gaps instead of inventions. The guard line blocks the two failure modes that matter for notes: guessed owners and invented deadlines. Keeping open questions as rows stops discussions from being recorded as decisions.",
+  "skills": ["meeting notes", "structured output"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-for-work/meeting-notes-to-action-items"],
+  "draft": false
+}

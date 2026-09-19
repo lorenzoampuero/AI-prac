@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Assemble a document-extraction prompt",
+  "scenario": "Six supplier contracts sit in a folder as plain text. Finance needs renewal and termination details in a spreadsheet by Friday — and every value must be traceable to the sentence it came from.",
+  "task": "Fill every field to assemble a prompt that extracts one row per contract — then compare with a strong example.",
+  "fields": [
+    {
+      "id": "outcome",
+      "label": "Outcome — what to extract, one row per what",
+      "placeholder": "One row per contract: term end, notice period, renewal type…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "Format — the columns, including how to prove each value",
+      "placeholder": "Columns: Supplier, Term end, Notice period, Renewal type, Source quote",
+      "required": true
+    },
+    {
+      "id": "missing",
+      "label": "Missing values — when a contract does not state something",
+      "placeholder": "Write 'not stated'…",
+      "required": true
+    },
+    {
+      "id": "guard",
+      "label": "Guard — copy, never compute",
+      "placeholder": "Copy values verbatim; do not calculate or convert any date…",
+      "required": true
+    }
+  ],
+  "sampleSolution": "Extract one row per supplier contract from the six texts below. Columns: Supplier | Term end | Notice period | Renewal type | Source quote.\n\nThe Source quote column must contain the exact sentence each row's values come from. If a value cannot be quoted from the text, write 'not stated' in its cell instead.\n\nCopy dates and periods verbatim from the text. Do not calculate, convert or normalize any date or duration.\n\nOutput only the table, with no commentary around it.\n\nContracts:\n[paste the six contracts]",
+  "hints": [
+    "Which column proves a value instead of asking you to trust it?",
+    "What rule stops the model from computing a date you did not ask it to compute?"
+  ],
+  "explanation": "The assembled prompt names the columns, fixes one row per contract and adds the step that makes extraction verifiable: a Source quote column, so checking a value means reading one sentence. 'Copy, never compute' blocks the silent normalization that turns an extracted date into an invented one, and 'not stated' keeps gaps visible instead of filled.",
+  "skills": ["data extraction", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/extract-data-from-documents"],
+  "draft": false
+}

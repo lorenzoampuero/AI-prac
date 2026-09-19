@@ -1,0 +1,65 @@
+---
+title: Email that sounds like you
+description: "Voice comes from examples, not adjectives: two emails you actually sent teach more than 'professional but friendly' — and placeholders stop invented commitments."
+track: ai-for-work
+order: 3
+level: beginner
+estimatedMinutes: 6
+skills: ["email", "prompting"]
+prerequisites: ["ai-for-work/meeting-notes-to-action-items"]
+learningOutcome: "Draft emails in your voice using examples, constraints and placeholders."
+class: evergreen
+sources: []
+seo:
+  intent: "ai email drafting that sounds like you — voice examples and constraints"
+  cluster: "C3"
+exercises: ["assemble-a-voice-matching-email-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+An AI-drafted email fails in exactly two ways: it does not sound like you, and it promises things you never agreed to. Both are fixable with the same structure: **show your voice with examples**, and **bound the facts with placeholders**.
+
+## Voice is examples, not adjectives
+
+"Professional but friendly" describes a thousand different writers. Two emails you actually sent describe one. Paste them as voice samples — the same move as [few-shot examples](/learn/prompting/examples-and-few-shot), applied to yourself: openers, how you phrase requests, how you sign off. The draft inherits your cadence instead of a generic one.
+
+## The four-part request
+
+1. **Outcome** — what the email must achieve: apologize, explain the fix, confirm next steps.
+2. **Voice samples** — one or two real emails you have sent to similar people.
+3. **Facts and boundaries** — what must be in it (the refund, the correct date) and what must **not** be promised (no discounts, no future credits).
+4. **Placeholders** — "where a detail is missing, insert [refund reference] instead of inventing it".
+
+That last rule is the quiet hero. A model asked to "write the email" will happily produce a reference number, an amount and a deadline that you might send by accident. A model asked for placeholders gives you a draft with visible gaps — and gaps you can see are gaps you can fill.
+
+## A bad example
+
+> **Ask:** "Write a professional apology email to a client about a billing mistake."
+>
+> Generic tone, invented specifics, and a promise about "adjusting charges" you are not authorized to make.
+
+## A better example
+
+> **Ask:** "Write a reply about charging the client for a fourth storage week after their goods shipped — our mistake. It must apologize plainly, state that the week will be refunded, and give a next step. Match the voice of these two emails I sent before: [paste]. Do not promise anything beyond the refund. Where a detail is missing, insert a bracket placeholder like [refund reference]."
+>
+> Same speed, your tone, and no commitments you did not make.
+
+## Before you send
+
+Read it once as the recipient: does it answer their question, does it promise anything you cannot deliver, is every bracketed placeholder filled in? That is the [five-question check](/learn/prompting/evaluate-before-you-ship) applied to correspondence — thirty seconds, no exceptions for "just an email".
+
+## Practice
+
+<ExerciseCard id="assemble-a-voice-matching-email-prompt" />
+
+## Transfer
+
+- Recurring replies: keep a two-email voice pack ready to paste.
+- Sensitive topics: more boundaries, more placeholders, no drafting shortcuts around a human review.
+- Any language: samples work wherever you write.
+
+## Next
+
+Next: **[Extract data from documents](/learn/ai-for-work/extract-data-from-documents)** — the same discipline, pointed at piles of text that should become rows.

@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Assemble a spreadsheet-help prompt",
+  "scenario": "Your expense tracker holds one receipt per row — date, vendor, category and amount. You want a running total per category for a monthly report, and a formula you understand well enough to trust.",
+  "task": "Fill every field to assemble a prompt that describes your sheet and asks for a testable formula — then compare with a strong example.",
+  "fields": [
+    {
+      "id": "structure",
+      "label": "Structure — describe the sheet as it actually is",
+      "placeholder": "Columns: A = date, B = vendor, C = category, D = amount; data rows 2–340",
+      "required": true
+    },
+    {
+      "id": "outcome",
+      "label": "Outcome — the exact result you want",
+      "placeholder": "A running total per category for a month I choose in one cell…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "Format — how the answer must come back",
+      "placeholder": "Assumptions first, then the formula, then a walkthrough, then a test…",
+      "required": true
+    },
+    {
+      "id": "guard",
+      "label": "Guard — what it must not do",
+      "placeholder": "No columns I did not describe; ask instead of assuming…",
+      "required": true
+    }
+  ],
+  "sampleSolution": "My spreadsheet has one receipt per row. Columns: A = date, B = vendor, C = category, D = amount. Data rows are 2 to 340.\n\nI want a running total per category for a month I select in a single cell, displayed in a small summary block.\n\nGive me, in this order: (1) any assumptions you made about the structure — before the formula; (2) the formula, ready to paste; (3) a plain-language walkthrough of each part; (4) one test: what should it return for three sample rows I can check by hand?\n\nDo not reference columns, sheets or ranges I did not describe. If something about my structure is unspecified, ask me instead of assuming.\n\nDetails:\n[summary-block layout + one sample of expected values]",
+  "hints": [
+    "What does the model not know about your sheet unless you say it?",
+    "Which part of the answer lets you prove the formula before trusting it?"
+  ],
+  "explanation": "The assembled prompt replaces the guess with a description: real columns, real range, no invented structure. Asking for assumptions before the formula makes wrong guesses visible, the walkthrough makes the formula teachable, and the test question turns trust into something you can verify in five seconds on a copy.",
+  "skills": ["spreadsheets", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/spreadsheets-describe-dont-guess"],
+  "draft": false
+}

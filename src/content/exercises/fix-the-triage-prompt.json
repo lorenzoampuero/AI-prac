@@ -1,0 +1,39 @@
+{
+  "engine": "fix-prompt",
+  "title": "Fix the triage prompt",
+  "scenario": "Your support inbox takes 200+ messages a day. A teammate drafted a prompt for the AI assistant that sorts them — it works, but the results are different on every run and cannot be explained to anyone.",
+  "task": "Rewrite the weak prompt so the sorting is a rulebook: categories, priority criteria, an unclear bucket and a fixed output shape. Then compare with a strong version.",
+  "weakPrompt": "Sort these customer messages by importance and tell me what to do first.",
+  "criteria": [
+    {
+      "id": "categories",
+      "label": "Explicit categories with boundaries",
+      "hint": "Name each category — Billing, Technical, Shipping, Account access — and where its edges lie."
+    },
+    {
+      "id": "priorities",
+      "label": "Priority as criteria, not a feeling",
+      "hint": "Define what ranks higher: safety, money lost today, blocked work…"
+    },
+    {
+      "id": "unclear",
+      "label": "A bucket for messages that do not fit",
+      "hint": "'Needs human review' for cases that fit none or several — never a forced guess."
+    },
+    {
+      "id": "format",
+      "label": "A fixed output shape with a reason per message",
+      "hint": "One list per category, one line per message, a five-word reason for its placement."
+    }
+  ],
+  "sampleSolution": "Sort these customer messages into exactly these categories: Billing, Technical, Shipping, Account access, Other. If a message fits more than one category, place it by the most severe issue and note the second category.\n\nRank the messages within each category by this priority order: (1) safety risks, (2) money lost today — charges, double billing, (3) blocked work, (4) everything else.\n\nIf a message does not clearly fit — or fits none — put it under 'Needs human review' instead of guessing.\n\nOutput one list per category. For each message: one line with its position and a five-word reason. Use only what the messages say; do not invent details.\n\nMessages:\n[paste messages]",
+  "hints": [
+    "What does 'importance' mean to five different people?",
+    "Where should an ambiguous message go, so it is not lost?"
+  ],
+  "explanation": "The weak prompt hands the model a feeling and hopes for consistency. The rewrite replaces the feeling with a rulebook: named categories with edges, a ranked priority order, an explicit bucket for unclear cases, and an output shape with a five-word reason per message — so any row can be audited at a glance and the hard cases stay visible.",
+  "skills": ["triage", "structured output"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/classify-and-triage-text"],
+  "draft": false
+}

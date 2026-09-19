@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Assemble a voice-matching email prompt",
+  "scenario": "A client was charged for a fourth storage week after their goods had already shipped — a billing mistake on your side. You need a reply that apologizes, explains the fix, and does not promise compensation you are not authorized to give.",
+  "task": "Fill every field to assemble a prompt for a reply email that sounds like you — then compare with a strong example.",
+  "fields": [
+    {
+      "id": "outcome",
+      "label": "Outcome — what the email must achieve",
+      "placeholder": "Apologize plainly, explain the refund, give the next step…",
+      "required": true
+    },
+    {
+      "id": "voice",
+      "label": "Voice — two emails you actually sent",
+      "placeholder": "Paste one or two short emails you have written…",
+      "required": true
+    },
+    {
+      "id": "boundaries",
+      "label": "Facts and boundaries — what must be in it, what must not be promised",
+      "placeholder": "Include the fourth-week refund; no discounts or future credits…",
+      "required": true
+    },
+    {
+      "id": "guard",
+      "label": "Guard — placeholders instead of invented details",
+      "placeholder": "Use [refund reference] style placeholders for anything I must fill in…",
+      "required": true
+    }
+  ],
+  "sampleSolution": "Write a reply email to a client who was billed for a fourth storage week after their goods had already shipped — our mistake.\n\nThe email must: apologize plainly, state that the fourth week will be refunded, and give a clear next step with a date.\n\nMatch the voice of these two emails I have sent before:\n[paste example 1]\n[paste example 2]\n\nDo not promise anything beyond the refund — no discounts, no future credits, no service-level commitments.\n\nWhere a detail is not in my notes, insert a bracket placeholder like [refund reference] for me to fill in before sending.\n\nContext:\n[paste the facts of the case]",
+  "hints": [
+    "Adjectives like 'friendly' cannot be checked; examples can.",
+    "What convention keeps the model from inventing an amount, a date or a reference?"
+  ],
+  "explanation": "Two examples replace a page of tone adjectives, and the boundaries line fences off the promises you cannot make. The placeholder rule leaves visible gaps — [refund reference] — instead of plausible inventions you might send by accident. A draft you must complete is exactly the right shape for consequential email.",
+  "skills": ["email", "prompting"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-for-work/email-that-sounds-like-you"],
+  "draft": false
+}

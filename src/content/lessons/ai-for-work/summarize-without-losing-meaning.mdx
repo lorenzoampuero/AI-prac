@@ -1,0 +1,63 @@
+---
+title: Summarize without losing meaning
+description: "A summary's job is compression without damage: keep the decisions, numbers, owners and conditions, drop the rest. The failure mode is silent — omissions, not errors."
+track: ai-for-work
+order: 1
+level: beginner
+estimatedMinutes: 6
+skills: ["summarizing", "verification"]
+prerequisites: []
+learningOutcome: "Compress text while preserving decisions, numbers, conditions and open questions."
+class: evergreen
+sources: []
+seo:
+  intent: "summarize with ai without losing meaning — keep decisions and caveats"
+  cluster: "C7"
+exercises: ["compare-two-meeting-summaries"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+A summary is compressed text that keeps everything a decision depends on: the decisions themselves, numbers, owners, dates, conditions and open questions. Drop an anecdote and nobody notices; drop a condition and people act on a plan that never existed. The failure mode of a summary is silent — it is omission, not error.
+
+## The keep-list and the drop-list
+
+**Keep:** decisions (what was actually settled), numbers and dates, owners, conditions and caveats ("conditional on", "unless", "to be confirmed"), disagreements and open questions. **Drop:** repetition, filler, tangents, meeting pleasantries. When in doubt, keep it — compress the language, not the facts.
+
+## How compression goes wrong
+
+The instinct is to keep the shortest text that still sounds true. That instinct quietly deletes load-bearing words: "the beta continues, restricted to existing testers" becomes "the beta continues"; "April, if the security review passes" becomes "in April". The result reads perfectly and is wrong in the two places that matter. This is the same distortion you catch when [tracing claims](/learn/ai-research/primary-vs-secondary-sources) — each retelling trims a caveat.
+
+## The recipe
+
+1. Name the **elements to keep** — "keep every decision, number, owner, date and any condition attached to them".
+2. Name the **reader's job** — "for a colleague who will act on this tomorrow" sharpens what is essential.
+3. Preserve **ambiguity as ambiguity** — "if something is unresolved, keep it unresolved". Summaries that resolve open questions are editing, not reporting.
+4. Set the length last — "in three sentences" after the content rules, not before.
+
+## A bad example
+
+> **Summary:** "The group agreed to move forward in Q2."
+>
+> Shorter, cleaner, and it deleted the condition the whole plan hangs on. Everyone acts; nobody re-checks.
+
+## A better example
+
+> **Summary:** "Launch moves to Q2, with the March beta staying limited to existing testers. Budget review in April — both depend on the security review passing first."
+>
+> One sentence longer, and it carries the restriction, the date and the condition. This is what "summarize" should mean.
+
+## Practice
+
+<ExerciseCard id="compare-two-meeting-summaries" />
+
+## Transfer
+
+- Meeting threads: summarize for the person who missed it — conditions first.
+- Long documents: extract decisions and numbers; skip the narrative.
+- Handovers: an honest summary includes what is still unresolved.
+
+## Next
+
+Next: **[Meeting notes to action items](/learn/ai-for-work/meeting-notes-to-action-items)** — from summary to the table people actually work from.

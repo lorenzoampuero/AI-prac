@@ -1,0 +1,68 @@
+---
+title: Meeting notes to action items
+description: "Messy notes become a table people can act on: one action per row, an owner for each, a date or an explicit gap. Rules that stop invented owners and silent gaps."
+track: ai-for-work
+order: 2
+level: beginner
+estimatedMinutes: 6
+skills: ["meeting notes", "structured output"]
+prerequisites: ["ai-for-work/summarize-without-losing-meaning"]
+learningOutcome: "Turn messy notes into an action table without inventing owners or dates."
+class: evergreen
+sources: []
+seo:
+  intent: "turn meeting notes into an action table — owners and deadlines"
+  cluster: "C2"
+exercises: ["assemble-an-action-table-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+An action table has columns — Action, Owner, Due date — and the entire value sits in two rules: **every row comes from the notes**, and **anything missing becomes a visible gap**. A table full of guessed owners is worse than no table: it looks authoritative and spreads silent errors across the team.
+
+## The two rules that do the work
+
+1. **No invention.** Owners and dates come only from the notes. If the notes say "Sarah will check the contract", the owner is Sarah. If they say "someone should check the contract", the owner is `unassigned` — and that cell is now a finding, not a failure.
+2. **One action per row.** "Prepare the deck and send it to legal" is two rows. Compound rows hide who is waiting on whom.
+
+Then separate the record: actions (someone will do something), **decisions** (already settled), and **open questions** (unresolved). Mixing them into one list is how discussions get re-litigated.
+
+## The prompt shape
+
+- **Outcome:** "turn these notes into an action table".
+- **Format:** name the columns — `Action | Owner | Due date | Status` — and say status uses `decided` / `open`.
+- **Missing rule:** `unassigned` and `no date` for gaps.
+- **Guard:** "only what is in the notes; never infer an owner or a deadline".
+
+Optionally ask for a second pass that groups the rows by owner — it is the format a stand-up actually wants.
+
+## A bad example
+
+> **Ask:** "Make these meeting notes clearer."
+>
+> You get polished prose: pleasant to read, impossible to work from, and still needing the same manual pass to find who owes what.
+
+## A better example
+
+> **Ask:** "Turn these notes into an action table with columns Action | Owner | Due date | Status (decided/open). One action per row, using the notes' own words. Write 'unassigned' or 'no date' when the notes are silent. Use only what is in the notes. Then group the rows by owner."
+>
+> Now the meeting has a working list — and every gap shows itself instead of hiding.
+
+## Why the gaps matter
+
+The `unassigned` rows are the most useful cells in the table: they mark exactly where the meeting failed to assign the work, which is precisely what an absent manager needs to know. Hiding them with a plausible name looks tidier and is strictly worse.
+
+## Practice
+
+<ExerciseCard id="assemble-an-action-table-prompt" />
+
+## Transfer
+
+- Stand-ups: owner-grouped rows turn notes into a checklist.
+- Client calls: decisions rows become the follow-up email's backbone.
+- Personal notes: same columns, minus the ceremony.
+
+## Next
+
+Next: **[Email that sounds like you](/learn/ai-for-work/email-that-sounds-like-you)** — from a table of actions to the message that gets them moving.

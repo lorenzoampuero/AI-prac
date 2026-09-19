@@ -1,0 +1,64 @@
+---
+title: Classify and triage text
+description: "Triage is a rulebook, not a vibe: explicit categories, written priority criteria and a bucket for unclear cases turn a pile of messages into a defensible list."
+track: ai-for-work
+order: 5
+level: intermediate
+estimatedMinutes: 6
+skills: ["triage", "structured output"]
+prerequisites: ["ai-for-work/extract-data-from-documents"]
+learningOutcome: "Define categories and priority rules so text gets sorted defensibly."
+class: evergreen
+sources: []
+seo:
+  intent: "triage support messages with ai — categories and priority rules"
+  cluster: "C9"
+exercises: ["fix-the-triage-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+"Sort these messages by importance" fails for a simple reason: importance is not defined. Five people rank the same inbox five ways, and so will the model — differently each run. Triage becomes useful when you write the rulebook first: **named categories with edges**, **priority as criteria**, and **a bucket for whatever does not fit**.
+
+## The rulebook
+
+1. **Categories with boundaries.** Name each one and where its edge lies: is a message about a wrong charge "Billing" or "Technical"? Decide — "messages about money go to Billing even if the cause is technical" — and write it down. Boundaries are what make sorting reproducible.
+2. **Priority as criteria, not adjectives.** Not "high importance" but a ranked order: safety risks → money lost today → blocked work → everything else. Criteria can be applied by anyone; adjectives cannot.
+3. **An unclear bucket.** "Needs human review" for messages that fit no category or several. Forcing a guess buries the hard cases where nobody looks again — an explicit bucket keeps them visible.
+4. **A multi-issue rule.** Most real messages contain two problems. Choose: split them, or route by the most severe issue and say so in the output.
+5. **A fixed output shape.** One list per category, one line per message, a five-word reason for its placement.
+
+## Why the reason column earns its place
+
+A sorted list you cannot audit is just a guess with formatting. A five-word reason — "wrong charge, money lost" — lets you scan fifty rows in a minute and catch the ones that landed wrong. Triage output should always be **checkable at a glance**.
+
+## A bad example
+
+> **Ask:** "Sort these customer messages by importance and tell me what to do first."
+>
+> You get a plausible order, different on every run, with no way to say why row 3 outranks row 4 — and no visibility for the messages that fit nothing.
+
+## A better example
+
+> **Ask:** "Sort these messages into Billing, Technical, Shipping, Account access, Other. Priority within each list: safety first, then money lost today, then blocked work. Messages that fit none — or several — go to 'Needs human review' with the reason. One line per message, five-word reason. Use only what the messages say."
+>
+> Same pile, now a defensible queue: the rules are visible, the unclear cases stayed visible.
+
+## Scale it honestly
+
+Triage automates sorting, never accountability. Sample the boundary rows — especially the ones in "Needs human review" and the ones adjacent to category edges — before trusting the whole queue, and expect to tune the rulebook after the first batch. The rules are the product; the sort is just its output.
+
+## Practice
+
+<ExerciseCard id="fix-the-triage-prompt" />
+
+## Transfer
+
+- Support inboxes: one queue per category, priority criteria written once.
+- Feedback and surveys: themes as categories, verbatims kept, unclear ones flagged.
+- Personal inbox: two categories — "needs me today", "needs me eventually" — still beats a vibe.
+
+## Next
+
+Next: **[Spreadsheets: describe, don't guess](/learn/ai-for-work/spreadsheets-describe-dont-guess)** — the last work-track skill: turning descriptions into formulas you can actually test.

@@ -1,0 +1,26 @@
+{
+  "engine": "evaluate-output",
+  "title": "Compare two meeting summaries",
+  "scenario": "A steering group decided: launch postponed to Q2, the March beta stays limited to existing testers, and the budget gets reviewed in April — with everything conditional on the security review passing first. You asked for a short summary for a colleague who missed the meeting.",
+  "task": "Work through the rubric for both summaries, then pick the one you would send.",
+  "outputA": "The steering group postponed the launch to Q2. The March beta continues as planned. The budget will be reviewed in April.",
+  "outputB": "Launch moves to Q2. The March beta stays limited to existing testers. April brings the budget review — and all of it depends on the security review passing first.",
+  "rubric": [
+    { "id": "decisions", "label": "Does it carry the decisions that were actually made?" },
+    { "id": "conditions", "label": "Are the restriction and the condition preserved — the tester limit and the security review?" },
+    { "id": "nothing-added", "label": "Does it avoid turning conditional items into settled facts?" }
+  ],
+  "verdict": {
+    "better": "B",
+    "reasoning": "Both read cleanly — but B keeps the two things the colleague would act on wrongly: the beta's tester restriction and the condition everything hangs on. A's brevity silently converts a conditional plan into a settled one. The failure mode of a summary is omission, not error."
+  },
+  "hints": [
+    "What would the colleague do differently after reading each version?",
+    "Which version mentions the security review — and who needs to know about it?"
+  ],
+  "explanation": "A passes on tone and fails on load-bearing facts: the tester restriction disappeared and the condition became a schedule. B is one sentence longer and carries every element a decision depends on — restriction, date and condition — which is exactly what compression without damage means.",
+  "skills": ["summarizing"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-for-work/summarize-without-losing-meaning"],
+  "draft": false
+}

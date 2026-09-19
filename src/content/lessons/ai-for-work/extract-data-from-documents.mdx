@@ -1,0 +1,56 @@
+---
+title: Extract data from documents
+description: "Documents become data when you name the fields, fix one row per item, forbid calculations and require a quote for each value — then spot-check a sample."
+track: ai-for-work
+order: 4
+level: intermediate
+estimatedMinutes: 7
+skills: ["data extraction", "verification"]
+prerequisites: ["ai-for-work/email-that-sounds-like-you"]
+learningOutcome: "Pull structured fields from documents with traceable, spot-checked values."
+class: evergreen
+sources: []
+seo:
+  intent: "extract data from documents with ai — fixed fields and verification"
+  cluster: "C4"
+exercises: ["assemble-a-document-extraction-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Extraction is not summarizing. You do not want readable prose about the contract — you want one row per contract with the same four values in the same four columns, each traceable to the sentence it came from. Where a summary compresses language, extraction **copies values and refuses to interpret them**.
+
+## The extraction contract
+
+- **Name the columns** before anything else: `Supplier | Term end | Notice period | Renewal type`.
+- **One row per item** — one contract, one invoice, one form. Not "the agreements".
+- **Copy, never compute.** "Copy dates and periods verbatim; do not calculate or convert anything." Model arithmetic is not a calculator; a normalized date is an invented date.
+- **A quote column.** Require the exact sentence each row's values come from. Now every value can be checked with a glance, and values that cannot be quoted come back `not stated`.
+- **Output only the rows.** No commentary around the table, so it can be pasted straight into a sheet.
+
+## Why the quote column changes everything
+
+An extraction without sources asks you to trust the machine on exactly the numbers that matter. With a source quote per row, verification shrinks from "re-read every contract" to "read six sentences". It is the [grounding pattern](/learn/prompting/ground-responses-in-your-sources) applied to table building.
+
+## Then do the sampling pass
+
+Extractions deserve a spot-check, not faith. Open the source for **five rows** — mix the first and last, not the cleanest ones — and compare against the quote. If one value drifted, stop and re-run with a stricter instruction; one wrong row means the batch is untrustworthy. And if you asked for totals: never accept a model-computed total. Extract the raw numbers and let the spreadsheet add them — it is a calculator.
+
+## Long documents
+
+For a folder, work in chunks: one document per request (or a batch of similar ones), same columns every time, collecting rows you control. The workflow is the same one from [working with long input](/learn/prompting/work-with-long-input), and your collected rows are the memory the chat does not have.
+
+## Practice
+
+<ExerciseCard id="assemble-a-document-extraction-prompt" />
+
+## Transfer
+
+- Contracts: renewal dates, notice periods, obligations — with quotes.
+- Invoices and receipts: amounts and dates into the expense tracker.
+- Forms and applications: fields into a comparison sheet, `not stated` where the form is silent.
+
+## Next
+
+Next: **[Classify and triage text](/learn/ai-for-work/classify-and-triage-text)** — when the pile of text needs sorting rather than fields.
