@@ -1,0 +1,34 @@
+{
+  "engine": "model-choice",
+  "title": "Diagnose the layer",
+  "scenario": "App A, connected to your files, answers questions about your project and remembers decisions. App B — reportedly running the same underlying model — refuses to see any files and forgets between sessions.",
+  "task": "What is the best explanation?",
+  "options": [
+    {
+      "text": "The two apps run completely different models; sharing models is not possible.",
+      "correct": false,
+      "feedback": "Models are routinely shared: one engine can power many apps and platforms. The difference lives above the engine."
+    },
+    {
+      "text": "Products layer features — file access, memory, tools — around models; App B simply does not expose them.",
+      "correct": true,
+      "feedback": "Exactly. Same engine, different product features. Check what a product enables before blaming the model."
+    },
+    {
+      "text": "App A's model was specially retrained on your files.",
+      "correct": false,
+      "feedback": "No retraining happened — your files are read into the context when needed, not learned into the model's weights."
+    },
+    {
+      "text": "File access is a property of the model itself, so App B must use a weaker version.",
+      "correct": false,
+      "feedback": "File access is a product feature. A “weaker version” is not the explanation unless the documentation says so."
+    }
+  ],
+  "hints": ["Which layer owns memory, files and tools?"],
+  "explanation": "Model, product, feature: the engine sets the ceiling; the product decides what is reachable. Most “same model, different behaviour” puzzles are product-layer differences — tools, memory, defaults and policies.",
+  "skills": ["tool selection", "mental models"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/models-vs-products"],
+  "draft": false
+}

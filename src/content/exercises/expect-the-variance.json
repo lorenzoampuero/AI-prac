@@ -1,0 +1,34 @@
+{
+  "engine": "model-choice",
+  "title": "Expect the variance",
+  "scenario": "You approved a marketing paragraph yesterday. Today you paste the same request and get slightly different wording, even though you changed nothing.",
+  "task": "What is the realistic expectation and fix?",
+  "options": [
+    {
+      "text": "The product is broken — identical requests must return identical text.",
+      "correct": false,
+      "feedback": "Identical output is not the design. Generation samples from probabilities; small shifts — even across runs — change the wording."
+    },
+    {
+      "text": "Wording varies by design; keep approved text saved and paste it whenever it must be edited or reused.",
+      "correct": true,
+      "feedback": "Yes — variance is normal; commitments are snapshots. The saved approved version is the source of truth."
+    },
+    {
+      "text": "Ask it to “output exactly what you said yesterday” and it will comply.",
+      "correct": false,
+      "feedback": "Nothing stores “yesterday” unless that conversation is still in context — and across sessions, it is not."
+    },
+    {
+      "text": "Lower the temperature to zero and every future run will be word-for-word identical.",
+      "correct": false,
+      "feedback": "Lower randomness makes output more stable, not frozen — and most products do not even expose the setting."
+    }
+  ],
+  "hints": ["What is the difference between drafting and committing?"],
+  "explanation": "Model output is a draft with variance: sampling, wording and context all shift the result. Draft freely, then snapshot anything you commit to — and stop expecting exact repeats from a new run.",
+  "skills": ["working with AI"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/why-answers-vary"],
+  "draft": false
+}

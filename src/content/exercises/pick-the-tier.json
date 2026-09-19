@@ -1,0 +1,34 @@
+{
+  "engine": "model-choice",
+  "title": "Pick the right tier",
+  "scenario": "You must review a 30-page vendor contract against five constraints — penalties, renewal, jurisdiction, data terms, deadlines. A missed clause has real financial consequences. Budget matters, but the review must be thorough.",
+  "task": "Which approach fits best?",
+  "options": [
+    {
+      "text": "Use the fastest, cheapest tier for everything to keep the cost down.",
+      "correct": false,
+      "feedback": "Cost control is real, but a missed clause costs far more than the tokens saved. This task is exactly where deliberation pays."
+    },
+    {
+      "text": "Use a reasoning tier for the conflict analysis, and keep clause extraction on a fast pass.",
+      "correct": true,
+      "feedback": "Yes — split by task shape: pattern extraction is fast-tier work; constraint checking and conflicts are reasoning work. Escalate where it matters, stay efficient everywhere else."
+    },
+    {
+      "text": "Use the fast tier but add “be very careful and thorough” to the prompt.",
+      "correct": false,
+      "feedback": "Instructions do not add thinking time. The carefulness you want is computation — and that is what the reasoning tier is for."
+    },
+    {
+      "text": "Use the flagship tier for every step and every document, always.",
+      "correct": false,
+      "feedback": "Overkill as a default: far more expensive and slower for work a fast pass does equally well. Reserve the top tier for what needs it."
+    }
+  ],
+  "hints": ["Split the job: which half is pattern work, which half is judgement?"],
+  "explanation": "Reasoning tiers buy deliberation with time and money; fast tiers win on one-pass transformations. The durable pattern: fast for extraction and volume, reasoning for multi-constraint judgement — and verify either way.",
+  "skills": ["tool selection", "costs and limits"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/fast-vs-reasoning-models"],
+  "draft": false
+}

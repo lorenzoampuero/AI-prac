@@ -1,0 +1,67 @@
+---
+title: Models vs products
+description: "The same AI engine can behave differently in two apps. Learn the three layers — model, product, feature — and why the difference decides what you can actually do."
+track: ai-foundations
+order: 6
+level: beginner
+estimatedMinutes: 6
+skills: ["foundations", "tool selection"]
+prerequisites: ["ai-foundations/what-an-llm-actually-does"]
+learningOutcome: "Separate model, product and feature when judging what an AI can do."
+class: current
+lastReviewed: 2026-09-19
+sources:
+  - title: "Anthropic — Models overview (platform IDs and lineup)"
+    url: "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+seo:
+  intent: "models vs products — why the same ai behaves differently in different apps"
+  cluster: "A8"
+exercises: ["diagnose-the-layer"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+When people say "ChatGPT" or "Claude", they usually mean the **product** — the app they type into. The **model** is the engine underneath: a different thing, with a different name, released on its own schedule. Keeping the layers apart explains most "why does it work here but not there?" puzzles.
+
+## Three layers
+
+1. **Model** — the trained system: an [LLM](/glossary/large-language-model) plus its tokenizer, turned into weights and sold under versioned names, reachable through an API.
+2. **Product** — the app around it: interface, memory, file access, tools (search, code), limits, prices, policies, safety defaults.
+3. **Feature** — a specific capability switched on inside a product: "Projects", "connected drives", "deep research", browsing.
+
+A single model can power an app, an API, and embedded features at once. **Current example (September 2026):** the same Claude models are documented across the Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry — same model family, platform-specific IDs, regions and lifecycle terms.
+
+## Why the distinction matters
+
+- **"Model X is bad at my job"** — often it is the product configuration: no file access, a short [context window](/glossary/context-window), a cautious system prompt. Switch products and the score changes; the engine did not.
+- **"I switched products, so I switched models"** — maybe not. Two apps can run the same engine with different tools and defaults — or one brand can run different engines per feature and plan.
+- **Comparisons mix layers.** "Which AI is best at research?" usually measures products-with-search, not models alone.
+
+## A bad example
+
+> **Assume:** "This app can't read my spreadsheets, so the AI can't read spreadsheets."
+>
+> The model is not refusing; the product never gave it the file. In another product — or via the API — the same engine handles the sheet.
+
+## A better example
+
+When something behaves differently than expected, ask three questions in order: **Does the model have the capability? Does this product expose it? Is the feature enabled for me?** Most mysteries end at question two.
+
+## Why it works
+
+The model sets the ceiling; the product decides what you can reach. That ordering is stable even as names churn: engines improve, products add memory and tools, features come and go. Judging the layer you are actually talking to is what keeps expectations accurate — and it is the first step of every tool-selection decision.
+
+## Practice
+
+<ExerciseCard id="diagnose-the-layer" />
+
+## Transfer
+
+- Trying a new tool? Ask what is *enabled*, not just which model it claims.
+- A feature the competition has? It may be a product layer your current app can add.
+- Writing or talking about AI capability: name the layer — engine or app.
+
+## Next
+
+Next: **[Fast vs reasoning models](/learn/ai-foundations/fast-vs-reasoning-models)** — the choice inside the engine layer. Product names and prices change constantly; the next lesson separates the durable idea from the current lineup.

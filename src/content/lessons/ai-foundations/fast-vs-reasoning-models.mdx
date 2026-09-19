@@ -1,0 +1,80 @@
+---
+title: Fast vs reasoning models
+description: "One tier answers in a second; another thinks for a minute and costs more. Learn when deliberate thinking pays — and when the fast model is simply better."
+track: ai-foundations
+order: 7
+level: beginner
+estimatedMinutes: 6
+skills: ["foundations", "tool selection", "costs and limits"]
+prerequisites: ["ai-foundations/models-vs-products"]
+learningOutcome: "Choose a fast or reasoning tier based on the shape of the task."
+class: current
+lastReviewed: 2026-09-19
+sources:
+  - title: "OpenAI — model catalog (tiers, reasoning effort, pricing)"
+    url: "https://developers.openai.com/api/docs/models"
+  - title: "Anthropic — Models overview (lineup, adaptive thinking)"
+    url: "https://platform.claude.com/docs/en/docs/about-claude/models/overview"
+seo:
+  intent: "fast vs reasoning models — choosing the right tier for a task"
+  cluster: "A10, I4"
+exercises: ["pick-the-tier"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Two models, same brand, same chat box — one answers instantly, the other takes a minute and shows a "thinking" spinner. The difference is not quality versus speed with a clear winner. It is a **trade: time and cost for deliberate problem-solving** — and choosing correctly is a skill.
+
+## What "reasoning" means here
+
+A reasoning model spends extra computation before committing to an answer: it works through steps, checks itself, explores alternatives. Sometimes you see a summary of that thinking; often you just wait longer. A fast model answers in one pass: quick, cheap, and surprisingly good at anything that does not need deliberation.
+
+The trade is visible in the pricing. **Current example (September 2026, official docs):** OpenAI's lineup spans a flagship (GPT-6 Astra, $10 in / $50 out per million [tokens](/glossary/token)) through balanced and cost tiers (GPT-5.6 Terra at $2/$12; GPT-5.6 Luna at $0.20/$1.20), with reasoning effort adjustable per request. Anthropic spans Fable 5.1 (demanding reasoning, slower, $10/$50) through Sonnet 5 (speed + intelligence, $2/$10) to Haiku 4.5 (fastest, $1/$5), with "adaptive" thinking steered by an effort setting. Names and prices change — treat this as the shape of the market, and check current docs before deciding.
+
+## When the fast tier wins
+
+- Rewriting, summarizing, translating, extracting — one-pass transformations.
+- Classification and triage at volume.
+- Quick drafts you will edit anyway.
+- Anything interactive: latency *is* the feature.
+
+## When to pay for thinking
+
+- Multi-constraint problems: "check this contract against these five rules."
+- Planning and analysis where a wrong answer costs more than the waiting.
+- Debugging or logic that needs several steps to verify.
+- Drafts you cannot easily check by eye.
+
+## Calibration
+
+- **Escalate on doubt.** If a quick pass looks shaky, re-run it with the reasoning tier — cheaper than starting heavy for everything.
+- **Reasoning is not truth.** A long chain can still hallucinate; verify specifics as always.
+- **Bulk + synthesize.** Fast models for the twenty extractions; a [reasoning model](/glossary/reasoning-model) for the synthesis that matters.
+
+## A bad example
+
+> **Ask:** "Analyze this 30-page vendor contract against five constraints — jurisdiction, penalties, renewal, data terms, deadlines."
+>
+> The cheapest, fastest tier may skate over clause interactions. A missed penalty clause is expensive; the extra think-time is not.
+
+## A better example
+
+> **Fast tier:** "Extract every clause mentioning penalties, with section numbers."
+> **Then reasoning tier:** "Using only the clauses above, find conflicts and rank the top three risks."
+
+Extraction is a pattern task; conflict analysis is a reasoning task. Two tiers, two jobs, better result than either alone.
+
+## Practice
+
+<ExerciseCard id="pick-the-tier" />
+
+## Transfer
+
+- Daily drafting: fast tier, always.
+- Decisions with money, law or health stakes: reasoning tier *plus* a source check.
+- High-volume pipelines: fast first, escalate only the exceptions.
+
+## Next
+
+Next: **[Why answers vary](/learn/ai-foundations/why-answers-vary)** — what changes between two runs of the same model. The [reasoning model glossary entry](/glossary/reasoning-model) is the one-line version.

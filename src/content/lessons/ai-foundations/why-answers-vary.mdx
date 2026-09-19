@@ -1,0 +1,65 @@
+---
+title: Why answers vary
+description: "Ask twice and you may get two different answers. That is generation sampling, not a bug — learn what changes between runs and how to work with the variance."
+track: ai-foundations
+order: 8
+level: beginner
+estimatedMinutes: 5
+skills: ["foundations", "working with AI"]
+prerequisites: ["ai-foundations/what-an-llm-actually-does"]
+learningOutcome: "Explain why outputs vary between runs and keep critical text stable."
+class: evergreen
+sources: []
+seo:
+  intent: "why does ai give different answers — sampling and variability explained"
+  cluster: "A11"
+exercises: ["expect-the-variance"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Send the same prompt twice, get two different answers. Nothing broke: a model chooses each next [token](/glossary/token) by sampling from a range of plausible options — not by looking up one fixed reply. Small differences — your wording, the order of the conversation, the product's settings — shift which option gets picked.
+
+## Where the variance comes from
+
+- **Sampling settings.** Products control randomness with parameters like [temperature](/glossary/temperature): lower is more predictable, higher is more varied. Many apps set these for you and never show them.
+- **Tiny prompt changes.** One added word nudges every probability that follows. "Make it shorter" and "keep it brief" are not identical inputs.
+- **Context changes.** The same question three turns later sits next to a different history.
+- **Model versions.** Updates change behaviour without changing anything you did.
+
+## What varies — and what that is good for
+
+Variance is a feature for brainstorming: ten runs, ten angles to choose from. It is a hazard for anything that must stay stable: legal text, official numbers, approved copy. The working rule: **drafting tolerates variance; commitments do not.**
+
+## A bad example
+
+> **Expect:** "Ask once, approve it, ask again tomorrow and get word-for-word the same text."
+>
+> You won't. Something shifts — wording, structure, an example. If you promised the approved version, you no longer control what was promised.
+
+## A better example
+
+> **Workflow:** generate until you approve a version, then **save that text** and work from the saved copy. When variance is acceptable, re-run for alternatives; when it is not, paste the locked text back in.
+
+## Why it works
+
+Treat model output as a **draft with variance**, not a deterministic function:
+
+1. **Snapshot approvals.** The file you saved is the commitment; the chat is not.
+2. **Re-run for diversity, not confirmation.** Need alternatives? Ask for them on purpose.
+3. **Don't chase exact repeats.** "Say it exactly like before" has nothing to retrieve — unless the previous text is in front of it.
+
+## Practice
+
+<ExerciseCard id="expect-the-variance" />
+
+## Transfer
+
+- Approved copy: keep it in a document; paste it for edits, never regenerate.
+- Code you shipped: the diff is the truth, not the chat that produced it.
+- Brainstorming: ask for ten variations — variance is the tool.
+
+## Next
+
+Foundations complete — eight lessons. Next wave: **Prompting**, from clear instructions to structured output; follow the [curriculum overview](/learn) to see what lands next. The [temperature glossary entry](/glossary/temperature) explains the randomness dial.

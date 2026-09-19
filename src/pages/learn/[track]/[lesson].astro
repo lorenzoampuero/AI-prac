@@ -103,6 +103,9 @@ const levelLabel = LEVEL_LABELS[entry.data.level] ?? entry.data.level;
       <p class="meta-line">
         {levelLabel} · {entry.data.estimatedMinutes} min · {entry.data.learningOutcome}
       </p>
+      {entry.data.class === 'current' && entry.data.lastReviewed && (
+        <p class="meta-line">Product-specific details last reviewed: {entry.data.lastReviewed.toISOString().slice(0, 10)}</p>
+      )}
       <ul class="chips">
         {entry.data.skills.map((skill) => <li class="chip">{skill}</li>)}
       </ul>
