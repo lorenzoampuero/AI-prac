@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+const exercises = await getCollection('exercises', ({ data }) => !data.draft);
+const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+const lessonTitle = new Map(lessons.map((lesson) => [lesson.id, lesson.data.title]));
+
+const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const DIFFICULTY_LABELS: Record<string, string> = {
+  beginner: 'Beginner',
+  intermediate: 'Intermediate',
+  advanced: 'Advanced',
+};
+---
+
+<BaseLayout
+  title="Practice AI skills"
+  description="Hands-on AI exercises with instant, deterministic feedback — task fit, prompting and more. No account, no API key; progress stays on your device."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Home', path: '/' },
+        { name: 'Practice', path: '/practice' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Practice</li>
+    </ol>
+  </nav>
+
+  <h1>Practice AI skills</h1>
+  <p class="lede">
+    Every exercise gives instant feedback and explains why it is right — no account, no API key.
+    Most exercises belong to a lesson; each one also works standalone from this page.
+  </p>
+
+  <ul class="lesson-list">
+    {
+      exercises.map((exercise) => {
+        const firstRef = exercise.data.lessonRefs[0];
+        const fromLesson = firstRef ? lessonTitle.get(firstRef) : undefined;
+        return (
+          <li>
+            <a href={`/practice/${exercise.id}`}>{exercise.data.title}</a>
+            <div class="lesson-meta">
+              {DIFFICULTY_LABELS[exercise.data.difficulty] ?? exercise.data.difficulty} ·{' '}
+              {exercise.data.skills.join(' · ')}
+              {fromLesson ? ` — from “${fromLesson}”` : ''}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  {exercises.length === 0 && <p class="meta-line">The practice library grows with each lesson wave.</p>}
+</BaseLayout>

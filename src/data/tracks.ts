@@ -2,15 +2,19 @@
 // Content files reference track ids via src/content.config.ts; contract tests (Gate 8) will assert that
 // this registry, the schema enum and the curriculum map stay in sync.
 
-export type TrackId =
-  | 'ai-foundations'
-  | 'prompting'
-  | 'ai-research'
-  | 'ai-for-work'
-  | 'ai-safety'
-  | 'ai-coding'
-  | 'ai-images'
-  | 'ai-workflows';
+/** Single source of truth for track ids — imported by the content schema and asserted by contract tests. */
+export const TRACK_IDS = [
+  'ai-foundations',
+  'prompting',
+  'ai-research',
+  'ai-for-work',
+  'ai-safety',
+  'ai-coding',
+  'ai-images',
+  'ai-workflows',
+] as const;
+
+export type TrackId = (typeof TRACK_IDS)[number];
 
 export interface TrackInfo {
   id: TrackId;

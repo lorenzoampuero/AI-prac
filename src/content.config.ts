@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { TRACK_IDS } from './data/tracks';
 
 // Content model — the single source of truth for every lesson, exercise and glossary term.
 // Field rules live in docs/CONTENT_STANDARDS.md; curriculum units in docs/CURRICULUM_MAP.md.
@@ -9,16 +10,7 @@ import { z } from 'astro/zod';
 
 const level = z.enum(['beginner', 'intermediate', 'advanced']);
 const contentClass = z.enum(['evergreen', 'current']);
-const track = z.enum([
-  'ai-foundations',
-  'prompting',
-  'ai-research',
-  'ai-for-work',
-  'ai-safety',
-  'ai-coding',
-  'ai-images',
-  'ai-workflows',
-]);
+const track = z.enum(TRACK_IDS);
 
 const lessons = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/lessons' }),

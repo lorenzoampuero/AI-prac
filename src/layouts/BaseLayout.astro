@@ -7,9 +7,11 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  /** JSON-LD blocks built via src/seo/schema.ts. Rendered verbatim in <head>. */
+  structuredData?: Record<string, unknown>[];
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, structuredData = [] } = Astro.props;
 const pageTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 
 const origin = Astro.site ?? new URL('https://ai-practice.invalid');
@@ -30,13 +32,21 @@ const canonical = new URL(Astro.url.pathname, origin);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {structuredData.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <nav class="container" aria-label="Main">
         <a class="brand" href="/">{SITE_NAME}</a>
-        <a href="/learn">Learn</a>
+        <span class="nav-links">
+          <a href="/learn">Learn</a>
+          <a href="/practice">Practice</a>
+          <a href="/glossary">Glossary</a>
+          <a href="/about">About</a>
+        </span>
       </nav>
     </header>
     <main id="main" class="container">

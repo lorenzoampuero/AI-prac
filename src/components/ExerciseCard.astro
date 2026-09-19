@@ -5,9 +5,11 @@ import { isChoiceFamily, toOptions, type ChoiceOption } from '../lib/exercise/gr
 interface Props {
   /** Exercise id (file id inside src/content/exercises). */
   id: string;
+  /** Standalone pages render their own <h1>; keep an SR-only heading for the section label instead. */
+  showHeading?: boolean;
 }
 
-const { id } = Astro.props;
+const { id, showHeading = true } = Astro.props;
 const entry = await getEntry('exercises', id);
 const published = Boolean(entry && !entry.data.draft);
 
@@ -22,7 +24,9 @@ const config = entry && options ? JSON.stringify({ id: entry.id, options }) : ''
 {
   entry && published && options && (
     <section class="exercise" data-exercise-choice data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
-      <h3 id={`ex-${entry.id}-title`}>{entry.data.title}</h3>
+      <h3 id={`ex-${entry.id}-title`} class={showHeading ? undefined : 'visually-hidden'}>
+        {entry.data.title}
+      </h3>
       <p class="scenario">{entry.data.scenario}</p>
       <p>{entry.data.task}</p>
 

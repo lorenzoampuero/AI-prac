@@ -102,6 +102,18 @@ a:hover {
   padding-inline: var(--space-4);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Header / footer */
 
 .skip-link {
@@ -147,6 +159,11 @@ a:hover {
 
 .site-header nav a:not(.brand):hover {
   color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-4);
 }
 
 .site-footer {

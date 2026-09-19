@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+const terms = await getCollection('glossary', ({ data }) => !data.draft);
+terms.sort((a, b) => a.data.term.localeCompare(b.data.term));
+
+const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+---
+
+<BaseLayout
+  title="AI glossary"
+  description="Plain-language definitions of AI terms — every entry links to the lesson that teaches it. No jargon walls, no dictionary filler."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Home', path: '/' },
+        { name: 'Glossary', path: '/glossary' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Glossary</li>
+    </ol>
+  </nav>
+
+  <h1>AI glossary</h1>
+  <p class="lede">
+    Plain-language definitions for the terms that matter in practice. Every entry links to the lesson
+    that teaches it.
+  </p>
+
+  <ul class="lesson-list">
+    {
+      terms.map((term) => (
+        <li>
+          <a href={`/glossary/${term.id}`}>{term.data.term}</a>
+          <div class="lesson-meta">
+            {term.data.definition.slice(0, 120)}
+            {term.data.definition.length > 120 ? '…' : ''}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  {terms.length === 0 && <p class="meta-line">Terms are added alongside the lessons that use them.</p>}
+</BaseLayout>
