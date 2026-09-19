@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Choose when search changes the answer",
+  "scenario": "You are using an AI assistant that can answer from its training memory or search the live web. For one of these requests, only a live, sourced answer is safe to act on.",
+  "task": "Pick the request that needs live sources before you trust the answer.",
+  "options": [
+    {
+      "text": "Explain how compound interest works.",
+      "correct": false,
+      "feedback": "A stable concept — the explanation is the same this year as five years ago. Memory is enough."
+    },
+    {
+      "text": "Is the VAT rate for e-books in my country still 21%?",
+      "correct": true,
+      "feedback": "Rates change by law, and 'still' is the whole question — only a live, sourced answer can update it. This is the one to search."
+    },
+    {
+      "text": "Rewrite this email so it sounds friendlier.",
+      "correct": false,
+      "feedback": "A transformation of text you supplied — nothing outside the conversation is needed."
+    },
+    {
+      "text": "Summarize the attached report into five bullets.",
+      "correct": false,
+      "feedback": "The source is already in front of the model. No search needed."
+    }
+  ],
+  "hints": [
+    "Would the correct answer have been different a year ago?",
+    "The word 'still' assumes yesterday's fact is today's — what could confirm that?"
+  ],
+  "explanation": "The test is whether the correct answer changes with time: laws, rates, prices, versions and schedules do; explanations and text transformations do not. 'Still 21%' assumes yesterday's fact is today's, and only live sources can confirm that.",
+  "skills": ["research"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-research/search-vs-generation"],
+  "draft": false
+}

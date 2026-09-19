@@ -1,0 +1,61 @@
+---
+title: Search vs generation
+description: "One answer comes from frozen model memory, another from pages fetched right now. Knowing which mode you are in decides whether a fact can be trusted at all."
+track: ai-research
+order: 1
+level: beginner
+estimatedMinutes: 6
+skills: ["research", "verification"]
+prerequisites: []
+learningOutcome: "Decide when a question needs live web access and when the model's memory is enough."
+class: evergreen
+sources: []
+seo:
+  intent: "when ai needs web search — live sources vs model memory"
+  cluster: "E5"
+exercises: ["choose-when-search-changes-the-answer"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+An AI answer comes from one of two places: the model's **memory** — patterns absorbed during training, frozen at a cutoff date — or **live sources** fetched right now by a search-connected tool. The words look identical either way, so before trusting any fact, ask which one you just got.
+
+## What each mode is good at
+
+- **Memory (generation)** — explanations of stable concepts, transformations of text you supply, structure and drafting, reasoning over your own documents. If the answer would read the same a year ago and a year from now, memory is fine.
+- **Live retrieval** — prices, laws and rates, product versions, schedules, news, availability. The tell: if the correct answer is different today than last year, memory alone cannot be reliably right.
+
+## The traps on each side
+
+Memory fails through staleness and confident invention — the mechanism behind [hallucinations](/learn/ai-foundations/why-ai-makes-things-up). Retrieval fails differently: a page can be real and still not support the claim, and search results can be thin or misleading. Live search makes answers **checkable** — it does not make them **checked**. That is the next lesson's job.
+
+## A bad example
+
+> **Ask (no web access):** "What does the new data-protection amendment require for small businesses?"
+>
+> The amendment is recent — possibly newer than the model's training data. Memory answers with the average of what it saw: plausible, structured, and quietly a year out of date.
+
+## A better example
+
+> **Ask (web-connected):** "Find the current text of the amendment and summarize what it requires for small businesses, linking each requirement to the section of the official text it comes from."
+>
+> Now the answer arrives with pointers you can open — and "the retrieved text does not cover this" becomes a possible, correct answer.
+
+## The five-second test
+
+Before trusting a fact: **would this fact survive a year unchanged?** If yes, generation is usually enough. If no — or if being wrong costs money, time or compliance — ask a search-connected tool and require sources. The test takes five seconds and prevents most stale-fact mistakes.
+
+## Practice
+
+<ExerciseCard id="choose-when-search-changes-the-answer" />
+
+## Transfer
+
+- Travel and logistics: schedules and entry rules change — search-connected only.
+- Software: ask for the version you use and confirm against [official docs](/learn/ai-foundations/models-vs-products) when commands read suspiciously new.
+- Concepts and writing: memory is fine; save the searches for facts with expiry dates.
+
+## Next
+
+Next: **[Inspect the citations](/learn/ai-research/inspect-the-citations)** — the source exists. Now: does it actually say what the answer claims?

@@ -1,0 +1,54 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the unsupported claims",
+  "scenario": "A strategy briefing goes to your leadership team tomorrow. You have one pass to mark the claims that need evidence attached before the deck ships.",
+  "task": "Flag every claim that should not be trusted as-is.",
+  "response": "Market update:\n\nThe sector grew 23% year over year. Three of the top five vendors will move to usage-based pricing by 2028. Customers increasingly expect transparent pricing. Our churn was 4.2% last quarter, according to our analytics dashboard. Experts agree the shift is inevitable. The competitor's pricing page lists three tiers.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "The sector grew 23% year over year.",
+      "problematic": true,
+      "feedback": "A precise statistic with no source — whose measurement, which segment, which year? Attach evidence or replace it with a sourced direction."
+    },
+    {
+      "id": "c2",
+      "text": "Three of the top five vendors will move to usage-based pricing by 2028.",
+      "problematic": true,
+      "feedback": "A prediction with a count and a date, stated as fact. Nobody knows this; label it as a scenario or find the analyst report behind it."
+    },
+    {
+      "id": "c3",
+      "text": "Customers increasingly expect transparent pricing.",
+      "problematic": false,
+      "feedback": "Qualitative and directional — nothing checkable enough to be factually wrong. Just make sure no number gets attached later."
+    },
+    {
+      "id": "c4",
+      "text": "Our churn was 4.2% last quarter, according to our analytics dashboard.",
+      "problematic": false,
+      "feedback": "It names its source and you can open it. Verify the dashboard figure, but the claim itself points at its evidence."
+    },
+    {
+      "id": "c5",
+      "text": "Experts agree the shift is inevitable.",
+      "problematic": true,
+      "feedback": "Anonymous authority plus absolutism — which experts, agreeing on what? A claim that names nothing cannot be checked."
+    },
+    {
+      "id": "c6",
+      "text": "The competitor's pricing page lists three tiers.",
+      "problematic": false,
+      "feedback": "Specific, but checkable in one click at a named place. Confirm the page, then it is safe."
+    }
+  ],
+  "hints": [
+    "Scan for digits, dates and 'experts' — each one needs a source or a label.",
+    "One statement names where to find its own evidence. Is that a problem?"
+  ],
+  "explanation": "The flagged claims carry specifics — a percentage, a dated prediction, an unnamed authority — with nothing to check them against. The others assert nothing measurable, name their source, or point at a page you can open. Specificity plus consequence plus no evidence equals the danger zone.",
+  "skills": ["verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/find-the-unsupported-claim"],
+  "draft": false
+}

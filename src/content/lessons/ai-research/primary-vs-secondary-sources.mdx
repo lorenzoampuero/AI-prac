@@ -1,0 +1,70 @@
+---
+title: Primary vs secondary sources
+description: "Every summary of a summary loses something: a nuance, a number, a caveat. Tracing a claim to its origin — the study, the law — stops you paying for other people's shorthand."
+track: ai-research
+order: 3
+level: intermediate
+estimatedMinutes: 6
+skills: ["research", "verification"]
+prerequisites: ["ai-research/inspect-the-citations"]
+learningOutcome: "Rank sources by how close they sit to the evidence and trace important claims to it."
+class: evergreen
+sources: []
+seo:
+  intent: "primary vs secondary sources — trace a claim to its origin"
+  cluster: "E4"
+exercises: ["trace-claims-to-their-origin"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Sources sit on a ladder of distance from the evidence. A **primary source** is the thing itself: the study, the law's text, the official documentation, the original dataset, the vendor's own spec sheet. A **secondary source** describes or summarizes a primary one — reporting, whitepapers, explainers. A **tertiary source** aggregates summaries — newsletters, listicles, and, notably, an AI answering from memory. Every hop up the ladder loses a caveat, rounds a number or adds an interpretation.
+
+## How meaning bends on the way up
+
+A study abstract might say: "a pilot with 40 participants measured up to a 12% improvement on one task measure". One level up: "teams got 12% better". Another level up: "'big' performance gains found". Same research, three different promises — and only the first one is what the researchers claim.
+
+## When secondary is fine
+
+Orientation. Deciding what matters, what the vocabulary is, where to look. Secondary sources are how you find the primary ones. Being maximally skeptical of everything is not the skill; directing skepticism is.
+
+## When you must trace
+
+- Numbers you will repeat — in a deck, a report, a purchase decision.
+- Anything legal, medical or financial.
+- Claims that start with "studies show" or "research suggests".
+- Anything a stranger's money depends on.
+
+## How to trace a claim in practice
+
+1. Get a pointer: title, authors, year, publisher — ask for the full citation if it is missing.
+2. Search the exact title; open the abstract or first pages.
+3. Find the number and read the sentence around it: what does the original actually claim?
+4. If every chain you follow ends in "an article about a report about a study", the claim is not research — it is a telephone game. Say so.
+
+## A bad example
+
+> **Statement for your board memo:** "The pitch deck says teams using AI assistants ship 40% faster."
+>
+> Deck → whitepaper → study → survey. Each hop chose its favorite number. Shipping "40% faster" under your name inherits all four hops' optimism.
+
+## A better example
+
+> **After tracing:** "In one 2024 study of 2,400 teams, routine-task completion improved 40% during the pilot; the authors note the effect may not generalize."
+>
+> Same number, honest boundaries, and you can name the document it lives in. That sentence survives a skeptical reader.
+
+## Practice
+
+<ExerciseCard id="trace-claims-to-their-origin" />
+
+## Transfer
+
+- Negotiations: the other side's "industry data" gets traced before it constrains your offer.
+- Policy and compliance: read the rule, not the summary of the rule.
+- Recommendations: "according to research" is not a source — it is an invitation to go find one.
+
+## Next
+
+Next: **[Find the unsupported claim](/learn/ai-research/find-the-unsupported-claim)** — some claims have no source to trace at all. Those are the ones to catch fast.

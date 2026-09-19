@@ -1,0 +1,22 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Choose the uncertainty-asking prompt",
+  "scenario": "You are importing lithium batteries for a real shipment next month and asking an assistant about the EU process and costs. Getting the answer wrong is expensive.",
+  "task": "Pick the prompt that gives you something you can act on.",
+  "promptA": "What's the exact process and total cost for importing lithium batteries into the EU? Be accurate — this is for a real shipment.",
+  "promptB": "What's the process and likely costs for importing lithium batteries into the EU? I need this for a real shipment. Answer in three parts: (1) your understanding of the process and typical costs; (2) the assumptions you made, including anything that may have changed recently; (3) the specific details I should confirm with customs, and where to check each one.",
+  "better": "B",
+  "feedback": {
+    "a": "'Be accurate' asks for a promise, not for information — it gives you no way to see which parts rest on solid ground and which are assumptions.",
+    "b": "It asks for the answer, the assumptions and a to-check list in one shape — so you end with a map of what to verify instead of a confident paragraph."
+  },
+  "hints": [
+    "Which prompt produces a list of things you can check?",
+    "A 'be accurate' instruction does not change how the answer is produced."
+  ],
+  "explanation": "Accuracy instructions do not make an answer accurate; structure does the work. Prompt B separates the answer, its assumptions and the verification list, so uncertainty becomes visible and actionable. Treat the output as a checklist of what to confirm with the authority that decides — not as the final word.",
+  "skills": ["prompting", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/ask-for-uncertainty"],
+  "draft": false
+}

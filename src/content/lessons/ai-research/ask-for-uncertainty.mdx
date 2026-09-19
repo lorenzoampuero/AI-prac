@@ -1,0 +1,61 @@
+---
+title: Ask for uncertainty
+description: "By default an answer arrives with uniform confidence — right and wrong parts styled identically. Asking for assumptions turns flat text into a map of what to check."
+track: ai-research
+order: 5
+level: intermediate
+estimatedMinutes: 6
+skills: ["prompting", "verification"]
+prerequisites: ["ai-research/find-the-unsupported-claim"]
+learningOutcome: "Request assumptions, staleness notes and open questions — and use them as a to-check list."
+class: evergreen
+sources: []
+seo:
+  intent: "ask ai for its uncertainty — assumptions and confidence you can check"
+exercises: ["choose-the-uncertainty-asking-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+An answer's confidence is styling, not measurement — models express certainty as a writing habit, and can sound equally sure about a definition and an invention. You cannot make confidence honest by asking "be accurate". But you **can** ask for the parts of the answer's reasoning that matter: assumptions, staleness, and what deserves checking.
+
+## The three-part request
+
+1. **The answer** — what the model believes, in the shape you need.
+2. **The assumptions** — "list what you assumed to get here". This is where wrong answers come from: a wrong assumption is visible and fixable, a wrong fact can hide behind fluent prose.
+3. **The to-check list** — "the details I should confirm with [the authority], and where to check each one". You end up holding a verification plan, not just a paragraph.
+
+## What you get — and what you do not
+
+You get a map of where the weak parts are: "may have changed after my training data" flags [staleness](/glossary/training-cutoff); "this depends on your jurisdiction" flags scope; a named assumption tells you what to correct in a follow-up. What you do not get is a trustworthy probability. "I am 90% confident" is a sentence, not a measurement — treat every stated confidence as a pointer to where you should look, not as evidence that looking is unnecessary.
+
+## A bad example
+
+> **Ask:** "What's the process for importing lithium batteries into the EU? Be accurate — this is for a real shipment."
+>
+> "Be accurate" is a request for a promise. You get one confident block of text with no way to tell which sentence is current law and which is plausible guesswork.
+
+## A better example
+
+> **Ask:** "What's the process and likely costs for importing lithium batteries into the EU? I need this for a real shipment. Answer in three parts: (1) your understanding of the process and typical costs; (2) the assumptions you made, including anything that may have changed recently; (3) the specific details I should confirm with customs, and where to check each one."
+>
+> Now you can act on the parts that survive scrutiny — and you know exactly which phone call settles the rest.
+
+## Why it works
+
+The model has no incentive to flag weak spots unless you ask, and no penalty for uniform confidence. Asking for assumptions converts hidden uncertainty into visible text, and requesting the to-check list converts your role from trusting reader to verifier with a checklist. It pairs naturally with [grounding](/learn/prompting/ground-responses-in-your-sources): one request points at sources, the other points at gaps.
+
+## Practice
+
+<ExerciseCard id="choose-the-uncertainty-asking-prompt" />
+
+## Transfer
+
+- High-stakes questions — legal, medical, financial: always run the three-part request.
+- Planning under unknowns: assumptions lists double as risk lists for your project.
+- Team use: make "assumptions + to-check list" a standing part of prompts that feed decisions.
+
+## Next
+
+That closes the research track — all five lessons. Take the [practice floor](/practice) for mixed repetitions, or revisit the [glossary](/glossary) any time a term feels loose. The work track — meetings, email and documents — arrives with the next wave.

@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Inspect the suspicious citations",
+  "scenario": "A teammate drafted an article using an AI answer as the source. Before it goes out under the team's name, you check what the answer's citations are worth.",
+  "task": "Flag every part that should not be trusted as-is — where the citation must be opened and confirmed first.",
+  "response": "Remote-work research summary:\n\nAccording to a 2021 Stanford study, remote workers are 13% more productive. Dr. Elena Marsh, who led the study, called the effect 'transformative'. Most companies now require two office days per week. Return-to-office policies have been debated publicly for years. Check your own organization's current policy before acting on any of this.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "According to a 2021 Stanford study, remote workers are 13% more productive.",
+      "problematic": true,
+      "feedback": "A named study plus a precise number is exactly where misattribution hides — the study may exist and say something narrower. Get the title, open it, find the 13%."
+    },
+    {
+      "id": "c2",
+      "text": "Dr. Elena Marsh, who led the study, called the effect 'transformative'.",
+      "problematic": true,
+      "feedback": "A named person and a direct quote: two things to verify. If a search for the name finds nothing, treat the quote as invented."
+    },
+    {
+      "id": "c3",
+      "text": "Most companies now require two office days per week.",
+      "problematic": true,
+      "feedback": "'Most' plus a precise practice, with no survey behind it — a sweeping quantitative claim wearing a casual voice."
+    },
+    {
+      "id": "c4",
+      "text": "Return-to-office policies have been debated publicly for years.",
+      "problematic": false,
+      "feedback": "Broad and qualitative — no number, no named source needed. Nothing here to verify."
+    },
+    {
+      "id": "c5",
+      "text": "Check your own organization's current policy before acting on any of this.",
+      "problematic": false,
+      "feedback": "It asserts nothing external — it sends you to the authoritative source. Leave it in."
+    }
+  ],
+  "hints": [
+    "Numbers, names and quotes are the three things a citation must prove.",
+    "One sentence sends you to a better source — is that a problem, or good practice?"
+  ],
+  "explanation": "The three flagged parts all carry checkable specifics — a study, a named researcher, a quantitative sweep — attached to sources that must be opened before reuse. The two you leave alone either assert nothing specific or point you at the real source. That contrast is the skill: specificity demands evidence; generality does not.",
+  "skills": ["verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/inspect-the-citations"],
+  "draft": false
+}

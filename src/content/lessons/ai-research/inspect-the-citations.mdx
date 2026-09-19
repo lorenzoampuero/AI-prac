@@ -1,0 +1,66 @@
+---
+title: Inspect the citations
+description: "AI answers arrive with confident-looking sources — study names, quotes, links. Three checks catch sources that do not exist or do not say what is claimed."
+track: ai-research
+order: 2
+level: intermediate
+estimatedMinutes: 7
+skills: ["research", "verification"]
+prerequisites: ["ai-research/search-vs-generation"]
+learningOutcome: "Verify that named sources exist and actually support the claims attached to them."
+class: evergreen
+sources: []
+seo:
+  intent: "check ai citations — do the quoted sources actually exist"
+  cluster: "E3"
+exercises: ["inspect-the-suspicious-citations"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+A citation is a claim about a source — and like any claim it can be wrong. Inspecting citations means opening the source and confirming two things: **it exists**, and **it says what the answer says it says**. Three failure patterns cover most of what you will find.
+
+## The three failures
+
+1. **The source does not exist.** Plausible study titles, researcher names and page names, generated to look real. If a search for the exact title finds nothing at all, stop there — an unfindable source is a non-source.
+2. **The source exists but does not say that.** The number is off by a factor, the quote is trimmed or invented, the study says "may be associated with" and the answer says "proven". Search the exact phrase in quotes and compare wording.
+3. **The source says it, but the source is weak.** It exists and matches — and it is a blog post about a survey about a pilot. Real but thin; sorting source quality is [the next lesson](/learn/ai-research/primary-vs-secondary-sources).
+
+## Checking in one minute
+
+- Search the **exact title or quote** in quotation marks. Zero results → treat the claim as invented until proven otherwise.
+- Open the source and find the number or sentence — browser search on the page is enough.
+- For quotes, check the exact words **and** who said them.
+- For numbers, check the number and the direction. "13% more productive" is not the same as "a 13% productivity difference", and neither is the same as "13% of the effect".
+- One honest caveat: a working link is not proof either. Links can be real while the claim misreads them — the check is the text, not the link.
+
+## A bad example
+
+> **Answer:** "A 2021 Stanford study found remote workers are 13% more productive."
+>
+> No title, no authors, no link — you cannot even begin to check it. Treat the number as unverified; a precise statistic riding a vague citation is exactly where misattribution hides.
+
+## A better example
+
+> **Ask:** "Give the full citation for that study — title, authors, year — plus the exact sentence behind the 13% figure, and a link if you have one."
+>
+> Now you have a searchable pointer and a sentence to match. One search, one page-search, done.
+
+## The habit
+
+When output will be reused — published, forwarded, put in a deck — the citations are your first stop, not the prose. Quote-first answers make this cheap: the quote is the claim, and the check is comparing it with the source. That is the same move as [grounding](/learn/prompting/ground-responses-in-your-sources), pointed at someone else's sources instead of yours.
+
+## Practice
+
+<ExerciseCard id="inspect-the-suspicious-citations" />
+
+## Transfer
+
+- Articles and briefs: no specific claim ships without a findable source behind it.
+- Health, law and money: every citation gets opened, especially when the answer reads beautifully.
+- Someone else's AI-assisted draft: run the three failure patterns over it before you co-sign.
+
+## Next
+
+Next: **[Primary vs secondary sources](/learn/ai-research/primary-vs-secondary-sources)** — the source exists and matches. But how far is it from the evidence itself?

@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Trace claims to their origin",
+  "scenario": "A vendor's pitch deck cites research about AI-assisted engineering teams. Your manager asks which statements can go into the board memo as-is, and which need tracing first.",
+  "task": "Flag every statement that must be traced to its origin before you repeat it.",
+  "response": "AI in engineering, as summarized in the deck:\n\nA 2024 study of 2,400 engineering teams found a 40% speed-up on routine tasks. TechDaily's coverage of that study called it 'the strongest effect measured in a decade'. AI coding assistants are widely used across the industry. The deck invites you to read the study's abstract before discussing the numbers. An industry newsletter, summarizing the whitepaper about the study, reports that adoption doubled last year.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "A 2024 study of 2,400 engineering teams found a 40% speed-up on routine tasks.",
+      "problematic": true,
+      "feedback": "A precise number with no title, authors or link — you cannot even begin to check it. Trace it to the study or drop the number."
+    },
+    {
+      "id": "c2",
+      "text": "TechDaily's coverage of that study called it 'the strongest effect measured in a decade'.",
+      "problematic": true,
+      "feedback": "A journalist's summary of the study — second-hand. The 'strongest in a decade' framing is the coverage's, not the researchers'. Trace to the study itself."
+    },
+    {
+      "id": "c3",
+      "text": "AI coding assistants are widely used across the industry.",
+      "problematic": false,
+      "feedback": "Broad and qualitative with no numbers — nothing in it can be misquoted downstream."
+    },
+    {
+      "id": "c4",
+      "text": "The deck invites you to read the study's abstract before discussing the numbers.",
+      "problematic": false,
+      "feedback": "It points at the primary artifact — the right move. Follow it: open the abstract yourself."
+    },
+    {
+      "id": "c5",
+      "text": "An industry newsletter, summarizing the whitepaper about the study, reports that adoption doubled last year.",
+      "problematic": true,
+      "feedback": "Three hops from the research — newsletter about whitepaper about study — and 'doubled' with no origin in sight. This is the telephone game, not evidence."
+    }
+  ],
+  "hints": [
+    "Count the hops between each statement and a document you can open.",
+    "One item asks you to go read the original — does that need checking?"
+  ],
+  "explanation": "The flagged statements all rest on chains of retelling — a number with no pointer, coverage about a study, a newsletter about a whitepaper about a study — where each hop can bend the meaning. The statements left alone assert nothing checkable or point straight at the primary artifact. Rule of thumb: trace numbers to origins; let generalities stay general.",
+  "skills": ["research", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/primary-vs-secondary-sources"],
+  "draft": false
+}
