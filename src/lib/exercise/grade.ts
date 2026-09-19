@@ -149,9 +149,35 @@ export function isUsableSubmission(text: string): boolean {
 }
 
 // ---------------------------------------------------------------------------------------------------
+// order-steps — arrange workflow stages in a workable order. The canonical order is the content; the UI
+// presents a fixed scrambled rotation so the answer is never visible before interaction.
+
+export interface OrderSteps {
+  engine: 'order-steps';
+  steps: string[];
+}
+
+export function isOrderSteps(value: { engine: string }): value is OrderSteps {
+  return value.engine === 'order-steps';
+}
+
+export interface OrderGrade {
+  correct: boolean;
+  misplaced: number[];
+}
+
+/** `submitted` holds original step indices in the learner's current order; canonical is [0, 1, 2, …]. */
+export function gradeOrderSteps(submitted: number[]): OrderGrade {
+  const misplaced = submitted
+    .map((original, position) => (original === position ? -1 : position))
+    .filter((position) => position >= 0);
+  return { correct: misplaced.length === 0, misplaced };
+}
+
+// ---------------------------------------------------------------------------------------------------
 // Engine registry — every engine with a working UI must be listed here; the content contract tests
 // refuse to publish exercises whose engine is missing (no phantom UI ships).
 
 export function isImplementedEngine(value: { engine: string }): boolean {
-  return isChoiceFamily(value) || isFindProblem(value) || isFixPrompt(value);
+  return isChoiceFamily(value) || isFindProblem(value) || isFixPrompt(value) || isOrderSteps(value);
 }

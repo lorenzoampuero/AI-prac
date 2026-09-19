@@ -1,0 +1,60 @@
+---
+title: Work with long input
+description: "Long documents break prompts in predictable ways: instructions drown, middles get skipped, windows overflow. The fix is a process — chunk, extract, keep notes, then combine."
+track: prompting
+order: 7
+level: intermediate
+estimatedMinutes: 7
+skills: ["prompting", "long input"]
+prerequisites: ["prompting/examples-and-few-shot"]
+learningOutcome: "Process a long document with a chunked extraction process instead of one giant paste."
+class: evergreen
+sources: []
+seo:
+  intent: "chatgpt long documents — a chunked process for summarizing and extracting at scale"
+  cluster: "B11"
+exercises: ["order-the-long-document-process"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Long documents do not fail loudly. The model does not say "I could not read past page 40" — it skims, drops the middle and answers from the edges. Three forces are at work: attention dilutes across a huge window, the oldest text gets truncated first, and vague instructions drown in sheer volume. The fix is not a better sentence — it is a **process**.
+
+## The process
+
+1. **State the task and the exact output format before pasting anything.** The spec stays near the top where it is read first.
+2. **Split the document into logical chunks** — sections, chapters, pages. Logical beats equal: a chunk that ends mid-decision produces mid-decision extractions.
+3. **Process one chunk per pass**, extracting into the *same* fixed format every time. Identical shape means identical quality across chunks.
+4. **Collect extractions in notes you control** — a file, not the chat. You are building the durable memory the model does not have.
+5. **Write the final answer from your notes**, then spot-check it against the source. The synthesis never depends on the model remembering a document.
+
+## A bad example
+
+> **Ask:** [paste 200 pages] "Summarize this."
+>
+> You get a confident shallow summary that follows the document's opening and ending and skips everything between. Nothing is visibly wrong — which is the danger.
+
+## A better example
+
+> **Ask:** "Here is section 3 of 9 of the project manual. Extract every decision, date and owner as a bullet list: `Decision — Owner — Deadline`. Use no knowledge outside this section. If something is missing, write `unstated`."
+>
+> Nine small passes, one format, notes you keep. The final report is assembled from extractions you can verify one by one.
+
+## Why it works
+
+Every pass stays inside the sweet spot where attention is high and instructions survive. The notes file becomes the single source of truth — the [context window](/glossary/context-window) can overflow without taking your work with it. And chunked extraction fits the model's strength exactly: transforming text that is fully in front of it.
+
+## Practice
+
+<ExerciseCard id="order-the-long-document-process" />
+
+## Transfer
+
+- Contracts: extract obligations/parties/deadlines per section; verify the extracts.
+- Research: one source per pass — claim, evidence, confidence — then combine.
+- Meeting marathons: summarize per segment; carry the decision bullets forward.
+
+## Next
+
+Next: **[Ground responses in your sources](/learn/prompting/ground-responses-in-your-sources)** — the strongest anti-hallucination move in the prompting toolkit. The [context window glossary entry](/glossary/context-window) explains the limit this process works around.

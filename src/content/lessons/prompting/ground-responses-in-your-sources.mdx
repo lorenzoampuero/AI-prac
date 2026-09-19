@@ -1,0 +1,62 @@
+---
+title: Ground responses in your sources
+description: "Grounding means the model answers from material you supply, not from memory — making every claim checkable against the source. The strongest anti-hallucination move."
+track: prompting
+order: 8
+level: intermediate
+estimatedMinutes: 6
+skills: ["prompting", "verification"]
+prerequisites: ["prompting/work-with-long-input"]
+learningOutcome: "Make answers traceable to supplied text, and verify claims against it."
+class: evergreen
+sources: []
+seo:
+  intent: "ground ai answers in your sources — quote-first prompting for checkable results"
+  cluster: "B17"
+exercises: ["spot-unsupported-policy-claims"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Grounding means the answer comes from **material you supply** — not from what the model happens to remember. Instead of trusting the engine's training memory, you paste the source and constrain the answer to it. The payoff is enormous: every claim becomes checkable against a text you can hold side by side.
+
+## The grounding pattern
+
+1. **Paste the source** — the policy, the paper, the contract. Not a link, not a description.
+2. **Constrain to it** — "Answer using only the text below."
+3. **Demand traceability** — "For each statement, quote the sentence it comes from."
+4. **Define the fallback** — "If the text does not cover something, say 'not covered'." Without this line, gaps get filled with confident invention.
+5. **Verify by comparison** — you check quotes against the source. That check is cheap, which is the whole point.
+
+## A bad example
+
+> **Ask:** "What does our refund policy say about change-of-mind returns?"
+>
+> The model has never seen your policy. You get the average refund policy of its training data — fluent, structured and wrong in exactly the details that matter.
+
+## A better example
+
+> **Ask:** "Here is our refund policy: [paste]. Answer this question using only the policy text. Quote the sentence behind each statement. If the policy does not cover it, answer 'not covered'."
+>
+> Now the answer is a set of pointers into your document. Wrong answers are visible: either a quote does not exist, or a claim has no quote behind it.
+
+## Why it works
+
+The mechanism from [what an LLM actually does](/learn/ai-foundations/what-an-llm-actually-does) applies here: plausibility is generated, truth is not. Grounding does not make the model truthful — it moves errors into a place where **you can catch them cheaply**. Support turns into a verifiable property: does this sentence appear in the source?
+
+A warning that keeps it honest: grounding does not eliminate mistakes. Quotes can be misquoted, cherry-picked or subtly altered. Read quotes against the source rather than trusting the quotation marks.
+
+## Practice
+
+<ExerciseCard id="spot-unsupported-policy-claims" />
+
+## Transfer
+
+- Contracts and policies: quote-first answers; anything unquoted is flagged for a human.
+- Research notes: same pattern against each paper — claim, quote, page.
+- Support macros: ground replies in the official policy text, never in vibes.
+
+## Next
+
+Next: **Structured output** arrives in the coming wave. Browse the [prompting track](/learn/prompting) meanwhile; the [grounding glossary entry](/glossary/grounding) is the one-line version.

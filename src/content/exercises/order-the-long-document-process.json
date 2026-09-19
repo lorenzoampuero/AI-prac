@@ -1,0 +1,22 @@
+{
+  "engine": "order-steps",
+  "title": "Order the long-document process",
+  "scenario": "You must extract every deadline and owner from a 120-page project manual — without losing the middle of the document.",
+  "task": "Put the five steps in a workable order using the up/down controls.",
+  "steps": [
+    "State the task and the exact output format before pasting anything.",
+    "Split the document into logical chunks — sections, chapters, pages.",
+    "Process one chunk per pass, extracting into the same fixed format every time.",
+    "Collect the extractions in notes you control (a file), not in the chat.",
+    "Write the final answer from your notes, then spot-check it against the source."
+  ],
+  "hints": [
+    "Where should the output format live — before or after the input?",
+    "Which artifact survives when the chat is gone?"
+  ],
+  "explanation": "Long documents fail through dilution, truncation and drift. Stating the spec first, chunking logically, extracting in one fixed format, keeping your own notes and synthesizing from them turns one impossible pass into a sequence of small checkable ones — and your notes become the memory the session cannot have.",
+  "skills": ["long input"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/work-with-long-input"],
+  "draft": false
+}

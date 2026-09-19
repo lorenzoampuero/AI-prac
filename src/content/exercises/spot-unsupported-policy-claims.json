@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the unsupported policy claims",
+  "scenario": "You pasted your refund policy into a chat and asked whether change-of-mind returns are allowed. The AI answered — compare every sentence of the answer against the policy excerpt you supplied.",
+  "task": "Select every part of the AI answer that is NOT supported by the pasted policy text.",
+  "response": "POLICY (excerpt you pasted): “Refunds are available within 30 days of purchase for unused items in original packaging. Shipping costs are non-refundable. Change-of-mind returns follow the same 30-day window.”\n\nAI ANSWER: Yes — you can return unused items within 30 days in original packaging. Change-of-mind returns follow the same window. Shipping costs are non-refundable, unless the item arrived damaged, in which case shipping is refunded. Refunds are processed within 5 business days.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "“you can return unused items within 30 days in original packaging”",
+      "problematic": false,
+      "feedback": "Supported — this paraphrases the policy's first sentence almost word for word."
+    },
+    {
+      "id": "c2",
+      "text": "“Change-of-mind returns follow the same window”",
+      "problematic": false,
+      "feedback": "Supported — the excerpt states exactly this."
+    },
+    {
+      "id": "c3",
+      "text": "“unless the item arrived damaged, in which case shipping is refunded”",
+      "problematic": true,
+      "feedback": "NOT in the excerpt. A plausible-sounding exception invented beyond the source — precisely the kind of addition grounding is designed to catch."
+    },
+    {
+      "id": "c4",
+      "text": "“Refunds are processed within 5 business days”",
+      "problematic": true,
+      "feedback": "No such timeline appears in the policy text. Gap-filling specifics read exactly like policy language — and are the most dangerous kind of addition."
+    },
+    {
+      "id": "c5",
+      "text": "“Shipping costs are non-refundable”",
+      "problematic": false,
+      "feedback": "Supported — a direct paraphrase of the second sentence."
+    }
+  ],
+  "hints": [
+    "Compare each sentence to the excerpt: does its meaning appear there?",
+    "Specifics absent from the source — exceptions, timelines, numbers — are the suspects."
+  ],
+  "explanation": "Grounded answers can be checked line by line: supported claims trace back to the source, invented extras read just as fluently as the real ones. The skill is comparing each statement to the pasted text — not trusting the tone of the answer.",
+  "skills": ["grounding", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/ground-responses-in-your-sources"],
+  "draft": false
+}

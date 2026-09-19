@@ -3,9 +3,11 @@ import {
   assertSingleCorrect,
   gradeChoice,
   gradeFindProblem,
+  gradeOrderSteps,
   isChoiceFamily,
   isFixPrompt,
   isImplementedEngine,
+  isOrderSteps,
   isUsableSubmission,
   toOptions,
   type FindProblem,
@@ -88,7 +90,8 @@ describe('choice engines — grading', () => {
     expect(isChoiceFamily({ engine: 'model-choice' })).toBe(true);
     expect(isChoiceFamily({ engine: 'find-the-problem' })).toBe(false);
     expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
-    expect(isImplementedEngine({ engine: 'order-steps' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'order-steps' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'evaluate-output' })).toBe(false);
   });
 });
 
@@ -137,5 +140,20 @@ describe('fix-prompt engine', () => {
     expect(isUsableSubmission('   \n  ')).toBe(false);
     expect(isUsableSubmission('make it better')).toBe(false);
     expect(isUsableSubmission('Write a five-sentence update email to my manager about Project Atlas.')).toBe(true);
+  });
+});
+
+describe('order-steps engine', () => {
+  it('grades canonical and scrambled orders', () => {
+    expect(gradeOrderSteps([0, 1, 2, 3])).toEqual({ correct: true, misplaced: [] });
+
+    const swapped = gradeOrderSteps([1, 0, 2, 3]);
+    expect(swapped.correct).toBe(false);
+    expect(swapped.misplaced).toEqual([0, 1]);
+  });
+
+  it('is recognized as implemented', () => {
+    expect(isOrderSteps({ engine: 'order-steps' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'order-steps' })).toBe(true);
   });
 });

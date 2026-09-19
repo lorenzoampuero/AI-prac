@@ -4,6 +4,7 @@ import {
   isChoiceFamily,
   isFindProblem,
   isFixPrompt,
+  isOrderSteps,
   toOptions,
   type ChoiceOption,
   type FindProblemClaim,
@@ -24,6 +25,7 @@ const published = Boolean(entry && !entry.data.draft);
 let options: ChoiceOption[] | null = null;
 let claims: FindProblemClaim[] | null = null;
 let fix: FixPrompt | null = null;
+let order: string[] | null = null;
 let aiResponse = '';
 if (entry && published) {
   if (isChoiceFamily(entry.data)) {
@@ -33,6 +35,8 @@ if (entry && published) {
     aiResponse = entry.data.response;
   } else if (isFixPrompt(entry.data)) {
     fix = entry.data;
+  } else if (isOrderSteps(entry.data)) {
+    order = entry.data.steps;
   }
 }
 
@@ -43,11 +47,21 @@ const config =
       ? JSON.stringify({ id: entry.id, kind: 'find-problem', response: aiResponse, claims })
       : entry && fix
         ? JSON.stringify({ id: entry.id, kind: 'fix-prompt' })
-        : '';
+        : entry && order
+          ? JSON.stringify({ id: entry.id, kind: 'order-steps' })
+          : '';
+
+// Fixed rotated presentation (never the canonical order) so the answer is not visible before interaction.
+let presented: { index: number; text: string }[] = [];
+if (order) {
+  const offset = Math.floor(order.length / 2);
+  const rotated = [...order.slice(offset), ...order.slice(0, offset)];
+  presented = rotated.map((text, position) => ({ index: (position + offset) % order.length, text }));
+}
 ---
 
 {
-  entry && published && (options || claims || fix) && (
+  entry && published && (options || claims || fix || order) && (
     <section class="exercise" data-exercise data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
       <h3 id={`ex-${entry.id}-title`} class={showHeading ? undefined : 'visually-hidden'}>
         {entry.data.title}
@@ -148,6 +162,44 @@ const config =
         </div>
       )}
 
+      {order && (
+        <div>
+          <form>
+            <ol class="step-list" data-step-list>
+              {presented.map((item) => (
+                <li data-step-index={item.index}>
+                  <span class="step-text">{item.text}</span>
+                  <span class="step-actions">
+                    <button type="button" class="step-button" data-move="up" aria-label="Move step up">
+                      ↑
+                    </button>
+                    <button type="button" class="step-button" data-move="down" aria-label="Move step down">
+                      ↓
+                    </button>
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <div class="exercise-actions">
+              <button class="button" type="button" data-check>
+                Check order
+              </button>
+              <span class="xp-note" data-xp hidden />
+            </div>
+          </form>
+          <details data-solution hidden>
+            <summary>Correct order</summary>
+            <ol class="step-list step-list-canonical">
+              {order.map((step) => (
+                <li>
+                  <span class="step-text">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </details>
+        </div>
+      )}
+
       <div class="feedback" data-feedback role="status" hidden />
 
       {entry.data.hints.length > 0 && (
@@ -169,9 +221,11 @@ const config =
         import { initChoiceExercises } from '../scripts/exercise-choice';
         import { initFindProblemExercises } from '../scripts/exercise-find-problem';
         import { initFixPromptExercises } from '../scripts/exercise-fix-prompt';
+        import { initOrderStepsExercises } from '../scripts/exercise-order-steps';
         initChoiceExercises();
         initFindProblemExercises();
         initFixPromptExercises();
+        initOrderStepsExercises();
       </script>
     </section>
   )
