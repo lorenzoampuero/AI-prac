@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ASSESSMENT_ITEMS } from '../data/assessment';
+import { TRACKS } from '../data/tracks';
+
+const grouped = TRACKS.map((track) => ({
+  track,
+  items: ASSESSMENT_ITEMS.filter((item) => item.track === track.id),
+})).filter((group) => group.items.length > 0);
+
+let counter = 0;
+---
+
+<BaseLayout
+  title="AI skills assessment"
+  description="Eighteen questions across the six tracks — foundations, prompting, research, work, coding and safety. Scored instantly in your browser; nothing is sent anywhere."
+>
+  <h1>AI skills assessment</h1>
+  <p class="lede">
+    Eighteen questions across the six tracks. This is a starting map, not a certificate: it shows what
+    to practice next. Every answer is scored instantly in your browser — nothing is sent anywhere.
+  </p>
+  <p class="meta-line" data-assessment-last hidden></p>
+
+  <form data-assessment-form novalidate>
+    {
+      grouped.map((group) => (
+        <section class="quiz-track" aria-labelledby={`quiz-track-${group.track.id}`}>
+          <h2 id={`quiz-track-${group.track.id}`} class="section-title">
+            {group.track.name}
+          </h2>
+          {group.items.map((item) => {
+            counter += 1;
+            return (
+              <div class="quiz-item">
+                <fieldset class="quiz-fieldset">
+                  <legend class="question">
+                    {counter}. {item.question}
+                  </legend>
+                  {item.options.map((option, optionIndex) => (
+                    <label class="quiz-option">
+                      <input type="radio" name={`q-${item.id}`} value={optionIndex} />
+                      <span>{option.text}</span>
+                    </label>
+                  ))}
+                  <div class="quiz-feedback" data-item-feedback={item.id} hidden />
+                </fieldset>
+              </div>
+            );
+          })}
+        </section>
+      ))
+    }
+
+    <div class="exercise-actions">
+      <button class="button" type="button" data-assessment-submit>
+        Score my answers
+      </button>
+      <button class="button secondary" type="button" data-assessment-retake hidden>
+        Clear and retake
+      </button>
+    </div>
+  </form>
+
+  <section class="quiz-summary" data-assessment-summary tabindex="-1" aria-label="Your results" hidden></section>
+
+  <script>
+    import { initAssessment } from '../scripts/assessment';
+    initAssessment();
+  </script>
+</BaseLayout>
