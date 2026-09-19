@@ -23,11 +23,12 @@ function getStorage(): StorageLike | null {
 }
 
 export function initChoiceExercises(): void {
-  const cards = document.querySelectorAll<HTMLElement>('[data-exercise-choice]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-exercise]');
   if (cards.length === 0) return;
 
   const storage = getStorage();
   for (const card of cards) {
+    if (!card.querySelector('input[type="radio"][data-choice-input]')) continue;
     if (card.dataset.wired === 'true') continue;
     wire(card, storage);
     card.dataset.wired = 'true';

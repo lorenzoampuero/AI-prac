@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the fabrication",
+  "scenario": "An AI assistant answered a question about workplace research. You cannot open any sources right now — you have only the text below.",
+  "task": "Select every part of the answer that should not be trusted as-is.",
+  "response": "Hybrid work has become common in many companies since 2020. A 2023 study by the Institute for Workplace Research found that hybrid teams were 41% more productive than fully in-office teams, and the study's lead author, Dr. Helena Marsh, called it “the largest productivity gain since the typewriter.” Hybrid schedules usually combine office days with remote days.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "“Hybrid work has become common in many companies since 2020.”",
+      "problematic": false,
+      "feedback": "Broad and uncontroversial — no precise number or source hangs on it. Fine as written."
+    },
+    {
+      "id": "c2",
+      "text": "“A 2023 study by the Institute for Workplace Research”",
+      "problematic": true,
+      "feedback": "An institution you cannot place, a year, and no link — the classic shape of a fabricated citation. Verify it or discount it."
+    },
+    {
+      "id": "c3",
+      "text": "“hybrid teams were 41% more productive than fully in-office teams”",
+      "problematic": true,
+      "feedback": "A precise, impressive statistic with no accessible source. Specificity feels like evidence; it is not."
+    },
+    {
+      "id": "c4",
+      "text": "“the largest productivity gain since the typewriter” — Dr. Helena Marsh",
+      "problematic": true,
+      "feedback": "A colourful quote from a person you cannot verify. Invented quotes are a standard hallucination pattern."
+    },
+    {
+      "id": "c5",
+      "text": "“Hybrid schedules usually combine office days with remote days.”",
+      "problematic": false,
+      "feedback": "A definition-style statement — there is nothing specific to fabricate here."
+    }
+  ],
+  "hints": [
+    "Specifics are the suspects: names, numbers, dates, quotes, citations.",
+    "Generic statements with no measurable detail are rarely the problem."
+  ],
+  "explanation": "Hallucinations cluster around specifics: names, dates, numbers and quotes, plus any citation you cannot open. The broad statements around them are usually fine — which is exactly what makes the fabricated details easy to miss. Treat specificity as a reason to verify, not a reason to believe.",
+  "skills": ["verification", "hallucinations"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/why-ai-makes-things-up"],
+  "draft": false
+}

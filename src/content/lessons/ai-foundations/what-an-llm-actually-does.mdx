@@ -1,0 +1,70 @@
+---
+title: What an LLM actually does
+description: "A large language model generates text by predicting what comes next, one token at a time. Understand that mechanism and the quirks stop being surprising."
+track: ai-foundations
+order: 2
+level: beginner
+estimatedMinutes: 5
+skills: ["foundations", "mental models"]
+prerequisites: ["ai-foundations/what-generative-ai-is"]
+learningOutcome: "Explain how an LLM generates text and what follows from it."
+class: evergreen
+sources: []
+seo:
+  intent: "how an llm works, simply — next-token prediction and its consequences"
+  cluster: "A4"
+exercises: ["choose-how-llms-work"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+A large language model (LLM) is a prediction engine. It generates text by repeatedly answering one narrow question — **given everything so far, what comes next?** — first one token, then another, then another. That is the whole mechanism, and it explains most of the quirks you will meet.
+
+## From autocomplete to answers
+
+The idea is autocomplete — the same thing your phone does in a text field, scaled dramatically. The model has no database of sentences and no rulebook. It has numeric weights, learned from enormous amounts of text, that estimate which token is likely to follow which context.
+
+The competence is real, but it emerges from that single discipline. To continue a legal paragraph, it has learned what legal continuations look like. To continue a recipe, recipe-like text. Asking it a question is really handing it a pattern to continue.
+
+## Three consequences you will meet daily
+
+1. **Wording changes the output.** The same question, phrased differently, shifts the probabilities — which is why refining a prompt works at all.
+2. **It cannot recall exact text.** It reconstructs. Ask for a "verbatim" quote or a page number and you get a plausible reconstruction, not a retrieval. For anything that must be word-perfect, supply the text.
+3. **Confidence is free.** Every token is chosen to fit — including false ones. Fluent, specific and wrong is a normal failure mode, not a bug: [hallucinations](/glossary/hallucination) are the price of a prediction engine.
+
+## A bad example
+
+> **Ask:** "Recite, word for word, section 7 of the standard confidentiality clause template."
+>
+> You get text that looks exactly like a contract clause — possibly close, possibly invented. It is a continuation wearing the costume of a quotation, and you cannot tell the difference without the original.
+
+## A better example
+
+> **Paste the template and ask:** "Using only the text above, rewrite section 7 into plain language for a non-lawyer."
+>
+> Now the model is doing what it does best: transforming material that is fully in front of it. Anything added beyond the supplied text is easy to spot.
+
+## Why it works
+
+Match the task to the mechanism:
+
+- **Continuation-shaped tasks** — rewrite, summarize, continue, restructure, translate, draft from your own notes — fit naturally.
+- **Retrieval-shaped tasks** — exact quotes, recent facts, "what did we discuss", source lists — do not. Supply the material yourself, or use a tool that actually retrieves.
+
+That single distinction prevents a large share of real-world AI mistakes.
+
+## Practice
+
+<ExerciseCard id="choose-how-llms-work" />
+
+## Transfer
+
+- Drafting from your own notes: continuation. Good fit.
+- Rewriting in a different tone: continuation. Good fit.
+- Quoting, citing, or "the latest" anything: retrieval. Find the source.
+- Any number that will appear in a document: verify it.
+
+## Next
+
+Next: **[Why AI makes things up](/learn/ai-foundations/why-ai-makes-things-up)** — the failure mode this mechanism predicts. The [LLM glossary entry](/glossary/large-language-model) sums up the basics, and further [foundations lessons](/learn/ai-foundations) arrive in waves.

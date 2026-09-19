@@ -10,13 +10,15 @@ interface NavLesson {
   title: string;
 }
 
-const toNav = (entry: CollectionEntry<'lessons'>): NavLesson => ({
-  id: entry.id,
-  title: entry.data.title,
-  href: `/learn/${entry.data.track}/${entry.id.split('/').slice(1).join('/')}`,
-});
-
 export async function getStaticPaths() {
+  // NOTE: getStaticPaths is extracted into its own chunk during build — it must be self-contained
+  // (imports only; no references to module-level constants).
+  const toNav = (entry: CollectionEntry<'lessons'>): NavLesson => ({
+    id: entry.id,
+    title: entry.data.title,
+    href: `/learn/${entry.data.track}/${entry.id.split('/').slice(1).join('/')}`,
+  });
+
   const lessons = await getCollection('lessons', ({ data }) => !data.draft);
 
   const byTrack = new Map<string, CollectionEntry<'lessons'>[]>();

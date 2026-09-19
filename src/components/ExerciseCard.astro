@@ -1,6 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
-import { isChoiceFamily, toOptions, type ChoiceOption } from '../lib/exercise/grade';
+import {
+  isChoiceFamily,
+  isFindProblem,
+  toOptions,
+  type ChoiceOption,
+  type FindProblemClaim,
+} from '../lib/exercise/grade';
 
 interface Props {
   /** Exercise id (file id inside src/content/exercises). */
@@ -14,44 +20,84 @@ const entry = await getEntry('exercises', id);
 const published = Boolean(entry && !entry.data.draft);
 
 let options: ChoiceOption[] | null = null;
-if (entry && published && isChoiceFamily(entry.data)) {
-  options = toOptions(entry.data);
+let claims: FindProblemClaim[] | null = null;
+let aiResponse = '';
+if (entry && published) {
+  if (isChoiceFamily(entry.data)) {
+    options = toOptions(entry.data);
+  } else if (isFindProblem(entry.data)) {
+    claims = entry.data.claims;
+    aiResponse = entry.data.response;
+  }
 }
 
-const config = entry && options ? JSON.stringify({ id: entry.id, options }) : '';
+const config =
+  entry && options
+    ? JSON.stringify({ id: entry.id, kind: 'choice', options })
+    : entry && claims
+      ? JSON.stringify({ id: entry.id, kind: 'find-problem', response: aiResponse, claims })
+      : '';
 ---
 
 {
-  entry && published && options && (
-    <section class="exercise" data-exercise-choice data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
+  entry && published && (options || claims) && (
+    <section class="exercise" data-exercise data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
       <h3 id={`ex-${entry.id}-title`} class={showHeading ? undefined : 'visually-hidden'}>
         {entry.data.title}
       </h3>
       <p class="scenario">{entry.data.scenario}</p>
       <p>{entry.data.task}</p>
 
-      <form>
-        <fieldset>
-          <legend class="meta-line">Choose one option</legend>
-          <div class="options">
-            {options.map((option) => (
-              <label class="option">
-                <input type="radio" name={`choice-${entry.id}`} value={option.id} />
-                <span>
-                  <span class="option-label">{option.label}</span>
-                  <span>{option.text}</span>
-                </span>
-              </label>
-            ))}
+      {options && (
+        <form>
+          <fieldset>
+            <legend class="meta-line">Choose one option</legend>
+            <div class="options">
+              {options.map((option) => (
+                <label class="option">
+                  <input type="radio" name={`choice-${entry.id}`} value={option.id} data-choice-input />
+                  <span>
+                    <span class="option-label">{option.label}</span>
+                    <span>{option.text}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div class="exercise-actions">
+            <button class="button" type="button" data-check>
+              Check answer
+            </button>
+            <span class="xp-note" data-xp hidden />
           </div>
-        </fieldset>
-        <div class="exercise-actions">
-          <button class="button" type="button" data-check>
-            Check answer
-          </button>
-          <span class="xp-note" data-xp hidden />
+        </form>
+      )}
+
+      {claims && (
+        <div>
+          <p class="example-label">The AI answer</p>
+          <blockquote class="ai-response">{aiResponse}</blockquote>
+          <form>
+            <fieldset>
+              <legend class="meta-line">Select every part that should not be trusted as-is</legend>
+              <div class="claims">
+                {claims.map((claim) => (
+                  <label class="claim">
+                    <input type="checkbox" value={claim.id} data-claim-input />
+                    <span>{claim.text}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="exercise-actions">
+              <button class="button" type="button" data-check>
+                Check answer
+              </button>
+              <span class="xp-note" data-xp hidden />
+            </div>
+          </form>
         </div>
-      </form>
+      )}
 
       <div class="feedback" data-feedback role="status" hidden />
 
@@ -72,7 +118,9 @@ const config = entry && options ? JSON.stringify({ id: entry.id, options }) : ''
       <script type="application/json" data-exercise-config is:inline set:html={config} />
       <script>
         import { initChoiceExercises } from '../scripts/exercise-choice';
+        import { initFindProblemExercises } from '../scripts/exercise-find-problem';
         initChoiceExercises();
+        initFindProblemExercises();
       </script>
     </section>
   )

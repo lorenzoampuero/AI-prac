@@ -1,0 +1,36 @@
+{
+  "engine": "model-choice",
+  "title": "Which request matches how an LLM actually works?",
+  "scenario": "You are talking to a text model with no web access and no memory of previous conversations. It generates each response by predicting the next token over and over.",
+  "task": "Which request is the best fit for that mechanism?",
+  "options": [
+    {
+      "text": "Quote word-for-word a paragraph from a book you memorised, with the page number.",
+      "correct": false,
+      "feedback": "The model is not a library: there are no stored book pages to retrieve, so any “exact” quote — and especially the page number — is a reconstruction that can be wrong."
+    },
+    {
+      "text": "Continue this paragraph in the same style, using only what I wrote above.",
+      "correct": true,
+      "feedback": "Yes — this is continuation, the model's core behaviour. Everything the task needs is in the text you supplied."
+    },
+    {
+      "text": "What exactly did we discuss last month?",
+      "correct": false,
+      "feedback": "Without that conversation in the current context, there is nothing to recall. A model only “remembers” what sits in front of it."
+    },
+    {
+      "text": "List every source you used while learning to write.",
+      "correct": false,
+      "feedback": "Training does not leave a readable list of sources. The answer would sound plausible — and be fiction."
+    }
+  ],
+  "hints": [
+    "Ask: does the request rely on stored facts or exact recall, or on continuing text I provide?"
+  ],
+  "explanation": "An LLM repeatedly answers one narrow question: what comes next? That makes continuation-style tasks natural (rewrite, continue, restructure, translate) and makes lookups, exact recall and “what did we say” requests unnatural. Understanding the mechanism turns these failures from surprises into expected behaviour.",
+  "skills": ["mental models", "task fit"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/what-an-llm-actually-does"],
+  "draft": false
+}

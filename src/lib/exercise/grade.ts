@@ -70,3 +70,61 @@ export function gradeChoice(options: ChoiceOption[], selectedId: string): Choice
   if (!selected) throw new Error(`unknown option: ${selectedId}`);
   return { correct: selected.correct, feedback: selected.feedback };
 }
+
+// ---------------------------------------------------------------------------------------------------
+// find-the-problem — multi-select: flag every claim that should not be trusted as-is.
+
+export interface FindProblemClaim {
+  id: string;
+  text: string;
+  problematic: boolean;
+  feedback: string;
+}
+
+export interface FindProblem {
+  engine: 'find-the-problem';
+  response: string;
+  claims: FindProblemClaim[];
+}
+
+export function isFindProblem(value: { engine: string }): value is FindProblem {
+  return value.engine === 'find-the-problem';
+}
+
+export type ClaimStatus = 'caught' | 'missed' | 'over-flagged' | 'correctly-left';
+
+export interface ClaimResult {
+  id: string;
+  text: string;
+  status: ClaimStatus;
+  feedback: string;
+}
+
+/** Correct = every problematic claim selected AND no non-problematic claim selected. */
+export function gradeFindProblem(
+  claims: FindProblemClaim[],
+  selectedIds: string[],
+): { correct: boolean; results: ClaimResult[] } {
+  const selected = new Set(selectedIds);
+  const results = claims.map((claim) => {
+    const isSelected = selected.has(claim.id);
+    const status: ClaimStatus = claim.problematic
+      ? isSelected
+        ? 'caught'
+        : 'missed'
+      : isSelected
+        ? 'over-flagged'
+        : 'correctly-left';
+    return { id: claim.id, text: claim.text, status, feedback: claim.feedback };
+  });
+  const correct = results.every((result) => result.status === 'caught' || result.status === 'correctly-left');
+  return { correct, results };
+}
+
+// ---------------------------------------------------------------------------------------------------
+// Engine registry — every engine with a working UI must be listed here; the content contract tests
+// refuse to publish exercises whose engine is missing (no phantom UI ships).
+
+export function isImplementedEngine(value: { engine: string }): boolean {
+  return isChoiceFamily(value) || isFindProblem(value);
+}

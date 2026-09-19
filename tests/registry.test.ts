@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import { TRACK_IDS } from '../src/data/tracks';
-import { isChoiceFamily } from '../src/lib/exercise/grade';
+import { isImplementedEngine } from '../src/lib/exercise/grade';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const lessonsRoot = join(root, 'src', 'content', 'lessons');
@@ -150,7 +150,7 @@ describe('curriculum registry — published content integrity', () => {
   it('published exercises use an implemented engine (no phantom UI ships)', () => {
     for (const exercise of publishedExercises) {
       expect(
-        isChoiceFamily({ engine: exercise.engine }),
+        isImplementedEngine({ engine: exercise.engine }),
         `${exercise.id} uses an engine with no implemented UI: ${exercise.engine}`,
       ).toBe(true);
     }

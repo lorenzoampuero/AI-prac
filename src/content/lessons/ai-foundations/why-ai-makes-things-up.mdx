@@ -1,0 +1,73 @@
+---
+title: Why AI makes things up (hallucinations)
+description: "AI does not lie on purpose — it predicts what sounds right. Learn why confident wrong answers happen, which details to suspect, and how to verify before relying on them."
+track: ai-foundations
+order: 5
+level: beginner
+estimatedMinutes: 6
+skills: ["verification", "foundations"]
+prerequisites: ["ai-foundations/what-an-llm-actually-does"]
+learningOutcome: "Explain why hallucinations happen and catch them before using an answer."
+class: evergreen
+sources: []
+seo:
+  intent: "why does ai make things up — hallucinations explained with spotting practice"
+  cluster: "A7"
+exercises: ["spot-the-fabrication"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+A [hallucination](/glossary/hallucination) is a fluent, confident piece of AI output that simply is not true. Models generate what plausibly comes next — not what is accurate — so the most convincing sentences can be the least reliable. Knowing where fabrications cluster is most of the defence.
+
+## It is not lying — it is completing
+
+[LLMs](/glossary/large-language-model) have no internal fact-checker. When the pattern calls for a citation, a number or a quote, the model produces the **shape** of one: authors, years, statistics, page numbers. The output is optimised to look like a correct answer, because correct-looking text is what its training rewarded.
+
+The rule of thumb follows from the mechanism: **plausibility is generated; truth is not.**
+
+## Where fabrications cluster
+
+- **Numbers and statistics** — precise figures feel like evidence; an invented one is indistinguishable by style.
+- **Dates and "the latest" anything.**
+- **Names, titles and institutions** — Dr. So-and-so at the Institute of Something.
+- **Quotes** — the more colourful, the more suspect.
+- **Citations, links and DOIs** — reference-shaped text is easy to generate and impossible to click.
+- **Niche or very recent facts** — thin training signal, strong pressure to answer anyway.
+
+## A bad example
+
+> **Ask:** "Give me a peer-reviewed study showing that open-plan offices reduce creativity, with a DOI."
+>
+> You will get a full citation — authors, journal, year, DOI. It may not exist. The model was completing a citation pattern; nobody checked the library.
+
+## A better example
+
+> **Ask:** "Quote only from the text I paste below. If the answer is not in the text, say 'not in the text'."
+>
+> And separately: when you need an outside fact, look it up in a source you can open — a search, a database, the original document — instead of asking for recall.
+
+## Why it works
+
+Two habits cover most of the risk:
+
+1. **Treat specifics as claims, not facts.** Numbers, names, dates and quotes get checked — that is exactly where failures live.
+2. **Set the verification budget by the consequence.** A draft email: a glance. A number in a report, or anything about money, health or law: primary source or a human.
+
+The goal is not blanket suspicion — it is calibration: fast trust for low stakes, real verification where it counts.
+
+## Practice
+
+<ExerciseCard id="spot-the-fabrication" />
+
+## Transfer
+
+- A deck with five statistics: every number gets a source.
+- "A quick summary of the regulations": find the regulation.
+- An email draft: read it and send — low stakes.
+- Anything with a DOI or a link: click it, or delete it.
+
+## Next
+
+The [hallucination glossary entry](/glossary/hallucination) is the one-line version; [foundations lessons](/learn/ai-foundations) continue in waves, and the research & verification track — with drills like this one — arrives in a later wave.

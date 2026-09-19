@@ -2,8 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   assertSingleCorrect,
   gradeChoice,
+  gradeFindProblem,
   isChoiceFamily,
+  isImplementedEngine,
   toOptions,
+  type FindProblem,
   type ModelChoice,
   type PickBetterPrompt,
 } from '../src/lib/exercise/grade';
@@ -82,6 +85,40 @@ describe('choice engines — grading', () => {
     expect(isChoiceFamily({ engine: 'pick-better-prompt' })).toBe(true);
     expect(isChoiceFamily({ engine: 'model-choice' })).toBe(true);
     expect(isChoiceFamily({ engine: 'find-the-problem' })).toBe(false);
-    expect(isChoiceFamily({ engine: 'real-challenge' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'order-steps' })).toBe(false);
+  });
+});
+
+describe('find-the-problem engine — grading', () => {
+  const exercise: FindProblem = {
+    engine: 'find-the-problem',
+    response: 'A response with claims of mixed verifiability.',
+    claims: [
+      { id: 'c1', text: 'Generic, uncontroversial statement.', problematic: false, feedback: 'Broad and safe.' },
+      { id: 'c2', text: 'Precise statistic with no source.', problematic: true, feedback: 'Verify or discard.' },
+      { id: 'c3', text: 'Colourful quote from an unverifiable person.', problematic: true, feedback: 'Quotes are a classic fabrication.' },
+    ],
+  };
+
+  it('marks a complete, precise selection as correct', () => {
+    const grade = gradeFindProblem(exercise.claims, ['c2', 'c3']);
+    expect(grade.correct).toBe(true);
+    expect(grade.results.map((r) => r.status)).toEqual(['correctly-left', 'caught', 'caught']);
+  });
+
+  it('flags missed claims and over-flagging as incorrect', () => {
+    const missed = gradeFindProblem(exercise.claims, ['c2']);
+    expect(missed.correct).toBe(false);
+    expect(missed.results[2]?.status).toBe('missed');
+
+    const over = gradeFindProblem(exercise.claims, ['c1', 'c2', 'c3']);
+    expect(over.correct).toBe(false);
+    expect(over.results[0]?.status).toBe('over-flagged');
+  });
+
+  it('is recognized as an implemented engine', () => {
+    expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
   });
 });
