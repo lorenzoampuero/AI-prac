@@ -1,0 +1,30 @@
+{
+  "name": "ai-practice",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Practice — learn practical AI literacy by doing. Short lessons and interactive exercises for prompting, research, verification and working with AI.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "npm@11.8.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run typecheck && npm run check && npm run test && npm run build"
+  },
+  "dependencies": {
+    "astro": "7.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "^24.13.6",
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
+  }
+}
