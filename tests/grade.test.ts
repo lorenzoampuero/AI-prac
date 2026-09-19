@@ -1,10 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
+  assemblePrompt,
   assertSingleCorrect,
   gradeChoice,
+  gradeEvaluateOutput,
   gradeFindProblem,
   gradeOrderSteps,
+  isBuildPrompt,
+  isBuildPromptReady,
   isChoiceFamily,
+  isEvaluateOutput,
   isFixPrompt,
   isImplementedEngine,
   isOrderSteps,
@@ -91,7 +96,8 @@ describe('choice engines — grading', () => {
     expect(isChoiceFamily({ engine: 'find-the-problem' })).toBe(false);
     expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
     expect(isImplementedEngine({ engine: 'order-steps' })).toBe(true);
-    expect(isImplementedEngine({ engine: 'evaluate-output' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'evaluate-output' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
   });
 });
 
@@ -155,5 +161,59 @@ describe('order-steps engine', () => {
   it('is recognized as implemented', () => {
     expect(isOrderSteps({ engine: 'order-steps' })).toBe(true);
     expect(isImplementedEngine({ engine: 'order-steps' })).toBe(true);
+  });
+});
+
+describe('build-prompt engine', () => {
+  const fields = [
+    { id: 'outcome', label: 'Outcome', placeholder: 'What to produce', required: true },
+    { id: 'format', label: 'Format', placeholder: 'The exact shape', required: true },
+    { id: 'guard', label: 'Guard', placeholder: 'Optional extra', required: false },
+  ];
+
+  it('gates on every required field holding a real attempt', () => {
+    expect(isBuildPromptReady({ outcome: 'Extract every invoice total', format: 'short' }, fields)).toBe(false);
+    expect(isBuildPromptReady({ outcome: 'Extract every invoice total', format: '' }, fields)).toBe(false);
+    expect(isBuildPromptReady({ format: 'A markdown table with three columns' }, fields)).toBe(false);
+    expect(
+      isBuildPromptReady({ outcome: 'Extract every invoice total', format: 'A markdown table' }, fields),
+    ).toBe(true);
+  });
+
+  it('assembles filled fields in order and skips empty ones', () => {
+    const preview = assemblePrompt(
+      { outcome: 'Extract the totals', format: 'A markdown table', guard: '' },
+      fields,
+    );
+    expect(preview).toBe('Extract the totals\n\nA markdown table');
+  });
+
+  it('is classified and registered as implemented', () => {
+    expect(isBuildPrompt({ engine: 'build-prompt' })).toBe(true);
+    expect(isBuildPrompt({ engine: 'fix-prompt' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'build-prompt' })).toBe(true);
+  });
+});
+
+describe('evaluate-output engine', () => {
+  const verdict = {
+    better: 'B' as const,
+    reasoning: 'B answers the question and flags what the text does not cover.',
+  };
+
+  it('grades the verdict against the expected better output', () => {
+    const right = gradeEvaluateOutput(verdict, 'B');
+    expect(right.correct).toBe(true);
+    expect(right.feedback).toContain('flags what the text does not cover');
+
+    const wrong = gradeEvaluateOutput(verdict, 'A');
+    expect(wrong.correct).toBe(false);
+    expect(wrong.feedback).toMatch(/try again/i);
+  });
+
+  it('is classified and registered as implemented', () => {
+    expect(isEvaluateOutput({ engine: 'evaluate-output' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'evaluate-output' })).toBe(true);
+    expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
   });
 });

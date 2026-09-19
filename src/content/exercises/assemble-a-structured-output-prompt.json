@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Assemble a structured-output prompt",
+  "scenario": "A teammate needs the three supplier invoices on their desk turned into rows — vendor, invoice number, due date and amount — ready to paste into a budget spreadsheet.",
+  "task": "Fill every field to assemble a prompt that asks for a clean table instead of prose. The preview shows exactly what you would send; then compare it with a strong example.",
+  "fields": [
+    {
+      "id": "outcome",
+      "label": "Outcome — what to produce",
+      "placeholder": "Extract one row per invoice…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "Format — name every column",
+      "placeholder": "A markdown table with columns: Vendor, Invoice number, Due date, Amount",
+      "required": true
+    },
+    {
+      "id": "missing",
+      "label": "Missing values — what to write when a field is absent",
+      "placeholder": "If a value is not present, write 'not found'",
+      "required": true
+    },
+    {
+      "id": "guard",
+      "label": "Guard — what should NOT appear in the answer",
+      "placeholder": "No commentary outside the table",
+      "required": false
+    }
+  ],
+  "sampleSolution": "Extract one row per supplier invoice from the three invoices below, into a markdown table with exactly these columns: Vendor | Invoice number | Due date | Amount.\n\nIf a value is not present in an invoice, write 'not found' in that cell — never guess or calculate it.\n\nOutput only the table, with no commentary before or after it.\n\nInvoices:\n[paste the three invoices]",
+  "hints": [
+    "A column list is a format; 'organized' is a hope.",
+    "What happens to a due date the invoice never mentions? Decide before the model does."
+  ],
+  "explanation": "The assembled prompt names every column, defines the container (a table), writes in the missing-data rule and blocks the default behaviour — polite commentary wrapped around the data. One example row would make it even stronger: a filled row communicates the shape more precisely than any description can.",
+  "skills": ["structured output"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/structured-output"],
+  "draft": false
+}

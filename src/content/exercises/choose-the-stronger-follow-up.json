@@ -1,0 +1,22 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Choose the stronger follow-up",
+  "scenario": "A product announcement draft came back well structured but too long and a little salesy. You liked the opening paragraph and the three feature bullets; everything after them needs work.",
+  "task": "Pick the follow-up message you would actually send.",
+  "promptA": "Make it better.",
+  "promptB": "Keep the opening paragraph and the three bullets exactly as they are. Cut everything after the bullets. Rewrite the two sentences that say 'revolutionary' so they state the change plainly.",
+  "better": "B",
+  "feedback": {
+    "a": "'Better' has no target — the model guesses, and you end up re-reading a new draft while hunting for the same old problems.",
+    "b": "It points at the exact parts to keep, the exact parts to cut and the exact flaw to fix — three surgical edits in one short message."
+  },
+  "hints": [
+    "Which follow-up tells the model what NOT to touch?",
+    "Count the concrete instructions each message contains."
+  ],
+  "explanation": "A follow-up works when it narrows the search: keep this, cut that, fix those sentences. 'Make it better' re-rolls the dice instead of steering the draft — you get a new version to review from scratch, with no guarantee the parts you liked survive.",
+  "skills": ["iteration"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/iterate-from-the-output"],
+  "draft": false
+}

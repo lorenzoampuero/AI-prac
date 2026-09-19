@@ -1,0 +1,69 @@
+---
+title: Structured output (JSON, simply)
+description: "Ask for output shaped to a fixed format — a table, fixed fields or JSON — so the result drops straight into your tools instead of only living in a chat."
+track: prompting
+order: 9
+level: intermediate
+estimatedMinutes: 6
+skills: ["prompting", "structured output"]
+prerequisites: ["prompting/ground-responses-in-your-sources"]
+learningOutcome: "Request output shaped for reuse — a named table, fixed fields or JSON — with no extra commentary."
+class: evergreen
+sources: []
+seo:
+  intent: "ask ai for structured output — json, tables and fields you can reuse"
+  cluster: "B18"
+exercises: ["assemble-a-structured-output-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Structured output is output shaped for a **destination** — a spreadsheet column, a checklist, a field list your tool can read. Most AI answers are written for a human reader: fluent prose you have to re-type before it is useful. Asking for a fixed shape changes that. And you do not need to be a programmer: you need to name the shape.
+
+## Three levels of shape
+
+1. **A table or list** — for humans and spreadsheets. "A markdown table with columns: Vendor, Due date, Amount."
+2. **Fixed fields** — for partial reuse. "For each item, output three lines: Name:, Deadline:, Owner:."
+3. **JSON** — for tools. "A JSON array where each object has the keys invoice, due, amount." JSON is just labeled data; the keys are the labels.
+
+## The recipe
+
+- **Name every column before asking for rows.** "Organized" is a hope, not a format.
+- **Show one example row.** A single filled row communicates the shape better than a paragraph about it — the same signal as [examples and few-shot](/learn/prompting/examples-and-few-shot).
+- **Ask for nothing else.** "Output only the table." By default, answers come wrapped in polite commentary that breaks every tool that tries to read them.
+- **Decide what happens to missing values.** "If a field is absent, write 'not found'." Without a rule, gaps get filled — and you cannot tell which cells are real.
+
+## A bad example
+
+> **Ask:** "Summarize these invoices in a clear, organized way."
+>
+> Clear to whom? You get elegant prose — and an afternoon of re-typing it into a sheet.
+
+## A better example
+
+> **Ask:** "Here are three invoices: [paste]. Extract one row per invoice into a markdown table with columns: Vendor, Invoice number, Due date, Amount. Use 'not found' when a field is missing. Output only the table."
+>
+> Now the answer pastes into a spreadsheet, and every gap is visible instead of invented.
+
+## Test the shape before you run it
+
+Ask for **the first two rows only** and check the shape. Fixing a column name costs one follow-up; re-deriving two hundred rows costs the afternoon. When you do get JSON, confirm it actually parses before trusting it downstream — chat interfaces often add a friendly sentence or wrap long lines, which breaks importers silently. The shape is a promise the model usually keeps, but you are still the one who checks.
+
+## Why it works
+
+Models are pattern machines: a named shape plus one example row is the strongest pattern signal you can give, and it leaves nothing to improvise. Free-form requests leave the structure to chance; fixed fields leave it to you.
+
+## Practice
+
+<ExerciseCard id="assemble-a-structured-output-prompt" />
+
+## Transfer
+
+- Meeting notes → an action table with Owner and Due columns.
+- Job postings → keyword fields per posting for a comparison sheet.
+- Any "turn this into something I can paste" request: answer with the destination format, not a nicer paragraph.
+
+## Next
+
+Next: **[Iterate from the output](/learn/prompting/iterate-from-the-output)** — the first draft is a draft; here is how to steer it without starting over.

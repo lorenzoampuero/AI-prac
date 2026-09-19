@@ -1,12 +1,16 @@
 ---
 import { getEntry } from 'astro:content';
 import {
+  isBuildPrompt,
   isChoiceFamily,
+  isEvaluateOutput,
   isFindProblem,
   isFixPrompt,
   isOrderSteps,
   toOptions,
+  type BuildPrompt,
   type ChoiceOption,
+  type EvaluateOutput,
   type FindProblemClaim,
   type FixPrompt,
 } from '../lib/exercise/grade';
@@ -26,6 +30,8 @@ let options: ChoiceOption[] | null = null;
 let claims: FindProblemClaim[] | null = null;
 let fix: FixPrompt | null = null;
 let order: string[] | null = null;
+let build: BuildPrompt | null = null;
+let evaluate: EvaluateOutput | null = null;
 let aiResponse = '';
 if (entry && published) {
   if (isChoiceFamily(entry.data)) {
@@ -37,6 +43,10 @@ if (entry && published) {
     fix = entry.data;
   } else if (isOrderSteps(entry.data)) {
     order = entry.data.steps;
+  } else if (isBuildPrompt(entry.data)) {
+    build = entry.data;
+  } else if (isEvaluateOutput(entry.data)) {
+    evaluate = entry.data;
   }
 }
 
@@ -49,7 +59,11 @@ const config =
         ? JSON.stringify({ id: entry.id, kind: 'fix-prompt' })
         : entry && order
           ? JSON.stringify({ id: entry.id, kind: 'order-steps' })
-          : '';
+          : entry && evaluate
+            ? JSON.stringify({ id: entry.id, kind: 'evaluate-output', verdict: evaluate.verdict })
+            : entry && build
+              ? JSON.stringify({ id: entry.id, kind: 'build-prompt', fields: build.fields })
+              : '';
 
 // Fixed rotated presentation (never the canonical order) so the answer is not visible before interaction.
 let presented: { index: number; text: string }[] = [];
@@ -61,7 +75,7 @@ if (order) {
 ---
 
 {
-  entry && published && (options || claims || fix || order) && (
+  entry && published && (options || claims || fix || order || build || evaluate) && (
     <section class="exercise" data-exercise data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
       <h3 id={`ex-${entry.id}-title`} class={showHeading ? undefined : 'visually-hidden'}>
         {entry.data.title}
@@ -200,6 +214,94 @@ if (order) {
         </div>
       )}
 
+      {build && (
+        <div>
+          <form class="builder">
+            {build.fields.map((field) => (
+              <div class="field-block">
+                <label class="field-label" for={`build-${entry.id}-${field.id}`}>
+                  {field.label}
+                  {field.required ? '' : ' — optional'}
+                </label>
+                <textarea
+                  id={`build-${entry.id}-${field.id}`}
+                  class="prompt-editor"
+                  rows="3"
+                  data-build-input
+                  data-field-id={field.id}
+                  placeholder={field.placeholder}
+                />
+              </div>
+            ))}
+            <p class="example-label">Your prompt, assembled</p>
+            <pre
+              class="prompt-preview"
+              data-prompt-preview
+              data-placeholder="Fill the fields above — this shows exactly what you would paste into the chat."></pre>
+            <div class="exercise-actions">
+              <button class="button" type="button" data-check>
+                Compare with a strong example
+              </button>
+              <span class="xp-note" data-xp hidden />
+            </div>
+          </form>
+          <details data-solution hidden>
+            <summary>A strong example (self-assessment — not machine-graded)</summary>
+            <p class="solution-text">{build.sampleSolution}</p>
+          </details>
+        </div>
+      )}
+
+      {evaluate && (
+        <div>
+          <div class="outputs">
+            <div class="output-card">
+              <p class="example-label">Output A</p>
+              <blockquote class="ai-response">{evaluate.outputA}</blockquote>
+            </div>
+            <div class="output-card">
+              <p class="example-label">Output B</p>
+              <blockquote class="ai-response">{evaluate.outputB}</blockquote>
+            </div>
+          </div>
+          <div class="rubric">
+            <p class="example-label">Rubric — answer each question for both outputs before deciding</p>
+            <ul class="rubric-list">
+              {evaluate.rubric.map((item) => (
+                <li>{item.label}</li>
+              ))}
+            </ul>
+          </div>
+          <form>
+            <fieldset>
+              <legend class="meta-line">Which output would you ship?</legend>
+              <div class="options">
+                <label class="option">
+                  <input type="radio" name={`verdict-${entry.id}`} value="A" data-evaluate-input />
+                  <span>
+                    <span class="option-label">Output A</span>
+                    <span>This is the one I would ship.</span>
+                  </span>
+                </label>
+                <label class="option">
+                  <input type="radio" name={`verdict-${entry.id}`} value="B" data-evaluate-input />
+                  <span>
+                    <span class="option-label">Output B</span>
+                    <span>This is the one I would ship.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="exercise-actions">
+              <button class="button" type="button" data-check>
+                Check verdict
+              </button>
+              <span class="xp-note" data-xp hidden />
+            </div>
+          </form>
+        </div>
+      )}
+
       <div class="feedback" data-feedback role="status" hidden />
 
       {entry.data.hints.length > 0 && (
@@ -218,11 +320,15 @@ if (order) {
 
       <script type="application/json" data-exercise-config is:inline set:html={config} />
       <script>
+        import { initBuildPromptExercises } from '../scripts/exercise-build-prompt';
         import { initChoiceExercises } from '../scripts/exercise-choice';
+        import { initEvaluateOutputExercises } from '../scripts/exercise-evaluate-output';
         import { initFindProblemExercises } from '../scripts/exercise-find-problem';
         import { initFixPromptExercises } from '../scripts/exercise-fix-prompt';
         import { initOrderStepsExercises } from '../scripts/exercise-order-steps';
+        initBuildPromptExercises();
         initChoiceExercises();
+        initEvaluateOutputExercises();
         initFindProblemExercises();
         initFixPromptExercises();
         initOrderStepsExercises();

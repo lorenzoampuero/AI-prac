@@ -1,0 +1,27 @@
+{
+  "engine": "evaluate-output",
+  "title": "Compare two replies and pick the one to ship",
+  "scenario": "A colleague asked for a plain-language read of one clause, in three bullets, for a meeting in ten minutes. The excerpt says: 'Either party may terminate this Agreement for convenience upon written notice. Termination is effective upon receipt of the notice. Notice must be delivered to the other party's registered address.' You prompted an assistant and have two candidate replies — there is time to check one before the meeting.",
+  "task": "Work through the rubric for both outputs, then pick the reply you would send.",
+  "outputA": "Summary of the termination clause:\n\n- Either party may terminate for convenience with 15 days' written notice sent by email.\n- The contract renews automatically for five years unless terminated.\n\nThis strongly favours the supplier. You should push to shorten the renewal term and secure a shorter notice period before signing.",
+  "outputB": "Here is what the excerpt says about ending the contract early:\n\n- Either party can end the agreement for convenience — no reason needed.\n- Notice must be in writing; the excerpt does not state how many days.\n- It does not say whether notice by email is accepted — check the full contract.\n\nThe excerpt does not mention automatic renewal, so I cannot confirm anything about it from this text.",
+  "rubric": [
+    { "id": "ask", "label": "Does it deliver the requested format — three bullets, plain language, no legalese?" },
+    { "id": "trace", "label": "Can every specific claim (numbers, channels, lengths) be traced to the excerpt?" },
+    { "id": "gaps", "label": "Does it say what the excerpt does not cover instead of filling the gap?" },
+    { "id": "advice", "label": "Does it stay a summary, rather than giving advice the writer cannot give?" }
+  ],
+  "verdict": {
+    "better": "B",
+    "reasoning": "B is less polished — but every claim stays inside what the excerpt supports, it flags the two details the text does not state, and it remains a summary. A reads better at a glance while inventing a 15-day notice, an email channel and a five-year renewal the excerpt never mentions, then wraps advice around them. Fluency is not evidence."
+  },
+  "hints": [
+    "Check every number in both replies against the excerpt — which reply contains numbers the excerpt never gives?",
+    "Which reply tells you what the source does not cover?"
+  ],
+  "explanation": "The rubric is the whole exercise. The more fluent reply fails four questions in a row — invented notice period, invented channel, invented renewal term, plus advice — while the plainer reply survives all four by staying inside the excerpt and naming its gaps. Polish is not a criterion; traceability is.",
+  "skills": ["evaluation", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/evaluate-before-you-ship"],
+  "draft": false
+}

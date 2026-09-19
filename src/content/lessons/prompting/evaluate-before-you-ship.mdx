@@ -1,0 +1,56 @@
+---
+title: Evaluate before you ship
+description: "A thirty-second rubric beats a week of rework: check facts, format, scope and gaps before AI output leaves your hands — especially when it reads beautifully."
+track: prompting
+order: 11
+level: intermediate
+estimatedMinutes: 7
+skills: ["prompting", "verification", "evaluation"]
+prerequisites: ["prompting/iterate-from-the-output"]
+learningOutcome: "Run a five-question rubric on any AI output before you act on it or pass it on."
+class: evergreen
+sources: []
+seo:
+  intent: "evaluate ai output before using it — a five-point checklist anyone can run"
+  cluster: "B20"
+exercises: ["compare-two-replies-and-pick-the-one-to-ship"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Fluency is not quality. The better an output reads, the less you notice what is missing — which is why confident, polished answers are the dangerous ones. A rubric is simply the questions you ask every time, in the same order, before anything leaves your hands. Five questions do most of the work.
+
+## The five questions
+
+1. **Does it answer the actual ask?** The deliverable you specified — format, length, audience. Not a similar topic: the ask.
+2. **Which claims can you verify — and which can't you?** Numbers, names, quotes, dates, policies: trace them or mark them. [Grounded, quote-first answers](/learn/prompting/ground-responses-in-your-sources) make this a ten-second job.
+3. **What is missing that the reader would need?** The gap between "covers the ask" and "usable" hides here.
+4. **Would you put your name on it?** Advice it cannot give, promises you cannot keep, tone that does not fit — this question catches them.
+5. **Do the details fit the destination?** If it will be pasted into a sheet or a tool, does it actually paste cleanly?
+
+## Comparing two drafts
+
+When you have two versions, run the same rubric on both — question by question, not vibe against vibe. The more fluent one often wins the glance and loses the check; polish is not on the list. Score each question, then decide. This is the mirror image of [why AI makes things up](/learn/ai-foundations/why-ai-makes-things-up): plausible is generated, true is not, and the rubric is where the difference gets caught.
+
+## Scale the check to the stakes
+
+For a throwaway draft, a skim is fine. For anything that goes to someone else — especially about people, money, policies, law or health — every claim gets traced, and unverifiable material gets cut or marked. You cannot delegate the last check: the model has no idea which details matter to your reader. That judgment is the job you are keeping.
+
+## A habit, not a ceremony
+
+The five questions take about thirty seconds on a short text. Run them out loud once and they become automatic — the moment you catch yourself thinking "that's a nice number, where did it come from?", the rubric is doing its work.
+
+## Practice
+
+<ExerciseCard id="compare-two-replies-and-pick-the-one-to-ship" />
+
+## Transfer
+
+- Before forwarding: questions 1 and 2 at minimum.
+- Before publishing: all five, quote-first on every specific claim.
+- On your own writing: the same five questions work — that is not an accident.
+
+## Next
+
+That closes the prompting track — all eleven lessons. Keep the muscles alive on the [practice floor](/practice), where every exercise lives, and revisit any term in the [glossary](/glossary). The research track follows in a coming wave; until then, the foundations track is worth a second pass with new eyes.

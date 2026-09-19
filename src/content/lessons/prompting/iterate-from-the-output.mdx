@@ -1,0 +1,59 @@
+---
+title: Iterate from the output
+description: "The first draft is a draft. Targeted follow-ups — keep this, change that — steer AI work faster than restarting, and teach you what the model actually understood."
+track: prompting
+order: 10
+level: intermediate
+estimatedMinutes: 6
+skills: ["prompting", "iteration"]
+prerequisites: ["prompting/structured-output"]
+learningOutcome: "Improve AI work with targeted follow-ups: point at the flaw, name the fix, protect what works."
+class: evergreen
+sources: []
+seo:
+  intent: "iterate on ai output — targeted follow-up prompts that fix without rewriting"
+  cluster: "B19"
+exercises: ["choose-the-stronger-follow-up"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+You rarely get the right answer on the first try — that is normal, not failure. The skill is the second message. Most people either restart from zero or type "make it better"; both throw away information you just paid for. The first output tells you what the model understood, and that is exactly what your follow-up should correct.
+
+## Critique, don't redo
+
+The draft is a map of the model's interpretation. Use it: "Keep the two opening paragraphs. Rewrite only the closing." Now the parts that worked are protected, and the round of changes is small enough to verify.
+
+## Four moves for a strong follow-up
+
+1. **Point at the exact place.** "The second bullet", "the title" — not "some parts feel off".
+2. **Name the fix, not the feeling.** "Cut it to three bullets" beats "make it shorter". A feeling describes your reaction; a fix describes the target.
+3. **Protect what works, explicitly.** "Change nothing else." Otherwise every round quietly reshuffles the pieces you liked.
+4. **One change per round — or clearly separate ones.** Five blended changes produce a rewrite where you cannot tell what helped.
+
+## When you're stuck
+
+Ask for options instead of an edit: "Give me three different openings for this section." Comparing alternatives is easier than describing the fix from scratch — and you can blend the best of each in the next round. You can also ask it to list its weakest sentences as a suggestion generator; treat that list as ideas, not a verdict — the model is no better at judging its own output than at producing it.
+
+## When to restart instead
+
+Restart when the **goal** changed, not the text. If you now want a different deliverable, a new prompt built from [the outcome](/learn/prompting/define-the-outcome) is cleaner than five patches on the wrong target.
+
+## Why it works
+
+Every follow-up adds constraints the model can act on, and the conversation — with the draft and your corrections — becomes part of its context, exactly as the [context window](/learn/ai-foundations/context-windows) allows. "Make it better" adds no constraint at all, so the model guesses; a pointed fix narrows the search to the sentence you actually mean.
+
+## Practice
+
+<ExerciseCard id="choose-the-stronger-follow-up" />
+
+## Transfer
+
+- Documents: point at a section, name the edit, freeze the rest.
+- Code: "keep the structure, change this function to return a list" beats "fix it".
+- Plans: "merge steps 2 and 3, keep the rest" — same loop at every scale.
+
+## Next
+
+Next: **[Evaluate before you ship](/learn/prompting/evaluate-before-you-ship)** — the last muscle: a fast rubric you run before anything leaves your hands.

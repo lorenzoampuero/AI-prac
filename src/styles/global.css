@@ -520,6 +520,62 @@ main {
   grid-template-columns: 1fr;
 }
 
+/* build-prompt — guided composition with a live preview */
+
+.field-block {
+  margin-bottom: var(--space-3);
+}
+
+.field-block .prompt-editor {
+  margin-bottom: 0;
+}
+
+.prompt-preview {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-height: 3rem;
+}
+
+.prompt-preview:empty::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+}
+
+/* evaluate-output — two candidates, one verdict */
+
+.outputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.outputs .ai-response {
+  margin-bottom: 0;
+  white-space: pre-wrap;
+}
+
+.rubric {
+  margin-bottom: var(--space-4);
+}
+
+.rubric-list {
+  margin: var(--space-2) 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: var(--space-1);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
 /* Breadcrumbs */
 
 .breadcrumbs {

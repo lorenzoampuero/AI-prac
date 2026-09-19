@@ -175,9 +175,85 @@ export function gradeOrderSteps(submitted: number[]): OrderGrade {
 }
 
 // ---------------------------------------------------------------------------------------------------
+// build-prompt — guided composition: the learner fills named fields and a live preview assembles the
+// prompt they would actually send. Open-ended by design, so the only deterministic rule is that every
+// required field holds a real attempt before the strong example is revealed (self-assessment, §19).
+
+export interface BuildPromptField {
+  id: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+}
+
+export interface BuildPrompt {
+  engine: 'build-prompt';
+  fields: BuildPromptField[];
+  sampleSolution: string;
+}
+
+export function isBuildPrompt(value: { engine: string }): value is BuildPrompt {
+  return value.engine === 'build-prompt';
+}
+
+export const MIN_FIELD_CHARS = 10;
+
+/** Every required field must contain a real attempt before the example is revealed. */
+export function isBuildPromptReady(values: Record<string, string>, fields: BuildPromptField[]): boolean {
+  return fields.every((field) => !field.required || (values[field.id] ?? '').trim().length >= MIN_FIELD_CHARS);
+}
+
+/** Assembles the learner's fields into a prompt preview — plain text, in field order, no API (§19). */
+export function assemblePrompt(values: Record<string, string>, fields: BuildPromptField[]): string {
+  return fields
+    .map((field) => (values[field.id] ?? '').trim())
+    .filter((text) => text.length > 0)
+    .join('\n\n');
+}
+
+// ---------------------------------------------------------------------------------------------------
+// evaluate-output — judgement training: two outputs for the same ask, a rubric to compare them, and a
+// verdict. The rubric is the process (not graded); only the verdict is deterministic.
+
+export interface EvaluateOutput {
+  engine: 'evaluate-output';
+  outputA: string;
+  outputB: string;
+  rubric: { id: string; label: string }[];
+  verdict: { better: 'A' | 'B'; reasoning: string };
+}
+
+export function isEvaluateOutput(value: { engine: string }): value is EvaluateOutput {
+  return value.engine === 'evaluate-output';
+}
+
+export interface EvaluateGrade {
+  correct: boolean;
+  feedback: string;
+}
+
+export function gradeEvaluateOutput(
+  verdict: { better: 'A' | 'B'; reasoning: string },
+  selected: 'A' | 'B',
+): EvaluateGrade {
+  const correct = selected === verdict.better;
+  return {
+    correct,
+    feedback: correct ? verdict.reasoning : 'Re-read both outputs against the rubric, then try again — attempts are free.',
+  };
+}
+
+// ---------------------------------------------------------------------------------------------------
 // Engine registry — every engine with a working UI must be listed here; the content contract tests
 // refuse to publish exercises whose engine is missing (no phantom UI ships).
 
 export function isImplementedEngine(value: { engine: string }): boolean {
-  return isChoiceFamily(value) || isFindProblem(value) || isFixPrompt(value) || isOrderSteps(value);
+  return (
+    isChoiceFamily(value) ||
+    isFindProblem(value) ||
+    isFixPrompt(value) ||
+    isOrderSteps(value) ||
+    isBuildPrompt(value) ||
+    isEvaluateOutput(value)
+  );
 }
