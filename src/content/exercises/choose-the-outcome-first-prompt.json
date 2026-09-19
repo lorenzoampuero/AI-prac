@@ -1,0 +1,19 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Which prompt aims at a result?",
+  "scenario": "You have a list of Q3 numbers and a manager who will read whatever you send in under a minute.",
+  "task": "Which prompt is more likely to produce something you can use as-is?",
+  "promptA": "Write something about our Q3 results.",
+  "promptB": "Using the numbers below, write a five-bullet executive summary of Q3: one metric per bullet with its number, plus one risk bullet. No facts beyond the list.",
+  "better": "B",
+  "feedback": {
+    "a": "A topic, not a result. There is no shape to check the answer against — you will negotiate for three rounds and still not know when it is done.",
+    "b": "The outcome is visible before generation starts: five bullets, one metric each, one risk, no outside facts. Shapeless prose became a target."
+  },
+  "hints": ["Ask: what will exist when this is done — and could I recognise it?"],
+  "explanation": "Outcome-first prompting turns “good” into something countable. The stronger prompt names the artifact, its structure and its boundary, so the result is checkable in seconds — and fixable precisely when it misses.",
+  "skills": ["outcomes"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/define-the-outcome"],
+  "draft": false
+}

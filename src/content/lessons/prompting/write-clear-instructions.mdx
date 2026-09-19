@@ -1,0 +1,70 @@
+---
+title: Write clear instructions
+description: "A clear instruction does one job in words a stranger could follow — no stacked requests, no adjectives doing the work of requirements. Here is the fix."
+track: prompting
+order: 3
+level: beginner
+estimatedMinutes: 6
+skills: ["prompting", "clarity"]
+prerequisites: ["prompting/give-useful-context"]
+learningOutcome: "Turn vague or overloaded asks into single, checkable instructions."
+class: evergreen
+sources: []
+seo:
+  intent: "write clear ai instructions — one job per instruction, checkable by a stranger"
+  cluster: "B2, B3"
+exercises: ["fix-the-boss-email-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+A clear instruction says **what to do, for whom, and what good looks like** — in words a colleague could follow without asking you a single question. Most "the AI misunderstood me" stories are not model problems; they are instructions missing load-bearing walls.
+
+## The two failure modes
+
+- **Vagueness.** "Make it better." Better how? The model substitutes its guess for your intent.
+- **Overload.** "Shorten this, add statistics, keep the tone, make it professional and maybe more exciting." Five requests in one sentence become five half-done requests.
+
+The cure for both is the same: **one job per instruction, stated so a stranger could check it.**
+
+## The specificity ladder
+
+Watch one request climb:
+
+1. "Improve this paragraph." — no direction at all.
+2. "Shorten this paragraph." — a direction, no target.
+3. "Cut this paragraph to 120 words." — countable.
+4. "Cut this paragraph to 120 words; keep every commitment and the apology; add no new facts." — countable, bounded, checkable.
+
+Climb one rung more than feels necessary, and your results stop being lotteries.
+
+## Why it works
+
+Instructions narrow the space of plausible [tokens](/glossary/token) — that is the only mechanism there is. Each specific, checkable requirement removes a swath of outcomes you did not want. Vague words like "professional" remove almost nothing; "apologetic but confident, five sentences" removes almost everything except the target.
+
+## A bad example
+
+> **Ask:** "Help me write an email to my boss about the project."
+>
+> The model knows the topic, not the situation: status update or request? Good news or bad? Formal or casual? You will spend three rounds teaching it what one sentence could have said.
+
+## A better example
+
+> **Ask:** "Write a five-sentence update email to my manager about Project Atlas. The integration milestone slipped to October 4; everything else is on track; I need two more days of QA support. Direct, solution-oriented, no jargon. End with the ask."
+>
+> One job, fully specified. The reply is checkable line by line against the brief.
+
+## Practice
+
+<ExerciseCard id="fix-the-boss-email-prompt" />
+
+## Transfer
+
+- Any "improve this" request: replace the verb with a countable one.
+- Multi-part wishes: split into separate instructions — they are separate decisions.
+- The stranger test before sending: would someone with zero context produce the right thing?
+
+## Next
+
+Next: **Add constraints** lands in the next delivery wave. Browse the [prompting track](/learn/prompting) meanwhile, and the [prompt glossary entry](/glossary/prompt) covers the basics.

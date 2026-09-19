@@ -4,7 +4,9 @@ import {
   gradeChoice,
   gradeFindProblem,
   isChoiceFamily,
+  isFixPrompt,
   isImplementedEngine,
+  isUsableSubmission,
   toOptions,
   type FindProblem,
   type ModelChoice,
@@ -120,5 +122,20 @@ describe('find-the-problem engine — grading', () => {
   it('is recognized as an implemented engine', () => {
     expect(isImplementedEngine({ engine: 'find-the-problem' })).toBe(true);
     expect(isImplementedEngine({ engine: 'real-challenge' })).toBe(false);
+  });
+});
+
+describe('fix-prompt engine', () => {
+  it('is classified and registered as implemented', () => {
+    expect(isFixPrompt({ engine: 'fix-prompt' })).toBe(true);
+    expect(isFixPrompt({ engine: 'build-prompt' })).toBe(false);
+    expect(isImplementedEngine({ engine: 'fix-prompt' })).toBe(true);
+  });
+
+  it('only accepts submissions with real content', () => {
+    expect(isUsableSubmission('')).toBe(false);
+    expect(isUsableSubmission('   \n  ')).toBe(false);
+    expect(isUsableSubmission('make it better')).toBe(false);
+    expect(isUsableSubmission('Write a five-sentence update email to my manager about Project Atlas.')).toBe(true);
   });
 });

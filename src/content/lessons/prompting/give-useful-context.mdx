@@ -1,0 +1,65 @@
+---
+title: Give useful context
+description: "Models cannot know who text is for, why it matters or what was already decided. Context is the shortest path from a decent answer to a usable one."
+track: prompting
+order: 2
+level: beginner
+estimatedMinutes: 6
+skills: ["prompting", "context"]
+prerequisites: ["prompting/define-the-outcome"]
+learningOutcome: "Supply audience, purpose, knowns and material that change the answer."
+class: evergreen
+sources: []
+seo:
+  intent: "give ai useful context — audience, purpose, knowns and source material"
+  cluster: "B4"
+exercises: ["choose-the-context-rich-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Context is everything the model needs to know that is not already in your request: **who** the result is for, **why** it matters, what is **already known**, and **what material** to work from. Without it, the model fills gaps with the average of everything it has seen — and that average is rarely your situation.
+
+## The four slots
+
+1. **Audience** — who reads or uses this. A client, your manager, a beginner, a machine.
+2. **Purpose** — what happens next. Send as-is, make a decision, learn something.
+3. **Knowns** — facts and decisions already settled, plus constraints that must survive.
+4. **Material** — the text, data or documents to work from. Paste them; do not describe them.
+
+Two sentences usually cover audience and purpose; knowns and material are often one line plus a paste. That is the difference between "rewrite my email" and a result you send without edits.
+
+## Context is not a dump
+
+More is not always better. Everything you add competes for attention inside the [context window](/glossary/context-window) — a 40-page dump with one buried instruction gets worse results than ten relevant lines. Add what changes the answer; summarize the rest.
+
+## A bad example
+
+> **Ask:** "Rewrite this email in a more professional style."
+>
+> Professional for whom? The model aims at a polite generic register — maybe too stiff for the colleague, too warm for legal.
+
+## A better example
+
+> **Ask:** "Rewrite the draft below as a reply to a client who has waited a week: apologetic but confident. Keep every commitment we made. Maximum five sentences."
+>
+> Audience, situation, tone, boundary, length. The draft can now land on the first try — or fail in ways you can name and fix.
+
+## Why it works
+
+Every context sentence rewires the probabilities that follow. The model cannot infer your client from the draft alone — but given the client, the draft transforms. Context is the cheapest quality upgrade in prompting, and it doubles as documentation: to write it, you had to know your audience.
+
+## Practice
+
+<ExerciseCard id="choose-the-context-rich-prompt" />
+
+## Transfer
+
+- Asking for analysis: say what decision it feeds — insight changes shape.
+- Delegating writing: name the reader and the register before the topic.
+- Sensitive domains: state the constraint ("we cannot promise dates") — it survives into every draft.
+
+## Next
+
+Next: **[Write clear instructions](/learn/prompting/write-clear-instructions)** — one job per instruction, checkable by a stranger. The [prompt glossary entry](/glossary/prompt) is the one-line version.

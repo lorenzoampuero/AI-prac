@@ -439,6 +439,43 @@ main {
   font-size: 0.9375rem;
 }
 
+.field-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.prompt-editor {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+  resize: vertical;
+}
+
+.prompt-editor:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.solution-text {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-s);
+  padding: var(--space-3) var(--space-4);
+  white-space: pre-wrap;
+}
+
+.feedback[data-state='done'] {
+  border-left-color: var(--success);
+}
+
 /* Breadcrumbs */
 
 .breadcrumbs {

@@ -1,0 +1,39 @@
+{
+  "engine": "fix-prompt",
+  "title": "Fix the boss email prompt",
+  "scenario": "A colleague needs help drafting a status email to their manager and wrote this prompt. It is the classic package: topic given, situation missing.",
+  "task": "Rewrite the prompt so a stranger could produce the right email without asking anything.",
+  "weakPrompt": "Help me write an email to my boss about the project.",
+  "criteria": [
+    {
+      "id": "outcome",
+      "label": "Names the exact result and format",
+      "hint": "Length, shape, language level — e.g. “a five-sentence update email”."
+    },
+    {
+      "id": "context",
+      "label": "Adds who it is for and the situation",
+      "hint": "Relationship and status: achievement, risk, slippage, ask…"
+    },
+    {
+      "id": "content",
+      "label": "Lists what must be included or avoided",
+      "hint": "Facts that must survive, tone constraints, things not to promise."
+    },
+    {
+      "id": "check",
+      "label": "Defines “good” concretely enough to check",
+      "hint": "Prefer countable words: “no jargon”, “end with the ask”, “direct, no excuses”."
+    }
+  ],
+  "sampleSolution": "Write a five-sentence status email to my manager about Project Atlas. Situation: the integration milestone slipped to October 4; everything else is on track; I need two more days of QA support to keep the new date. Tone: direct and solution-oriented, no excuses, no jargon. End with the specific ask as the last sentence.",
+  "hints": [
+    "The stranger test: would someone with zero context produce the right email?",
+    "Climb one rung past comfortable: replace every adjective with something countable."
+  ],
+  "explanation": "The fixed prompt states one job with a checkable shape: who it is for, what happened, what to avoid and how it ends. Each specific requirement narrows the space of plausible outputs — that is the entire mechanism of “clear instructions”.",
+  "skills": ["clarity", "instructions"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/write-clear-instructions"],
+  "draft": false
+}

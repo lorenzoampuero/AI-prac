@@ -3,9 +3,11 @@ import { getEntry } from 'astro:content';
 import {
   isChoiceFamily,
   isFindProblem,
+  isFixPrompt,
   toOptions,
   type ChoiceOption,
   type FindProblemClaim,
+  type FixPrompt,
 } from '../lib/exercise/grade';
 
 interface Props {
@@ -21,6 +23,7 @@ const published = Boolean(entry && !entry.data.draft);
 
 let options: ChoiceOption[] | null = null;
 let claims: FindProblemClaim[] | null = null;
+let fix: FixPrompt | null = null;
 let aiResponse = '';
 if (entry && published) {
   if (isChoiceFamily(entry.data)) {
@@ -28,6 +31,8 @@ if (entry && published) {
   } else if (isFindProblem(entry.data)) {
     claims = entry.data.claims;
     aiResponse = entry.data.response;
+  } else if (isFixPrompt(entry.data)) {
+    fix = entry.data;
   }
 }
 
@@ -36,11 +41,13 @@ const config =
     ? JSON.stringify({ id: entry.id, kind: 'choice', options })
     : entry && claims
       ? JSON.stringify({ id: entry.id, kind: 'find-problem', response: aiResponse, claims })
-      : '';
+      : entry && fix
+        ? JSON.stringify({ id: entry.id, kind: 'fix-prompt' })
+        : '';
 ---
 
 {
-  entry && published && (options || claims) && (
+  entry && published && (options || claims || fix) && (
     <section class="exercise" data-exercise data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
       <h3 id={`ex-${entry.id}-title`} class={showHeading ? undefined : 'visually-hidden'}>
         {entry.data.title}
@@ -99,6 +106,48 @@ const config =
         </div>
       )}
 
+      {fix && (
+        <div>
+          <p class="example-label">The weak prompt</p>
+          <blockquote class="ai-response">{fix.weakPrompt}</blockquote>
+          <form>
+            <label class="field-label" for={`fix-input-${entry.id}`}>
+              Your improved version
+            </label>
+            <textarea
+              id={`fix-input-${entry.id}`}
+              class="prompt-editor"
+              rows="5"
+              data-fix-input
+              placeholder="Write the improved prompt here…"
+            />
+            <fieldset>
+              <legend class="meta-line">Self-check — does your version address these?</legend>
+              <div class="claims">
+                {fix.criteria.map((criterion) => (
+                  <label class="claim">
+                    <input type="checkbox" value={criterion.id} data-criterion-input />
+                    <span>
+                      <strong>{criterion.label}</strong> — {criterion.hint}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="exercise-actions">
+              <button class="button" type="button" data-check>
+                Compare with a strong version
+              </button>
+              <span class="xp-note" data-xp hidden />
+            </div>
+          </form>
+          <details data-solution hidden>
+            <summary>A strong version (self-assessment — not machine-graded)</summary>
+            <p class="solution-text">{fix.sampleSolution}</p>
+          </details>
+        </div>
+      )}
+
       <div class="feedback" data-feedback role="status" hidden />
 
       {entry.data.hints.length > 0 && (
@@ -119,8 +168,10 @@ const config =
       <script>
         import { initChoiceExercises } from '../scripts/exercise-choice';
         import { initFindProblemExercises } from '../scripts/exercise-find-problem';
+        import { initFixPromptExercises } from '../scripts/exercise-fix-prompt';
         initChoiceExercises();
         initFindProblemExercises();
+        initFixPromptExercises();
       </script>
     </section>
   )

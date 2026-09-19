@@ -1,0 +1,67 @@
+---
+title: Define the outcome
+description: "Before you word a prompt, decide what done looks like. The outcome sentence is the single highest-leverage line — it shapes the answer and gives you something to check."
+track: prompting
+order: 1
+level: beginner
+estimatedMinutes: 5
+skills: ["prompting", "outcomes"]
+prerequisites: []
+learningOutcome: "State a checkable outcome before writing the rest of a prompt."
+class: evergreen
+sources: []
+seo:
+  intent: "define the outcome first — result-first prompting for beginners"
+  cluster: "B2"
+exercises: ["choose-the-outcome-first-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Most weak prompts describe a topic. Strong prompts describe a result. Before you write a single instruction, answer one question: **what will exist when this is done?** A five-bullet summary? A 120-word email? A ranked list with reasons? That sentence is the highest-leverage line in the whole [prompt](/glossary/prompt).
+
+## Why outcome-first works
+
+A model generates [token](/glossary/token) by token toward what your words point at. Point at a topic and you get the average of that topic — generic, fluent, useless. Point at a concrete artifact and everything after is shaped toward it. The outcome is not decoration; it is the target.
+
+It also gives you your acceptance test. "Was this good?" becomes checkable: five bullets? Yes or no. Right audience? Yes or no. Iteration gets a ruler.
+
+## A shape that works
+
+Outcome sentences tend to share a skeleton: **artifact + audience + purpose**, in about ten words.
+
+- "A three-bullet summary a manager can act on."
+- "A polite four-sentence decline, suitable to send as-is."
+- "A ranked shortlist of five options with one-line reasons."
+
+## A bad example
+
+> **Ask:** "Write something about our Q3 results."
+>
+> You get a generic wall of text about business results — plausible, shapeless, impossible to check. Every extra instruction from here is firefighting.
+
+## A better example
+
+> **Ask:** "Using the numbers below, write a five-bullet executive summary of Q3: one metric per bullet with its number, plus one risk bullet. No facts beyond the list."
+>
+> Same subject — but with a target. The result has a shape you can verify in ten seconds and fix precisely when one bullet misses.
+
+## Why it works
+
+Everything else in prompting — context, constraints, format — hangs off the outcome. Define it first and the rest becomes obvious: which context is relevant, which constraints matter, which format fits. Skip it and you are asking the model to guess what you want, then negotiating.
+
+## Practice
+
+<ExerciseCard id="choose-the-outcome-first-prompt" />
+
+## Transfer
+
+- Email: "a reply the client can act on the same day."
+- Slides: "a five-slide argument for one decision, not a tour."
+- Images: "a portrait for a job ad — professional, neutral background." The outcome is the use.
+- Code: "a function that passes these three test cases" — the same move.
+
+## Next
+
+Next: **[Give useful context](/learn/prompting/give-useful-context)** — the details that change everything downstream. The [prompt glossary entry](/glossary/prompt) covers the basics.

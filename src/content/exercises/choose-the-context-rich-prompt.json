@@ -1,0 +1,19 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Which prompt carries the context?",
+  "scenario": "You are sending a reply to a client who has been waiting a week for an answer about their refund.",
+  "task": "Which prompt is more likely to produce a send-ready draft?",
+  "promptA": "Rewrite this email in a more professional style.",
+  "promptB": "Rewrite the draft below as a reply to a client who has waited a week for a refund decision: apologetic but confident. Keep every commitment we made. Maximum five sentences.",
+  "better": "B",
+  "feedback": {
+    "a": "“Professional” points at a generic register — the model has no idea who is reading or why. Expect stiff boilerplate that fixes the tone and misses the situation.",
+    "b": "Audience, situation, tone, boundary and length in one breath. The draft can now land on the first try — or fail in ways you can name and correct."
+  },
+  "hints": ["Which prompt tells the model something it could not possibly know?"],
+  "explanation": "Context sentences are the cheapest quality upgrade in prompting: audience, purpose, knowns and material rewiring every prediction that follows. The client is not in the draft — supply her, and the draft transforms.",
+  "skills": ["context"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/give-useful-context"],
+  "draft": false
+}

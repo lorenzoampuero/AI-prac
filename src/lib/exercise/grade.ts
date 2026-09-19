@@ -122,9 +122,36 @@ export function gradeFindProblem(
 }
 
 // ---------------------------------------------------------------------------------------------------
+// fix-prompt — open-ended editing, self-assessed: the learner rewrites a weak prompt, checks their own
+// draft against criteria, then compares with a strong version. Nothing here claims machine grading;
+// the only deterministic rule is that a usable submission exists (brief §19).
+
+export interface FixPromptCriterion {
+  id: string;
+  label: string;
+  hint: string;
+}
+
+export interface FixPrompt {
+  engine: 'fix-prompt';
+  weakPrompt: string;
+  criteria: FixPromptCriterion[];
+  sampleSolution: string;
+}
+
+export function isFixPrompt(value: { engine: string }): value is FixPrompt {
+  return value.engine === 'fix-prompt';
+}
+
+/** Minimal deterministic gate so “Compare” only fires when something was actually written. */
+export function isUsableSubmission(text: string): boolean {
+  return text.trim().length >= 15;
+}
+
+// ---------------------------------------------------------------------------------------------------
 // Engine registry — every engine with a working UI must be listed here; the content contract tests
 // refuse to publish exercises whose engine is missing (no phantom UI ships).
 
 export function isImplementedEngine(value: { engine: string }): boolean {
-  return isChoiceFamily(value) || isFindProblem(value);
+  return isChoiceFamily(value) || isFindProblem(value) || isFixPrompt(value);
 }
