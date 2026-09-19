@@ -1,24 +1,71 @@
 ---
 title: What generative AI is
-description: "Generative AI creates new text, images or code from your instructions. This draft explains the mental model before you start practicing with it."
+description: "Generative AI creates new text, images or code from your instructions. Learn the mental model that tells you which tasks fit it — and which to keep away."
 track: ai-foundations
 order: 1
 level: beginner
 estimatedMinutes: 5
-skills: ["foundations"]
+skills: ["foundations", "task fit"]
 prerequisites: []
-learningOutcome: "Explain what generative AI is and when it applies to a real task."
+learningOutcome: "Explain what generative AI is and decide which tasks fit it."
 class: evergreen
 sources: []
 seo:
-  intent: "what generative ai is — informational intro for absolute beginners"
+  intent: "what generative ai is — beginner definition plus when-to-use guidance"
   cluster: "A3"
-exercises: []
-draft: true
+exercises: ["choose-when-to-use-generative-ai"]
+draft: false
 ---
 
-## Draft — authored in wave W1
+import ExerciseCard from '../../../components/ExerciseCard.astro';
 
-This skeleton exists to validate the content pipeline end to end (frontmatter schema → build → route
-filtering). The full lesson — concept, bad/better examples, embedded practice and transfer section —
-is written to `docs/CONTENT_STANDARDS.md` in wave **W1**.
+Generative AI is software that produces new content — text, images, audio or code — in response to an instruction you write. It doesn't look anything up: it constructs the most plausible response from patterns absorbed during training. That single fact explains both why it feels magical and why it can be confidently wrong.
+
+## What makes it "generative"
+
+Plenty of software "knows" things without generating them. A spam filter sorts messages into two buckets; a recommendation engine ranks products that already exist. Those systems classify or rank.
+
+Generative systems **continue**. Give one a partial pattern — your question — and it extends it into something new: a paragraph, a sketch, a function, a translation. The output did not exist a second earlier, and it was not retrieved from a database. It was constructed on the spot.
+
+## Why this matters
+
+This changes how you choose tasks. Two everyday consequences:
+
+- **Transformations are its home ground.** Rewriting, summarizing, structuring, translating, extracting — anything where you supply the raw material and the model reshapes it — works well and fast.
+- **Freshness, precision and provenance are not.** Live prices, private databases, exact arithmetic, verified citations: a plain generative model has none of these. And because it always continues the pattern, it will rarely say "I don't know."
+
+## A bad example
+
+> **Ask:** "What's the current EUR/USD exchange rate, to four decimals?"
+>
+> You get a specific number — possibly yesterday's, possibly invented. There is no live feed behind the answer; fluency is not accuracy.
+
+## A better example
+
+> **Ask:** "Draft a five-step checklist I can use to verify an exchange rate before quoting it to a client."
+>
+> Same underlying need, right division of labor: the model structures the process, and you keep the step that requires live data.
+
+## Why it works
+
+A durable mental model: **training stores patterns; generation samples from them.** Once you hold that, three rules follow naturally:
+
+1. If everything the task needs can live in your prompt, generative AI is a strong fit.
+2. If it needs something the model cannot have — live data, your private files, exact computation, verified sources — pair it with a tool that provides that, or don't delegate it.
+3. When the output will be acted on, verify it. Confident phrasing costs the model nothing.
+
+## Practice
+
+<ExerciseCard id="choose-when-to-use-generative-ai" />
+
+## Transfer
+
+The test — "does it need something the model can't have?" — travels everywhere:
+
+- Drafting email or meeting notes: everything lives in your prompt. Good fit.
+- Checking a price, a law or a statistic: needs a source. Use search or the primary source.
+- Deciding something with consequences (taxes, health, contracts): wrong delegation entirely.
+
+## Next
+
+The foundations track is being written in waves. [See what's available](/learn/ai-foundations) — and the next lesson, **What an LLM actually does**, follows the mechanism behind "plausible continuation."

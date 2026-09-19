@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TRACKS } from '../../data/tracks';
+
+const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+const counts = new Map<string, number>();
+for (const lesson of lessons) {
+  counts.set(lesson.data.track, (counts.get(lesson.data.track) ?? 0) + 1);
+}
+---
+
+<BaseLayout
+  title="Learn AI"
+  description="The practical AI curriculum: foundations, prompting, research, work, safety and more — built as short lessons with hands-on practice, free and without an account."
+>
+  <h1>Learn practical AI skills</h1>
+  <p class="lede">
+    Tracks run from “what is generative AI” to designing reliable workflows. Every lesson ends in
+    practice — not a quiz about definitions.
+  </p>
+
+  <div class="grid" style="margin-top: var(--space-5);">
+    {
+      TRACKS.map((track) => {
+        const count = counts.get(track.id) ?? 0;
+        return (
+          <div class="card">
+            <h3>{track.name}</h3>
+            <p class="meta-line">{track.tagline}</p>
+            {count > 0 ? (
+              <a href={`/learn/${track.id}`}>
+                {count} lesson{count === 1 ? '' : 's'}
+              </a>
+            ) : (
+              <p class="meta-line">Arrives in a later delivery wave.</p>
+            )}
+          </div>
+        );
+      })
+    }
+  </div>
+</BaseLayout>

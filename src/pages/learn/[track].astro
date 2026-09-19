@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTrack } from '../../data/tracks';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+  const byTrack = new Map<string, CollectionEntry<'lessons'>[]>();
+  for (const lesson of lessons) {
+    const list = byTrack.get(lesson.data.track) ?? [];
+    list.push(lesson);
+    byTrack.set(lesson.data.track, list);
+  }
+  return [...byTrack.entries()].map(([track, list]) => ({
+    params: { track },
+    props: { lessons: [...list].sort((a, b) => a.data.order - b.data.order) },
+  }));
+}
+
+type Props = { lessons: CollectionEntry<'lessons'>[] };
+const { lessons } = Astro.props as Props;
+const { track: trackId } = Astro.params;
+const info = getTrack(trackId ?? '');
+---
+
+<BaseLayout
+  title={info?.name ?? 'Track'}
+  description={`${info?.name ?? 'Track'}: ${info?.tagline ?? ''} Lessons with hands-on practice, free and without an account.`}
+>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/learn">Learn</a></li>
+      <li aria-current="page">{info?.name ?? trackId}</li>
+    </ol>
+  </nav>
+
+  <h1>{info?.name ?? trackId}</h1>
+  <p class="lede">{info?.tagline}</p>
+
+  <ul class="lesson-list">
+    {
+      lessons.map((lesson) => (
+        <li>
+          <a href={`/learn/${lesson.data.track}/${lesson.id.split('/').slice(1).join('/')}`}>
+            {lesson.data.title}
+          </a>
+          <div class="lesson-meta">
+            {lesson.data.estimatedMinutes} min · {lesson.data.learningOutcome}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

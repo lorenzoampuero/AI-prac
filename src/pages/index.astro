@@ -1,22 +1,72 @@
 ---
-// Phase 0 scaffold page — replaced by the real homepage in the UX/content phases.
-// Kept `noindex` so a premature deploy can never index the scaffold.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TRACKS } from '../data/tracks';
+
+const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+const trackPriority = new Map(TRACKS.map((track, index) => [track.id, index]));
+
+const counts = new Map<string, number>();
+for (const lesson of lessons) {
+  counts.set(lesson.data.track, (counts.get(lesson.data.track) ?? 0) + 1);
+}
+
+const firstLesson = [...lessons].sort((a, b) => {
+  const trackDiff = (trackPriority.get(a.data.track) ?? 99) - (trackPriority.get(b.data.track) ?? 99);
+  return trackDiff !== 0 ? trackDiff : a.data.order - b.data.order;
+})[0];
+
+const firstLessonHref = firstLesson
+  ? `/learn/${firstLesson.data.track}/${firstLesson.id.split('/').slice(1).join('/')}`
+  : '/learn';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>AI Practice — scaffold</title>
-  </head>
-  <body>
-    <main>
-      <h1>Learn AI by doing.</h1>
-      <p>
-        Scaffold online. Lessons, practice engine and design system land in the next phases.
-      </p>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title="AI Practice"
+  description="Short lessons and hands-on exercises that teach you to prompt, verify, research and work with AI — free, no account, progress stays on your device."
+>
+  <section class="hero">
+    <h1>Build real AI skills, one exercise at a time.</h1>
+    <p class="lede">
+      Short lessons and hands-on practice that teach you to prompt, verify, research and work with AI.
+      No signup, no API keys — and your progress stays on your device.
+    </p>
+    <div class="cta-row">
+      <a class="button" href={firstLessonHref}>Start the first lesson</a>
+      <a class="button secondary" href="/learn">Browse the curriculum</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="tracks-title">
+    <h2 id="tracks-title" class="section-title">Tracks</h2>
+    <div class="grid">
+      {
+        TRACKS.map((track) => {
+          const count = counts.get(track.id) ?? 0;
+          return (
+            <div class="card">
+              <h3>{track.name}</h3>
+              <p class="meta-line">{track.tagline}</p>
+              {count > 0 ? (
+                <a href={`/learn/${track.id}`}>
+                  {count} lesson{count === 1 ? '' : 's'} available
+                </a>
+              ) : (
+                <p class="meta-line">First lesson arrives in a coming delivery wave.</p>
+              )}
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="section-title">How it works</h2>
+    <ol>
+      <li><strong>Read the concept.</strong> Two minutes, plain language, with a bad and a better example.</li>
+      <li><strong>Practice immediately.</strong> Every lesson ends in a real exercise with feedback that explains why.</li>
+      <li><strong>Transfer it.</strong> The skill works in any AI tool — not one magic prompt.</li>
+    </ol>
+  </section>
+</BaseLayout>

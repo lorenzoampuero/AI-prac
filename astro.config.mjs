@@ -16,9 +16,9 @@ export default defineConfig({
   devToolbar: { enabled: false },
   integrations: [
     mdx(),
-    // The scaffold homepage is `noindex` until the real homepage ships in this phase; excluding it keeps
-    // the sitemap honest. Refined with the real indexability policy at the SEO gate.
-    sitemap({ filter: (page) => page !== `${SITE_ORIGIN}/` }),
+    // Only generated (published) pages reach the build — drafts are filtered in getStaticPaths, so they
+    // cannot leak into the sitemap. Indexability policy is audited at the SEO gate (docs/SEO_PAGE_REGISTRY.md).
+    sitemap(),
   ],
   build: {
     inlineStylesheets: 'auto',

@@ -1,0 +1,75 @@
+---
+import { getEntry } from 'astro:content';
+import { isChoiceFamily, toOptions, type ChoiceOption } from '../lib/exercise/grade';
+
+interface Props {
+  /** Exercise id (file id inside src/content/exercises). */
+  id: string;
+}
+
+const { id } = Astro.props;
+const entry = await getEntry('exercises', id);
+const published = Boolean(entry && !entry.data.draft);
+
+let options: ChoiceOption[] | null = null;
+if (entry && published && isChoiceFamily(entry.data)) {
+  options = toOptions(entry.data);
+}
+
+const config = entry && options ? JSON.stringify({ id: entry.id, options }) : '';
+---
+
+{
+  entry && published && options && (
+    <section class="exercise" data-exercise-choice data-exercise-id={entry.id} aria-labelledby={`ex-${entry.id}-title`}>
+      <h3 id={`ex-${entry.id}-title`}>{entry.data.title}</h3>
+      <p class="scenario">{entry.data.scenario}</p>
+      <p>{entry.data.task}</p>
+
+      <form>
+        <fieldset>
+          <legend class="meta-line">Choose one option</legend>
+          <div class="options">
+            {options.map((option) => (
+              <label class="option">
+                <input type="radio" name={`choice-${entry.id}`} value={option.id} />
+                <span>
+                  <span class="option-label">{option.label}</span>
+                  <span>{option.text}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <div class="exercise-actions">
+          <button class="button" type="button" data-check>
+            Check answer
+          </button>
+          <span class="xp-note" data-xp hidden />
+        </div>
+      </form>
+
+      <div class="feedback" data-feedback role="status" hidden />
+
+      {entry.data.hints.length > 0 && (
+        <details>
+          <summary>Hint</summary>
+          {entry.data.hints.map((hint) => (
+            <p>{hint}</p>
+          ))}
+        </details>
+      )}
+
+      <details data-explanation hidden>
+        <summary>Why this is the answer</summary>
+        <p>{entry.data.explanation}</p>
+      </details>
+
+      <script type="application/json" data-exercise-config is:inline set:html={config} />
+      <script>
+        import { initChoiceExercises } from '../scripts/exercise-choice';
+        initChoiceExercises();
+      </script>
+    </section>
+  )
+}

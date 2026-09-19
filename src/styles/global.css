@@ -1,0 +1,459 @@
+/* Design tokens — v0. Palette and type follow the product brief (§41–43); brand research is still open
+   (research/BRAND_OPTIONS.md), so these are intentionally restrained and easy to swap. */
+
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --text: #171717;
+  --muted: #737373;
+  --border: #e7e5e4;
+  --primary: #4f46e5;
+  --primary-contrast: #ffffff;
+  --success: #16a34a;
+  --warning: #d97706;
+
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --measure: 68ch;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-3);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.375rem;
+  font-weight: 650;
+  margin-top: var(--space-6);
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: var(--space-5);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+}
+
+a {
+  color: var(--primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.container {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+/* Header / footer */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--surface);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-header nav a:not(.brand) {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+
+.site-header nav a:not(.brand):hover {
+  color: var(--text);
+}
+
+.site-footer {
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--border);
+  padding-block: var(--space-5);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+main {
+  min-height: 60vh;
+  padding-block: var(--space-6) var(--space-7);
+}
+
+/* Buttons */
+
+.button {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(1.08);
+}
+
+.button.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Cards, chips, meta */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: var(--space-5);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  background: var(--surface);
+}
+
+.meta-line {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+/* Lesson prose */
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25rem;
+  margin: 0 0 var(--space-4);
+}
+
+.prose li {
+  margin-bottom: var(--space-1);
+}
+
+.prose blockquote {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--border);
+  background: var(--surface);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  color: var(--text);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: #f5f5f4;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+.example-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+
+/* Exercise card */
+
+.exercise {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  padding: var(--space-5);
+  margin-block: var(--space-6);
+  max-width: var(--measure);
+}
+
+.exercise h3 {
+  margin-top: 0;
+}
+
+.exercise .scenario {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.exercise fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+}
+
+.exercise .options {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.exercise .option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: var(--space-4);
+  cursor: pointer;
+  background: var(--bg);
+}
+
+.exercise .option:hover {
+  border-color: #d6d3d1;
+}
+
+.exercise .option:has(input:checked) {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.exercise .option input {
+  margin-top: 0.35rem;
+}
+
+.exercise .option .option-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+
+.exercise-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.xp-note {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.feedback {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg);
+  margin-bottom: var(--space-3);
+}
+
+.feedback[data-state='correct'] {
+  border-left-color: var(--success);
+}
+
+.feedback[data-state='incorrect'] {
+  border-left-color: var(--warning);
+}
+
+.feedback .verdict {
+  font-weight: 650;
+  margin-bottom: var(--space-1);
+}
+
+.exercise details {
+  margin-top: var(--space-3);
+  font-size: 0.9375rem;
+}
+
+.exercise summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Breadcrumbs */
+
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: var(--space-4);
+}
+
+.breadcrumbs ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li::after {
+  content: '/';
+  margin-left: var(--space-2);
+  color: var(--border);
+}
+
+.breadcrumbs li:last-child::after {
+  content: none;
+}
+
+/* Lists of lessons */
+
+.lesson-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.lesson-list a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lesson-list a:hover {
+  text-decoration: underline;
+}
+
+.lesson-list .lesson-meta {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.hero {
+  max-width: 42rem;
+  margin-bottom: var(--space-7);
+}
+
+.lede {
+  max-width: 42rem;
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.section-title {
+  margin-top: var(--space-7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

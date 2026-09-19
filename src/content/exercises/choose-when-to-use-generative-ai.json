@@ -1,0 +1,36 @@
+{
+  "engine": "model-choice",
+  "title": "Which task fits a plain generative model?",
+  "scenario": "You are using a general chatbot with no web access and no calculator tool. It generates responses from patterns learned in training.",
+  "task": "Which of these requests is the best fit for that setup?",
+  "options": [
+    {
+      "text": "What is the current EUR/USD exchange rate, to four decimals?",
+      "correct": false,
+      "feedback": "Live rates change constantly and a plain model has no feed. It will produce a plausible number instead of the real one — and rarely admit the difference."
+    },
+    {
+      "text": "Compute the exact VAT on €8,432.19 at 21% and describe the legal rounding rule.",
+      "correct": false,
+      "feedback": "Two problems in one: language models are not reliable exact calculators, and the “legal rule” needs a verified source, not a prediction."
+    },
+    {
+      "text": "Turn these 14 messy meeting bullets into three clean paragraphs.",
+      "correct": true,
+      "feedback": "Yes — this is a transformation of text you supplied. Everything the task needs is inside your prompt, which is exactly where generative models are strong."
+    },
+    {
+      "text": "Give me the exact citation of a 2019 study, including page numbers.",
+      "correct": false,
+      "feedback": "Citations are a classic hallucination zone. A fluent-looking reference — authors, journal, pages — can be invented entirely, so this needs a real source."
+    }
+  ],
+  "hints": [
+    "Ask: does the task need something the model cannot have — live data, exact computation, or verified sources?"
+  ],
+  "explanation": "Generative models shine at transforming content you provide: structuring, rewriting, summarizing, extracting. They are weakest exactly where you need guaranteed freshness, precision or provenance. Matching the task to the tool is the first practical AI skill — it prevents most “AI got it wrong” stories before they happen.",
+  "skills": ["foundations", "task fit"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/what-generative-ai-is"],
+  "draft": false
+}
