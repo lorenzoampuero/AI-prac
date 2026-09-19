@@ -1,0 +1,36 @@
+{
+  "engine": "fix-prompt",
+  "title": "Fix the unstructured summary",
+  "scenario": "A teammate needs customer feedback summarized for a product meeting, but wrote a prompt that will produce prose — impossible to scan or paste into the minutes.",
+  "task": "Rewrite the prompt so the output arrives in a usable shape.",
+  "weakPrompt": "Summarize the customer feedback for the product meeting.",
+  "criteria": [
+    {
+      "id": "structure",
+      "label": "Names the output structure",
+      "hint": "Table, numbered list, three sections — pick one and say it."
+    },
+    {
+      "id": "fields",
+      "label": "Defines the fields or columns",
+      "hint": "What goes in each row: theme, frequency, example, priority…"
+    },
+    {
+      "id": "limits",
+      "label": "Sets count and length limits",
+      "hint": "Rows, words per cell, total length."
+    },
+    {
+      "id": "ordering",
+      "label": "Gives the ordering or priority rule",
+      "hint": "Sorted by frequency, by severity, grouped by product area…"
+    }
+  ],
+  "sampleSolution": "Summarize the customer feedback below for a product meeting as a table with columns: theme, frequency (number of mentions), one example quote, suggested priority (high/medium/low). Maximum six rows, sorted by frequency, maximum 15 words per cell. No commentary outside the table.",
+  "hints": ["Where will this text go next — and what shape does that place need?"],
+  "explanation": "The fixed prompt turns “a summary” into a specific artifact: a six-row table with named columns, limits and an ordering rule. Format is a constraint — and stated constraints make weak answers visible at a glance instead of hiding inside good prose.",
+  "skills": ["format"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/specify-the-format"],
+  "draft": false
+}

@@ -1,0 +1,65 @@
+---
+title: Add constraints
+description: "Length, scope, must-keep, must-avoid — constraints are the boundaries that turn a good draft into a usable one. Learn to bound an answer on purpose."
+track: prompting
+order: 4
+level: beginner
+estimatedMinutes: 5
+skills: ["prompting", "constraints"]
+prerequisites: ["prompting/write-clear-instructions"]
+learningOutcome: "Bound an answer with length, scope, must-keep and must-avoid constraints."
+class: evergreen
+sources: []
+seo:
+  intent: "add constraints to a prompt — length, scope, must-keep and must-avoid"
+  cluster: "B5"
+exercises: ["choose-the-bounded-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Constraints are the boundaries of an answer: **how long**, **what is in scope**, **what must survive**, **what must not appear**. They are the difference between a good draft and a usable one — and they double as the checklist you run when the result comes back.
+
+## The four families
+
+1. **Length** — words, bullets, sentences, table rows. Numbers, not adjectives: "120 words", not "short".
+2. **Scope** — what is included and excluded: "only the numbers below", "no features outside this list".
+3. **Must-keep** — facts, commitments, phrases that cannot be lost: "keep every deadline".
+4. **Must-avoid** — the classic failure modes: "no new facts", "no client names", "no promises".
+
+Two or three constraints usually do the real work. More than five and they start fighting each other — when that happens, say which wins: "if tone conflicts with length, keep the length."
+
+## Why vague constraints fail
+
+"Short" means 20 words to one writer and 200 to another. "Don't be boring" names something to avoid without naming the target — and models follow positive direction far better than negative vibes. Give the boundary a number or a shape, and keep the don'ts for things that are actually dangerous.
+
+## A bad example
+
+> **Ask:** "Write a product update. Keep it short and professional and don't oversell."
+>
+> Which parts are overselling? Short to whom? You get a plausible middle-length update that violates nothing specific and fits nowhere.
+
+## A better example
+
+> **Ask:** "Write a product update for existing customers: maximum 120 words, three short paragraphs (what changed, what it means for them, what to do next). No marketing adjectives; no client names; no promises about future releases."
+>
+> Every failing draft now fails *specifically* — one paragraph too many, an adjective, an invented promise — and each fix is one edit away.
+
+## Why it works
+
+Constraints narrow the space of plausible [tokens](/glossary/token) — the same mechanism as everything else in prompting, applied to the edges. The bonus is diagnostic power: with stated boundaries, review stops being taste and becomes a checklist. That is also what makes prompts reusable: the boundaries are the brief.
+
+## Practice
+
+<ExerciseCard id="choose-the-bounded-prompt" />
+
+## Transfer
+
+- Emails: cap the sentences; forbid new promises.
+- Reports: scope to the listed data; require the caveats.
+- Anything a human will skim: one number for length, one rule for tone.
+
+## Next
+
+Next: **[Specify the format](/learn/prompting/specify-the-format)** — choosing the shape of the answer before you get it. The [prompt glossary entry](/glossary/prompt) covers the basics.

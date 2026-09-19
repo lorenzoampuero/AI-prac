@@ -1,0 +1,19 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Which prompt shows instead of telling?",
+  "scenario": "You want release notes rewritten as short customer announcements in your brand's rhythm — a style reviewers always describe differently.",
+  "task": "Which prompt is more likely to reproduce the intended style?",
+  "promptA": "Rewrite these release notes in our brand voice — friendly, smart, a bit playful but not silly.",
+  "promptB": "Rewrite each release note as a short announcement, following the pattern of these two examples exactly — same structure, same length, same level of formality. Example 1: [Input: … → Output: …]. Example 2: [Input: … → Output: …]. Then the new input: …",
+  "better": "B",
+  "feedback": {
+    "a": "Adjectives point at a region of style and stop there. Every reviewer imagines a different register — and the output matches none of them precisely.",
+    "b": "Two worked pairs carry tone, structure and length at once — the model extends the demonstrated pattern instead of guessing at the adjectives."
+  },
+  "hints": ["Which prompt could a new teammate follow without asking a single follow-up question?"],
+  "explanation": "Few-shot prompting shows the pattern instead of describing it: two or three input → output pairs, the same shape as real inputs, deliberately varied content. The instruction then only carries the task — style comes from the examples.",
+  "skills": ["examples", "few-shot"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/examples-and-few-shot"],
+  "draft": false
+}

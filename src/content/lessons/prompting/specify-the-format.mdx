@@ -1,0 +1,69 @@
+---
+title: Specify the format
+description: "If you will paste the answer somewhere, say the shape first. Tables, templates, bullets — format is a constraint you can state, check and reuse."
+track: prompting
+order: 5
+level: beginner
+estimatedMinutes: 6
+skills: ["prompting", "format"]
+prerequisites: ["prompting/add-constraints"]
+learningOutcome: "Request output in a named structure the next tool or reader can use."
+class: evergreen
+sources: []
+seo:
+  intent: "specify the output format — tables, templates and structured answers"
+  cluster: "B6"
+exercises: ["fix-the-unstructured-summary"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+Format is the shape of the output: a table, a numbered list, three paragraphs, a slot-filled template. Every answer arrives in *some* shape — the only question is whether you chose it or the model did. If the text will be pasted into a document, compared with other answers or read by a skimmer, choose it.
+
+## Why shape matters
+
+- **Downstream tools need structure.** Columns feed spreadsheets; keys feed scripts; headings feed reports.
+- **Comparisons need alignment.** Five vendors in prose cannot be scanned; five rows in a table can.
+- **Reviewers need the rhythm.** A manager skims bullets, not paragraphs.
+
+## How to specify it
+
+Name the structure, then its contents:
+
+1. **The kind** — "a table", "a numbered list", "exactly three paragraphs".
+2. **The fields or columns** — "columns: vendor, price, setup time, main risk".
+3. **The limits** — "maximum 15 words per cell, six rows, sorted by setup time".
+4. **The template, when it is strict** — paste the skeleton and say "fill this in".
+
+A template is the strongest format instruction there is: fill-in-the-blank leaves almost no room for [tokens](/glossary/token) to wander. When you need several shapes from the same material, ask for the skeleton first, approve it, then have it filled — that is prompt chaining, one wave away.
+
+## A bad example
+
+> **Ask:** "Compare these five vendors."
+>
+> You get five paragraphs of prose — pleasant to read once, impossible to scan, sort or paste anywhere.
+
+## A better example
+
+> **Ask:** "Compare the vendors below in a table with columns: vendor, price, setup time, main risk. One line per cell, maximum 15 words. Six rows at most, sorted by setup time."
+>
+> The reply lands in the shape your decision needs, and every weakness is visible as a wrong cell.
+
+## Why it works
+
+Structure is a constraint — and constraints narrow the plausible space. It also moves review earlier: with a stated shape, a wrong answer is obvious at a glance instead of hiding inside good prose. The best part: the format line is copy-paste reusable. Once you have "columns: X, Y, Z; max 15 words per cell", it survives every future comparison task.
+
+## Practice
+
+<ExerciseCard id="fix-the-unstructured-summary" />
+
+## Transfer
+
+- Meeting summaries: table with decisions, owners, deadlines.
+- Research: one line per source — claim, evidence, confidence.
+- Anything heading to a spreadsheet: name the columns, then the rules.
+
+## Next
+
+Next: **[Examples and few-shot](/learn/prompting/examples-and-few-shot)** — teaching a pattern with examples instead of adjectives. The [prompt glossary entry](/glossary/prompt) is the one-line version.

@@ -1,0 +1,19 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Which prompt sets real boundaries?",
+  "scenario": "You are sending a product update to existing customers. Legal has rules: no client names, no promises about future releases.",
+  "task": "Which prompt gives the useful boundaries?",
+  "promptA": "Write a product update. Keep it short and professional and don't oversell.",
+  "promptB": "Write a product update for existing customers: maximum 120 words, three short paragraphs (what changed, what it means for them, what to do next). No marketing adjectives; no client names; no promises about future releases.",
+  "better": "B",
+  "feedback": {
+    "a": "“Short” and “don't oversell” are directions, not boundaries — nothing here is countable or checkable, and the legal rules are simply absent.",
+    "b": "Length is a number, structure is a shape, and the exclusions name the exact failure modes. Every draft now fails specifically — and fixes in one edit."
+  },
+  "hints": ["Count the things you could actually check in a review."],
+  "explanation": "Constraints turn review from taste into a checklist: length, scope, must-keep, must-avoid. Given boundaries, you stop negotiating about “short” and start fixing the actual sentence that broke a rule.",
+  "skills": ["constraints"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/add-constraints"],
+  "draft": false
+}

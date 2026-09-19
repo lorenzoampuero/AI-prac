@@ -1,0 +1,64 @@
+---
+title: Examples and few-shot
+description: "One good example teaches a pattern faster than a paragraph of adjectives. Learn to show the model what you want instead of describing it — with examples that generalize."
+track: prompting
+order: 6
+level: beginner
+estimatedMinutes: 6
+skills: ["prompting", "examples"]
+prerequisites: ["prompting/specify-the-format"]
+learningOutcome: "Teach a pattern with 2–3 examples instead of descriptive adjectives."
+class: evergreen
+sources: []
+seo:
+  intent: "few-shot prompting — teach a pattern with examples instead of adjectives"
+  cluster: "B7"
+exercises: ["choose-the-example-driven-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+
+"Friendly but professional, a bit playful but not silly" — anyone who has written that sentence knows the result: generic-friendly mush. **Few-shot prompting** replaces the adjective parade with something better: show two or three input → output pairs, then hand over your real input. The model extends the pattern. That is not a trick — it is the mechanism.
+
+## Why examples win
+
+An adjective describes a region of style. An example *is* a point in it — sentences, rhythm, length, level of detail, all at once. When the model continues from your examples, style and structure come along automatically. It is [next-token prediction](/learn/ai-foundations/what-an-llm-actually-does) doing what it does best: continuing an established pattern.
+
+## How to give examples well
+
+- **Match the real shape.** Examples must look like the actual input; a format you would never receive teaches the wrong pattern.
+- **Two or three pairs.** One is a point; three are a trend.
+- **Vary them deliberately.** Identical phrasing in every example → outputs that clone your words instead of the style.
+- **Include one hard case if you have it.** The edge case teaches the boundary faster than a rule.
+- **Then give the real input clearly** — labels like "Input:" and "Output:" keep the roles obvious.
+
+## A bad example
+
+> **Ask:** "Rewrite these release notes in our brand voice — friendly, smart, a bit playful but not silly."
+>
+> You get a polite generic register that matches no brand — and no way to name what went wrong.
+
+## A better example
+
+> **Ask:** "Rewrite each release note as a short announcement, following the pattern of these two examples exactly — same structure, same length, same level of formality. Then here is the new input: …"
+>
+> The examples carry tone, structure and granularity; your instruction only has to carry the task.
+
+## Why it works
+
+Every example narrows the plausible space like a constraint you never had to verbalise. It is also the most testable prompting technique: when output misses, the fix is usually an example edit, not a longer instruction. Keep your best pairs as reusable [prompt](/glossary/prompt) assets — three good examples outlive several rounds of prompt wording.
+
+## Practice
+
+<ExerciseCard id="choose-the-example-driven-prompt" />
+
+## Transfer
+
+- Brand voice: two approved paragraphs beat any tone adjectives.
+- Data extraction: show two "messy line → clean fields" pairs.
+- Support replies: three example answers per category; the model inherits the policy.
+
+## Next
+
+Next: **Work with long input** arrives in the coming wave. Browse the [prompting track](/learn/prompting) meanwhile, and the [few-shot prompting glossary entry](/glossary/few-shot-prompting) is the one-line version.
