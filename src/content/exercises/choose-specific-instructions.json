@@ -1,0 +1,22 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Pick the instruction that can actually be followed",
+  "scenario": "You need a three-bullet summary of a 12-page report for a manager who has two minutes to read it.",
+  "task": "Which prompt is more likely to produce a usable result? Choose one, then read the feedback.",
+  "promptA": "Summarize this report.",
+  "promptB": "Summarize the attached report in exactly three bullets. Each bullet: one decision or finding, then its supporting number. Use no information that is not in the report.",
+  "better": "B",
+  "feedback": {
+    "a": "Too vague — it does not say who the summary is for, how long it should be, or what a good bullet looks like. You cannot predict the result, and you cannot diagnose it when it misses.",
+    "b": "Specific and checkable — three bullets, a structure per bullet, and a boundary that keeps the model inside the source. This is the difference between an instruction and a wish."
+  },
+  "hints": [
+    "Ask yourself: could two different people read each prompt and expect very different outputs?",
+    "The stronger prompt defines the shape of the result, not just the topic."
+  ],
+  "explanation": "A prompt is an instruction, not a topic. The stronger version states the outcome (a digestible summary), the format (three bullets), the content rule (decision or finding plus a number) and the boundary (nothing outside the source). Those four elements make the result predictable and verifiable — and they transfer to any AI tool.",
+  "skills": ["clear instructions", "constraints", "format"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/what-generative-ai-is"],
+  "draft": true
+}
