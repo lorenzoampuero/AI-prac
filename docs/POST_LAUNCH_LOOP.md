@@ -39,11 +39,13 @@ chase volume. The registry tests (`tests/registry.test.ts`) enforce the slug and
 
 ## Metrics policy
 
-- v1 ships with **zero third-party analytics**. The site's signals are Search Console (aggregate,
-  owner-side) and user-reported issues.
+- **Update 2026-09-20 — owner approved Vercel Web Analytics.** It ships gated to Vercel builds only
+  (`process.env.VERCEL`), is cookieless and aggregate (page views + referrers, no profiling), and the
+  privacy page documents it. Local and non-Vercel builds remain script-free.
+- Search Console (aggregate, owner-side) and user-reported issues remain the qualitative signals.
 - Device-local progress data is never collected, transmitted or aggregated.
-- Adding any analytics later is a **product + privacy decision that requires explicit owner approval** and
-  a privacy-policy update before it ships — recorded here so it cannot happen by accident.
+- Any further data feature — ads, accounts, another tool — still requires an explicit owner decision and
+  a privacy-page update before it ships; this log is the record.
 
 ## Known watch-items
 

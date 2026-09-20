@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/inter';
+import Analytics from '@vercel/analytics/astro';
 import { SITE_NAME } from '../config/site';
 import '../styles/global.css';
 
@@ -16,6 +17,10 @@ const pageTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 
 const origin = Astro.site ?? new URL('https://getaipractice.site');
 const canonical = new URL(Astro.url.pathname, origin);
+
+// Vercel Web Analytics — enabled only when the build runs on Vercel (process.env.VERCEL is set there).
+// Local and any non-Vercel hosting builds ship zero third-party scripts; see /privacy for the promise.
+const showAnalytics = Boolean(process.env.VERCEL);
 ---
 
 <!doctype html>
@@ -40,6 +45,7 @@ const canonical = new URL(Astro.url.pathname, origin);
     {structuredData.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
+    {showAnalytics && <Analytics />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

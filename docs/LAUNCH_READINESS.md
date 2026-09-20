@@ -12,7 +12,7 @@ requires the owner's explicit approval (master-brief constraint).**
 | Accessibility | axe WCAG A/AA: **0 violations across 11 templates** (`docs/SEO_A11Y_PERF.md`) |
 | SEO/GEO | Canonical/OG everywhere; sitemap 107 URLs (404 excluded); structured data complete; anti-doorway enforced by tests |
 | Performance | Cold load 29–49 ms; ~61 KB transfer per page incl. the single latin-subset font |
-| Privacy posture | No analytics, no third-party requests, no accounts; progress is device-local only |
+| Privacy posture | No accounts, no ads; progress device-local only. Vercel Web Analytics (cookieless, aggregate) approved 2026-09-20 and gated to Vercel builds (`process.env.VERCEL`); local/non-Vercel builds ship zero third-party scripts |
 | Repo hygiene | Clean `git status`; `.gitignore` covers `dist/`, `.astro/`, env files; **no `.env`, no keys, no credentials anywhere** (the fake `sk_live_…` strings inside safety exercises are intentional teaching props) |
 
 ## Production dry-run (executed 2026-09-19)

@@ -27,8 +27,9 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
 
   <h1>Privacy</h1>
   <p class="lede">
-    Short version: this site has no accounts, no analytics and no third-party scripts. Everything you do
-    here stays in your browser.
+    Short version: no accounts, no ads, no cross-site tracking. Everything you do here stays in your
+    browser — the production deployment counts page views with cookieless, aggregate analytics, detailed
+    below.
   </p>
 
   <h2>What is stored on your device</h2>
@@ -46,11 +47,18 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
 
   <h2>What the site does not do</h2>
   <ul>
-    <li>No analytics or tracking scripts.</li>
     <li>No advertising and no third-party embeds.</li>
-    <li>No cookies.</li>
+    <li>No cookies and no cross-site tracking.</li>
     <li>No email collection, no sign-ups, no profiles.</li>
   </ul>
+
+  <h2>Analytics</h2>
+  <p>
+    The production deployment (on Vercel) uses Vercel Web Analytics: aggregate page-view and referrer
+    counts, cookieless, with no way to identify or profile individual visitors. It loads only on the
+    hosted deployment — local copies and non-Vercel builds of this site ship no analytics script at all.
+    Counting page views was an explicit decision, recorded here first, as promised.
+  </p>
 
   <h2>Hosting</h2>
   <p>
@@ -68,8 +76,8 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
 
   <h2 id="changes">Changes to this page</h2>
   <p>
-    Any future feature that would collect or transmit data — analytics, ads, accounts — requires a
-    visible update to this page before it ships. The current commitment: nothing extra without telling
-    you here first.
+    Analytics shipped on 2026-09-20 and is documented above. Any further feature that would collect or
+    transmit data — ads, accounts, anything new — still requires a visible update to this page before it
+    ships. The commitment stands: nothing extra without telling you here first.
   </p>
 </BaseLayout>
