@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Sources sit on a ladder of distance from the evidence. A **[primary source](/glossary/primary-source)** is the thing itself: the study, the law's text, the official documentation, the original dataset, the vendor's own spec sheet. A **secondary source** describes or summarizes a primary one — reporting, whitepapers, explainers. A **tertiary source** aggregates summaries — newsletters, listicles, and, notably, an AI answering from [memory](/glossary/training-cutoff). Every hop up the ladder loses a caveat, rounds a number or adds an interpretation.
 
@@ -55,6 +57,16 @@ Orientation. Deciding what matters, what the vocabulary is, where to look. Secon
 >
 > Same number, honest boundaries, and you can name the document it lives in. That sentence survives a skeptical reader.
 
+<CheckUnderstanding
+  id="cu-rs-primary"
+  question="A summary says “teams got 12% better”. What does the lesson say happens on the way up the source ladder?"
+  options={[
+    { text: 'The number gets rounded for readability, but the claim itself stays intact', feedback: '“up to 12% on one task measure” becoming “12% better” is not rounding — the promise itself changes.' },
+    { text: 'Caveats and scope get dropped — only the primary text says what the researchers claim', correct: true, feedback: 'every hop loses a nuance, rounds a number or adds an interpretation, so trace any number you will repeat.' },
+    { text: 'Secondary sources are safer to repeat because they are written for non-experts', feedback: 'secondary sources orient you and point to the primary one — they are a map, not the evidence.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="trace-claims-to-their-origin" />
@@ -64,6 +76,14 @@ Orientation. Deciding what matters, what the vocabulary is, where to look. Secon
 - Negotiations: the other side's "industry data" gets traced before it constrains your offer.
 - Policy and compliance: read the rule, not the summary of the rule.
 - Recommendations: "according to research" is not a source — it is an invitation to go find one.
+
+<KeyTakeaways
+  items={[
+    'Sources sit on a ladder: primary evidence, secondary summaries, tertiary aggregations.',
+    'Every hop up can drop a caveat or round a number — trace the claims you repeat.',
+    'Secondary sources are for orientation; go to the primary for numbers, law, health and money.',
+  ]}
+/>
 
 ## Next
 

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A summary is compressed text that keeps everything a decision depends on: the decisions themselves, numbers, owners, dates, conditions and open questions. Drop an anecdote and nobody notices; drop a condition and people act on a plan that never existed. The failure mode of a summary is silent — it is omission, not error.
 
@@ -50,6 +52,16 @@ The instinct is to keep the shortest text that still sounds true. That instinct 
 
 One closing habit: summarize for a named reader. "For the person who signs the budget" and "for the engineer who will implement this" produce genuinely different compression — what is load-bearing changes with the job. Name the reader in the request; when the reader changes, one re-run adapts the text and the source never moves. That single move prevents the strangest summary failure there is: technically faithful, and useless to whoever receives it.
 
+<CheckUnderstanding
+  id="cu-wk-summary"
+  question="You are compressing a plan into a summary. Which instruction keeps it faithful to the source?"
+  options={[
+    { text: 'Keep the shortest text that still sounds true to a fresh reader', feedback: 'that instinct stays plausible and wrong — it deletes the load-bearing condition the plan actually hangs on.' },
+    { text: 'Keep every decision, number, owner, date and attached condition, and leave open questions open', correct: true, feedback: 'the keep-list: compress the language, not the facts, and preserve ambiguity as ambiguity.' },
+    { text: 'Resolve the open questions into a clear position so the reader can act', feedback: 'a summary that resolves what the source left open is editing, not reporting.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="compare-two-meeting-summaries" />
@@ -59,6 +71,14 @@ One closing habit: summarize for a named reader. "For the person who signs the b
 - Meeting threads: summarize for the person who missed it — conditions first.
 - Long documents: extract decisions and numbers; skip the narrative.
 - Handovers: an honest summary includes what is still unresolved.
+
+<KeyTakeaways
+  items={[
+    'Keep decisions, numbers, owners, dates and any condition attached to them; drop filler.',
+    'Compress the language, not the facts, and keep unresolved questions unresolved.',
+    'Set the length last, after the content rules, and name the reader you write for.',
+  ]}
+/>
 
 ## Next
 

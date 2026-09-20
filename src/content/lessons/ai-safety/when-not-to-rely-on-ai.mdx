@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Delegate by consequence: use AI freely where being wrong is cheap and reversible, let it assist where the stakes rise, and keep the decision with a human where the outcome is irreversible or someone has to be accountable. Three tiers, one question each.
 
@@ -51,6 +53,16 @@ Professionals use AI for exactly these topics — legally, well and daily. The d
 >
 > AI does the compression and construction; the verdict goes to the professional; the decision and the signature stay with you.
 
+<CheckUnderstanding
+  id="cu-sf-delegate"
+  question="You want help with a tenancy deposit dispute. Which request routes the parts the way this lesson teaches?"
+  options={[
+    { text: 'Ask for a yes-or-no legal verdict plus the final reply, so you can act immediately', feedback: 'a confident verdict is exactly the wrong output shape when the consequence is real — the system cannot be accountable for it.' },
+    { text: 'Ask for a summary, a checklist of points to verify, and a neutral draft you review — the verdict goes to an adviser', correct: true, feedback: 'AI does the compression and construction; the professional keeps the verdict, and the decision and signature stay with you.' },
+    { text: 'Keep AI away from legal topics entirely — the tool has nothing useful to offer here', feedback: 'the discipline is routing, not avoidance: professionals use AI on these topics daily — materials to AI, the decision to you.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-sound-delegation" />
@@ -60,6 +72,14 @@ Professionals use AI for exactly these topics — legally, well and daily. The d
 - Health: organize information and questions; the diagnosis belongs to the doctor.
 - Money: model scenarios as worksheets; the commitment is yours to make.
 - People decisions: hiring, firing, discipline — AI drafts nothing that carries consequences for a person without full human judgment in the loop. Run your [rubric](/glossary/rubric) before anything is said to a person.
+
+<KeyTakeaways
+  items={[
+    'Delegate by consequence: reversible, verifiable, low-stakes work goes to AI freely.',
+    'Assist tier: AI produces the material, you produce the judgment.',
+    'Keep human: legal, medical, financial, irreversible calls — and anything with a name on it.',
+  ]}
+/>
 
 ## Next
 

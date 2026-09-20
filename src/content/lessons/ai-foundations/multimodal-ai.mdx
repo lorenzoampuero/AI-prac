@@ -1,0 +1,106 @@
+---
+title: "Multimodal AI: text, images, audio"
+description: "Assistants now accept images, audio and documents alongside text. Learn what each input changes, where it fails, and how to choose the right way to hand over your material."
+track: ai-foundations
+order: 9
+level: beginner
+estimatedMinutes: 5
+skills: ["multimodal", "capabilities"]
+prerequisites: ["ai-foundations/why-answers-vary"]
+learningOutcome: "Choose the right input type for a task and state its limits."
+class: evergreen
+sources: []
+seo:
+  intent: "what multimodal ai means — choosing image, audio and document inputs"
+  cluster: "A9"
+exercises: ["choose-the-input-mode"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Multimodal AI is a model that works with more than one kind of input — text, images, audio or documents — not just typed words. The practical payoff is simple: you can hand over **the artefact itself** instead of your description of it, which removes a whole layer of second-hand errors before the model even starts.
+
+## What each input adds
+
+- **Text** is the most editable and the cheapest to correct. If you can type it, type it.
+- **Images** carry layout, state and handwriting. A photo of a whiteboard keeps the arrows and groupings that a retyped list loses.
+- **Audio** carries delivery — tone, hesitation, emphasis — that a transcript flattens. Useful for interviews and voice notes.
+- **Documents** carry pages: tables, stamps, signature lines. What the model can use depends on whether it sees the pages or extracted text.
+
+## Hand over the artefact when it exists
+
+When the material exists in a file, your description competes with it. “A chart showing sales rising” is a claim about a chart; the chart itself is the evidence. Attaching it lets the model read the axis labels, units and the actual shape of the line — details nobody transcribes reliably from memory.
+
+The same logic applies the other way: when you need precision, put the exact text in the message. A voice note describing a contract clause is a summary; the clause is the clause.
+
+## Where each mode still fails
+
+- Small text inside images: dense screenshots, footnotes and fine print are read approximately, not perfectly.
+- Handwriting and stamps: legible handwriting is fine; a rushed margin note is a coin flip.
+- Audio: accents, crosstalk and background noise degrade accuracy, and the model usually answers from an internal transcript you never see.
+- Scans: a rotated or low-contrast scan can arrive as half a page. The model will answer anyway — it rarely announces what it could not read.
+
+<StepReveal
+  title="How an attached document reaches the model"
+  steps={[
+    "You choose the file — or the text — and attach it to the message.",
+    "The system turns it into something the model can read: pages as images, a document as extracted text, audio as a transcript.",
+    "The model answers from what that conversion produced — which is not always everything you sent.",
+    "You check the answer against the original artefact, since it is the only source of truth in the room.",
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “I uploaded a photo of our supplier’s invoice. Just confirm the total is what we agreed.”
+>
+> One word back: “Confirmed.” The model cannot know what you agreed, and a photographed total is exactly the sort of small text that gets read approximately. You have a confident echo, not a check.
+
+## A better example
+
+> **Ask:** “The photo is a supplier invoice. List the line items and totals as a table, with a confidence note for any number that is hard to read. I will compare them against our purchase order.”
+>
+> Now the model transcribes with a flag for uncertainty, and you keep the comparison — the part only you can do.
+
+## Why it works
+
+Reading an image or a recording is still prediction: the model reads pixels or sound the way it reads words, and some readings are more reliable than others. Knowing which is which turns the modality into a decision. Precision text goes in as text, layout goes in as pages, delivery goes in as audio — and every mode ends with a check against the original, because the conversion in the middle is where information quietly drops.
+
+<CheckUnderstanding
+  id="cu-fn-multimodal"
+  question="A colleague sends ten photos of a damaged shipment and needs a claim list. What is the strongest way to use an AI assistant?"
+  options={[
+    { text: 'Describe the damage from memory and ask for a claim list', feedback: 'memory is a paraphrase layer — the photos are the evidence, and your description will miss the details the claim turns on.' },
+    { text: 'Attach the photos, ask for a per-photo item list, then verify each line against the photos yourself', correct: true, feedback: 'the artefact goes in, the structure comes out, and the check stays with the person who can actually see the damage.' },
+    { text: 'Ask the assistant to find similar claims online', feedback: 'web search cannot see your shipment — the material is in the photos, and that is what should be attached.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="choose-the-input-mode" />
+
+## Transfer
+
+- Meetings: a photo of the whiteboard beats a retyped list; attach the photo and ask for decisions as columns.
+- Support: a screenshot carries the error code and the button states that “it doesn’t work” cannot.
+- Voice notes: paste the transcript when the exact wording matters, keep the audio when the delivery does.
+- Any attachment: state what the file is and what you want extracted, then check the numbers.
+
+<KeyTakeaways
+  items={[
+    'Multimodal means handing over the artefact — image, audio, document — instead of your description of it.',
+    'Each mode has a failure surface: fine print, accents, rotations, handwriting. The model rarely flags what it could not read.',
+    'Whatever the input, the original stays the source of truth — check the answer against it.',
+  ]}
+/>
+
+## Next
+
+- Next lesson: [Training vs inference](/learn/ai-foundations/training-vs-inference) — why this conversation does not retrain the model.
+- Related: [Context windows](/learn/ai-foundations/context-windows) explains what there is room for once an attachment arrives.
+- Terms: [multimodal](/glossary/multimodal) and [token](/glossary/token).

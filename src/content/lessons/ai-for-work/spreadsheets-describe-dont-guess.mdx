@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Ask for "a formula to total my expenses" and you get a confident answer that references columns you do not have. The model cannot see your sheet — it fills every blank with the most average spreadsheet in its training data. The discipline is in the name: **describe, don't guess** — yours and the model's.
 
@@ -52,6 +54,16 @@ A formula is a hypothesis about your sheet until proven. The request asks for a 
 
 Describe structure, not contents. Your real employee names, salaries or customer records do not need to travel with the formula — sample rows with made-up values communicate structure just as well ([redaction](/glossary/redaction), in spreadsheet form), and some of it should not leave your machine at all. That principle gets its own full treatment in the safety track; here it has one form: **structure in, no real data out**.
 
+<CheckUnderstanding
+  id="cu-wk-sheets"
+  question="You need a per-category total formula that fits your actual sheet. What does the request need?"
+  options={[
+    { text: 'The outcome alone — the model will follow the most common sheet layout', feedback: 'that is the guess: the model fills every blank with the most average spreadsheet in its training data.' },
+    { text: 'The real columns and ranges, assumptions stated first, then a test on a copy with values you know', correct: true, feedback: 'structure in, test out — ten seconds of description removes the invented columns, and the copy proves the formula by hand.' },
+    { text: 'A few real rows pasted with their totals, so the formula matches your numbers', feedback: 'real rows send real data out and invite the model to compute; sample rows with made-up values carry the structure just as well.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="assemble-a-spreadsheet-help-prompt" />
@@ -61,6 +73,14 @@ Describe structure, not contents. Your real employee names, salaries or customer
 - Reporting: monthly summaries from a described sheet, tested on a copy.
 - Cleanup: "describe the transformation, then show it applied to three sample rows".
 - Handover: the walkthrough becomes the comment you leave for colleagues.
+
+<KeyTakeaways
+  items={[
+    'Describe columns, ranges and a sample row; the model cannot see your sheet.',
+    'Ask for assumptions first, then the formula, then a walkthrough, then a test.',
+    'Prove the formula on a copy with values you know; structure in, no real data out.',
+  ]}
+/>
 
 ## Next
 

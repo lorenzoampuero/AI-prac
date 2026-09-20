@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Fluency is not quality. The better an output reads, the less you notice what is missing — a [hallucination](/glossary/hallucination) does not announce itself. A [rubric](/glossary/rubric) is simply the questions you ask every time, in the same order, before anything leaves your hands. Five questions do most of the work.
 
@@ -43,6 +45,16 @@ The five questions take about thirty seconds on a short text. Run them out loud 
 
 The checklist survives its own use, too: when a rubric question never catches anything — or keeps catching everything — the question is wrong, so rewrite it. A rubric is a working tool, not a ceremony; four useful questions beat ten decorative ones.
 
+<CheckUnderstanding
+  id="cu-pr-evaluate"
+  question="Two drafts are ready: one reads beautifully, one is plainer. What does this lesson say to do before choosing?"
+  options={[
+    { text: 'Ship the fluent draft — strong writing is the fastest quality signal', feedback: 'that is fluency mistaken for quality — a hallucination does not announce itself, and polish is not one of the five questions.' },
+    { text: 'Run the same five questions on both, question by question, then decide', correct: true, feedback: 'the rubric scores each question separately; the more fluent draft often wins the glance and loses the check.' },
+    { text: 'Ask the model which draft is stronger and ship its pick', feedback: 'the model is no better at judging its own output than at producing it — run the rubric yourself.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="compare-two-replies-and-pick-the-one-to-ship" />
@@ -53,6 +65,14 @@ The checklist survives its own use, too: when a rubric question never catches an
 - Before publishing: all five, quote-first on every specific claim.
 - On your own writing: the same five questions work — that is not an accident.
 
+<KeyTakeaways
+  items={[
+    'Five questions: the ask, the claims, the gaps, your name, the destination.',
+    'Compare drafts question by question — never vibe against vibe.',
+    'Scale the check to the stakes; the final check never leaves your hands.',
+  ]}
+/>
+
 ## Next
 
-That closes the prompting track — all eleven lessons. The **[research track](/learn/ai-research)** is up next, starting with **[Search vs generation](/learn/ai-research/search-vs-generation)** — when a question needs live sources before you trust the answer. Keep the muscles alive on the [practice floor](/practice) meanwhile.
+The prompting track continues with [Reusable prompt templates](/learn/prompting/reusable-prompt-templates) — turning a prompt that worked into a tool you trust. In parallel, the **[research track](/learn/ai-research)** opens with **[Search vs generation](/learn/ai-research/search-vs-generation)** — when a question needs live sources before you trust the answer. Keep the muscles alive on the [practice floor](/practice) meanwhile.

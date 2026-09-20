@@ -1,0 +1,87 @@
+---
+title: "Prompt templates you actually reuse"
+description: "A template turns a prompt that worked once into a tool you trust: fixed rules, named slots, one example. Learn to build one, keep it honest, and know when to retire it."
+track: prompting
+order: 12
+level: intermediate
+estimatedMinutes: 6
+skills: ["prompting", "templates"]
+prerequisites: ["prompting/evaluate-before-you-ship"]
+learningOutcome: "Turn a working prompt into a reusable template with named slots."
+class: evergreen
+sources: []
+seo:
+  intent: "chatgpt prompt templates — how to build and reuse your own"
+  cluster: "B16"
+exercises: ["build-the-template"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+A [prompt template](/glossary/prompt-template) is a prompt with named slots: fixed text for the rules you always want, and placeholders for the parts that change each time. The order matters — build the template **after** a prompt has worked twice, not before. A template is a reward for a solved problem, not a guess about one.
+
+## Fix the rules, open the slots
+
+**Fixed:** the task definition, the constraints that protect quality, the output shape, and a self-check line. If a rule exists because a specific failure happened, it belongs in the fixed text with a note about which failure it prevents.
+
+**Open:** the topic, the audience, the source text, the tone when it genuinely varies. Each open part gets a name — `[AUDIENCE]`, `<<<SOURCE>>>` — so a missing one is visibly missing instead of silently guessed. A [placeholder](/glossary/placeholder) the model can see is a question it can ask; one it cannot see becomes an invention.
+
+## Build it from evidence
+
+1. Take a run that actually worked and read it line by line: which parts would change for the next use, which parts would not?
+2. Circle the fixed parts; give each changing part a name and a one-line reminder of what state it arrives in.
+3. Add one [example](/glossary/few-shot-prompting) if the shape is subtle — one good example beats three adjectives.
+4. Add the check line: what must the model verify before it answers? (“Keep every number and date”, “If the source is missing, say so in one line”.)
+
+<PromptCompare
+  weak={"You are a helpful assistant. Summarise this text and make it good and professional: [text]"}
+  strong={"Summarise the text between <<< and >>> for [AUDIENCE]. Rules: five bullets maximum; keep every number, name and date exactly as written; end with one line — “Decision needed:” or “No decision needed”. If the text is missing context, say so in one line instead of guessing.\n\nText: <<< [PASTE TEXT] >>>"}
+  notes={[
+    'The weak version asks for a quality (“good”) and leaves the shape to chance; the template fixes shape, length and fidelity rules.',
+    'AUDIENCE is a slot: one required answer, visible when it is missing.',
+    'The last rule handles the common failure — the model filling gaps — by making “say so” an acceptable answer.',
+  ]}
+/>
+
+## Keep it honest, retire it on time
+
+Templates drift. A rule that made sense for last quarter's task becomes cargo the next; a product name in the fixed text goes stale; the folder grows to forty templates and you use three. Review a template when you use it: did it still do what its name says? If you skip a slot twice, delete the slot. If you skip a template twice, delete the template. Reusable assets earn their place through reuse, not through existing.
+
+<CheckUnderstanding
+  id="cu-pr-template"
+  question="You have used the same meeting-summary template five times and twice the model guessed the audience and wrote for the wrong readers. What is the disciplined fix?"
+  options={[
+    { text: 'Add “be accurate about who this is for” to the fixed rules', feedback: 'that is an adjective aimed at a slot that does not exist — the model still has to invent an answer.' },
+    { text: 'Make the audience a required slot with a visible placeholder, and add: never assume the audience — if it is not provided, ask', correct: true, feedback: 'the missing piece becomes visible and the failure mode gets a defined path instead of a hope.' },
+    { text: 'Rewrite the template from scratch every time it fails', feedback: 'rewriting wipes out what worked and diagnoses nothing — the template needs one repaired join, not a fresh start.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="build-the-template" />
+
+## Transfer
+
+- Weekly reports: fix the structure once, slot the data; the check line carries the fidelity rules.
+- Feedback and reviews: the fixed rules are the tone boundaries; examples carry the shape.
+- Support macros: the same construction — fixed policy lines, open customer specifics.
+- Your own prompts: two uses earns a template; two skips earns a deletion.
+
+<KeyTakeaways
+  items={[
+    'Templates are built after a prompt works twice — fixed rules, named slots, one check line.',
+    'A visible placeholder gets answered; an invisible gap gets invented.',
+    'Review on use: if a slot or template goes unused twice, cut it.',
+  ]}
+/>
+
+## Next
+
+- Keep the reps going on the [practice floor](/practice), or jump to the [research track](/learn/ai-research) and learn to verify what a template produces.
+- Related: [Examples and few-shot](/learn/prompting/examples-and-few-shot) is the deep version of “add one example”.
+- Terms: [prompt template](/glossary/prompt-template), [placeholder](/glossary/placeholder) and [few-shot prompting](/glossary/few-shot-prompting).

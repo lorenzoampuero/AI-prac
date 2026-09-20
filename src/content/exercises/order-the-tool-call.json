@@ -1,0 +1,23 @@
+{
+  "engine": "order-steps",
+  "title": "Order the tool call",
+  "scenario": "You are writing the spec for a small internal assistant that checks whether a meeting room is free and, after confirmation, moves a booking. The team building it needs the loop described in the right order — permissions and confirmation included.",
+  "task": "Order the steps of a single tool-using request, from the user's question to the final answer.",
+  "steps": [
+    "The user asks something the chat cannot answer from the conversation alone: “is Studio B free at 15:00 on Thursday?”",
+    "The model proposes a tool call — tool name, room, date and time — with the purpose stated.",
+    "The surrounding system checks permissions and policy: may this assistant read the calendar, with these arguments?",
+    "The tool executes and returns a real result — free, busy until 14:30, or an error.",
+    "The model answers using the returned result, quoting what the calendar actually said.",
+    "Any write — moving the booking — is proposed with details, confirmed by a human, then executed and reported."
+  ],
+  "hints": [
+    "Permission checks sit between the proposal and the execution, never after the fact.",
+    "Writes come last and pass a human gate: reads inform, writes commit."
+  ],
+  "explanation": "The order encodes the division of labour: the model proposes, the system authorises, the tool executes, the model reports — and any write passes a confirmation gate before it commits. Runs in this order, a mistake stays inside the conversation as a wrong proposal instead of escaping into a shared calendar. The two steps people tend to merge — permission check and execution — are precisely the ones that keep the assistant governable.",
+  "skills": ["tools", "function calling"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-foundations/tools-and-function-calling"],
+  "draft": false
+}

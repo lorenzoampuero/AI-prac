@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Choose the input mode",
+  "scenario": "Four requests land on your desk in the same hour. Each one has material that exists as an artefact — a photo, a document, a recording — and you have an AI assistant that accepts text, images, audio and documents.",
+  "task": "Pick the request where handing over the artefact itself is clearly the right first move — and check why the others are weaker uses of the tool.",
+  "options": [
+    {
+      "text": "A planning meeting ends and you need the decisions, owners and dates from a photo of the whiteboard.",
+      "correct": true,
+      "feedback": "The whiteboard is the evidence: arrows, groupings and exact wording survive in the photo. Attach it, ask for a table, then check each line against the photo — artefact in, structure out."
+    },
+    {
+      "text": "You need to quote a precise clause from a contract you can open and copy from.",
+      "correct": false,
+      "feedback": "This one is text. Copy the clause exactly and paste it in; retyping or re-describing it would only add transcription risk."
+    },
+    {
+      "text": "You remember the gist of a phone call and want a summary for your notes.",
+      "correct": false,
+      "feedback": "There is no artefact to attach — the material is your memory. A summary of your memory is fine for personal notes, but nothing here is being verified."
+    },
+    {
+      "text": "You want a general explanation of how shipping insurance claims work.",
+      "correct": false,
+      "feedback": "No private artefact is involved — this is a question about a general process, so plain text (and maybe a web search) is the right shape."
+    }
+  ],
+  "hints": [
+    "Ask two questions: does the material exist as a file, and does its layout or wording carry meaning that a retelling would lose?",
+    "The strongest use is the one where the model can read the source itself instead of your version of it."
+  ],
+  "explanation": "Multimodal input pays off when fidelity matters and the source exists: a whiteboard photo keeps the structure that a retyped list destroys. When the material is already text you can copy, use text; when it is a general question, no attachment is needed; when it is your memory, accept that you are summarising a summary. Match the input to what the task actually needs to preserve.",
+  "skills": ["multimodal", "capabilities"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/multimodal-ai"],
+  "draft": false
+}

@@ -1,0 +1,27 @@
+{
+  "engine": "evaluate-output",
+  "title": "Judge the two plans",
+  "scenario": "Two colleagues propose ways to produce a weekly competitive digest: one email each Monday covering pricing, product and messaging changes across your market. Read both plans and judge which one will still work in month three.",
+  "task": "Compare the plans against the workflow criteria, then choose the one you would put your name on.",
+  "outputA": "Plan A — “Each Monday I will paste everything I have into one long prompt: the competitor pages, the newsletters, the pricing sheet, and ask for a digest of anything important. If the result feels thin, I will add a sentence like 'be thorough and cover all the changes'. I will send it if it reads well.”",
+  "outputB": "Plan B — “The digest runs in four steps. Inputs are fixed: three competitor pages, their changelogs and the pricing sheet, saved in one folder each Friday. Step 1 extracts any change as a table row: source, date, what changed, quote. Step 2 filters to pricing, product and messaging — the three areas our team acts on. Step 3 drafts two-sentence entries from the filtered table. Step 4 is my review before anything sends: I check each entry against its quote. If a source is missing or unreadable, the row is flagged and the digest ships with a 'not checked this week' note.”",
+  "rubric": [
+    { "id": "inputs", "label": "The inputs are named and arrive in a predictable state" },
+    { "id": "stages", "label": "Each step does one job, and its output is the next step's input" },
+    { "id": "check", "label": "There is a specific check before the digest leaves" },
+    { "id": "edges", "label": "A missed or broken input has a defined path instead of silent silence" }
+  ],
+  "verdict": {
+    "better": "B",
+    "reasoning": "Plan B is a workflow: fixed inputs, one job per stage, an explicit review step against quotes, and a stated failure path for missing sources. Plan A is a hope with a schedule — everything depends on one prompt's mood, nothing can be checked, and a thin week quietly becomes a thin digest with no one able to say which stage failed."
+  },
+  "hints": [
+    "Look for the check step — a place where a human or a rule compares the output to the source.",
+    "A plan that cannot fail visibly will fail invisibly: ask what happens on a broken week."
+  ],
+  "explanation": "Both plans describe the same job; only one describes a process. Plan B makes each stage inspectable — extraction, filter, draft, review — so a mistake is locatable and fixable, and a missing source is declared rather than hidden. Plan A removes every seam, which feels efficient until the first wrong number ships. The workflow criteria are not bureaucracy: inputs, stages, checks and edges are exactly the places quality is either designed in or lost.",
+  "skills": ["workflows", "process design", "evaluation"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-workflows/prompt-vs-workflow"],
+  "draft": false
+}

@@ -1,0 +1,80 @@
+---
+title: "Prompt vs workflow: when one ask isn't enough"
+description: "Some jobs fit a single prompt; others need stages, checks and a place for a human. Learn the three questions that tell you when to stop prompting and design a workflow instead."
+track: ai-workflows
+order: 1
+level: beginner
+estimatedMinutes: 5
+skills: ["workflows", "process design"]
+prerequisites: ["ai-foundations/what-an-agent-is"]
+learningOutcome: "Decide when a job needs a workflow instead of a bigger prompt."
+class: evergreen
+sources: []
+seo:
+  intent: "prompt vs workflow — when a single prompt is not enough"
+  cluster: "G1"
+exercises: ["judge-the-two-plans"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+A prompt asks once; a [workflow](/glossary/workflow) runs the same reliable sequence every time. If the job has repeatable stages, a checkable output and at least one place where mistakes must be caught, a longer prompt will not save you — the shape is wrong. Prompting harder optimises one conversation; a workflow optimises the process that produces the conversation's output.
+
+## Three questions
+
+1. **Does it repeat?** A one-off request needs a prompt. The same job again next week — same inputs, same shape of output — is asking for a process.
+2. **Does an output feed the next input?** Long jobs are chains: extract the decisions, then check them, then write the summary from the checked list. Each stage deserves its own message and its own verification.
+3. **Where does a mistake get caught?** If the honest answer is “somewhere before it sends”, that somewhere is a step. Name it, place it, and give it a human when the consequence is real.
+
+## Why a bigger prompt is not a workflow
+
+A mega-prompt keeps every rule in one context, so a wrong turn is hard to locate: was it the extraction, the arithmetic or the tone? It also has no place to stand: no checkpoint to insert a human, no artefact you can approve before the next stage consumes it, and no way to test one step alone. Staged work fails smaller. When the summary is wrong, you already have a verified table to blame — and to fix. Stages also change who can help: a colleague can own one step without touching the others, and the review lands on someone's desk on Tuesday instead of hiding inside a Friday re-read.
+
+<PromptCompare
+  weak={"Here are forty pages of meeting notes, the CRM export and last quarter's deck. Write the whole quarterly review, make it good, and don't miss anything important."}
+  strong={"Stage 1 of 3. From the attached notes, extract every decision with its owner and date as a table. Flag anything ambiguous or missing. Do not summarise yet — I will check this table before we continue to the narrative."}
+  notes={[
+    'The mega-prompt hides its own failure inside one long answer; the staged prompt produces an artefact you can inspect before anything is built on it.',
+    '“Do not summarise yet” keeps stage 1 doing one job — extraction — instead of drifting into the report.',
+    'The human gate is explicit: the table gets checked before stage 2 consumes it.',
+  ]}
+/>
+
+<CheckUnderstanding
+  id="cu-wf-shape"
+  question="Which job is asking for a workflow rather than a better prompt?"
+  options={[
+    { text: 'Rewriting one email so it sounds warmer', feedback: 'one artefact, one output, no stages — a single prompt with the right context and constraints is exactly the tool.' },
+    { text: 'The monthly close: pull the numbers, reconcile the exceptions, draft commentary, review, then publish', correct: true, feedback: 'it repeats, has stages whose outputs feed the next step, and has a real gate before publishing — designed as a sequence, not a mega-prompt.' },
+    { text: 'Explaining what a context window is', feedback: 'a question, an answer — no process to design.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="judge-the-two-plans" />
+
+## Transfer
+
+- Reporting cycles: fixed inputs, staged extraction, human gate before distribution.
+- Onboarding documents: stage 1 gather facts, stage 2 draft, stage 3 check against a rubric.
+- Any “AI keeps missing stuff” complaint: look for the missing check step, not a missing adjective.
+- Personal habits: a Sunday review with three fixed steps is a workflow too.
+
+<KeyTakeaways
+  items={[
+    'A prompt asks once; a workflow repeats a sequence you designed and can test.',
+    'If outputs feed the next stage, split the stages — each gets its own check.',
+    'Find the gate before you build: where does a mistake get caught, and by whom?',
+  ]}
+/>
+
+## Next
+
+- Next lesson: [Map a workflow](/learn/ai-workflows/map-a-workflow) — four boxes, one page, before you build anything.
+- Related: [What an agent is](/learn/ai-foundations/what-an-agent-is) explains when even a workflow is the wrong shape.
+- Terms: [workflow](/glossary/workflow) and [agent](/glossary/agent).

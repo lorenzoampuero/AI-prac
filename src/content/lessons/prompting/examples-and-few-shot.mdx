@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 "Friendly but professional, a bit playful but not silly" — anyone who has written that sentence knows the result: generic-friendly mush. **Few-shot prompting** replaces the adjective parade with something better: show two or three input → output pairs, then hand over your real input. The model extends the pattern. That is not a trick — it is the mechanism.
 
@@ -51,6 +53,16 @@ Every example narrows the plausible space like a constraint you never had to ver
 
 One maintenance tip: when a pattern prompt produces a great result, save it with the examples intact. The examples carried the value — swapping them for a new task is usually a smaller edit than writing a fresh prompt, and the pattern keeps paying without being re-derived.
 
+<CheckUnderstanding
+  id="cu-pr-fewshot"
+  question="A brand-voice prompt made of adjectives keeps producing generic mush. What does this lesson say to do instead?"
+  options={[
+    { text: 'Show two or three input to output pairs, then hand over the real input', correct: true, feedback: 'an example is a point in style space — tone, rhythm and length come along with the pattern automatically.' },
+    { text: 'Describe the voice with a longer, more careful list of adjectives', feedback: 'that is the adjective parade from the opening — a description names a region of style, and the model still guesses inside it.' },
+    { text: 'Give one perfect example and ask it to copy the wording exactly', feedback: 'one example is a point, not a trend — and cloned wording is not the style; vary two or three pairs deliberately.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-example-driven-prompt" />
@@ -60,6 +72,14 @@ One maintenance tip: when a pattern prompt produces a great result, save it with
 - Brand voice: two approved paragraphs beat any tone adjectives.
 - Data extraction: show two "messy line → clean fields" pairs.
 - Support replies: three example answers per category; the model inherits the policy.
+
+<KeyTakeaways
+  items={[
+    'Two or three input to output pairs teach a pattern that adjectives cannot.',
+    'Match the real shape, vary the pairs deliberately, include one hard case.',
+    'When output misses, edit the example — not the instruction wording.',
+  ]}
+/>
 
 ## Next
 

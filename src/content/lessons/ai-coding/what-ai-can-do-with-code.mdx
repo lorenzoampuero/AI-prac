@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 AI code generation is a fast writing assistant for code: it produces plausible, often runnable drafts of small, precisely described tasks — and it verifies nothing. Reliability comes from your verification, not the model's confidence. Knowing where each side's strength ends is the whole skill.
 
@@ -52,6 +54,16 @@ Generation is fast; review is the bottleneck. Code you cannot read is code you c
 >
 > Start read-only, verify the list, and only then consider a second step that acts. Small steps you can check beat one big step you have to trust.
 
+<CheckUnderstanding
+  id="cu-cd-code"
+  question="Your assistant writes a small script that looks fluent and compiles. What does the lesson say this proves?"
+  options={[
+    { text: 'The script was tested in your environment before it was handed over', feedback: 'the model cannot test in your environment or own the outcome — and it will never tell you it did not test.' },
+    { text: 'Nothing about correctness — fluent drafts are not guaranteed, and edge cases are where they fail quietly', correct: true, feedback: 'generation is fast and review is the bottleneck: you verify by reading the lines or by behavior on a copy.' },
+    { text: 'The library calls are current — a compiling script cannot use outdated APIs', feedback: 'training cutoffs never move; a plausible call may be two versions old, so version facts need checking.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-right-coding-task" />
@@ -61,6 +73,14 @@ Generation is fast; review is the bottleneck. Code you cannot read is code you c
 - Personal automation: small scripts, run on copies, checked by behavior.
 - Learning: ask for explanations of code you find — a genuine study loop.
 - Anything production: AI drafts, a human reviews and owns.
+
+<KeyTakeaways
+  items={[
+    'AI writes plausible drafts of small, precisely described tasks — and verifies nothing.',
+    'Four limits stay: no guarantee, no context, no responsibility, no fresh knowledge.',
+    'Review is the bottleneck: understand each line, or test by behavior on a copy.',
+  ]}
+/>
 
 ## Next
 

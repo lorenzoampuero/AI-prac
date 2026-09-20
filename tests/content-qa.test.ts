@@ -199,3 +199,32 @@ describe('content QA — link integrity (standards §7)', () => {
     }
   });
 });
+
+describe('content QA — teaching blocks (standards §11)', () => {
+  const TEACHING_BLOCKS = [
+    'CheckUnderstanding',
+    'PromptCompare',
+    'StepReveal',
+    'NextTokenDemo',
+    'TokenSplit',
+    'ContextMeter',
+    'DiffusionStrip',
+  ];
+
+  it('every published lesson ships at least one interactive teaching block', () => {
+    for (const lesson of publishedLessons) {
+      const hasBlock = TEACHING_BLOCKS.some((block) => lesson.raw.includes(`<${block}`));
+      expect(hasBlock, `${lesson.id} has no teaching block (§11)`).toBe(true);
+    }
+  });
+
+  it('every published lesson closes with KeyTakeaways before the Next section', () => {
+    for (const lesson of publishedLessons) {
+      const raw = lesson.raw;
+      const takeawaysAt = raw.indexOf('<KeyTakeaways');
+      const nextAt = raw.lastIndexOf('## Next');
+      expect(takeawaysAt, `${lesson.id} has no KeyTakeaways (§11)`).toBeGreaterThan(-1);
+      expect(takeawaysAt, `${lesson.id} places KeyTakeaways after the Next section`).toBeLessThan(nextAt);
+    }
+  });
+});

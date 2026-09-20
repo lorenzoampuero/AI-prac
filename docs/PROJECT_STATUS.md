@@ -1,6 +1,6 @@
 # PROJECT STATUS — AI Practice (interactive AI-literacy platform)
 
-**Last updated:** 2026-09-20 (**LIVE at `https://getaipractice.site` — public custom domain verified externally (200s, canonical, robots + sitemap, custom 404); owner actions left: enable Analytics, align primary domain, Search Console · 50 tests / 109 pages**) · **Status vocabulary:** DONE (implemented) · TESTED (verified by execution) · PARTIAL · BLOCKED · NOT STARTED
+**Last updated:** 2026-09-20 (**LIVE at `https://getaipractice.site`; batch 3 shipped — 62 lessons · 177 pages · 70 tests: foundations 12/12, workflows track opened (WF01–WF02), PR16 + WK14 demand lessons, every lesson now carries an interactive teaching block + KeyTakeaways, /faq with FAQPage schema and generated /llms.txt live for answer engines; owner actions left: enable Analytics, align primary domain, Search Console**) · **Status vocabulary:** DONE (implemented) · TESTED (verified by execution) · PARTIAL · BLOCKED · NOT STARTED
 **Rule applied:** nothing says TESTED unless it was actually executed and observed in this session.
 
 ---
@@ -19,6 +19,15 @@
 | **7 — SEO/GEO/a11y/perf (Gates 8+9+10)** | Registry tests, structured data, axe, Core Web Vitals | **TESTED** | Gate 8: canonical/OG everywhere; sitemap 107 URLs (404 excluded); structured data completed — home `WebSite`, `/learn`+`/assessment` breadcrumbs+LD (previously missing), track pages now emit `BreadcrumbList`; anti-doorway intact. Gate 9: **axe WCAG A/AA — 0 violations across 11 templates** (incl. new quiz surfaces). Gate 10: cold-load 29–49 ms, 1–3 requests, ~61 KB transfer incl. the single latin-subset font; test/lint-independent audit script `scripts/audit-dist.mjs`. Full report: `docs/SEO_A11Y_PERF.md`. |
 | **8 — Launch readiness (Gate 11)** | Docs set, prod-check dry-run, launch checklist | **DONE** | `docs/LAUNCH_READINESS.md`: pre-launch evidence table, **executed production dry-run** (origin override via `PUBLIC_SITE_URL` verified with `scripts/check-origin.mjs` — canonical + sitemap switched, then restored; chain re-green), step-by-step deploy plan with the misuse guard, post-deploy checks, rollback via static artifact + `launch-v1` tag, boundary notes (placeholder-origin guard, hostile storage, AdSense prerequisites deferred). **Deployed to Vercel 2026-09-20** (project `aipractice`, auto-deploy from `main`, owner-approved); deploy lesson: the commit author must map to the GitHub account or Vercel blocks the deployment. **Live 2026-09-20:** home/privacy/learn 200, canonical apex, robots + sitemap OK, custom 404; apex 308→www (align primary domain); `.vercel.app` URLs stay login-gated. |
 | **9 — Post-launch loop** | Content loop + expansion rule (documented) | **DONE** | `docs/POST_LAUNCH_LOOP.md`: cadence table (per-report · weekly triage · monthly Search Console → intent map · quarterly competitor/axe/audit · **≤90-day facts registry review, due 2026-12-18**), correction workflow (fix or cut, evidence-first, QA-logged), expansion rule limited to the documented v1.1 map with demand evidence + green QA, metrics policy (Vercel Analytics — cookieless, aggregate — owner-approved 2026-09-20, gated to Vercel builds; local builds stay script-free). |
+
+## Post-launch content waves (2026-09-20)
+
+| Wave | What shipped | Evidence |
+|---|---|---|
+| Design v2 + gamification + teaching blocks (`e5a771d` → `1cfa379`) | premium editorial palette, XP/levels/badges, five teaching components | browser-verified |
+| AI Images IM01–IM12 (`f8bb637` → `dbafa45`) | full images track + animated diagrams | 141 pages · 65 tests |
+| Demand wave (`66fb5d8`, `e9df942`) | RS06–RS08, WK07–WK09 (autocomplete-backed) | 153 pages |
+| **Batch 3 — traffic + interaction + GEO (this session)** | **FN09–FN12 (foundations 12/12) · WF01–WF02 (workflows track opened) · PR16 templates + WK14 job-search (strongest unserved autocomplete pulls) · 28-lesson teaching-block retrofit now enforced by tests · /faq with FAQPage schema · generated /llms.txt · explicit AI-crawler robots policy** | **177 pages · 70 tests green · axe 0 violations (WCAG A/AA) on /faq + three new lessons · browser-verified CU feedback, StepReveal, +15 XP** |
 
 ## Operating constraints (from the master brief)
 

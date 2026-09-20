@@ -17,6 +17,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 An answer's confidence is styling, not measurement — models express certainty as a writing habit, and can sound equally sure about a definition and an [invention](/glossary/hallucination). You cannot make confidence honest by asking "be accurate". But you **can** ask for the parts of the answer's reasoning that matter: assumptions, staleness, and what deserves checking.
 
@@ -46,6 +48,16 @@ You get a map of where the weak parts are: "may have changed after my training d
 
 The model has no incentive to flag weak spots unless you ask, and no penalty for uniform confidence. Asking for assumptions converts hidden uncertainty into visible text, and requesting the to-check list converts your role from trusting reader to verifier with a checklist. It pairs naturally with [grounding](/learn/prompting/ground-responses-in-your-sources): one request points at sources, the other points at gaps.
 
+<CheckUnderstanding
+  id="cu-rs-uncertainty"
+  question="Why does asking a model to “be accurate” fail to make its answer trustworthy?"
+  options={[
+    { text: 'A confident, detailed answer signals the model is sure, so tone can guide trust', feedback: 'tone is a writing habit, not a measurement — the model sounds equally certain about definitions and inventions.' },
+    { text: 'It asks for a promise instead of the parts you can check: assumptions, staleness and where to verify', correct: true, feedback: 'confidence is styling; the three-part request turns hidden uncertainty into a to-check list you can act on.' },
+    { text: 'Better to ask for a confidence percentage — a stated number is measurable', feedback: '“I am 90% confident” is a sentence, not a measurement — it points to where you should look.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-uncertainty-asking-prompt" />
@@ -55,6 +67,14 @@ The model has no incentive to flag weak spots unless you ask, and no penalty for
 - High-stakes questions — legal, medical, financial: always run the three-part request.
 - Planning under unknowns: assumptions lists double as risk lists for your project.
 - Team use: make "assumptions + to-check list" a standing part of prompts that feed decisions.
+
+<KeyTakeaways
+  items={[
+    'Confidence is styling, not measurement — models sound equally sure about facts and inventions.',
+    'Make a three-part request: the answer, the assumptions behind it, and what to confirm where.',
+    'Treat stated confidence as a pointer to where to look, not as evidence that checking is unnecessary.',
+  ]}
+/>
 
 ## Next
 

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Long documents do not fail loudly. The model does not say "I could not read past page 40" — it skims, drops the middle and answers from the edges. Three forces are at work: attention dilutes across a huge window, the oldest text gets truncated first, and vague instructions drown in sheer volume. The fix is not a better sentence — it is a **process**.
 
@@ -47,6 +49,16 @@ Every pass stays inside the sweet spot where attention is high and instructions 
 
 One habit that makes chunking feel light: finish the first chunk completely — extract, save, verify — before pasting the second. If the format is wrong, you learn it after one chunk instead of after twelve. And the notes file you build along the way becomes the deliverable: the final answer assembles from verified pieces instead of resting on one giant pass you cannot inspect.
 
+<CheckUnderstanding
+  id="cu-pr-longinput"
+  question="A 200-page summary skipped everything in the middle. What fix does this lesson give?"
+  options={[
+    { text: 'A stricter summary instruction with clearer, stronger wording', feedback: 'long documents do not fail loudly, and no sentence fixes attention dilution — the fix is a process, not phrasing.' },
+    { text: 'A chunked process: spec first, one logical chunk per pass, notes you control', correct: true, feedback: 'small passes keep attention high and instructions alive, and the notes file becomes the memory the model does not have.' },
+    { text: 'Paste the document twice so the middle gets a second chance', feedback: 'a second giant paste spends the window again without restoring attention — chunking is what protects the middle.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="order-the-long-document-process" />
@@ -56,6 +68,14 @@ One habit that makes chunking feel light: finish the first chunk completely — 
 - Contracts: extract obligations/parties/deadlines per section; verify the extracts.
 - Research: one source per pass — claim, evidence, confidence — then combine.
 - Meeting marathons: summarize per segment; carry the decision bullets forward.
+
+<KeyTakeaways
+  items={[
+    'State the task and the exact output format before pasting anything.',
+    'One logical chunk per pass, in the same fixed format every time.',
+    'Collect extractions in notes you control; write the final answer from them.',
+  ]}
+/>
 
 ## Next
 

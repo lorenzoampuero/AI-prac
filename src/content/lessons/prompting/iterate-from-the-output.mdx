@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 You rarely get the right answer on the first try — that is normal, not failure. The skill is the second message — a [prompt](/glossary/prompt) in its own right. Most people either restart from zero or type "make it better"; both throw away information you just paid for. The first output tells you what the model understood, and that is exactly what your follow-up should correct.
 
@@ -46,6 +48,16 @@ Every follow-up adds constraints the model can act on, and the conversation — 
 
 One last habit for the loop: keep a two-line log of what you asked and what changed. Three rounds later the log shows which instruction actually fixed the draft — and the next similar task starts from a recipe instead of from zero. Iteration feels messy only until the record makes it repeatable.
 
+<CheckUnderstanding
+  id="cu-pr-iterate"
+  question="A first draft is close, but one paragraph is weak. What follow-up does this lesson call strong?"
+  options={[
+    { text: 'Keep the two opening paragraphs; rewrite only the closing — change nothing else', correct: true, feedback: 'pointing at the place, naming the fix and protecting the rest keeps the round small enough to verify.' },
+    { text: 'Make it better — let the model find and fix its own weak spots', feedback: 'that adds no constraint, so the model guesses and quietly reshuffles the parts that already worked.' },
+    { text: 'Restart from scratch with a longer prompt that explains the flaw', feedback: 'restarting throws away information you paid for — the draft shows what the model understood; correct it instead.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-stronger-follow-up" />
@@ -55,6 +67,14 @@ One last habit for the loop: keep a two-line log of what you asked and what chan
 - Documents: point at a section, name the edit, freeze the rest.
 - Code: "keep the structure, change this function to return a list" beats "fix it".
 - Plans: "merge steps 2 and 3, keep the rest" — same loop at every scale.
+
+<KeyTakeaways
+  items={[
+    'Point at the place, name the fix, protect what works, one change per round.',
+    'Make it better adds no constraint — the model guesses instead.',
+    'Restart only when the goal changed, not when the text needs another pass.',
+  ]}
+/>
 
 ## Next
 

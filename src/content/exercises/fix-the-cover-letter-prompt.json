@@ -1,0 +1,44 @@
+{
+  "engine": "fix-prompt",
+  "title": "Fix the cover letter prompt",
+  "scenario": "A friend is applying for a product analyst role and asks for help with the AI prompt they have been using. Their last two letters read well in the moment, but in one interview they were asked to explain a claim they could not back up.",
+  "task": "Rewrite the prompt so the model tailors the letter to the posting using only real evidence — and asks for missing facts instead of inventing them.",
+  "weakPrompt": "Take my CV and write a cover letter for this product analyst job. Make it really impressive and confident — add anything that would make me stand out, and make my experience sound more senior than my CV shows. Don't worry about length.",
+  "criteria": [
+    {
+      "id": "boundary",
+      "label": "Sets a truth boundary: no facts beyond the supplied evidence",
+      "hint": "Say explicitly that the model may not add, upgrade or stretch anything — and what to do instead."
+    },
+    {
+      "id": "posting",
+      "label": "Feeds the posting's requirements as a list to map against",
+      "hint": "A cover letter is an argument about fit; the requirement list is the argument's skeleton."
+    },
+    {
+      "id": "evidence",
+      "label": "Supplies the evidence bank (or asks for it) and requires gaps to be labelled",
+      "hint": "Roles, projects, numbers and outcomes the person can defend — plus the instruction to mark what is missing."
+    },
+    {
+      "id": "format",
+      "label": "Constrains the output for the actual reader",
+      "hint": "A length cap, plain structure, and the strongest requirement-evidence pairings made visible."
+    },
+    {
+      "id": "check",
+      "label": "Adds a self-check: every sentence traceable to the evidence bank",
+      "hint": "Ask the model to flag any sentence it cannot trace — that flag is the interview-proofing step."
+    }
+  ],
+  "sampleSolution": "Here is the job posting's requirement list and my evidence bank. Map each requirement to the closest evidence, or mark it as a gap — do not fill gaps with anything I did not supply. Then write a 210-word cover letter that uses only the evidence bank: same facts, same scale, nothing upgraded or stretched. If a requirement needs a fact I have not given you, ask me for it instead of inventing one. Finish with the three strongest requirement-evidence pairings as a short bullet list, and flag any sentence in the letter you could not trace back to the evidence bank.",
+  "hints": [
+    "Replace every invitation to embellish (“impressive”, “more senior”) with an instruction about fidelity.",
+    "The model needs two artefacts to be honest: the requirements list and the evidence bank — name both."
+  ],
+  "explanation": "The weak prompt asks for confidence and authorises invention — and the failure shows up weeks later, in an interview. The fixed prompt changes the job from “make me sound good” to “map my real evidence onto their requirements, and say what is missing”. That is why the criteria matter together: the boundary keeps claims honest, the posting list keeps the letter relevant, the evidence bank gives the model legitimate material, the format keeps it readable, and the self-check catches the sentence you would have been asked about.",
+  "skills": ["job search", "writing", "grounding"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-for-work/job-search-workflows"],
+  "draft": false
+}

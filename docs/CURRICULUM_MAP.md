@@ -4,7 +4,11 @@
 
 > **Shipped update (2026-09-20):** MVP 36/36 live · v1.1 waves shipped: **AI Images IM01–IM12 complete**,
 > **RS06–RS08** (cross-check, freshness, numbers) and **WK07–WK09** (presentations, reports, support) live,
-> FN02–FN04 + IM01 gained animated teaching diagrams. Details in `CONTENT_QA.md` v1.1 verdicts.
+> FN02–FN04 + IM01 gained animated teaching diagrams.
+> **Batch 3 (same day):** **FN09–FN12** complete the foundations track (12/12), **WF01–WF02** open the
+> workflows track, **PR16** reusable templates and **WK14** job-search workflows live; all remaining MVP
+> lessons retrofitted with a teaching block + KeyTakeaways (new §11 rules enforced by tests); **/faq** and
+> **/llms.txt** shipped for answer engines. Details in `CONTENT_QA.md` v1.1 verdicts.
 
 **Sources:** `research/CURRICULUM_OPPORTUNITY.md` (MVP mix), `research/KEYWORD_UNIVERSE.md` (cluster refs),
 master brief §7–15 (track allocation 12/20/15/12/12/10/10/9). Slugs are finalized per unit at authoring time;

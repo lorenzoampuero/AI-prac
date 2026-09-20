@@ -1,0 +1,101 @@
+---
+title: "Map a workflow before you build it"
+description: "A workflow map fits on one page: inputs, steps, outputs, checks. Learn the four boxes, the joins where workflows break, and how to test the map before building anything."
+track: ai-workflows
+order: 2
+level: intermediate
+estimatedMinutes: 6
+skills: ["workflows", "process design"]
+prerequisites: ["ai-workflows/prompt-vs-workflow"]
+learningOutcome: "Draw a one-page map: inputs, steps, outputs and checks."
+class: evergreen
+sources: []
+seo:
+  intent: "how to map an ai workflow — inputs, steps, outputs and checks"
+  cluster: "G1"
+exercises: ["order-the-workflow-map"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+A workflow map is four boxes — **input, steps, output, checks** — plus a name, drawn on one page before anything is built. If you cannot draw it, you cannot test it, and the version in your head will quietly disagree with the version in everyone else's. The map is not documentation written after the fact; it is the design.
+
+## The four boxes
+
+- **Input.** The artefacts that arrive, in what state — and how you notice when one is missing or broken.
+- **Steps.** One job per step, in the order the inputs move. “Extract the decisions” is a step; “and also write the summary” is a second step pretending to be one.
+- **Output.** The artefact that leaves, and who consumes it. Naming the consumer decides the format.
+- **Checks.** Where a mistake is caught: a format check, a rubric pass, a comparison against the source, a human gate. At least one check should sit before the output leaves.
+
+<StepReveal
+  title="Draw it backwards, in six moves"
+  steps={[
+    "Name the output and its consumer — the artefact that leaves and who reads it.",
+    "List the inputs that must exist for that output to be possible, in the state they must arrive.",
+    "Place the steps between them — one job per step, in movement order.",
+    "Mark the joins: confirm each step's output is exactly what the next step expects as input.",
+    "Add the checks: format validation, a rubric pass, and the human gate before the output ships.",
+    "Add the failure paths: missing input, low-confidence output, a step that errors — say where each one goes.",
+  ]}
+/>
+
+## Where workflows actually break
+
+**At the joins.** Step 2 produces a prose summary; step 3 needed a table. Or the extractor returns dates as “next Tuesday” and the filter sorts by ISO date. Joins are where silent corruption happens, because each step did its own job fine.
+
+**At the edges.** Odd inputs arrive: a scanned page where a digital one was expected, a source in another language, a missing field. A workflow without an edge policy does not fail loudly — it fails politely, by producing something plausible from incomplete material. Naming the edge and its route (“flag and skip, note it in the output”) is the difference between a process and a wish.
+
+<CheckUnderstanding
+  id="cu-wf-map"
+  question="You are mapping a workflow that turns interview transcripts into a themed summary. Which item is a join check rather than a step?"
+  options={[
+    { text: 'Transcribe each recording into a text file', feedback: 'that is a step — one job, one output, moving the work forward.' },
+    { text: 'Verify each transcript file is non-empty and contains the speaker labels the summary step needs', correct: true, feedback: 'it validates that one step’s output fits the next step’s input — a join check, not new work.' },
+    { text: 'Write the final themed summary', feedback: 'that is the output step itself — still work, not a check.' },
+  ]}
+/>
+
+## A bad example
+
+> **Plan:** “We’ll throw the transcripts at the assistant, get themes, and someone will read it before sending.”
+>
+> Which transcripts, in what state? What does “read it” check? With no map, the human review is doing quality assurance for a process nobody described — and it will miss the empty file and the missing speaker labels.
+
+## A better example
+
+> **Plan:** “Inputs: one audio file per interview, transcriber output named `[interviewer]-[date].txt`. Steps: transcribe → join check (non-empty, speaker labels present) → extract quotes by topic → cluster quotes → draft themes. Check: each theme must quote at least two participants, or it is dropped. Edge: a failed transcription goes to the flag list and the summary ships with its coverage note.”
+>
+> Now every part of “someone will read it” has a name, and the map doubles as the test plan.
+
+## Why it works
+
+The map converts quality from an intention into a placement question. Checks become visible objects you can assign to a person or a rule; joins become mismatches you can catch before they compound; edges become routes instead of surprises. It also disciplines the build: you can implement and test one step at a time, with a stub for the neighbours, and you will notice early when a step is trying to do two jobs.
+
+## Practice
+
+<ExerciseCard id="order-the-workflow-map" />
+
+## Transfer
+
+- Repeatable reports: the map doubles as the handover document when someone covers your leave.
+- Data pipelines: the join check is the schema; the edge policy is the error queue.
+- Hiring and ops processes: the same four boxes reveal where approvals actually belong.
+- Before buying tools: map the process first — the map, not the tool, decides what you need.
+
+<KeyTakeaways
+  items={[
+    'Four boxes on one page: input, steps, output, checks — drawn before building.',
+    'Workflows break at the joins and the edges; name both, and say where failures go.',
+    'A map with checks is also a test plan — each step can be tried on its own.',
+  ]}
+/>
+
+## Next
+
+- Keep practising on the [practice floor](/practice), or see where you stand with the [skills check](/assessment).
+- Related: [What an agent is](/learn/ai-foundations/what-an-agent-is) — when the loop, not the map, decides the steps.
+- Terms: [workflow](/glossary/workflow), [dry run](/glossary/dry-run) and [placeholder](/glossary/placeholder).

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 An [unsupported claim](/glossary/unsupported-claim) is a statement specific enough to be checked, consequential enough to matter — and attached to no evidence. The marker is not tone: fluent text [styles invented sentences](/glossary/hallucination) exactly like true ones. The load falls on you, so learn the shapes that deserve an immediate second look.
 
@@ -53,6 +55,16 @@ For each claim, ask: **is it specific? is it consequential? does it name its evi
 
 Make the pass concrete: mark every number, date, name and prediction in the draft. Anything marked that cannot point at checkable evidence gets a "verify" tag before the document moves another step. On a single page that pass takes a minute — and it is the difference between catching a fabricated detail in private and discovering it in front of an audience.
 
+<CheckUnderstanding
+  id="cu-rs-claim"
+  question="A draft says “revenue grew 23% last year and experts agree the shift is inevitable”. What does the three-part test flag?"
+  options={[
+    { text: 'Only the percentage — numbers can be wrong, while opinions cannot', feedback: 'the marker is missing evidence, not the claim type; “experts agree” names no study and is just as uncheckable.' },
+    { text: 'Both claims: specific and consequential, each attached to no named evidence', correct: true, feedback: 'specific plus consequential plus no evidence is exactly the danger zone the test exists to catch.' },
+    { text: 'Neither — both are qualitative generalities that assert nothing measurable', feedback: 'generalities are the harmless kind; a figure and an anonymous consensus are both specific enough to check.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="spot-the-unsupported-claims" />
@@ -62,6 +74,14 @@ Make the pass concrete: mark every number, date, name and prediction in the draf
 - Inbox triage: scan for digits, dates, names and futures — each needs a source or a label.
 - AI-assisted drafts: run the three-part test before anything leaves your hands.
 - Your own writing: unsupported claims are contagious — catch them in your sentences too.
+
+<KeyTakeaways
+  items={[
+    'Confidence is not evidence: fluent text styles invented sentences exactly like true ones.',
+    'Catch precise numbers, predictions stated as facts, anonymous authorities and superlatives.',
+    'Ask three questions: is it specific, is it consequential, does it name its evidence?',
+  ]}
+/>
 
 ## Next
 

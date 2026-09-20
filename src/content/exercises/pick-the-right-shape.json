@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Pick the right shape",
+  "scenario": "Your team has four automation ideas on the board and one budget line. Before choosing tools, you need to stop the agent-shaped answer from being applied to workflow-shaped problems.",
+  "task": "Pick the idea that genuinely needs an agent — a system that decides its own steps — rather than a fixed workflow or a single prompt.",
+  "options": [
+    {
+      "text": "Enter three fixed fields from every incoming invoice into the ledger",
+      "correct": false,
+      "feedback": "The path is known and the output is checkable: a workflow, run at volume, with exception handling for the odd invoice. No loop decisions needed."
+    },
+    {
+      "text": "Triage 300 support tickets a day into five queues defined by written rules",
+      "correct": false,
+      "feedback": "Fixed rules, fixed queues — a workflow. It will be cheaper, and its mistakes will be findable by auditing the rules."
+    },
+    {
+      "text": "Find out why cancellations rose in one region last month, drawing on reports, survey text and support notes",
+      "correct": true,
+      "feedback": "The next step depends on what the previous one found — that is the agent signature. Bound it with a question, a budget and a human review, and it earns its loop."
+    },
+    {
+      "text": "Convert a folder of 80 scanned forms into spreadsheet rows",
+      "correct": false,
+      "feedback": "Repetitive, known steps, verifiable output — workflow. If a page fails, route it to a human queue; no step-by-step decisions required."
+    }
+  ],
+  "hints": [
+    "Ask whether the path is known in advance. Known path → workflow; unknown path that reacts to findings → maybe agent.",
+    "If you could write the steps down as a checklist before starting, an agent is usually a more expensive checklist."
+  ],
+  "explanation": "Three of the four ideas have a written path: extract, classify, convert — repetitive steps with checkable outputs. Those are workflows, and they should stay that way. The churn investigation is different: the useful next move depends on the last result, so the sequence cannot be authored in advance. That is when an agent loop can pay — provided it is bounded by a clear question, a budget and a review gate at the end.",
+  "skills": ["agents", "workflows"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-foundations/what-an-agent-is"],
+  "draft": false
+}

@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the training myths",
+  "scenario": "A teammate drafted an explainer for your team wiki: “How the assistant learns from us.” You need it to be accurate before it starts shaping how colleagues think about privacy and data use.",
+  "task": "Select every claim that misstates how training and inference work. Leave the claims that are accurate.",
+  "response": "Every message you send is used to retrain the model overnight. The model's weights are fixed once training finishes, so a conversation cannot change how it behaves for anyone else. I have updated my knowledge with everything you told me. The assistant will remember your preferences in future chats because we enabled the memory feature, which stores short notes and re-inserts them into new conversations. When you open a new chat, it starts with an empty context, so anything you want it to know must be re-supplied or stored.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "“Every message you send is used to retrain the model overnight”",
+      "problematic": true,
+      "feedback": "Automatic overnight retraining is a myth. Whether conversations are collected for future training at all is a decision written in the provider's policy — not a property of chatting."
+    },
+    {
+      "id": "c2",
+      "text": "“The model's weights are fixed once training finishes, so a conversation cannot change how it behaves for anyone else”",
+      "problematic": false,
+      "feedback": "Accurate, and it is the core of the distinction: inference reads fixed weights."
+    },
+    {
+      "id": "c3",
+      "text": "“I have updated my knowledge with everything you told me”",
+      "problematic": true,
+      "feedback": "Nothing was written into the model. At most, your text is still sitting in the context window — lose the chat and the “update” is gone."
+    },
+    {
+      "id": "c4",
+      "text": "“The assistant will remember your preferences in future chats because we enabled the memory feature, which stores short notes and re-inserts them into new conversations”",
+      "problematic": false,
+      "feedback": "Correct framing: it is a stored note being retrieved, not a changed model — useful continuity with an editable, visible mechanism."
+    },
+    {
+      "id": "c5",
+      "text": "“When you open a new chat, it starts with an empty context, so anything you want it to know must be re-supplied or stored”",
+      "problematic": false,
+      "feedback": "Exactly right, and it explains the everyday symptom: tomorrow's blank stare."
+    }
+  ],
+  "hints": [
+    "Separate three layers: the weights (training), the conversation (context), and the product's notes store (memory).",
+    "Claims that attribute memory to the model itself — as if chatting wrote something in — are the ones to flag."
+  ],
+  "explanation": "Two ideas do the work here. First, weights do not change during a conversation: inference reads them, it does not write them. Second, continuity comes from text being stored and re-supplied — context today or a memory note tomorrow. Any sentence that says the model itself learned from your chat crosses those layers; any sentence that keeps storage, context and weights separate is accurate.",
+  "skills": ["training", "mental models"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-foundations/training-vs-inference"],
+  "draft": false
+}

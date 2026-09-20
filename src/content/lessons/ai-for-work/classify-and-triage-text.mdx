@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 "Sort these messages by importance" fails for a simple reason: importance is not defined. Five people rank the same inbox five ways, and so will the model — differently each run. [Triage](/glossary/triage) becomes useful when you write the rulebook first: **named categories with edges**, **priority as criteria**, and **a bucket for whatever does not fit**.
 
@@ -49,6 +51,16 @@ A sorted list you cannot audit is just a guess with formatting. A five-word reas
 
 Triage automates sorting, never accountability. Sample the boundary rows — especially the ones in "Needs human review" and the ones adjacent to category edges — before trusting the whole queue, and expect to tune the rulebook after the first batch. The rules are the product; the sort is just its output.
 
+<CheckUnderstanding
+  id="cu-wk-triage"
+  question="A technical bug caused a wrong charge. Your rulebook routes money messages to Billing regardless of cause. What is correct triage?"
+  options={[
+    { text: 'Send it to Technical — fixing the bug is what resolves the message', feedback: 'that re-decides the boundary per message; the edge was written once so every run lands the same way.' },
+    { text: 'Route it to Billing, following the written boundary, with the reason column attached', correct: true, feedback: 'same message, same destination every run, and the five-word reason keeps the call checkable at a glance.' },
+    { text: 'Send it to Needs human review — a message with two aspects is never clean', feedback: 'that bucket exists for messages that fit no category or several; using it for clean calls buries the cases it should surface.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="fix-the-triage-prompt" />
@@ -58,6 +70,14 @@ Triage automates sorting, never accountability. Sample the boundary rows — esp
 - Support inboxes: one queue per category, priority criteria written once.
 - Feedback and surveys: themes as categories, verbatims kept, unclear ones flagged.
 - Personal inbox: two categories — "needs me today", "needs me eventually" — still beats a vibe.
+
+<KeyTakeaways
+  items={[
+    'Name categories and their edges before sorting; boundaries are what make triage reproducible.',
+    'Priority is a ranked order of criteria, not adjectives — anyone should be able to apply it.',
+    'Keep an unclear bucket and a reason column: one surfaces the hard cases, the other lets you audit them.',
+  ]}
+/>
 
 ## Next
 

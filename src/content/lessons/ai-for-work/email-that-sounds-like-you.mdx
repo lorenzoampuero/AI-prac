@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 An AI-drafted email fails in exactly two ways: it does not sound like you, and it promises things you never agreed to. Both are fixable with the same structure: **show your voice with examples**, and **bound the facts with placeholders**.
 
@@ -52,6 +54,16 @@ Read it once as the recipient — a [rubric](/glossary/rubric) pass: does it ans
 
 Keep the voice pack current: every few months, replace the samples with more recent emails. Voice drifts — yours included — and two fresh samples cost nothing while keeping the drafts fitted to the person you are now.
 
+<CheckUnderstanding
+  id="cu-wk-voice"
+  question="A draft email invents a refund reference, an amount and a deadline it was never given. Which instruction prevents that?"
+  options={[
+    { text: 'Brief it with every case fact, since a complete model has nothing left to invent', feedback: 'a fully briefed model still fills the remaining gaps — an amount, a deadline, a reference — and you may send them by accident.' },
+    { text: 'Bound the facts and add the placeholder rule: a missing detail becomes a bracket placeholder, never an invention', correct: true, feedback: 'visible gaps are gaps you can fill; invisible ones travel into the sent email unread.' },
+    { text: 'Ask it to be accurate and to avoid making anything up', feedback: 'that instruction gives you nothing to check; a helpful model still fills gaps quietly rather than stopping to ask.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="assemble-a-voice-matching-email-prompt" />
@@ -61,6 +73,14 @@ Keep the voice pack current: every few months, replace the samples with more rec
 - Recurring replies: keep a two-email voice pack ready to paste.
 - Sensitive topics: more boundaries, more placeholders, no drafting shortcuts around a human review.
 - Any language: samples work wherever you write.
+
+<KeyTakeaways
+  items={[
+    'Voice comes from one or two real emails you sent, not from adjectives like professional but friendly.',
+    'Bound what the email must say, and what it must not promise, before asking for a draft.',
+    'Placeholders turn invented details into visible gaps; check they are filled before you send.',
+  ]}
+/>
 
 ## Next
 

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Format is the shape of the output: a table, a numbered list, three paragraphs, a slot-filled template. Every answer arrives in *some* shape — the only question is whether you chose it or the model did. If the text will be pasted into a document, compared with other answers or read by a skimmer, choose it.
 
@@ -56,6 +58,16 @@ Structure is a constraint — and constraints narrow the plausible space. It als
 
 Formats travel: a table pastes into a document, a checklist gets walked through in a meeting, a labeled list scans in seconds. Choosing the format is choosing who can use the result without rework — say it in the prompt, and the last mile of the work disappears.
 
+<CheckUnderstanding
+  id="cu-pr-format"
+  question="Five vendors come back as five paragraphs of prose. What does this lesson teach you to specify?"
+  options={[
+    { text: 'A table with named columns, limits and a sort order', correct: true, feedback: 'the kind, the columns and the limits give the answer the shape your decision needs — every weakness shows up as a wrong cell.' },
+    { text: 'A plainer writing style with fewer decorative adjectives', feedback: 'style is not shape — five smoother paragraphs still cannot be scanned, sorted or pasted anywhere.' },
+    { text: 'A longer reply so the comparison is complete', feedback: 'length was never the problem — every answer arrives in some shape, and the question is who chose it.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="fix-the-unstructured-summary" />
@@ -65,6 +77,14 @@ Formats travel: a table pastes into a document, a checklist gets walked through 
 - Meeting summaries: table with decisions, owners, deadlines.
 - Research: one line per source — claim, evidence, confidence.
 - Anything heading to a spreadsheet: name the columns, then the rules.
+
+<KeyTakeaways
+  items={[
+    'Name the kind, the columns or fields, and the limits.',
+    'A filled template is the strongest format instruction available.',
+    'The format line is reusable — it survives every future comparison task.',
+  ]}
+/>
 
 ## Next
 

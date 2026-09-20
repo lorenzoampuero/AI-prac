@@ -1,0 +1,90 @@
+---
+title: "Job search: CVs and cover letters with AI"
+description: "AI can tailor a cover letter to a posting without inventing a fact. Learn the evidence-first workflow: gather proof, map it to the posting, then draft inside the truth."
+track: ai-for-work
+order: 10
+level: beginner
+estimatedMinutes: 6
+skills: ["job search", "writing"]
+prerequisites: ["ai-for-work/support-replies-that-deescalate"]
+learningOutcome: "Tailor a CV or cover letter with AI without exaggerating."
+class: evergreen
+sources: []
+seo:
+  intent: "ai cover letter and resume tailoring — an honest, free workflow"
+  cluster: "C3"
+exercises: ["fix-the-cover-letter-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+You can use AI to tailor a cover letter or CV to a specific posting — as long as every claim stays traceable to something you actually did. The workflow has four moves: **gather evidence, map it to the posting, draft inside the truth, and check**. Skip the first move and the model fills the gaps with plausible fiction you will have to defend in an interview.
+
+## Gather evidence before anything else
+
+Write a one-page brag sheet: roles and dates, projects and what you personally did, numbers you can defend, tools you actually used, outcomes with context. This is your [grounding](/glossary/grounding) bank — the only material the model is allowed to draw from. It does not know your history, and an ungrounded draft is a nicer-sounding guess about a stranger.
+
+## Map the posting
+
+Turn the posting into a requirements list, then mark each line:
+
+- **Evidence.** Covered, with the specific proof.
+- **Partial.** You touched this. Say how, at the true scale: “familiar with X from Y”, not “expert in X”.
+- **Miss.** Not covered. Either leave it alone or address it honestly in one line — never let a bullet silently absorb it.
+
+This map is also your cover letter's outline: requirements on the left, evidence on the right, and the letter argues the strongest three or four pairings.
+
+## Draft inside the truth
+
+<PromptCompare
+  weak={"Take my CV and make it sound really impressive for this marketing manager job. Don't hold back — make my experience sound more senior than it is written, and add anything that would help me stand out."}
+  strong={"Here is the posting's requirement list and my evidence bank. Map each requirement to a bullet: the closest evidence, or “gap”. Then draft a 210-word letter using only the evidence bank — same facts, same scale, nothing upgraded. If a requirement has no evidence, ask me for a fact instead of inventing one. End with the three strongest requirement-evidence pairings as a bullet list."}
+  notes={[
+    '“Sound more senior” is an instruction to fabricate; the model complies happily and you own the claim in the interview.',
+    'The strong prompt supplies the two artefacts that make honesty easy: the requirement list and the evidence bank.',
+    '“Ask me for a fact instead of inventing one” gives the model a legitimate path when evidence is missing.',
+  ]}
+/>
+
+## The check is reading your own draft
+
+Before sending, read every sentence and point to the evidence behind it. Anything you cannot point to is an [unsupported claim](/glossary/unsupported-claim) — cut it or correct it to the true scale. Two failure patterns to hunt: **scope upgrades** (“led” when you contributed; “owned” when you supported) and **time stretching** (“years of” where the evidence is a project). Both read fine and both are easy for an interviewer to puncture with one follow-up question.
+
+<CheckUnderstanding
+  id="cu-wk-jobs"
+  question="Your tailored draft claims you “led the migration of the billing system”. In reality you were one of six engineers on it. What do you do?"
+  options={[
+    { text: 'Keep it — it reads better, and the team did migrate the system', feedback: '“led” is a scope upgrade you will have to defend; the honest claim is just as useful and survives the follow-up question.' },
+    { text: 'Reword to the true scope — “contributed to the migration of the billing system as part of a six-engineer team” — then check the rest of the draft for similar upgrades', correct: true, feedback: 'one honest sentence and a systematic check: the interview-proof version of the same achievement.' },
+    { text: 'Add “team player” elsewhere in the letter to balance it out', feedback: 'a soft adjective does not cancel a hard false claim — the inflated verb is still sitting in the first paragraph.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="fix-the-cover-letter-prompt" />
+
+## Transfer
+
+- Interviews: the evidence bank doubles as your prep sheet — every claim has a story behind it.
+- Performance reviews: same discipline, internal audience; upgrades age badly when promotions are decided.
+- Freelance profiles and bios: map claims to deliverables, cut anything you cannot show.
+- LinkedIn summaries: write from the evidence bank, not from the job title you wish you had.
+
+<KeyTakeaways
+  items={[
+    'Evidence first: an ungrounded draft is fiction with good formatting.',
+    'Map every posting requirement to evidence, partial coverage, or an honest gap.',
+    'Check your own draft line by line — scope upgrades and time stretching are the failures to hunt.',
+  ]}
+/>
+
+## Next
+
+- Keep going on the [practice floor](/practice), or check where you stand with the [skills check](/assessment).
+- Related: [Find the unsupported claim](/learn/ai-research/find-the-unsupported-claim) is the same check applied to other people's text.
+- Terms: [grounding](/glossary/grounding), [unsupported claim](/glossary/unsupported-claim) and [caveat](/glossary/caveat).

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Constraints are the boundaries of an answer: **how long**, **what is in scope**, **what must survive**, **what must not appear**. They are the difference between a good draft and a usable one — and they double as the checklist you run when the result comes back.
 
@@ -52,6 +54,16 @@ Constraints narrow the space of plausible [tokens](/glossary/token) — the same
 
 Constraints also make results comparable: same length, same sections, same tone across ten options means you choose on substance instead of presentation. That is why constraint-heavy prompts pay twice — once on the first draft, and again every time you reuse the prompt for the next item in the queue.
 
+<CheckUnderstanding
+  id="cu-pr-constraints"
+  question="A prompt says only: keep it short and professional, and do not oversell. What fix does the lesson teach?"
+  options={[
+    { text: 'Add more style adjectives so the model understands the register', feedback: 'adjective stacking adds vagueness — short means 20 words to one writer and 200 to another, so the boundary needs a number or a shape.' },
+    { text: 'Give the boundary a number or a shape — 120 words, three paragraphs, no marketing adjectives', correct: true, feedback: 'numbers and named exclusions turn review into a checklist; each failing draft then fails specifically, one edit from fixed.' },
+    { text: 'Drop the boundaries entirely and let the model choose the best length', feedback: 'without boundaries the model guesses your target — constraints are what narrow the plausible space and make results comparable.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-bounded-prompt" />
@@ -61,6 +73,14 @@ Constraints also make results comparable: same length, same sections, same tone 
 - Emails: cap the sentences; forbid new promises.
 - Reports: scope to the listed data; require the caveats.
 - Anything a human will skim: one number for length, one rule for tone.
+
+<KeyTakeaways
+  items={[
+    'Four families: length, scope, must-keep and must-avoid.',
+    'Boundaries need numbers or shapes — short is not a target.',
+    'Two or three constraints do the work; when they conflict, say which wins.',
+  ]}
+/>
 
 ## Next
 

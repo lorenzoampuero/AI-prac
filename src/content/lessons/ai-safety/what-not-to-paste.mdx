@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Three categories never belong in a chat box: **secrets** (keys, passwords, tokens), **other people's personal data**, and your **organization's confidential material**. Almost everything else can go in — after a quick scrub. The skill is classification, and it takes ten seconds.
 
@@ -52,6 +54,16 @@ Treat anything you paste as leaving your building: depending on the tool and its
 >
 > Same debugging help, no secrets, nothing to rotate.
 
+<CheckUnderstanding
+  id="cu-sf-paste"
+  question="An API key stopped working and you want AI help to debug it. Which paste fits the lesson’s three buckets?"
+  options={[
+    { text: 'Paste the failing key so the model can inspect its format — a secret is only dangerous in code', feedback: 'a pasted key is a leaked key: remove it, rotate it, and describe the problem without it — the rule travels to the chat box too.' },
+    { text: 'Describe the error with a placeholder where the key was — the shape of the problem, no secret to rotate', correct: true, feedback: 'the model needs the structure, not the credential; the real key stays where it lives, and the debugging help is just as good.' },
+    { text: 'Paste the customer export along with the error so the context is complete', feedback: 'that is the personal-data bucket under pressure: the task almost never needs real identities, and the structure alone teaches the model everything.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="spot-what-should-not-be-pasted" />
@@ -61,6 +73,14 @@ Treat anything you paste as leaving your building: depending on the tool and its
 - Debugging sessions: error messages yes, keys never.
 - Meeting notes: summarize internal-but-not-secret content freely; scrub figures you are not allowed to share.
 - Photos and screenshots: check what is visible before they travel — a dashboard screenshot is a data dump.
+
+<KeyTakeaways
+  items={[
+    'Three buckets stay out of the chat box: secrets, personal data, and confidential material.',
+    'Scrub the rest in two moves: replace specific values, generalize the details that do not matter.',
+    'Treat anything you paste as leaving your building — classify first, then paste.',
+  ]}
+/>
 
 ## Next
 

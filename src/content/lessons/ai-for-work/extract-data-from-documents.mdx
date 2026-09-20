@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Extraction is not summarizing. You do not want readable prose about the contract — you want one row per contract with the same four values in the same four columns, each traceable to the sentence it came from. Where a summary compresses language, extraction **copies values and refuses to interpret them**.
 
@@ -43,6 +45,16 @@ For a folder, work in chunks: one document per request (or a batch of similar on
 
 A sizing tip from practice: keep each extraction batch small enough to sample in five minutes — six contracts, a dozen invoices. Beyond that, the spot-check quietly turns into a second job, and unverified tables are exactly the ones that get trusted by accident. Small, verified batches beat one big unchecked pull.
 
+<CheckUnderstanding
+  id="cu-wk-extract"
+  question="A model returns a converted date in the Term end column and a computed total row at the bottom. What does the discipline say?"
+  options={[
+    { text: 'Accept both — the source quote confirms the date, and arithmetic is deterministic', feedback: 'a quote shows what the document says; a converted date is an invented date, and model arithmetic drifts over many rows.' },
+    { text: 'Reject both: copy dates verbatim and take raw numbers so the spreadsheet does the sums', correct: true, feedback: 'copy, never compute — the source keeps the wording, and the calculator is the spreadsheet, not the model.' },
+    { text: 'Keep the total but rewrite the date yourself from the quote', feedback: 'fixing one cell by hand hides the rule that failed; re-run with a stricter instruction so the whole batch copies verbatim.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="assemble-a-document-extraction-prompt" />
@@ -52,6 +64,14 @@ A sizing tip from practice: keep each extraction batch small enough to sample in
 - Contracts: renewal dates, notice periods, obligations — with quotes.
 - Invoices and receipts: amounts and dates into the expense tracker.
 - Forms and applications: fields into a comparison sheet, `not stated` where the form is silent.
+
+<KeyTakeaways
+  items={[
+    'Name the columns first and demand one row per item, so the output has the shape you need.',
+    'Copy, never compute: a normalized date is an invented date, and totals belong to the spreadsheet.',
+    'Require a source quote per row and spot-check five rows; one drifted value condemns the batch.',
+  ]}
+/>
 
 ## Next
 

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 An AI answer comes from one of two places: the model's **memory** — patterns absorbed during training, frozen at its [training cutoff](/glossary/training-cutoff) — or **live sources** fetched right now by a search-connected tool. The words look identical either way, so before trusting any fact, ask which one you just got.
 
@@ -48,6 +50,16 @@ Before trusting a fact: **would this fact survive a year unchanged?** If yes, ge
 
 A closing habit that makes the distinction physical: when a fact matters, copy the source line into your own notes as you verify it. Notes that carry a pointer per fact are what you actually trust later — and the pointers make rechecking cheap when the world moves. Memory starts the work; sourced notes finish it.
 
+<CheckUnderstanding
+  id="cu-rs-search"
+  question="A search-connected tool answers with links attached. What has retrieval actually guaranteed?"
+  options={[
+    { text: 'That the facts are current, so the answer can be trusted', feedback: 'a page can be real and still not support the claim, and search results can be thin or misleading — currency is not verification.' },
+    { text: 'That the answer is checkable — not that it has been checked', correct: true, feedback: 'live sources give you openable pointers; comparing each one with the claim is still your move.' },
+    { text: 'That the model has stopped relying on its training memory', feedback: 'the two modes are not sealed off, and the words look identical either way — so ask which one produced the fact.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-when-search-changes-the-answer" />
@@ -57,6 +69,14 @@ A closing habit that makes the distinction physical: when a fact matters, copy t
 - Travel and logistics: schedules and entry rules change — search-connected only.
 - Software: ask for the version you use and confirm against [official docs](/learn/ai-foundations/models-vs-products) when commands read suspiciously new.
 - Concepts and writing: memory is fine; save the searches for facts with expiry dates.
+
+<KeyTakeaways
+  items={[
+    'An answer comes from frozen training memory or from live pages fetched just now.',
+    'Five-second test: would this fact survive a year unchanged? If not, require sources.',
+    'Retrieval makes an answer checkable; it does not make it checked.',
+  ]}
+/>
 
 ## Next
 

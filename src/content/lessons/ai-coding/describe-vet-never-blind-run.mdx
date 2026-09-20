@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Generated code is a draft from a fast stranger who will never be blamed for it. Three habits make it safe: **describe** what you want precisely, **vet** what you get before executing, and never **blind-run** — execute something you cannot explain. The middle verb is the one people skip, and it is the one that matters.
 
@@ -51,6 +53,16 @@ Run the script on a copy folder with a few fake files, including one with a tric
 
 If you cannot explain what a line does, you have exactly two honest options: ask for the explanation and keep re-reading until you can, or **shrink the task** until the whole script fits in your head. There is no third option where you run it anyway — that one is a bet, not a workflow.
 
+<CheckUnderstanding
+  id="cu-cd-vet"
+  question="Your draft script renames and moves files. What order does the lesson prescribe before it touches the real folder?"
+  options={[
+    { text: 'Run it on the real folder first — a dry-run only delays the same test', feedback: 'the dry-run is not a delay: it prints what would happen and catches the wrong lines before a single file moves.' },
+    { text: 'Dry-run first, test on a copy with a tricky name, then execute with a backup in place', correct: true, feedback: 'reading the intended actions costs minutes; destructive steps earn their way in one at a time, never as a batch.' },
+    { text: 'Trust the comments — if the draft says it was tested thoroughly, it is ready to run', feedback: 'comments are unsupported claims from a system that cannot have tested anything in your folder; the behavior is what you verify.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="vet-the-file-renaming-script" />
@@ -60,6 +72,14 @@ If you cannot explain what a line does, you have exactly two honest options: ask
 - Automation scripts: dry-run, copy-test, then execute — in that order, every time.
 - Snippets from anywhere: the checklist works on human-written and generated code alike.
 - Commands pasted from chats: same rules as code — read the destructive verbs first.
+
+<KeyTakeaways
+  items={[
+    'Vet before you execute: find the dangerous verbs, check paths, and distrust the comments.',
+    'Write the dry-run yourself, test on a copy, and keep a backup for the real run.',
+    'If you cannot explain a line, shrink the task — never run what you cannot explain.',
+  ]}
+/>
 
 ## Next
 

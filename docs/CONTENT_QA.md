@@ -52,6 +52,21 @@ Same automated gate suite + browser verification per batch (blocks, exercises, X
 | Glossary | 23 terms | **PASS** — every term links ≥1 lesson; definitions plain-language |
 | Assessment | 18 items / 6 tracks | **PASS** — one correct option per item, honest band copy, device-local results |
 
+## v1.1 waves — batch 3 (2026-09-20): teaching-block retrofit + demand wave + discovery assets
+
+Same gate suite, extended with two new automated rules (standards §11): **every published lesson ships
+≥1 interactive teaching block** and **closes with KeyTakeaways before the Next section** — both green
+across 62 lessons. Totals after this batch: **177 pages · 70 tests · 62 lessons · 63 exercises · 35 terms**.
+
+| Area | Units | Verdict |
+|---|---|---|
+| Foundations completed | FN09 multimodal-ai · FN10 training-vs-inference · FN11 tools-and-function-calling · FN12 what-an-agent-is | **PASS** — track now 12/12; exercises model-choice / find-the-problem / order-steps / model-choice; new terms multimodal, inference, function-calling, agent |
+| Workflows track opened | WF01 prompt-vs-workflow · WF02 map-a-workflow | **PASS** — evaluate-output + order-steps exercises; new term workflow; hub tagline and learn-hub card updated (“later wave” copy removed) |
+| Prompting wave | PR16 reusable-prompt-templates | **PASS** — demand-backed (autocomplete: “chatgpt prompt templates free download”); build-prompt exercise; PR11 chain updated |
+| Work wave | WK14 job-search-workflows | **PASS** — strongest unserved autocomplete pull (“ai cover letter generator free”, “tailor resume with ai”); fix-prompt exercise; evidence-first, no-exaggeration framing |
+| Retrofit | 28 MVP lessons | **PASS** — each received one CheckUnderstanding + KeyTakeaways (ids cu-pr/wk/rs/sf/cd-\*), questions mined from the lesson bodies, ids unique |
+| Discovery assets (GEO) | /faq hub (11 Q&A, FAQPage schema) · /llms.txt (generated from collections) · robots AI-crawler allow list | **PASS** — verified in dist + browser: FAQPage JSON-LD, canonical, 0 axe violations (WCAG A/AA) on /faq and three new lessons; llms.txt serves 62 lessons / 106 bullets |
+
 ## Known non-blockers
 
 - Rolldown logs a benign `use astro:head-inject` hint from MDX asset propagation; the directive is absent

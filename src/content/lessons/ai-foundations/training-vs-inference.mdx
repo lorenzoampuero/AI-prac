@@ -1,0 +1,97 @@
+---
+title: "Training vs inference: what chats change"
+description: "Your messages run inference — they do not retrain the model. Learn what happens to a conversation, and what “memory” features really store."
+track: ai-foundations
+order: 10
+level: intermediate
+estimatedMinutes: 5
+skills: ["training", "mental models"]
+prerequisites: ["ai-foundations/multimodal-ai"]
+learningOutcome: "Explain why a chat does not retrain a model, and what memory features store."
+class: evergreen
+sources: []
+seo:
+  intent: "does ai learn from my chats — training vs inference explained"
+  cluster: "A12"
+exercises: ["spot-the-training-myths"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Training is how a model's weights were set before you ever used it; [inference](/glossary/inference) is what happens each time you send a message. Your conversation runs inference — it does **not** retrain the model. Anything that feels like the assistant “learning” mid-chat is either the conversation still being in view, or a memory feature storing a note for later.
+
+## What your message actually does
+
+Your words are turned into [tokens](/glossary/token), added to the conversation's [context window](/glossary/context-window), and the model predicts a response from weights that were fixed at training time. That is the whole loop. Nothing is written back into the weights while you talk, so nothing you say can change how the model behaves for the next person — or for you, tomorrow, in a fresh chat.
+
+## What looks like learning (and what it is)
+
+- **“It remembered my name.”** Your name is still in the conversation. Ask in a brand-new chat and the effect disappears.
+- **“I told it to always answer in bullet points and it does.”** Custom instructions are text stored by the product and re-inserted into each new conversation. Useful — and editable evidence, not learning.
+- **“It says it saved this to memory.”** Some products keep a small store of notes and paste them into future chats. That is retrieval of stored text, not a changed model.
+- **“My data made it smarter.”** Providers may *choose* to collect conversations for future training rounds — but that is a policy decision written in their terms, not something your chat does automatically. It is a privacy question, not a mechanism, and it is worth reading the actual policy for the tool you use.
+
+<StepReveal
+  title="What happens to one message"
+  steps={[
+    "Your message is split into tokens and appended to the conversation's context.",
+    "The model predicts a response from weights that were fixed before you arrived.",
+    "The response returns; the conversation is stored as history by the product.",
+    "A fresh chat starts with an empty context — which is why continuity has to be re-supplied or stored on purpose.",
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Remember this for next time: I always want sources with every fact.”
+>
+> If the product has no memory feature, nothing is remembered. Next session starts blank, and the promise quietly expires the moment you close the tab.
+
+## A better example
+
+> **Ask:** “Store this preference where I can re-use it — or remind me to put it in my custom instructions.”
+>
+> Now continuity has a home you can see and edit: a saved instruction, a reusable template, or a note you paste into the next chat.
+
+## Why it works
+
+The distinction sounds academic until it changes behaviour. Knowing that context is the only memory in play tells you exactly what to do when continuity breaks: keep essential facts in the message, put standing rules in the product's instructions field, and treat “I will remember that” as a sentence about the conversation, not about the model. It also sharpens privacy questions: whether your conversations are used for future training is decided by the provider's policy, so read the policy — do not infer it from how the chat feels.
+
+<CheckUnderstanding
+  id="cu-fn-training"
+  question="You chatted with an assistant for an hour yesterday about a project. Today, in a new chat, it asks what you are working on. Why?"
+  options={[
+    { text: 'It forgot because your messages are never stored anywhere', feedback: 'storage and learning are different layers — the conversation may be saved in your history while the model’s weights stay untouched.' },
+    { text: 'The new chat starts with an empty context; yesterday’s text is not retrained into the model', correct: true, feedback: 'continuity comes from re-supplied text or a memory store — not from the weights, which do not change while you chat.' },
+    { text: 'The model unlearned the project overnight', feedback: 'there was never a moment where the weights held your project — context windows carry conversations, weights carry training.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="spot-the-training-myths" />
+
+## Transfer
+
+- Fresh chat, blank start: re-attach the brief, or use a saved instruction.
+- Standing rules (tone, format): put them where the product re-injects them automatically.
+- Essential facts: keep them in the message you send, not in a promise that they will be remembered.
+- Privacy questions: check the provider's actual policy before trusting a chat summary of it.
+
+<KeyTakeaways
+  items={[
+    'Training sets the weights; inference uses them. Conversations never change the weights.',
+    'Continuity comes from context, custom instructions or a memory store — all of it text, all of it editable.',
+    'Whether your data is used for future training is a policy question: read the policy, not the vibe.',
+  ]}
+/>
+
+## Next
+
+- Next lesson: [Tools and function calling](/learn/ai-foundations/tools-and-function-calling) — how an assistant can act outside the chat.
+- Related: [Context windows](/learn/ai-foundations/context-windows) covers what is actually in view.
+- Terms: [inference](/glossary/inference), [training cutoff](/glossary/training-cutoff) and [large language model](/glossary/large-language-model).

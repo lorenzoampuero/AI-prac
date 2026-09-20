@@ -66,6 +66,12 @@ it is genuinely useful.
 **Weekly spot-check (first month):** `site:getaipractice.site` plus a branded query on Google and Bing;
 compare incoming queries against the P1 clusters in `research/KEYWORD_UNIVERSE.md`; log surprises here.
 
+**Answer engines (GEO):** `/llms.txt` is generated from the content collections at build time — it can
+never drift, so there is nothing to maintain by hand. The `/faq` hub is the one manual surface: when
+Search Console shows question-shaped queries with no matching answer, add the answer **and** link the
+lesson that teaches it — never a second page competing with a lesson's intent. Robots explicitly allows
+the major AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, …) on top of the wildcard.
+
 ## Metrics policy
 
 - **Update 2026-09-20 — owner approved Vercel Web Analytics.** It ships gated to Vercel builds only

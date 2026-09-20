@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Context is everything the model needs to know that is not already in your request: **who** the result is for, **why** it matters, what is **already known**, and **what material** to work from. Without it, the model fills gaps with the average of everything it has seen — and that average is rarely your situation.
 
@@ -52,6 +54,16 @@ Every context sentence rewires the probabilities that follow. The model cannot i
 
 A quick audit for any draft prompt: can you point at the who, the why and the what-you-already-know? A missing "who" produces the wrong tone; a missing "why" produces the wrong depth; missing known facts produce questions you had already answered. Three lines restore all three — and the answers stop being generic.
 
+<CheckUnderstanding
+  id="cu-pr-context"
+  question="A 40-page dump buries your one instruction. What does this lesson say to change?"
+  options={[
+    { text: 'Add only what changes the answer — audience, purpose, knowns and material', correct: true, feedback: 'ten relevant lines beat a dump; everything in the window competes for attention, so summarize the rest.' },
+    { text: 'Repeat the instruction at the top and the bottom so it stands out', feedback: 'repetition does not fix dilution — bulk crowds the instruction out; selecting context does.' },
+    { text: 'Send the full document and add more tone instructions to compensate', feedback: 'tone does not rescue buried instructions — the fix is less material, better chosen.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-context-rich-prompt" />
@@ -61,6 +73,14 @@ A quick audit for any draft prompt: can you point at the who, the why and the wh
 - Asking for analysis: say what decision it feeds — insight changes shape.
 - Delegating writing: name the reader and the register before the topic.
 - Sensitive domains: state the constraint ("we cannot promise dates") — it survives into every draft.
+
+<KeyTakeaways
+  items={[
+    'Four context slots: audience, purpose, knowns, material.',
+    'Paste the material; do not describe it.',
+    'Add what changes the answer — everything else competes for the window.',
+  ]}
+/>
 
 ## Next
 

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 An [action item](/glossary/action-item) is one row — Action, Owner, Due date — and the entire value of the table sits in two rules: **every row comes from the notes**, and **anything missing becomes a visible gap**. A table full of guessed owners is worse than no table: it looks authoritative and spreads silent errors across the team.
 
@@ -55,6 +57,16 @@ The `unassigned` rows are the most useful cells in the table: they mark exactly 
 
 Close the loop after the meeting: send the table back to the room with one line of framing — "silence is disagreement". Now the unassigned rows get owners before they become surprises, and the table doubles as the meeting's record.
 
+<CheckUnderstanding
+  id="cu-wk-actions"
+  question="The notes say someone should check the contract, with no name attached. What belongs in the Owner cell?"
+  options={[
+    { text: 'The person who usually handles contracts — a plausible owner is better than an empty cell', feedback: 'a guessed owner looks authoritative and spreads a silent error across the team; the gap is the honest output.' },
+    { text: 'unassigned — the gap is a finding that shows where the meeting failed to assign the work', correct: true, feedback: 'visible gaps get owners before they become surprises; a plausible name would hide exactly what the table exists to surface.' },
+    { text: 'Leave it empty so the reader sees nothing was assigned', feedback: 'an empty cell is ambiguous — it can read as an oversight rather than a finding; the explicit marker makes the gap actionable.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="assemble-an-action-table-prompt" />
@@ -64,6 +76,14 @@ Close the loop after the meeting: send the table back to the room with one line 
 - Stand-ups: owner-grouped rows turn notes into a checklist.
 - Client calls: decisions rows become the follow-up email's backbone.
 - Personal notes: same columns, minus the ceremony.
+
+<KeyTakeaways
+  items={[
+    'Owners and dates come only from the notes; silence becomes unassigned or no date, not a guess.',
+    'One action per row, and keep actions, decisions and open questions in separate lists.',
+    'The unassigned rows are the table doing its job: they show where work has no owner.',
+  ]}
+/>
 
 ## Next
 

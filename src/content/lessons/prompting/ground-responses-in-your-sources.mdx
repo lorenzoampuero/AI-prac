@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Grounding means the answer comes from **material you supply** — not from what the model happens to remember. Instead of trusting the engine's training memory, you paste the source and constrain the answer to it. The payoff is enormous: every claim becomes checkable against a text you can hold side by side.
 
@@ -49,6 +51,16 @@ A warning that keeps it honest: grounding does not eliminate mistakes. Quotes ca
 
 Grounding scales as a habit, not just a trick: paste source, constrain to it, demand quotes, define the fallback, compare. Done for every high-stakes answer, it stops feeling like extra caution and starts feeling like speed — verification becomes reading a quote instead of re-reading a document. The one-line version for small questions: "answer only from the text I gave you."
 
+<CheckUnderstanding
+  id="cu-pr-grounding"
+  question="You paste a source and constrain the answer to it. Which extra line does the pattern require?"
+  options={[
+    { text: 'Quote one sentence per paragraph so the answer looks thorough', feedback: 'quotes are for tracing, not decoration — the pattern asks for the sentence behind each statement, which you compare against the source.' },
+    { text: 'If the text does not cover something, answer: not covered', correct: true, feedback: 'the fallback turns gaps into a visible signal — without it, missing coverage gets filled with confident invention.' },
+    { text: 'Answer from memory first, then check it against the source afterwards', feedback: 'memory-first is the ungrounded answer the lesson warns about — fluent and wrong in exactly the details that matter.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="spot-unsupported-policy-claims" />
@@ -58,6 +70,14 @@ Grounding scales as a habit, not just a trick: paste source, constrain to it, de
 - Contracts and policies: quote-first answers; anything unquoted is flagged for a human.
 - Research notes: same pattern against each paper — claim, quote, page.
 - Support macros: ground replies in the official policy text, never in vibes.
+
+<KeyTakeaways
+  items={[
+    'Paste the source, constrain to it, demand quotes, define the fallback.',
+    'Grounding does not make the model truthful; it puts errors where you can catch them.',
+    'Read the quotes against the source — quotation marks are not proof.',
+  ]}
+/>
 
 ## Next
 

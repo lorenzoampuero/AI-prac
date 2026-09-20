@@ -1,0 +1,23 @@
+{
+  "engine": "order-steps",
+  "title": "Order the workflow map",
+  "scenario": "Your team wants to automate a recurring client report: transcripts, CRM notes and a metrics sheet go in; a two-page summary goes out. Before anyone builds anything, you are mapping the workflow on one page.",
+  "task": "Order the moves so the map is drawn in a sequence that surfaces checks and failure paths before the build starts.",
+  "steps": [
+    "Name the output and its consumer — the artefact that leaves and who reads it.",
+    "List the inputs that must exist for that output, and the state they must arrive in.",
+    "Place the steps between them — one job per step, in the order the work moves.",
+    "Mark the joins: check that each step's output is exactly what the next step expects.",
+    "Add the checks: format validation, a rubric pass, and the human gate before the output ships.",
+    "Add the failure paths: missing input, low-confidence output, a failed step — and where each one goes."
+  ],
+  "hints": [
+    "Start from what leaves, not from what arrives: the consumer decides the format.",
+    "Checks are placed, not sprinkled — put each one at a specific join or gate."
+  ],
+  "explanation": "Drawing backwards works because the output defines everything else: once the consumer and format are fixed, the inputs and steps have a target to serve. Joins and checks come next so mismatches surface on paper instead of in production, and failure paths come last because they depend on knowing where the seams are. Skipping straight to steps produces a process that runs when nothing goes wrong — which is not a process.",
+  "skills": ["workflows", "process design"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-workflows/map-a-workflow"],
+  "draft": false
+}

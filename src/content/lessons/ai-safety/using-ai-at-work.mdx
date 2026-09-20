@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Using AI at work well comes down to a plan you write before you start: **what you paste, what never, what you verify, what you disclose**. Four lines, reused for every task. The plan is personal, but it answers to three masters: your employer's rules, your readers' trust, and your own name.
 
@@ -52,6 +54,16 @@ Three yeses — ship it. Any no — fix that step first. The test is quick, and 
 > **Verify:** every figure against its dashboard; every example fictionalized or cleared; numbers re-typed, not copied.
 > **Disclose:** change-log note that AI assisted the draft, plus a flag to the manager that no team policy exists yet.
 
+<CheckUnderstanding
+  id="cu-sf-work"
+  question="AI-assisted output is heading into something consequential at work. What does the lesson’s meeting test ask?"
+  options={[
+    { text: 'A disclosure note is enough — if the draft says AI assisted, the numbers have been covered', feedback: 'disclosure is the fourth line, not a substitute for verification: every figure, name and claim still gets checked against its source.' },
+    { text: 'Can you explain where each fact came from, defend the text, and be comfortable if the process were visible', correct: true, feedback: 'three yeses and it ships; any no means that step is fixed before the output goes anywhere.' },
+    { text: 'Your manager approved the draft, so the accountability for it transfers with the approval', feedback: 'whatever the tool contributed, the signature stays human — approval does not move responsibility, which is why the four lines exist.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="plan-your-usage-before-you-start" />
@@ -62,6 +74,14 @@ Three yeses — ship it. Any no — fix that step first. The test is quick, and 
 - Freelance or client work: version of the plan per client, agreed in writing.
 - Teams: share your plan as a starting point — local norms beat silent variation.
 
+<KeyTakeaways
+  items={[
+    'Four lines before you start: what you paste, what never, what you verify, what you disclose.',
+    'Verify every figure, name and claim against its source — the signature stays human.',
+    'No workplace policy is not a license: ask early and set a local norm with your team.',
+  ]}
+/>
+
 ## Next
 
-That closes the safety track — and the MVP curriculum: thirty-six lessons across foundations, prompting, research, work, coding and safety, each with practice. Keep going on the [practice floor](/practice), look terms up in the [glossary](/glossary), and revisit any track that felt thin. More tracks — images and workflows — are planned for the next phase.
+That closes the safety track. Sixty-two lessons now run across foundations, prompting, research, work, safety, coding, images and workflows — each with practice. Keep going on the [practice floor](/practice), look terms up in the [glossary](/glossary), and revisit any track that felt thin. The **[workflows track](/learn/ai-workflows)** continues the curriculum: start with [Prompt vs workflow](/learn/ai-workflows/prompt-vs-workflow).

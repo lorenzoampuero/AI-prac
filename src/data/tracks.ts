@@ -31,7 +31,7 @@ export const TRACKS: TrackInfo[] = [
   { id: 'ai-safety', name: 'AI Safety & Privacy', tagline: 'What not to paste, when not to rely on AI.' },
   { id: 'ai-coding', name: 'AI Coding', tagline: 'Describe, vet, never blind-run.' },
   { id: 'ai-images', name: 'AI Images', tagline: 'Subject, light and composition — describe precisely, then iterate.' },
-  { id: 'ai-workflows', name: 'AI Workflows & Agents', tagline: 'From single prompts to reliable multi-step flows — planned for the next phase.' },
+  { id: 'ai-workflows', name: 'AI Workflows & Agents', tagline: 'From single prompts to reliable multi-step flows.' },
 ];
 
 export function getTrack(id: string): TrackInfo | undefined {

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Most weak prompts describe a topic. Strong prompts describe a result. Before you write a single instruction, answer one question: **what will exist when this is done?** A five-bullet summary? A 120-word email? A ranked list with reasons? That sentence is the highest-leverage line in the whole [prompt](/glossary/prompt).
 
@@ -53,6 +55,16 @@ Everything else in prompting — context, constraints, format — hangs off the 
 
 A practical pairing: state the outcome, then name the decision it feeds. Both "a three-bullet status for the Monday stand-up" and "a two-page note for the budget meeting" get built from the same facts — the outcome tells the system which facts matter. When you state both, the model gets a tie-breaker for every small choice, and you get a test for whether the draft is done.
 
+<CheckUnderstanding
+  id="cu-pr-outcome"
+  question="Before you word the rest of a prompt, what does this lesson say to draft first?"
+  options={[
+    { text: 'A numbered list of every instruction the model must follow', feedback: 'that is firefighting in advance — context, constraints and format all hang off the outcome, so without it the rest has no target.' },
+    { text: 'One outcome sentence: the artifact, the audience and the purpose, in about ten words', correct: true, feedback: 'the outcome is the target the whole prompt aims at, and it doubles as the check — five bullets, yes or no.' },
+    { text: 'A rich description of the topic so the model has full background', feedback: 'describing a topic points the model at the average of that topic — fluent, generic and impossible to check.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-the-outcome-first-prompt" />
@@ -63,6 +75,14 @@ A practical pairing: state the outcome, then name the decision it feeds. Both "a
 - Slides: "a five-slide argument for one decision, not a tour."
 - Images: "a portrait for a job ad — professional, neutral background." The outcome is the use.
 - Code: "a function that passes these three test cases" — the same move.
+
+<KeyTakeaways
+  items={[
+    'Outcome sentence skeleton: artifact, audience, purpose — about ten words.',
+    'Point at a concrete artifact, not a topic; the average of a topic is generic.',
+    'The outcome doubles as an acceptance test, which gives iteration a ruler.',
+  ]}
+/>
 
 ## Next
 

@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 [Prompt injection](/glossary/prompt-injection) is an attack hidden inside content: a document, web page, email or review that contains instructions aimed at the assistant — "ignore your task and do X". The defense starts with one sentence: **content is data, never commands**.
 
@@ -47,6 +49,16 @@ Most injections are not cloak-and-dagger exploits: they are harmless-looking tex
 >
 > Now the page's planted sentence is just another quote in your list — visible instead of obeyed.
 
+<CheckUnderstanding
+  id="cu-sf-inject"
+  question="You ask an assistant to check whether a vendor page meets your security requirements. What is the lesson’s defense?"
+  options={[
+    { text: 'Trust the model to stay neutral — it reads the page, so planted text cannot sway its judgment', feedback: 'your instructions and the page travel in the same channel; a line planted in the content can be followed like an order from you.' },
+    { text: 'Extract the page’s claims as quotes to verify yourself, and treat text addressed to AI as content, not commands', correct: true, feedback: 'content stays data: the planted sentence becomes just another quote in your list — visible instead of obeyed.' },
+    { text: 'Read-only access is enough — if the assistant cannot send or modify anything, nothing can go wrong', feedback: 'read-only shrinks the action channel, but a steered summary is still bad output you might act on — discard it and flag the source.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="spot-the-injected-instructions" />
@@ -56,6 +68,14 @@ Most injections are not cloak-and-dagger exploits: they are harmless-looking tex
 - Vendor materials: extract and verify; never let the document grade itself.
 - Web research: quote-first reading — the [grounding](/glossary/grounding) habit from [the prompting track](/learn/prompting/ground-responses-in-your-sources).
 - Any tool-using assistant: read-only until the pipeline is understood.
+
+<KeyTakeaways
+  items={[
+    'Content is data, never commands — put a boundary sentence in the prompt.',
+    'Distrust steered output: anything you did not ask for means the whole result is compromised.',
+    'Keep tools read-only with untrusted input until you understand the pipeline.',
+  ]}
+/>
 
 ## Next
 

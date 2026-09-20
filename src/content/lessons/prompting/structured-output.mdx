@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 [Structured output](/glossary/structured-output) is output shaped for a **destination** — a spreadsheet column, a checklist, a field list your tool can read. Most AI answers are written for a human reader: fluent prose you have to re-type before it is useful. Asking for a fixed shape changes that. And you do not need to be a programmer: you need to name the shape.
 
@@ -54,6 +56,16 @@ Ask for **the first two rows only** and check the shape. Fixing a column name co
 
 Models are pattern machines: a named shape plus one example row is the strongest pattern signal you can give, and it leaves nothing to improvise. Free-form requests leave the structure to chance; fixed fields leave it to you.
 
+<CheckUnderstanding
+  id="cu-pr-structured"
+  question="Before extracting a hundred invoices, what does this lesson say to test first?"
+  options={[
+    { text: 'Ask for the first two rows only and check the shape', correct: true, feedback: 'fixing a column name costs one follow-up; re-deriving two hundred rows costs the afternoon.' },
+    { text: 'Run the full batch, then fix the columns afterwards', feedback: 'that is exactly the afternoon the lesson warns about — shape errors are cheap before the run and expensive after.' },
+    { text: 'Add a friendly opening sentence so the model stays engaged', feedback: 'commentary around the data breaks the tools that read it — the recipe says output only the table.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="assemble-a-structured-output-prompt" />
@@ -63,6 +75,14 @@ Models are pattern machines: a named shape plus one example row is the strongest
 - Meeting notes → an action table with Owner and Due columns.
 - Job postings → keyword fields per posting for a comparison sheet.
 - Any "turn this into something I can paste" request: answer with the destination format, not a nicer paragraph.
+
+<KeyTakeaways
+  items={[
+    'Name every column before asking for rows, and show one example row.',
+    'Output only the table — extra commentary breaks importers.',
+    'Decide what happens to missing values, then test the shape on two rows.',
+  ]}
+/>
 
 ## Next
 

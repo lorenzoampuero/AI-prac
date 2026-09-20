@@ -1,0 +1,102 @@
+---
+title: "What an agent is (and isn't)"
+description: "Agents run a model in a loop — goal, steps, tools, results. Learn the difference between a chat, a workflow and a true agent, and when a job needs one."
+track: ai-foundations
+order: 12
+level: intermediate
+estimatedMinutes: 6
+skills: ["agents", "mental models"]
+prerequisites: ["ai-foundations/tools-and-function-calling"]
+learningOutcome: "Classify a task as chat, workflow or agent before building anything."
+class: evergreen
+sources: []
+seo:
+  intent: "what are ai agents — chat vs workflow vs agent, plainly"
+  cluster: "G2"
+exercises: ["pick-the-right-shape"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+An [agent](/glossary/agent) is a system where the model runs in a loop: given a goal, it decides the next step, calls tools, reads the results, and keeps going until it stops or hands back. A chat answers once. A [workflow](/glossary/workflow) follows a sequence you fixed in advance. An agent chooses its own steps — and that choice is both its value and its cost.
+
+## Three shapes, three jobs
+
+- **Chat.** One answer, then you decide what happens next. Right for questions, drafts and thinking partners.
+- **Workflow.** You author the steps; the model performs the steps that need language. Right when the path is known: extract these fields, summarise this document, classify by these rules.
+- **Agent.** The model picks the path toward a goal you defined. Right when the path is genuinely unknown — investigation, open-ended research — and the domain tolerates exploration with review.
+
+Most “agent” marketing describes a workflow with a chat in front. That is not a criticism: when the path is known, a workflow is cheaper, faster and testable, and nobody needs to supervise a loop that does not exist.
+
+## What a loop needs before you build it
+
+1. **A bounded goal.** “Reduce churn” is a department, not a goal. “Find last month's cancellations concentrated in one segment and summarise the common reasons” is a goal.
+2. **A stop condition.** Time, steps, or a cost ceiling. Loops without exits burn budget politely.
+3. **A budget you would defend.** Every step can be a tool call; the bill is the loop's length.
+4. **Approval points on writes.** Anything that sends, deletes or commits waits for a human — the same rule as any [tool call](/glossary/function-calling), now repeated inside a loop.
+
+<StepReveal
+  title="Inside one agent step"
+  steps={[
+    "The goal arrives — a sentence, plus any constraints and a budget.",
+    "The model picks the next step and proposes a tool call to take it.",
+    "The tool runs and returns a result; the model reads it and decides what it means.",
+    "The loop repeats — new step, new result — until the goal is met, the budget is spent, or the agent stops and asks.",
+    "The review gate: a human checks the writes and the final answer before anything leaves the system.",
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Build me an agent that handles my inbox.”
+>
+> Which mail, handled how, replying as whom, stopping when? With no goal, no stop condition and no approval gate, you have delegated your correspondence to an enthusiastic intern with no memory of what matters.
+
+## A better example
+
+> **Ask:** “Loop over unread mail from known clients. Classify each into one of five queues. Draft replies for the simplest two queues, send nothing, stop after twenty messages or ten minutes, and hand me the list.”
+>
+> Same assistant, same tools — but the loop now has an exit, a boundary and a review step, and you can test it on a quiet Tuesday.
+
+## Why it works
+
+Deciding the shape *before* choosing the tools keeps problems small. Known path plus language work equals workflow; unknown path plus a checkable goal equals agent-shaped; thinking together equals chat. The classification also tells you where the risks are: workflows fail at their edges, agents fail at their priorities, and chats fail when you ask them to be something they are not.
+
+<CheckUnderstanding
+  id="cu-fn-agents"
+  question="Which of these jobs is the honest candidate for an agent — a system that chooses its own steps?"
+  options={[
+    { text: 'Pulling three fixed fields from every incoming invoice into the ledger', feedback: 'the path is known and the output is checkable — a workflow does this more cheaply and predictably, with no supervision.' },
+    { text: 'Investigating why cancellations spiked in one region last month, from reports, surveys and support notes', correct: true, feedback: 'that is the agent-shaped one: the path is unknown, the next step depends on what the last one found — and it needs a budget and a human review at the end.' },
+    { text: 'Translating a product page into five languages', feedback: 'one input, one output, no decisions to make along the way — that is a prompt, not a loop.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="pick-the-right-shape" />
+
+## Transfer
+
+- Before “can we build an agent?”: ask whether the path is known. If yes, design the workflow instead.
+- Open-ended research: bound it with a question, a budget and a stopping rule, then review the output.
+- Any loop that writes: every write needs a gate, and the gate needs a human.
+- Dashboards and reports: fixed steps, fixed template — workflow territory, every time.
+
+<KeyTakeaways
+  items={[
+    'Chat answers once; a workflow follows your fixed sequence; an agent chooses its own steps.',
+    'Agents are for unknown paths — when steps are known, a workflow is cheaper and testable.',
+    'Every loop needs a bounded goal, a stop condition, a budget and a human gate on writes.',
+  ]}
+/>
+
+## Next
+
+- Next stop: the [workflows track](/learn/ai-workflows) opens with [Prompt vs workflow](/learn/ai-workflows/prompt-vs-workflow) — turning a one-off ask into a repeatable process.
+- Related: [When not to rely on AI](/learn/ai-safety/when-not-to-rely-on-ai) applies the same judgment to consequences.
+- Terms: [agent](/glossary/agent), [workflow](/glossary/workflow) and [function calling](/glossary/function-calling).

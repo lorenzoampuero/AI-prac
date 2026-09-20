@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, faqJsonLd } from '../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+
+// Answer-first, one honest paragraph per question, then a link to the lesson that goes deep.
+// Kept deliberately short: the FAQ answers the question, the lesson teaches the skill.
+interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+  links: { href: string; label: string }[];
+}
+
+const faqs: FaqItem[] = [
+  {
+    id: 'verify-ai-answer',
+    question: 'How do I verify an AI answer before I rely on it?',
+    answer:
+      'Cross-check the claim against at least two sources that do not share the same origin, and open every citation it gives you. Fluency is not evidence — a wrong answer can read exactly as smoothly as a right one, so the check is always about the source, never about the confidence of the prose.',
+    links: [
+      { href: '/learn/ai-research/cross-check-answers', label: 'Cross-check AI answers' },
+      { href: '/learn/ai-research/inspect-the-citations', label: 'Inspect the citations' },
+    ],
+  },
+  {
+    id: 'why-ai-makes-things-up',
+    question: 'Why does AI make things up?',
+    answer:
+      'Because it predicts plausible text, not truth. A fabricated price and a correct price are produced the same way, so the model has no internal alarm that fires when a detail is invented — which is why grounding answers in real sources and checking specifics is a habit rather than a patch.',
+    links: [
+      { href: '/learn/ai-foundations/why-ai-makes-things-up', label: 'Why AI makes things up' },
+      { href: '/learn/prompting/ground-responses-in-your-sources', label: 'Ground responses in your sources' },
+    ],
+  },
+  {
+    id: 'does-ai-learn-from-chats',
+    question: 'Does AI learn from my chats?',
+    answer:
+      'Not in the sense people usually mean: a conversation runs inference against weights that were fixed at training time, so nothing you type is written back into the model. Memory features store short notes and re-insert them, and whether a provider collects conversations for future training is a policy question you should read in its terms.',
+    links: [
+      { href: '/learn/ai-foundations/training-vs-inference', label: 'Training vs inference' },
+      { href: '/learn/ai-safety/what-not-to-paste', label: 'What not to paste' },
+    ],
+  },
+  {
+    id: 'better-prompt',
+    question: 'How do I write a better prompt?',
+    answer:
+      'State the outcome you want, add the context that changes the answer, set the constraints, and say what the output should look like. If the result is still wrong, improve it from the output instead of re-rolling — targeted feedback beats another lucky draw.',
+    links: [
+      { href: '/learn/prompting/write-clear-instructions', label: 'Write clear instructions' },
+      { href: '/learn/prompting/iterate-from-the-output', label: 'Iterate from the output' },
+      { href: '/learn/prompting/reusable-prompt-templates', label: 'Reusable prompt templates' },
+    ],
+  },
+  {
+    id: 'numbers',
+    question: 'Can I trust AI with numbers and calculations?',
+    answer:
+      'Not on its own. Models generate numbers as text, so every figure is a draft: recompute it yourself, ask for the steps so the reasoning is visible, and sanity-check the units and the order of magnitude before the number travels any further.',
+    links: [{ href: '/learn/ai-research/check-the-numbers', label: 'Check the numbers' }],
+  },
+  {
+    id: 'what-not-to-paste',
+    question: 'What should I never paste into an AI chat?',
+    answer:
+      'Credentials, other people’s personal data, and anything your organisation classifies as confidential. Redact first — replace names, account numbers and client details with placeholders — and only then start the task, because a paste you regret cannot be un-pasted.',
+    links: [
+      { href: '/learn/ai-safety/what-not-to-paste', label: 'What not to paste' },
+      { href: '/glossary/data-classification', label: 'Data classification' },
+    ],
+  },
+  {
+    id: 'excel-formulas',
+    question: 'Can AI write my Excel formulas?',
+    answer:
+      'Yes — and it works best when you describe the structure (columns, types, example row) and the result you want, then test the formula on a copy of the sheet. Describe the structure, never paste real rows, and ask it to state its assumptions.',
+    links: [
+      { href: '/learn/ai-for-work/spreadsheets-describe-dont-guess', label: 'Spreadsheets: describe, don’t guess' },
+    ],
+  },
+  {
+    id: 'cv-cover-letter',
+    question: 'Can AI write my CV or cover letter?',
+    answer:
+      'Yes, and it stays honest if you supply an evidence bank and forbid invention. Map each requirement in the posting to real evidence, mark the gaps as gaps, and check the draft for scope upgrades — “led” where you contributed is the sentence an interviewer will ask about.',
+    links: [{ href: '/learn/ai-for-work/job-search-workflows', label: 'Job-search workflow' }],
+  },
+  {
+    id: 'what-are-agents',
+    question: 'What are AI agents, in plain terms?',
+    answer:
+      'A system where the model runs in a loop: it decides a step, calls a tool, reads the result and continues toward a goal you defined. Chats answer once; workflows follow a fixed sequence; agents choose their own steps — which is why they need a budget, a stop condition and a human gate on anything that writes.',
+    links: [
+      { href: '/learn/ai-foundations/what-an-agent-is', label: 'What an agent is (and isn’t)' },
+      { href: '/learn/ai-workflows/prompt-vs-workflow', label: 'Prompt vs workflow' },
+    ],
+  },
+  {
+    id: 'generated-code',
+    question: 'Is AI-generated code safe to run?',
+    answer:
+      'Only after you have read it and understood what it does. Treat generated code as a draft from a fast contractor: check the edge cases, look for destructive commands, prefer a dry run or a copy of the data, and never run something you cannot explain.',
+    links: [
+      { href: '/learn/ai-coding/describe-vet-never-blind-run', label: 'Describe, vet, never blind-run' },
+      { href: '/glossary/dry-run', label: 'Dry run' },
+    ],
+  },
+  {
+    id: 'which-tool',
+    question: 'Which AI tool should I use?',
+    answer:
+      'Match the tool to the job instead of chasing rankings: what kind of material goes in, how much reasoning the task needs, and what privacy rules apply to the data. The same site lesson explains the dimensions — capability, mode and data handling — that actually decide the answer.',
+    links: [
+      { href: '/learn/ai-foundations/models-vs-products', label: 'Models vs products' },
+      { href: '/learn/ai-foundations/fast-vs-reasoning-models', label: 'Fast vs reasoning models' },
+    ],
+  },
+];
+
+const structuredData = [
+  breadcrumbJsonLd(
+    [
+      { name: 'Home', path: '/' },
+      { name: 'Questions', path: '/faq' },
+    ],
+    origin,
+  ),
+  faqJsonLd(
+    faqs.map((item) => ({ question: item.question, answer: item.answer })),
+    origin,
+  ),
+];
+---
+
+<BaseLayout
+  title="AI questions, answered"
+  description="Short, honest answers to the AI questions people actually search for — verifying answers, hallucinations, privacy, agents, cover letters and more — each linked to a full lesson."
+  structuredData={structuredData}
+>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Questions</li>
+    </ol>
+  </nav>
+
+  <h1>AI questions, answered</h1>
+  <p class="lede">
+    Straight answers to the AI questions people actually search for, each one linked to the lesson
+    that teaches the skill. No account, no hype — and if an answer here is not enough, the linked
+    lesson is where the practice lives.
+  </p>
+
+  <div class="faq-list">
+    {
+      faqs.map((item) => (
+        <section class="faq-item" aria-labelledby={item.id}>
+          <h2 id={item.id}>{item.question}</h2>
+          <p>{item.answer}</p>
+          <p class="meta-line">
+            Go deeper:{' '}
+            {item.links.map((link, index) => (
+              <>
+                {index > 0 && ' · '}
+                <a href={link.href}>{link.label}</a>
+              </>
+            ))}
+          </p>
+        </section>
+      ))
+    }
+  </div>
+
+  <p class="meta-line" style="margin-top: var(--space-5);">
+    Prefer to find out where you stand? Take the <a href="/assessment">skills check</a>, or start the
+    <a href="/learn">curriculum</a> from the top.
+  </p>
+</BaseLayout>

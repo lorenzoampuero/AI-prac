@@ -112,3 +112,24 @@ export function websiteJsonLd(input: { name: string; description: string; path: 
     url: new URL(input.path, origin).href,
   };
 }
+
+/** FAQ pages are genuinely question-shaped: every entry stands alone and links a lesson for depth. */
+export function faqJsonLd(
+  items: { question: string; answer: string }[],
+  origin: URL,
+  path = '/faq',
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+    url: new URL(path, origin).href,
+  };
+}

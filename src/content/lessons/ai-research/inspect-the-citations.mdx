@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A citation is a claim about a source — and like any claim it can be wrong. Inspecting citations means opening the source and confirming two things: **it exists**, and **it says what the answer says it says**. Three failure patterns cover most of what you will find.
 
@@ -51,6 +53,16 @@ A citation is a claim about a source — and like any claim it can be wrong. Ins
 
 When output will be reused — published, forwarded, put in a deck — the citations are your first stop, not the prose. Quote-first answers make this cheap: the quote is the claim, and the check is comparing it with the source. That is the same move as [grounding](/learn/prompting/ground-responses-in-your-sources), pointed at someone else's sources instead of yours.
 
+<CheckUnderstanding
+  id="cu-rs-citations"
+  question="A citation in an answer opens a real page. What does the lesson say still has to be checked?"
+  options={[
+    { text: 'Nothing — a live page means the citation is verified', feedback: 'links can be real while the claim misreads them; the check is the text, not the link.' },
+    { text: 'Whether the page actually says what the answer claims it says', correct: true, feedback: 'existence is step one; the load-bearing check is whether wording, number and direction match.' },
+    { text: 'That the source exists — passing the title search clears the citation', feedback: 'findability is only failure one of three; the source must also say what is claimed and be strong enough to carry it.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="inspect-the-suspicious-citations" />
@@ -60,6 +72,14 @@ When output will be reused — published, forwarded, put in a deck — the citat
 - Articles and briefs: no specific claim ships without a findable source behind it.
 - Health, law and money: every citation gets opened, especially when the answer reads beautifully.
 - Someone else's AI-assisted draft: run the three failure patterns over it before you co-sign.
+
+<KeyTakeaways
+  items={[
+    'Open the source: does it exist, and does it say what the answer claims?',
+    'Search the exact title or quote — an unfindable source is a non-source.',
+    'A working link is not proof — compare the wording, number and direction with the source.',
+  ]}
+/>
 
 ## Next
 

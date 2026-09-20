@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A clear instruction says **what to do, for whom, and what good looks like** — in words a colleague could follow without asking you a single question. Most "the AI misunderstood me" stories are not model problems; they are instructions missing load-bearing walls.
 
@@ -57,6 +59,16 @@ Instructions narrow the space of plausible [tokens](/glossary/token) — that is
 
 One last test before sending: read your instruction as a skeptic. "Summarize briefly" — how would anyone prove you wrong? "Summarize in five bullets, one per section, no adjectives" — now the output either matches or it does not, and the next round tells you which word to tighten. Instructions you cannot audit are wishes; the auditability is what turns them into instructions.
 
+<CheckUnderstanding
+  id="cu-pr-instructions"
+  question="Your prompt asks for five changes in one sentence and gets five half-done ones. What fix does the lesson teach?"
+  options={[
+    { text: 'Split it into one job per instruction, stated so a stranger could check it', correct: true, feedback: 'five stacked requests become five half-done requests; separated, each job is countable and checkable.' },
+    { text: 'Keep the stack and add a polite opening so the model tries harder', feedback: 'politeness does not clear overload — the model still has to guess which of five jobs matters most.' },
+    { text: 'Keep only the two easiest requests so the prompt stays manageable', feedback: 'that drops decisions you still need — the cure for overload is splitting the jobs, not shrinking the brief.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="fix-the-boss-email-prompt" />
@@ -66,6 +78,14 @@ One last test before sending: read your instruction as a skeptic. "Summarize bri
 - Any "improve this" request: replace the verb with a countable one.
 - Multi-part wishes: split into separate instructions — they are separate decisions.
 - The stranger test before sending: would someone with zero context produce the right thing?
+
+<KeyTakeaways
+  items={[
+    'Two failure modes: vagueness and overload, both from missing specifics.',
+    'One job per instruction, stated so a stranger could check it.',
+    'Vague words remove almost nothing; countable requirements remove almost everything else.',
+  ]}
+/>
 
 ## Next
 

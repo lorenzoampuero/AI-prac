@@ -1,0 +1,48 @@
+{
+  "engine": "build-prompt",
+  "title": "Build the template",
+  "scenario": "Your support team reads the week's help-desk conversations every Monday and sends a short digest to product. The prompt that worked last week was improvised in a hurry; this week you are turning it into a template the whole team can run.",
+  "task": "Fill the five template slots — job, inputs, fixed rules, output shape and check line — then compare with the reference version.",
+  "fields": [
+    {
+      "id": "job",
+      "label": "The job the template does, in one sentence",
+      "placeholder": "Summarise this week's support conversations into a product-facing digest of recurring problems…",
+      "required": true
+    },
+    {
+      "id": "inputs",
+      "label": "Named slots for what changes (and the state it arrives in)",
+      "placeholder": "[WEEK_START]-[WEEK_END] and <<<CONVERSATIONS>>> — pasted as one block, one conversation per section…",
+      "required": true
+    },
+    {
+      "id": "rules",
+      "label": "Fixed rules — the constraints that must not change between uses",
+      "placeholder": "Never invent volume numbers; group by problem, not by customer; drop anything mentioned only once…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "The output shape the consumer needs",
+      "placeholder": "Five bullets max; each bullet: problem → frequency described in words → one representative quote…",
+      "required": true
+    },
+    {
+      "id": "check",
+      "label": "The check line the model runs before answering",
+      "placeholder": "If a section is too thin to judge, say so in one line instead of generalising…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "Fixed text is what you would correct a new teammate on; slots are what they would ask you for.",
+    "The check line names the failure you are most afraid of: invented numbers, guessed frequency, generalised mush."
+  ],
+  "explanation": "A working template separates the two kinds of text: rules you would defend in review, and inputs that change weekly. Slots make missing data visible, the format line protects the reader, and the check line turns your worst failure mode into a stated instruction. Fill it once this way and the Monday digest stops depending on who is typing.",
+  "skills": ["prompting", "templates", "support"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/reusable-prompt-templates"],
+  "sampleSolution": "Job: turn one week of support conversations into a product-facing digest of recurring problems, with evidence. Inputs: [WEEK_START] to [WEEK_END], and <<<CONVERSATIONS>>> pasted as one block, one conversation per section, each starting with its date. Fixed rules: group by product problem, never by customer; include a problem only if it appears in three or more conversations; quote at most twenty words verbatim per problem; never state or estimate usage numbers — describe frequency as “several”, “a handful”, “widespread”; if the block is missing sections or unreadable, say so instead of summarising around it. Output: five bullets maximum, each in the shape “problem → observed frequency described in words → one representative quote with date”; end with a one-line “Not covered this week:” note when the input was incomplete. Check line: before answering, verify every bullet quotes the conversation block and that no number appears that is not a date or a quote.",
+  "draft": false
+}

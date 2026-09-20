@@ -1,0 +1,103 @@
+---
+title: "Tools and function calling, simply"
+description: "An assistant cannot open your calendar — but it can ask a tool to. Learn how the tool-call loop works, where permissions live, and where a confirmation gate belongs."
+track: ai-foundations
+order: 11
+level: intermediate
+estimatedMinutes: 5
+skills: ["tools", "mental models"]
+prerequisites: ["ai-foundations/training-vs-inference"]
+learningOutcome: "Explain how an assistant uses tools, and where the approval gate belongs."
+class: evergreen
+sources: []
+seo:
+  intent: "how ai uses tools — function calling explained for beginners"
+  cluster: "G4"
+exercises: ["order-the-tool-call"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+[Function calling](/glossary/function-calling) is how an assistant does something beyond writing text: it asks the surrounding software to run a named tool — check a calendar, look up an order, send a message — and then continues with the real result. The model **proposes** the call; your system decides whether it runs. Permissions and confirmation live on that second side, which is exactly where you want them.
+
+## The loop, in full
+
+1. You ask something the chat cannot answer from its own text: “Is the studio free at 15:00?”
+2. The model proposes a tool call — which tool, with which arguments (studio, date, time).
+3. The surrounding system checks whether that tool and those arguments are allowed at all.
+4. The tool runs and returns a result: free, busy until 14:30, or an error.
+5. The model answers using the returned result — not from memory of what calendars usually do.
+
+Reads and writes are not the same animal. A read fails quietly; a write changes the world. Sending an email, deleting a file, moving a booking: each needs a gate before execution, because a wrong argument that reaches a real system is no longer a draft.
+
+## Where the risk sits
+
+- **Wrong parameters.** The model may propose the wrong date, the wrong recipient, the wrong file — fluently.
+- **Untrusted text turning into instructions.** If a tool reads a document or a web page, anything inside it is potential instruction. That is the [prompt injection](/glossary/prompt-injection) problem, and it gets sharper the moment tools can act.
+- **Silent success.** “Done!” is the model's summary, not proof. The check is the tool's own result — or a [dry run](/glossary/dry-run) that lists what would happen before anything happens.
+
+## A bad example
+
+> **Ask:** “Clean up the duplicates in our CRM and email the team a summary.”
+>
+> One sentence, two writes and no review step. Wrong matches become deletions; an inaccurate summary becomes the team's record. The fluent version of this instruction is exactly the one that does the most damage.
+
+## A better example
+
+> **Ask:** “List candidate duplicate companies with the reason each pair was flagged. Do not delete anything. After I confirm the list, draft the team summary.”
+>
+> Now the first pass is a read that produces evidence for a human decision — and the write only happens after a specific yes.
+
+## Why it works
+
+Splitting propose from execute turns “trust the assistant” into “review a proposal”. The model is genuinely good at forming the call: tool name, arguments, sensible defaults. It is not the right place for judgment about consequences, because it does not know your policy, your margins or what a mistaken deletion costs. Keep the model on proposal duty and yourself on approval duty, and the whole interface becomes a queue of reviewable actions instead of a set of irreversible bets.
+
+<StepReveal
+  title="From question to action"
+  steps={[
+    "You ask for something the model cannot answer from the conversation alone.",
+    "The model proposes a tool call — tool name, arguments, and why.",
+    "The system checks permission: is this tool allowed, for this user, with these arguments?",
+    "The tool executes and returns a real result — or an error the model must handle honestly.",
+    "The model answers from the result; anything that writes to the world passes a human confirmation first.",
+  ]}
+/>
+
+<CheckUnderstanding
+  id="cu-fn-tools"
+  question="You are asked to set up an assistant that can move bookings in a shared calendar. Which design keeps the useful part and the risk contained?"
+  options={[
+    { text: 'Let it move bookings directly — speed is the whole point', feedback: 'irreversible writes with no review turn every wrong argument into a real, embarrassing booking. Speed is not worth deleting the gate.' },
+    { text: 'It proposes a specific move with details, a human confirms, then the tool executes and reports the result', correct: true, feedback: 'proposal, gate, execution, report — each step visible, and the model never decides consequences.' },
+    { text: 'No tools at all — the assistant can just explain how to move the booking', feedback: 'that removes the capability instead of the risk; with a confirmation gate, the useful version is safe to ship.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="order-the-tool-call" />
+
+## Transfer
+
+- Calendar and email: propose then confirm; never auto-send on the first run.
+- Orders and CRM: reads first, writes gated; keep a log of what the tool actually returned.
+- Files: prefer a dry run that lists affected files before a rename or delete.
+- Untrusted sources plus tools: treat document or web content as data, never as instructions.
+
+<KeyTakeaways
+  items={[
+    'The model proposes tool calls; your system decides whether they run.',
+    'Reads can be open; writes need a confirmation gate and a visible result.',
+    '“Done!” is a summary, not proof — the tool’s returned result is the evidence.',
+  ]}
+/>
+
+## Next
+
+- Next lesson: [What an agent is](/learn/ai-foundations/what-an-agent-is) — what changes when the loop keeps going on its own.
+- Related: [Prompt injection](/learn/ai-safety/prompt-injection-simply) shows why untrusted text and live tools are a dangerous pair.
+- Terms: [function calling](/glossary/function-calling), [dry run](/glossary/dry-run) and [prompt injection](/glossary/prompt-injection).
