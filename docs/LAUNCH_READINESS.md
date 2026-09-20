@@ -53,6 +53,15 @@ redirect), then choose the hosting target (any static host/CDN works — the out
   repo.
 - Manual dashboard deploys/redeploys are unaffected; automatic deploys need the attributed author.
 
+- **Deployment Protection (Vercel Authentication) is active on the project** and gates every generated
+  URL (`*.vercel.app`) — production included — behind a Vercel login (observed externally 2026-09-20:
+  anonymous fetches receive the login page, so content cannot be verified from outside while it is on).
+  Launch setting: **Standard Protection** (Project → Settings → Deployment Protection) — previews and
+  generated URLs stay gated, while the production custom domain `getaipractice.site` is public. If the
+  scope reads **All Deployments**, the public site would also show a login — change it before launch.
+- Consequence: post-deploy checks run against `https://getaipractice.site`; the `*.vercel.app` URL
+  staying login-gated under Standard Protection is intended.
+
 ## Post-launch verification (owner-owned, day 1–7)
 
 - Search Console: verify ownership, submit `sitemap-index.xml`, check Pages report for 200s (expect 108).
