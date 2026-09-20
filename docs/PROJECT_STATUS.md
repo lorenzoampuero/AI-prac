@@ -1,6 +1,6 @@
 # PROJECT STATUS — AI Practice (interactive AI-literacy platform)
 
-**Last updated:** 2026-09-19 (**MVP + all gates complete — Gates 0–11 done; post-launch loop documented**) · **Status vocabulary:** DONE (implemented) · TESTED (verified by execution) · PARTIAL · BLOCKED · NOT STARTED
+**Last updated:** 2026-09-19 (**MVP complete · polish pass done — og:image, `/privacy`, every lesson ≥460 words; 50 tests / 109 pages / sitemap 108 URLs**) · **Status vocabulary:** DONE (implemented) · TESTED (verified by execution) · PARTIAL · BLOCKED · NOT STARTED
 **Rule applied:** nothing says TESTED unless it was actually executed and observed in this session.
 
 ---

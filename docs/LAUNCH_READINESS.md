@@ -41,7 +41,7 @@ requires the owner's explicit approval (master-brief constraint).**
 
 ## Post-launch verification (owner-owned, day 1–7)
 
-- Search Console: verify ownership, submit `sitemap-index.xml`, check Pages report for 200s (expect 107).
+- Search Console: verify ownership, submit `sitemap-index.xml`, check Pages report for 200s (expect 108).
 - Render check: paste 3 URLs into a link preview/debugger (OG tags) and one AI-search style query to see
   indexability.
 - Re-run `node scripts/audit-dist.mjs` against the produced build for a final artifact record.
@@ -58,7 +58,4 @@ of deploys: clearing/reverting the site never destroys visitor data, and no visi
   configuration bug — step 4 above exists to catch exactly that.
 - Hostile-storage browsers: progress/assessment saving degrades silently by design (features work, XP is
   just not remembered).
-- **Monetization is out of scope for launch.** Before any AdSense submission (later, with approval):
-  add a privacy-policy page, decide the cookie/consent approach, prepare `ads.txt` once an account exists,
-  and re-run the anti-doorway audit against AdSense policy expectations (original content — already
-  enforced by the registry tests).
+- **Monetization is out of scope for launch.** Before any AdSense submission (later, with approval): the privacy-policy page (**already shipped at `/privacy`**) gets its contact channel added at launch, decide the cookie/consent approach, prepare `ads.txt` once an account exists, and re-run the anti-doorway audit against AdSense policy expectations (original content — already enforced by the registry tests).

@@ -31,6 +31,11 @@ const canonical = new URL(Astro.url.pathname, origin);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={new URL('/og.png', origin).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE_NAME} — practical AI skills, one exercise at a time`} />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {structuredData.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -55,7 +60,7 @@ const canonical = new URL(Astro.url.pathname, origin);
     </main>
     <footer class="site-footer">
       <div class="container">
-        <p>Free, no account needed — progress is stored on this device only.</p>
+        <p>Free, no account needed — progress is stored on this device only. · <a href="/privacy">Privacy</a></p>
       </div>
     </footer>
   </body>

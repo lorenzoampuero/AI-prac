@@ -12,7 +12,7 @@ skims of shipped pages. Fixes applied in `2b43af2`.
 | Banned phrasing (standards §2) across lessons/exercises/glossary | 0 hits |
 | Practice section + declared `<ExerciseCard>` in every published lesson | 36/36 |
 | `## Next` link + ≥2 glossary links per lesson (§7) | 36/36 (21 lessons strengthened; 4 new terms added: action item, caveat, data classification, unsupported claim) |
-| Word band (§1, exercise-heavy leeway) | 391–560 words; note: 4 lessons sit at 391–430 (allowed by §1; revisit at expansion time) |
+| Word band (§1, exercise-heavy leeway) | all 36 lessons ≥462 words after the enrichment pass (minimum previously 391); spread ≈462–570 |
 | Review dates (§9): `current` has `lastReviewed`, `evergreen` does not | 36/36 (2 CUR lessons carry registry-backed dates) |
 | Link integrity: every internal lesson link resolves | 100% (1 broken cross-track link `ai-work → ai-for-work` found and fixed) |
 | Glossary references (lesson/exercise ids) resolve | 23/23 |
@@ -45,5 +45,5 @@ skims of shipped pages. Fixes applied in `2b43af2`.
 
 - Rolldown logs a benign `use astro:head-inject` hint from MDX asset propagation; the directive is absent
   from published HTML.
-- Word counts for four work/safety lessons sit slightly below the 500-word guideline — permitted by the
-  exercise-heavy leeway in standards §1; revisit at content expansion time.
+- Word counts: the enrichment pass lifted every lesson to ≥462 words (from a 391-word minimum); lower
+  positions remain within §1's exercise-heavy leeway and can keep growing at expansion time.
