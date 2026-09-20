@@ -69,3 +69,31 @@ operator's step before any purchase). No WHOIS checks were made.
 
 **Reminder:** this file does not authorize purchases; the master brief (§0/§80/§93) requires explicit
 approval before spending money on domains.
+
+---
+
+## 5. RDAP update — 2026-09-20 (strong signal, registry-level)
+
+The earlier DNS probe was inconclusive; this pass queried the **registry RDAP endpoints directly**
+(Verisign for `.com`, Google Registry for `.app`/`.dev`, Identity Digital for `.io`/`.site`) via
+`scripts/domain-check.mjs`. 404 from the registry = not registered (very likely purchasable).
+
+| Domain | Registry verdict |
+|---|---|
+| aipractice.com | registered (parked — TurnCommerce/NameBright) |
+| **aipractice.app** | **AVAILABLE** |
+| **aipractice.dev** | **AVAILABLE** |
+| **aipractice.site** | **AVAILABLE** |
+| aipractice.io | registered (GoDaddy) |
+| aiskillslab.com | registered |
+| **aiskillslab.app** | **AVAILABLE** |
+| ailiteracy.com | registered |
+| promptgym.com | registered |
+| **promptgym.app** | **AVAILABLE** |
+| aikata.com · promptkata.com · aidrills.com · promptloop.com · practicebench.com | all registered |
+
+**Reading:** the `.com` space for every shortlist name is gone (several held by domain resellers).
+The realistic path for the current brand is **`aipractice.app`** (matches the shipped name everywhere,
+Google Registry, HTTPS enforced via HSTS preload, available today) with `aipractice.dev` as the
+technical-audience alternative and `aipractice.site` as the ImgExact-style fallback. RDAP is a strong
+signal, not a guarantee — confirm at a registrar and run the trademark screen before buying.
