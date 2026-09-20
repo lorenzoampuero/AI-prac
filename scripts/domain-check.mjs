@@ -35,7 +35,9 @@ function endpointsFor(domain) {
   const list = [];
   if (tld === 'com') list.push(`https://rdap.verisign.com/com/v1/domain/${domain}`);
   if (tld === 'app' || tld === 'dev') list.push(`https://www.registry.google/rdap/domain/${domain}`);
-  if (tld === 'io' || tld === 'site') list.push(`https://rdap.identitydigital.services/rdap/domain/${domain}`);
+  if (['io', 'site', 'info', 'online'].includes(tld)) {
+    list.push(`https://rdap.identitydigital.services/rdap/domain/${domain}`);
+  }
   list.push(`https://rdap.org/domain/${domain}`);
   return list;
 }

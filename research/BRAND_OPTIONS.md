@@ -111,3 +111,10 @@ signal, not a guarantee — confirm at a registrar and run the trademark screen 
 Note on `practiceaboutai.com`: descriptive and keyword-rich, but 18 characters, slower to dictate, and
 the phrase reads slightly off ("practice *about* AI"). A legitimate second choice; `aipractice.app`
 remains the shortest, on-brand match.
+
+**TLD follow-up (2026-09-20):** `aipractice.site`, `aipractice.info`, `aipractice.online`,
+`practiceaboutai.site`, `practiceaboutai.info` and `practiceaboutai.online` are **all available**.
+Perceived-trust ranking for a trust-sensitive education product: `.app`/`.dev` > `.site` > `.online` >
+`.info` (`.info` has a long spam-association history — avoid). `.site`/`.online` carry first-year promo
+pricing with meaningfully higher renewals; `.app` renews flat at ~€12–15/yr. Google treats all TLDs
+equally for ranking; the differences here are user perception and renewal cost, not SEO.
