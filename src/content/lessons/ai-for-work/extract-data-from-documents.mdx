@@ -27,11 +27,11 @@ Extraction is not summarizing. You do not want readable prose about the contract
 - **One row per item** — one contract, one invoice, one form. Not "the agreements".
 - **Copy, never compute.** "Copy dates and periods verbatim; do not calculate or convert anything." Model arithmetic is not a calculator; a normalized date is an invented date.
 - **A quote column.** Require the exact sentence each row's values come from. Now every value can be checked with a glance, and values that cannot be quoted come back `not stated`.
-- **Output only the rows.** No commentary around the table, so it can be pasted straight into a sheet.
+- **Output only the rows.** No commentary around the table — the [structured-output](/glossary/structured-output) rule — so it can be pasted straight into a sheet.
 
 ## Why the quote column changes everything
 
-An extraction without sources asks you to trust the machine on exactly the numbers that matter. With a source quote per row, verification shrinks from "re-read every contract" to "read six sentences". It is the [grounding pattern](/learn/prompting/ground-responses-in-your-sources) applied to table building.
+An extraction without sources asks you to trust the machine on exactly the numbers that matter. With a source quote per row, verification shrinks from "re-read every contract" to "read six sentences". It is the [grounding](/glossary/grounding) pattern from [the grounding lesson](/learn/prompting/ground-responses-in-your-sources), applied to table building.
 
 ## Then do the sampling pass
 

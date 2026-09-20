@@ -19,7 +19,7 @@ draft: false
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
 
-An action table has columns — Action, Owner, Due date — and the entire value sits in two rules: **every row comes from the notes**, and **anything missing becomes a visible gap**. A table full of guessed owners is worse than no table: it looks authoritative and spreads silent errors across the team.
+An [action item](/glossary/action-item) is one row — Action, Owner, Due date — and the entire value of the table sits in two rules: **every row comes from the notes**, and **anything missing becomes a visible gap**. A table full of guessed owners is worse than no table: it looks authoritative and spreads silent errors across the team.
 
 ## The two rules that do the work
 
@@ -31,7 +31,7 @@ Then separate the record: actions (someone will do something), **decisions** (al
 ## The prompt shape
 
 - **Outcome:** "turn these notes into an action table".
-- **Format:** name the columns — `Action | Owner | Due date | Status` — and say status uses `decided` / `open`.
+- **Format:** name the columns — `Action | Owner | Due date | Status` — and say status uses `decided` / `open`. Standard [structured-output](/glossary/structured-output) discipline.
 - **Missing rule:** `unassigned` and `no date` for gaps.
 - **Guard:** "only what is in the notes; never infer an owner or a deadline".
 

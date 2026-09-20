@@ -19,7 +19,7 @@ draft: false
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
 
-Structured output is output shaped for a **destination** — a spreadsheet column, a checklist, a field list your tool can read. Most AI answers are written for a human reader: fluent prose you have to re-type before it is useful. Asking for a fixed shape changes that. And you do not need to be a programmer: you need to name the shape.
+[Structured output](/glossary/structured-output) is output shaped for a **destination** — a spreadsheet column, a checklist, a field list your tool can read. Most AI answers are written for a human reader: fluent prose you have to re-type before it is useful. Asking for a fixed shape changes that. And you do not need to be a programmer: you need to name the shape.
 
 ## Three levels of shape
 
@@ -32,7 +32,7 @@ Structured output is output shaped for a **destination** — a spreadsheet colum
 - **Name every column before asking for rows.** "Organized" is a hope, not a format.
 - **Show one example row.** A single filled row communicates the shape better than a paragraph about it — the same signal as [examples and few-shot](/learn/prompting/examples-and-few-shot).
 - **Ask for nothing else.** "Output only the table." By default, answers come wrapped in polite commentary that breaks every tool that tries to read them.
-- **Decide what happens to missing values.** "If a field is absent, write 'not found'." Without a rule, gaps get filled — and you cannot tell which cells are real.
+- **Decide what happens to missing values.** "If a field is absent, write 'not found'" — a [placeholder](/glossary/placeholder) convention. Without a rule, gaps get filled — and you cannot tell which cells are real.
 
 ## A bad example
 

@@ -34,7 +34,7 @@ Before the ask, state what exists: which columns, what lives in each, which rows
 
 ## The test step is not optional
 
-A formula is a hypothesis about your sheet until proven. The request asks for a test case — "what should this show for these three rows?" — and you run it on a **copy** of the sheet with values you can verify by hand: three rows, five seconds, and the formula is either trusted or fixed. This is the spreadsheet version of [verifying before you ship](/learn/prompting/evaluate-before-you-ship): cheap check, expensive mistake avoided.
+A formula is a hypothesis about your sheet until proven. The request asks for a test case — "what should this show for these three rows?" — and you run it on a **copy** of the sheet with values you can verify by hand — a tiny [dry run](/glossary/dry-run): three rows, five seconds, and the formula is either trusted or fixed. This is the spreadsheet version of [verifying before you ship](/learn/prompting/evaluate-before-you-ship): cheap check, expensive mistake avoided.
 
 ## A bad example
 
@@ -50,7 +50,7 @@ A formula is a hypothesis about your sheet until proven. The request asks for a 
 
 ## Data hygiene, briefly
 
-Describe structure, not contents. Your real employee names, salaries or customer records do not need to travel with the formula — sample rows with made-up values communicate structure just as well, and some of it should not leave your machine at all. That principle gets its own full treatment in the safety track; here it has one form: **structure in, no real data out**.
+Describe structure, not contents. Your real employee names, salaries or customer records do not need to travel with the formula — sample rows with made-up values communicate structure just as well ([redaction](/glossary/redaction), in spreadsheet form), and some of it should not leave your machine at all. That principle gets its own full treatment in the safety track; here it has one form: **structure in, no real data out**.
 
 ## Practice
 

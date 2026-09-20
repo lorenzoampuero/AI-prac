@@ -28,8 +28,8 @@ Read the draft with a specific checklist:
 1. **Find the dangerous verbs.** Delete, move, overwrite, send, install, fetch a URL, anything touching passwords or keys. Those lines decide everything.
 2. **Check paths and inputs.** Where does it actually operate? A wrong variable means the wrong folder. Pick a folder name with spaces and odd characters as your test — that is where naive scripts break.
 3. **Look for secrets.** API keys and passwords must never be hardcoded — in generated code or any other. They belong in environment variables.
-4. **Distrust the comments.** "I tested this thoroughly" is a claim by a system that cannot have tested anything here — the same unsupported certainty from [the research track](/learn/ai-research/find-the-unsupported-claim), in a comment.
-5. **Write the dry-run line yourself.** Ask for a version that only prints what it *would* do. Run that first — the list of intended actions is cheap to read and catches the expensive mistakes.
+4. **Distrust the comments.** "I tested this thoroughly" is an [unsupported claim](/glossary/unsupported-claim) by a system that cannot have tested anything here — the kind [the research track](/learn/ai-research/find-the-unsupported-claim) trains you to catch, in a comment.
+5. **Write the [dry-run](/glossary/dry-run) line yourself.** Ask for a version that only prints what it *would* do. Run that first — the list of intended actions is cheap to read and catches the expensive mistakes.
 
 ## Test on copies
 

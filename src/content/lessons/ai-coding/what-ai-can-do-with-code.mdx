@@ -32,9 +32,9 @@ AI code generation is a fast writing assistant for code: it produces plausible, 
 ## The four limits that stay
 
 1. **No guarantee.** Fluent code compiles, runs sometimes, is not necessarily correct — edge cases (empty inputs, odd file names, missing folders) are exactly where drafts fail quietly. Same mechanism as [why AI makes things up](/learn/ai-foundations/why-ai-makes-things-up), wearing a compiler.
-2. **No context.** It cannot see your files, versions or settings; whatever you do not state gets assumed silently — the [describe-don't-guess rule](/learn/ai-for-work/spreadsheets-describe-dont-guess) applies twice here.
+2. **No context — only what fits its [context window](/glossary/context-window).** It cannot see your files, versions or settings; whatever you do not state gets assumed silently — the [describe-don't-guess rule](/learn/ai-for-work/spreadsheets-describe-dont-guess) applies twice here.
 3. **No responsibility.** It cannot test in your environment or own the outcome. It will also never tell you it did not test.
-4. **No fresh knowledge by default.** Libraries change; a plausible call may be two versions old. Version facts follow the [search-vs-generation rule](/learn/ai-research/search-vs-generation).
+4. **No fresh knowledge by default — its [training cutoff](/glossary/training-cutoff) never moves.** Libraries change; a plausible call may be two versions old. Version facts follow the [search-vs-generation rule](/learn/ai-research/search-vs-generation).
 
 ## The cost center is review
 
