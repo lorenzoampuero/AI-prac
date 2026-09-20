@@ -1,8 +1,9 @@
 # LAUNCH READINESS — AI Practice (Gate 11)
 
-**Date: 2026-09-19 · Deploy notes 2026-09-20 · Status: LAUNCHING — Vercel project `aipractice`
-auto-deploys from GitHub `main` (owner-approved); domain purchase + DNS connection still pending
-(owner action).**
+**Date: 2026-09-19 · Updated 2026-09-20 · Status: LIVE — the site serves publicly at
+`https://getaipractice.site` (apex 308-redirects to `www.getaipractice.site`, which serves 200;
+canonical + sitemap use the apex origin). Remaining owner actions: enable Analytics in the dashboard,
+align the primary domain with the canonical origin, then Search Console.**
 
 ## What is verified (this session)
 
@@ -61,6 +62,20 @@ redirect), then choose the hosting target (any static host/CDN works — the out
   scope reads **All Deployments**, the public site would also show a login — change it before launch.
 - Consequence: post-deploy checks run against `https://getaipractice.site`; the `*.vercel.app` URL
   staying login-gated under Standard Protection is intended.
+
+### Live verification — executed 2026-09-20 against the real domain (external fetches)
+
+- DNS + TLS live; `getaipractice.site` → **308** → `www.getaipractice.site` (**200**, Vercel edge).
+- Home: title “AI Practice”, canonical `https://getaipractice.site/`, analytics script present
+  (Vercel build ⇒ the `VERCEL` gate is on; counting starts once Analytics is enabled in the dashboard).
+- `/privacy` 200 with the analytics disclosure present (old “no analytics” wording gone).
+- `/robots.txt` 200 (Sitemap → `https://getaipractice.site/sitemap-index.xml`); `sitemap-index.xml`
+  200 (1 child sitemap, apex URLs); `/learn` hub 200; unknown URL → **404** with the custom page.
+- `*.vercel.app` URLs stay login-gated (Vercel Authentication) while the custom domain is public —
+  the intended posture (previews private, production public).
+- **Pending alignment:** the served URL (`www`) differs from the canonical/sitemap origin (apex). Set
+  `getaipractice.site` as the primary domain in Vercel so `www` redirects to the apex and redirects
+  agree with the canonical.
 
 ## Post-launch verification (owner-owned, day 1–7)
 
