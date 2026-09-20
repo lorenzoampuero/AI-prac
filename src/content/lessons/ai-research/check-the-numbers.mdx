@@ -1,0 +1,102 @@
+---
+title: Check the numbers
+description: "AI is fluent with figures and unreliable at arithmetic. Extract, recompute, sanity-check — every number gets checked before it ships."
+track: ai-research
+order: 8
+level: intermediate
+estimatedMinutes: 6
+skills: ["research", "verification"]
+prerequisites: ["ai-research/check-dates-and-freshness"]
+learningOutcome: "Recompute and sanity-check the figures in an AI draft."
+class: evergreen
+sources: []
+seo:
+  intent: "wrong ai calculations — recomputing and sanity-checking ai numbers"
+exercises: ["check-the-number-claim"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Numbers in AI drafts deserve a different trust level from the prose around them. The words are usually fine; the figures are where quiet failures live — a percentage that does not recompute, a total that double-counts, a “12%” that is really 9.5%. The rule is simple: **numbers get recomputed, not read.**
+
+## Three checks, every time
+
+- **Recompute.** Do the arithmetic yourself — even a rough pass. 4.2% churn down to 3.8% is a drop of 0.4 points, which is a ~9.5% relative improvement — not the “12%” a draft claimed. Derived figures (growth rates, averages, totals) are where models slip most often.
+- **Sanity-check the magnitude.** Does the size pass the smell test? A three-store bakery with €2M *weekly* revenue does not. Order-of-magnitude checks catch most invented or garbled numbers in two seconds.
+- **Check units and scope.** Percent or percentage points. Per month or per year. Country or region. Responders or the whole population. A number is only as precise as its unit — and scope words are where shrinkage and inflation happen quietly.
+
+## The extract-and-check habit
+
+<StepReveal
+  steps={[
+    'Extract every figure into a list with its label and the sentence it came from.',
+    'Mark the load-bearing ones — the figures the decision depends on — versus decorative numbers.',
+    'Recompute the load-bearing figures by hand, or with a calculator, and write the working down.',
+    'Sanity-check magnitude and units for the rest; fix or delete what fails.',
+    'Keep the working with the document. A number whose arithmetic you can show survives any review.',
+  ]}
+/>
+
+<PromptCompare
+  weak={"Make these numbers sound more impressive for the deck"}
+  strong={"List every figure in this draft with its value, unit, period and source sentence. Then recalculate each derived figure — growth rates, totals, averages — and show the working for each. Do not add any numbers I have not given you."}
+  notes={[
+    'The weak prompt asks the model to optimise the impression — the exact direction numbers should never be pushed.',
+    'The strong prompt uses the model for what it is genuinely good at: extraction, transcription and bookkeeping.',
+    '“Do not add any numbers I have not given you” removes the largest failure mode in one clause.',
+  ]}
+/>
+
+## A bad example
+
+> **Ship:** “Revenue grew 30% year on year, reaching €152k from €120k.”
+>
+> Two real numbers and one invented relationship: €152k from €120k is a 26.7% increase. Nobody recomputed, and the error is now a quotable “30%”.
+
+## A better example
+
+> **Ship:** “Revenue grew from €120k to €152k — up €32k, or 26.7% (calculation in the appendix).”
+>
+> The raw numbers carry the weight; the derived figure shows its work; the appendix makes the check trivial for the next reader.
+
+## Why it works
+
+Language models produce numbers the way they produce words — as likely continuations, not as arithmetic. Simple calculations are often right; multi-step or derived ones fail in plausible-looking ways. That asymmetry is exactly why the *habit* matters more than any single result: an AI assistant is an excellent extractor and transcriber, and a verifier only of last resort. Checks you delegated to it are checks you did not do — and numbers, being the most quotable thing in any document, carry the failure furthest. Anything [unsupported](/glossary/unsupported-claim) hidden in prose stays arguable; an [unsupported number](/glossary/unsupported-claim) ships as fact.
+
+<CheckUnderstanding
+  id="cu-rs-numbers"
+  question="A draft says: “Conversion improved from 2.4% to 2.8% — a 16.7% increase.” What is the right response?"
+  options={[
+    { text: 'Trust it — the model handles percentages fine', feedback: 'sometimes it does; on this one it happens to be right. “Sometimes” is not a verification strategy — recompute anyway.' },
+    { text: 'Recompute: 0.4 ÷ 2.4 = ~16.7%, so the maths is right — and then restate it with its unit (up 0.4 points)', correct: true, feedback: 'the habit is recompute-first, even when the answer is correct. And the same delta reads differently as points vs percent — units are half the claim.' },
+    { text: 'Reject it — 2.4 to 2.8 is only 0.4%, not 16.7%', feedback: '0.4 is the change in percentage points; 16.7% is the relative change. Both describe the same move — confusing the two is the error to avoid.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="check-the-number-claim" />
+
+## Transfer
+
+- Decks: the biggest number on the slide is the one to recompute first — it is the one everyone will quote.
+- Budgets and forecasts: check totals against their parts; double-counting hides in long tables.
+- Percentages: write both forms — “up 0.4 points (+16.7%)” — and readers stop confusing them.
+- Any derived figure without visible working: mark it, recompute it, or cut it.
+
+<KeyTakeaways
+  items={[
+    'Numbers get recomputed, not read — especially derived ones (rates, totals, averages).',
+    'Magnitude and units catch what arithmetic misses: per month or per year? points or percent?',
+    'Use AI as extractor and transcriber; the arithmetic check is yours to do.',
+  ]}
+/>
+
+## Next
+
+More research lessons arrive in a later wave — the [track hub](/learn/ai-research) keeps the path in view. Meanwhile the **work track** continues with **[AI for presentations](/learn/ai-for-work/ai-for-presentations)** — and the [practice floor](/practice) keeps every muscle warm. The [caveat entry](/glossary/caveat) pairs well with this lesson’s habit of writing down uncertainty.

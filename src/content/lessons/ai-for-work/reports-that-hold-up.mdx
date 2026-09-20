@@ -1,0 +1,95 @@
+---
+title: Reports that hold up
+description: "An AI draft is a fast first pass and a quiet carrier of unsupported claims. Structure first, numbers checked, evidence attached — the report that survives review."
+track: ai-for-work
+order: 8
+level: intermediate
+estimatedMinutes: 6
+skills: ["reports", "evidence hygiene"]
+prerequisites: ["ai-for-work/ai-for-presentations"]
+learningOutcome: "Draft a report skeleton that forces evidence and caveats."
+class: evergreen
+sources: []
+seo:
+  intent: "ai report writing — structure and evidence hygiene for ai-assisted reports"
+exercises: ["structure-the-status-report"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Reports fail in review, not in drafting — and the failures repeat: the reader's decision is missing, claims arrive unsourced, numbers do not recompute, confidence outruns evidence. AI accelerates drafting, which means it accelerates all four unless the **structure** forces them out.
+
+## The report skeleton
+
+Five sections, in this order, every time:
+
+1. **Purpose and decision** — what the reader should do after reading. If this line is missing, the report is a diary.
+2. **Findings as claims** — one-sentence claims, each with its evidence attached. Not narrative — claims.
+3. **Numbers with working** — every load-bearing figure, its unit, and the calculation that produced it.
+4. **Risks and caveats** — what could make the findings wrong, and what you do not yet know. This is the section AI omits by default.
+5. **Next steps** — owners and dates. A recommendation without an owner is a wish.
+
+## Evidence hygiene with AI
+
+<PromptCompare
+  weak={"Write a report on our Q3 performance, make it impressive and complete"}
+  strong={"Draft the skeleton only: (1) purpose and decision, (2) five findings as one-sentence claims — mark any needing a source with [SOURCE?] — (3) risks section with at least three caveats, (4) next-steps table. Use only the figures I list below; do not add numbers."}
+  notes={[
+    '“Impressive and complete” invites fluent filling; the skeleton request invites structure with visible gaps.',
+    'The [SOURCE?] flags turn missing evidence into something you can see and chase — instead of prose that reads finished.',
+    '“Do not add numbers” removes the single biggest failure mode of AI-assisted reports in one clause.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Write a competitive analysis from these notes.”
+>
+> You get a confident narrative with smooth generalities, undated competitor claims and a tidy conclusion — and no way, on the surface, to see which sentences are load-bearing facts and which are the model being agreeable.
+
+## A better example
+
+> **Ask:** the skeleton prompt above, then fill the evidence slots yourself from your notes, recomputing figures as you go and leaving the [SOURCE?] flags until each one is honestly resolved.
+>
+> The document now has the two properties review looks for: every claim traceable, every gap visible.
+
+## Why it works
+
+A review-proof report is engineered, not written. Decision at the top, claims that are checkable one by one, numbers that show their working, caveats that were written before someone else finds them. AI remains genuinely useful inside this frame — as an outliner, a rewriter, a consistency checker — because the structure it operates within is yours. The [caveat entry](/glossary/caveat) is the spirit of section four: say what you do not know before the review says it for you.
+
+<CheckUnderstanding
+  id="cu-wk-report"
+  question="Why does drafting the skeleton before the prose catch AI's biggest reporting failure?"
+  options={[
+    { text: 'Skeletons look more professional in review', feedback: 'format is not the failure mode — fluent prose that hides its gaps is.' },
+    { text: 'In a structure of claims and evidence slots, gaps are visible — [SOURCE?] flags have nowhere to hide, while fluent prose smooths them over', correct: true, feedback: 'that is the mechanism: prose hides missing evidence; a skeleton disciplines it into view before drafting begins.' },
+    { text: 'Skeletons are shorter, so there is less to check', feedback: 'less text is a side effect; the point is that the remaining text is checkable — claim, evidence, working.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="structure-the-status-report" />
+
+## Transfer
+
+- Weekly updates: purpose line first, claims with links, risks section even when it feels unnecessary.
+- Proposals: the decision and the ask belong on page one, not page nine.
+- Any AI-heavy draft: run the five-section skeleton over it — the gaps surface immediately.
+- Numbers: recompute before they enter the skeleton; [checking figures](/learn/ai-research/check-the-numbers) gets its own pass.
+
+<KeyTakeaways
+  items={[
+    'Reports are engineered: decision first, claims with evidence, numbers with working, caveats before review finds them.',
+    'Draft the skeleton with AI, fill evidence yourself, keep [SOURCE?] flags until truly resolved.',
+    'The risks section AI omits by default is the one reviewers respect most.',
+  ]}
+/>
+
+## Next
+
+Next: **[Support replies that de-escalate](/learn/ai-for-work/support-replies-that-deescalate)** — the hardest small document in any business, where tone and promises both carry risk. The [rubric entry](/glossary/rubric) covers checking work like a reviewer, and [unsupported claims](/glossary/unsupported-claim) covers what the skeleton is designed to expose.

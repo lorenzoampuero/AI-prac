@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Build the support reply",
+  "scenario": "A customer's order (#4821) arrived six days late. Your delivery guarantee covers a refund of shipping only, and you are authorised to add one month of free delivery as goodwill. The customer is angry and has mentioned writing a review. You will ask an AI assistant for the reply draft.",
+  "task": "Fill the four slots — facts, allowed remedy, tone rules and forbidden promises — then compare with the reference version.",
+  "fields": [
+    {
+      "id": "facts",
+      "label": "Case facts (fixed, nothing invented)",
+      "placeholder": "Order #4821 arrived six days late; the courier scan shows it left the depot on time…",
+      "required": true
+    },
+    {
+      "id": "remedy",
+      "label": "What you can offer (per policy and your authority)",
+      "placeholder": "Full refund of shipping cost plus one month of free delivery as goodwill…",
+      "required": true
+    },
+    {
+      "id": "tone",
+      "label": "Tone rules and length",
+      "placeholder": "Calm and direct; acknowledge frustration once, plainly; no grovelling, no jargon; about 120 words…",
+      "required": true
+    },
+    {
+      "id": "forbidden",
+      "label": "What must NOT be promised",
+      "placeholder": "No product refund, no discount codes, no delivery date commitments beyond “within three business days”…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "The facts slot is frozen material — the draft may rephrase it, never extend it.",
+    "The forbidden list is what keeps a warm draft sendable: name every promise the model might reach for."
+  ],
+  "explanation": "A constrained draft passes the policy gate by construction. The facts slot stops invention, the remedy slot names the one allowed outcome, the tone rules keep it sendable with light editing, and the forbidden list closes the gaps a model would otherwise fill with generosity. The result is a reply that is warm where it is true and silent where the policy is strict — which is exactly what de-escalates: specific, kept promises.",
+  "skills": ["support", "tone", "prompting"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/support-replies-that-deescalate"],
+  "sampleSolution": "Facts: order #4821 arrived six days late; courier records show it left the depot on schedule and stalled in transit; this is the first contact about the delay. Allowed remedy: refund of the shipping cost in full, plus one month of free delivery as goodwill. Tone rules: calm and direct, acknowledge the frustration once and plainly, no grovelling, no jargon, no exclamation marks, about 120 words, end with a concrete next step. Forbidden: no refund of the product price, no discount codes beyond the stated goodwill, no delivery guarantees beyond 'within three business days' for any follow-up answer.",
+  "draft": false
+}

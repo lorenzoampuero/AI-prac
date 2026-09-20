@@ -1,0 +1,24 @@
+{
+  "engine": "real-challenge",
+  "title": "Structure the status report",
+  "scenario": "Project Atlas is two weeks behind its integration milestone, and the steering committee meets Friday. You have raw notes: mixed progress, one slip, a budget that is still fine, and an unconfirmed rumour that a key vendor may deprioritise you. You want an AI assistant to help — but a fluent draft that smooths over the slip would be worse than useless.",
+  "task": "Draft the report skeleton you would ask the AI to produce: purpose and decision, findings as sourced claims, numbers with units, risks with caveats, and next steps with owners and dates. This is the text you would paste as your structure brief.",
+  "rubric": [
+    { "id": "decision", "label": "Opens with the purpose and the decision the committee must make" },
+    { "id": "claims", "label": "Findings are one-sentence claims, not narrative" },
+    { "id": "sources", "label": "Missing evidence is flagged explicitly (e.g. [SOURCE?]) rather than smoothed over" },
+    { "id": "numbers", "label": "Figures include units and periods, with working or a note to recompute" },
+    { "id": "risks", "label": "At least two honest caveats or risks are named, including the vendor rumour" },
+    { "id": "next", "label": "Next steps carry owners and dates" }
+  ],
+  "hints": [
+    "The committee's job is a decision — the skeleton should say which one before anything else.",
+    "The vendor rumour is unconfirmed: that is exactly what the risks section exists for. Name it as unconfirmed rather than omitting or asserting it."
+  ],
+  "modelAnswer": "Purpose and decision: The committee is asked to approve keeping the October integration date with reduced scope (not moving the date). Findings (claims, one per line): (1) Integration milestone slipped by two weeks due to vendor API changes [SOURCE? — link the change log]; (2) Reduced-scope option keeps the October date with three of five planned features [SOURCE? — scope sheet draft]; (3) Budget remains within the approved envelope, at 61% spent against a 70% planned burn as of 20 September 2026 (actuals from the finance tracker; planned burn from the approved plan — growth rate recomputed, working attached). Risks and caveats: (a) unconfirmed report that the vendor may deprioritise our integration — not yet verifiable, mitigation: written commitment requested by 25 September; (b) scope reduction removes the bulk-export feature customers asked for — churn impact unknown; (c) two-week slip compressed QA to four days. Next steps: written vendor commitment — owner: PM, due 25 September; scope decision record — owner: programme lead, due 30 September; QA plan for the compressed window — owner: tech lead, due 28 September.",
+  "explanation": "The skeleton disciplines the whole engagement: the decision is named first, findings are discrete claims you can source or flag one by one, the arithmetic is annotated for recomputation, the awkward risks are named while they are still cheap, and every next step has a name and a date. An AI assistant can produce this structure in seconds from your notes — and because the structure makes gaps visible, you can check it in minutes. Compare that with a fluent narrative draft, where the slip would be buried in paragraph three and the vendor rumour would either vanish or harden into a fact.",
+  "skills": ["reports", "structuring", "evidence hygiene"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/reports-that-hold-up"],
+  "draft": false
+}

@@ -1,0 +1,98 @@
+---
+title: Check dates and freshness
+description: "Stale information is the quiet default: model knowledge has a cutoff and pages age quietly. How to date every claim before you rely on it."
+track: ai-research
+order: 7
+level: beginner
+estimatedMinutes: 5
+skills: ["research", "verification"]
+prerequisites: ["ai-research/cross-check-answers"]
+learningOutcome: "Date claims and sources, and judge whether age matters."
+class: evergreen
+sources: []
+seo:
+  intent: "ai outdated information — dating claims, sources and training cutoffs"
+exercises: ["spot-the-stale-claims"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Every claim has a shelf life, and fluent text never looks old. A model's knowledge stops at a [training cutoff](/glossary/training-cutoff); search results keep years-old pages alive; a “2022 guide” still ranks today. Freshness checking is three moves: **date the claim, date the source, and decide whether age matters for this claim.**
+
+## Know which clock you are on
+
+- **Model time** — the training cutoff. Anything after it is invisible unless the tool retrieves live information.
+- **Source time** — when the page, report or dataset was published *and last updated*. The search result's freshness and the source's date are different things.
+- **Subject time** — how fast the subject moves. Tax rates, prices and product features change monthly; definitions, history and geography barely move.
+
+Freshness only matters where the subject clock is fast. The skill is telling the three clocks apart — and matching your checking effort to the fastest one.
+
+## The freshness pass
+
+1. **Date the claim.** Write what must be true, and as of when: “as of mid-2026…”. A claim with no date is a claim you cannot defend later.
+2. **Find the source's date** — the publication or last-update date, not when you happened to find it.
+3. **Check the subject clock.** Fast-moving subject? Then an undated or old source fails regardless of how well-written it is. Slow-moving? An older source is fine.
+4. **Under-date, never over-date.** “Current as of [month, year]” beats “latest” — you can keep the first promise; the second expires the moment you write it.
+
+<PromptCompare
+  weak={"Tell me about the latest AI regulations and current interest rates"}
+  strong={"Today is September 2026. For each regulation in force as of that date, give the rule, its jurisdiction, and the source with its publication or last-updated date. Flag anything you cannot date precisely."}
+  notes={[
+    '“Latest” and “current” carry no date — the model may answer from stale knowledge or a vague sense of now.',
+    'The strong prompt pins the present (“as of September 2026”), demands source dates, and flags undatable items instead of hiding them.',
+    'Undated answers become possible to review: every item either has a date or is explicitly flagged.',
+  ]}
+/>
+
+## A bad example
+
+> **Ship:** a “state of the market” paragraph written from the model's memory.
+>
+> The sentences are confident, specific and — because the model's world ends at its cutoff — possibly two years out of date. Nothing in the text signals it.
+
+## A better example
+
+> **Ship:** the same paragraph, except every fact carries a source with a date, and the section opens with “as of September 2026.”
+>
+> Now staleness is visible at review time, and the next reader knows exactly when the picture was true.
+
+## Why it works
+
+Staleness is invisible in good prose — that is precisely what makes it dangerous. Dating everything converts an invisible property into a checkable one: every claim either has a date or is a flagged gap. And the subject-clock rule keeps the effort proportional — you would not re-verify the speed of light, and you should not ship a tax number you cannot date. Cross-checking (previous lesson) and freshness checking are the two halves of [grounding](/glossary/grounding) a claim in reality.
+
+<CheckUnderstanding
+  id="cu-rs-fresh"
+  question="A draft says “67% of companies now use AI tools daily,” citing a source you cannot date. What is the disciplined next step?"
+  options={[
+    { text: 'Use it — the word “now” means the number is current', feedback: '“now” is decoration; an undated number is exactly as old as its source, and you just admitted you cannot see the source.' },
+    { text: 'Find the source’s publication or update date — and when the underlying data was collected; if it cannot be dated, it cannot be used', correct: true, feedback: 'undatable means uncheckable. The survey year and the page year are both part of the claim.' },
+    { text: 'Ask the model again — a second answer might sound fresher', feedback: 'a fresh-sounding restatement is still the same stale claim with better grammar.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="spot-the-stale-claims" />
+
+## Transfer
+
+- Reports: an “as of [date]” line at the top; source + date on every fast-moving number.
+- Briefs from AI: scan for “now”, “latest”, “recently”, “last year” — each one is a date waiting to be pinned.
+- Slow-clock facts (definitions, history, geography) need corroboration, not freshness.
+- Research with search tools: check the page's update date before quoting it; an old page is fine only if the subject is slow.
+
+<KeyTakeaways
+  items={[
+    'Three clocks: model cutoff, source date, subject speed. Match your checking to the fastest.',
+    'Under-date, never over-date: “as of March 2026” survives; “latest” expires on contact.',
+    'An undatable source is unusable for fast-moving claims — flag it, don’t ship it.',
+  ]}
+/>
+
+## Next
+
+Next: **[Check the numbers](/learn/ai-research/check-the-numbers)** — because figures need more than a date; they need recomputing. The [training cutoff entry](/glossary/training-cutoff) covers model time, and the [primary source entry](/glossary/primary-source) covers how to date a claim properly.

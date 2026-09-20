@@ -1,0 +1,91 @@
+---
+title: Support replies that de-escalate
+description: "Customer replies fail on tone and on promises. Route with AI, draft with constraints, gate every commitment against policy — never let a model promise what the policy cannot."
+track: ai-for-work
+order: 9
+level: intermediate
+estimatedMinutes: 5
+skills: ["support", "tone"]
+prerequisites: ["ai-for-work/reports-that-hold-up"]
+learningOutcome: "Draft support replies with fixed facts and a policy gate."
+class: evergreen
+sources: []
+seo:
+  intent: "ai customer support replies — de-escalation, tone and policy-safe promises"
+exercises: ["build-the-support-reply"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+An upset customer, a busy agent and a fluent AI is a three-way recipe for a reply that overshoots: over-apologising, over-promising, or arguing a point nobody asked about. The reliable pattern splits the job into three gates — **routing, drafting and the policy gate** — and keeps the model inside the one it can actually do.
+
+## Three gates before send
+
+1. **Route.** Is this a how-to question (an AI first draft is fine), a billing or policy edge (a human decides first), or something involving harm, legal exposure or a public threat (escalate now, draft nothing)? [Triage](/glossary/triage) before text.
+2. **Draft with constraints.** The facts of the case are fixed; the draft moves inside them. Tone rules, a length cap, and — most important — the list of things that must not be promised.
+3. **Policy gate.** Before sending, check every commitment against the actual policy. The model does not know your policy, your margins or your exceptions. You do.
+
+## Drafting with constraints
+
+<PromptCompare
+  weak={"Write a reply to this angry customer and make them happy"}
+  strong={"Draft a 120-word reply. Facts: order #4821 arrived six days late; our delivery guarantee covers a full refund of shipping only. Acknowledge the frustration once, plainly. Offer the shipping refund and one month of free delivery as goodwill. Do not promise anything else — no product refund, no delivery dates beyond “within three business days”. Tone: calm and direct; no grovelling, no jargon, no exclamation marks."}
+  notes={[
+    '“Make them happy” invites invented discounts and hollow promises — the model optimises for the mood, not the policy.',
+    'The strong prompt fixes the facts, names the one allowed remedy, and forbids the rest explicitly.',
+    'A length cap and tone rules keep the draft sendable with light editing instead of a rewrite.',
+  ]}
+/>
+
+## A bad example
+
+> **Send:** “We are so terribly sorry for this experience! We completely understand and to make it right we will refund your order and expedite a replacement immediately.”
+>
+> A kind, fluent reply that promises two things you may not be authorised to give — and the customer now has it in writing. De-escalation failed in the direction of generosity.
+
+## A better example
+
+> **Send:** “You are right to be annoyed — the delay was ours. I have refunded the shipping cost in full and added a month of free delivery to your account. If the package has not arrived by Thursday, reply here and I will investigate the courier case personally, with an answer within three business days.”
+>
+> Acknowledged once, fixed what policy allows, and the only commitment made is one you can keep.
+
+## Why it works
+
+Drafting is language; promising is policy — two different jobs, and flattery blurs them. Constraints keep the reply inside what is true, which is exactly what makes it de-escalating: angry customers are not soothed by warmth, they are soothed by specific, kept promises. Keeping the model on the drafting side of the line also protects the agent: a wrong promise made by a person in an AI-worded email is still a wrong promise by the company. And with the facts frozen and the remedies fixed, the model is genuinely fast — a first draft that already passes the policy gate.
+
+<CheckUnderstanding
+  id="cu-wk-support"
+  question="A customer demands a full refund for an order that is outside your refund window, and threatens a public review. What is the disciplined handling?"
+  options={[
+    { text: 'Have AI draft a warm apology with the full refund — goodwill protects the rating', feedback: 'that is the policy gate skipped under pressure — the model cannot know your margins, exceptions or precedent, and the promise is now binding.' },
+    { text: 'Route it as a policy edge: a human decides the exception, and AI drafts only the holding reply — fixed facts, no promises beyond the reply timeline', correct: true, feedback: 'the exception is a business decision; the holding reply is language. Each goes to the side of the line that can carry it.' },
+    { text: 'Wait a day before replying so emotions cool', feedback: 'delay without acknowledgement reads as being ignored — the dissatisfaction compounds, and the review usually ships anyway.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="build-the-support-reply" />
+
+## Transfer
+
+- Templates: keep the constraints block — allowed remedies, tone rules, forbidden promises — ready to paste.
+- Reviews and social: reply publicly with facts and a private channel, never with concessions made under visible pressure.
+- Escalation cues: legal language, safety, repeat contacts. Route first; drafting can wait three minutes.
+- After any AI draft: the policy gate is a human reading every promise, sentence by sentence.
+
+<KeyTakeaways
+  items={[
+    'Three gates: route the case, draft with constraints, gate every promise against policy.',
+    'Angry customers are soothed by specific kept promises, not warmth.',
+    'The model drafts; the policy decides. Never send a commitment it invented.',
+  ]}
+/>
+
+## Next
+
+That closes this wave of the work track — nine lessons live, more planned. Keep the reps going on the [practice floor](/practice), or see where you stand with the [skills check](/assessment). The **[coding track](/learn/ai-coding)** picks up the same discipline next: [What AI can (and can’t) do with code](/learn/ai-coding/what-ai-can-do-with-code). The [placeholder entry](/glossary/placeholder) covers keeping personal data out of drafts.

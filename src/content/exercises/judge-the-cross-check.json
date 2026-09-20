@@ -1,0 +1,27 @@
+{
+  "engine": "evaluate-output",
+  "title": "Judge the cross-check",
+  "scenario": "An AI assistant was asked to verify a claim for a briefing: “Remote work reduces office rent costs by 30% on average.” Two verification write-ups came back. You need to use the claim in a client document.",
+  "task": "Compare the two write-ups against the verification criteria, then pick the one you would trust.",
+  "outputA": "The claim is well-supported. Multiple sources confirm it: a large business publication reports that remote work has reduced office costs significantly; a workplace survey reports average savings around 30%; and several HR blogs cite the same figure. Conclusion: the number is reliable and safe to use in the briefing.",
+  "outputB": "I could not confirm the exact figure yet. The “30%” traces to a single 2022 vendor survey (about 120 firms, self-reported savings). The business article and the HR posts all cite that same survey — one original source, three retellings. I checked an independent benchmark (a property managers' association report, 2023): it shows smaller median savings, 11–18%, with a different methodology (actual lease data, not self-reporting). Recommendation: drop the precise 30%, or attribute it narrowly — “a 2022 vendor survey of 120 firms reported around 30%” — with the date and sample size visible.",
+  "rubric": [
+    { "id": "independence", "label": "Distinguishes genuinely independent sources from retellings of one original" },
+    { "id": "primary", "label": "Traces the claim back to its originating source" },
+    { "id": "compare", "label": "Compares specifics — numbers, dates, method — instead of broad agreement" },
+    { "id": "conclusion", "label": "Lands on a decision-ready recommendation with honest attribution" }
+  ],
+  "verdict": {
+    "better": "B",
+    "reasoning": "Write-up B performs the actual check: it traces 30% to one vendor survey, shows the “confirmations” are retellings of that single source, brings an independent benchmark using a different method that disagrees on the number, and ends with a usable decision — attribute narrowly or drop. Write-up A counts echoes as evidence and declares the number reliable without dating the source, naming the method, or noticing that all roads lead to one self-reported survey."
+  },
+  "hints": [
+    "Count origins, not articles — how many independent sources does each write-up actually establish?",
+    "Watch what happens to the number when a different method looks at the same question."
+  ],
+  "explanation": "The two write-ups look similarly confident; the difference is structural. A verified claim has an origin (who produced the data), a method (how), a date, and at least one independent comparison. The weaker write-up has repetition — three articles echoing one survey — which is exactly the shape misinformation and marketing numbers travel in. The stronger one separates those echoes, finds the origin, contradicts it with independent evidence, and still leaves you something usable: the claim, narrowly attributed, or nothing.",
+  "skills": ["verification", "research"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/cross-check-answers"],
+  "draft": false
+}

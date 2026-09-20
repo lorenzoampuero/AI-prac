@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Check the number claim",
+  "scenario": "A draft analytics summary, mostly written by an AI assistant, contains this line: “Customer churn improved from 4.2% to 3.8% — a 12% reduction in churn.” The number is going into a board slide.",
+  "task": "What is the right first move?",
+  "options": [
+    {
+      "text": "Trust it — churn figures were supplied by the analytics tool, so the percentage must be right.",
+      "correct": false,
+      "feedback": "The raw numbers may be right while the derived percentage is wrong — the arithmetic step is exactly where drafts slip. The source of the raw data says nothing about the calculation built on top of it."
+    },
+    {
+      "text": "Recompute the relative change from the raw numbers: 0.4 ÷ 4.2 is about 9.5%, not 12% — then restate the figure with both forms: down 0.4 points, or ~9.5% relative.",
+      "correct": true,
+      "feedback": "Extract, recompute, fix, and show both units. The absolute form (−0.4 points) survives scrutiny; the wrong relative figure would have been the slide's most quoted number."
+    },
+    {
+      "text": "Delete the percentage and keep only the raw numbers to be safe.",
+      "correct": false,
+      "feedback": "Safer, but you lose information the audience needs. The disciplined route is to recompute the percentage, not to abandon derived figures — churn reduction is genuinely useful when it is correct and unit-labelled."
+    },
+    {
+      "text": "Ask the AI to double-check its own calculation.",
+      "correct": false,
+      "feedback": "Asking the model that made the error to grade its own arithmetic is a coin flip with extra steps. The recompute is two seconds of your own work — do it yourself."
+    }
+  ],
+  "hints": [
+    "The raw numbers can be right while the percentage derived from them is wrong — check the derivation, not just the source.",
+    "Absolute change and relative change are two different figures: 4.2 → 3.8 is a 0.4-point move, which is a certain percentage of the starting value."
+  ],
+  "explanation": "“4.2% to 3.8%” is an absolute drop of 0.4 percentage points; as a relative change it is 0.4 ÷ 4.2 ≈ 9.5% — not the claimed 12%. Nothing looks wrong: the format is right, the direction is right, and it is off by a quarter. Derived figures (rates, totals, growth) are where AI drafts fail most plausibly, so they get recomputed before they ship — especially the one destined for a board slide, where the number will be quoted without its context.",
+  "skills": ["verification", "numeracy"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/check-the-numbers"],
+  "draft": false
+}

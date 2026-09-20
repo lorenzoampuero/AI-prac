@@ -1,0 +1,93 @@
+---
+title: AI for presentations
+description: "Slides fail as prose. Use AI for the argument, the outline and the speaker notes — then build slides like slides, one claim per title."
+track: ai-for-work
+order: 7
+level: beginner
+estimatedMinutes: 5
+skills: ["presentations", "structuring"]
+prerequisites: ["ai-for-work/spreadsheets-describe-dont-guess"]
+learningOutcome: "Build a deck from an AI-assisted outline with claim titles."
+class: evergreen
+sources: []
+seo:
+  intent: "ai presentation outline — using ai for decks that argue clearly"
+  cluster: "C6"
+exercises: ["build-the-deck-brief"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+A deck is an argument, not a document. Most AI slide help fails for one reason: it generates paragraphs and calls them slides. The fix is to use AI where it is genuinely strong — the **spine** of the argument, the outline, the speaker notes — and build the slides like slides.
+
+## Slides are not prose
+
+- **One idea per slide.** If a slide needs three sentences to be understood, it is a document wearing a slide costume.
+- **The title carries the point.** “Retention is the bottleneck” is a title; “Retention” is a topic.
+- **Evidence lives in one visual.** A chart, a diagram, two numbers. Nothing else.
+- **Sentences go in the notes.** The slides support you; the notes are what you actually say.
+
+## The deck loop
+
+<StepReveal
+  steps={[
+    'Brief first: who is in the room, the one decision you want from them, and the three to five things they must believe to make it.',
+    'Outline with AI: ask for a spine of sections as claims — full sentences, not topics — matching the time you actually have.',
+    'Stress-test the argument before design: “What would make this argument fail? Which claim is weakest?” Fix it now, cheaply.',
+    'Speaker notes: let AI draft the sentences that go in your mouth — one short note per slide, in your register.',
+    'Build the slides: titles are the claims, visuals are the evidence, everything else is notes. Do this part yourself.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Make me a 15-slide deck about our Q3.”
+>
+> You get topic soup — Introduction, Overview, Key Metrics, Conclusion — with paragraphs on every slide. The audience reads ahead, you narrate your own slides, and no decision emerges.
+
+## A better example
+
+> **Ask:** “Audience: the exec team. Decision: approve two support hires. They must believe: backlog growth is unsustainable; temps fix it short-term only; two hires clear it by Q1. Give a ten-slide spine for a 15-minute slot where every title is a full-sentence claim, plus the single piece of evidence each claim needs.”
+>
+> The output is an argument you can check slide by slide — and it is checkable *before* any design work begins.
+
+## Why it works
+
+The model is a strong structuring partner and a weak visual designer. Decks live or die on their spine: an argument whose titles read as claims works even when skimmed, because the skimmer absorbs the reasoning. AI also drafts speaker notes faster than you will, and — used *after* the spine is fixed — notes reinforce the argument instead of wandering. Keep the build step for yourself, where taste matters; keep the outline step with AI, where structure is cheap to change.
+
+<CheckUnderstanding
+  id="cu-wk-deck"
+  question="AI returned 30 slides of paragraph text for your 15-minute slot. What is the best next move?"
+  options={[
+    { text: 'Keep them and read faster — the content is all there', feedback: 'you would be narrating your own slides to an audience reading ahead — the classic deck failure.' },
+    { text: 'Ask for a spine of full-sentence claims for a 15-minute slot, move paragraphs to speaker notes, and cut to one idea per slide', correct: true, feedback: 'right size, right shape: claims as titles, evidence on the slide, sentences in the notes where they belong.' },
+    { text: 'Split the difference — trim each paragraph to three sentences', feedback: 'smaller paragraphs are still paragraphs; the failure is structural, not a word count.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="build-the-deck-brief" />
+
+## Transfer
+
+- Status updates: same loop at two-slide scale — decision, claims, evidence.
+- Pitches: the “what must they believe” list is the real work; AI just formats it.
+- Reviewing a colleague's deck: check whether the titles alone tell the story.
+- Speaker notes in your register: feed AI one paragraph of how you actually talk.
+
+<KeyTakeaways
+  items={[
+    'A deck is an argument: one claim per title, evidence per slide, sentences in the notes.',
+    'Use AI for the spine and the notes; build the slides yourself.',
+    'Brief the model like the room: audience, decision, beliefs, time slot.',
+  ]}
+/>
+
+## Next
+
+Next: **[Reports that hold up](/learn/ai-for-work/reports-that-hold-up)** — the written cousin of the deck, with evidence hygiene attached. The [structured output entry](/glossary/structured-output) covers shaping model output, and [action items](/glossary/action-item) covers the one part every deck must end with.

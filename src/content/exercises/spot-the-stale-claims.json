@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the stale claims",
+  "scenario": "You are reviewing an AI-drafted briefing paragraph for a client newsletter about hybrid work and office costs. Nothing here is obviously false — but several items need a freshness check before the paragraph ships.",
+  "task": "Select every item that needs a freshness check before publication. Leave the items whose age genuinely does not matter.",
+  "response": "Hybrid work is now the default for tech teams. A 2021 industry survey reported that 71% of tech companies had adopted hybrid schedules, and the figure keeps climbing. Analysts expect the trend to accelerate through next year. Last year's office-rent benchmark put downtown vacancies at 18.4%. Remote work became widespread during the 2020 pandemic lockdowns, and its history is well documented. Austin, the city where the research team is based, sits in Texas. The briefing recommends budgeting using these figures.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "“A 2021 industry survey reported that 71% of tech companies had adopted hybrid schedules, and the figure keeps climbing”",
+      "problematic": true,
+      "feedback": "A five-year-old number presented as a current trend. The survey needs a fresher counterpart — or the sentence needs to say plainly that 71% was the 2021 reading."
+    },
+    {
+      "id": "c2",
+      "text": "“Analysts expect the trend to accelerate through next year”",
+      "problematic": true,
+      "feedback": "Which analysts, published when? An unnamed forecast with a relative date (“next year”) cannot be checked or dated — flag it or cut it."
+    },
+    {
+      "id": "c3",
+      "text": "“Last year's office-rent benchmark put downtown vacancies at 18.4%”",
+      "problematic": true,
+      "feedback": "“Last year” drifts — last year from when? Pin the benchmark to a month and year, and check whether a newer edition exists."
+    },
+    {
+      "id": "c4",
+      "text": "“Remote work became widespread during the 2020 pandemic lockdowns, and its history is well documented”",
+      "problematic": false,
+      "feedback": "History with its date inside the sentence. It cannot go stale — no freshness check needed."
+    },
+    {
+      "id": "c5",
+      "text": "“Austin, the city where the research team is based, sits in Texas”",
+      "problematic": false,
+      "feedback": "Geography is a slow clock: verifying it is worthwhile, checking its freshness is not."
+    }
+  ],
+  "hints": [
+    "Sort claims by their clock: survey numbers and forecasts move fast; history and geography barely move at all.",
+    "Relative time words — “now”, “keeps climbing”, “next year”, “last year” — are dates waiting to be pinned. Each one hides a freshness question."
+  ],
+  "explanation": "Freshness triage, not paranoia: fast-clock items (surveys, trends, forecasts, benchmarks) need dated sources and recent editions; slow-clock items (history, geography) need accuracy but not freshness. The draft's danger is not a single wrong fact — it is several undated fast-clock numbers wearing confident grammar. Every “now”, “keeps climbing” and “next year” is a promise that the picture was true at some unstated moment. Pin it or cut it.",
+  "skills": ["verification", "research", "freshness"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-research/check-dates-and-freshness"],
+  "draft": false
+}

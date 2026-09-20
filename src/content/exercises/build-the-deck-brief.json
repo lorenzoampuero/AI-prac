@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Build the deck brief",
+  "scenario": "You need a quarterly update deck for your leadership team. The goal is not “show the numbers” — it is to get a specific decision: moving budget from one channel to another. You will ask an AI assistant for the deck's spine.",
+  "task": "Fill the four brief slots — audience and decision, the claims they must believe, the evidence each claim needs, and the constraints — then compare with the reference version.",
+  "fields": [
+    {
+      "id": "audience",
+      "label": "Audience and the decision you want",
+      "placeholder": "The leadership team; decision: move 20% of the ads budget to the newsletter channel…",
+      "required": true
+    },
+    {
+      "id": "beliefs",
+      "label": "What they must believe (three to five claims)",
+      "placeholder": "Newsletter engagement is growing while ads plateau; newsletter subscribers convert twice as well…",
+      "required": true
+    },
+    {
+      "id": "evidence",
+      "label": "The evidence each claim needs",
+      "placeholder": "Growth claim: the 6-month engagement chart; conversion claim: the cohort comparison table…",
+      "required": true
+    },
+    {
+      "id": "constraints",
+      "label": "Constraints (time slot, slide shape, what to avoid)",
+      "placeholder": "Fifteen minutes, ten slides max, every title a full-sentence claim, no paragraphs on slides…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "The deck is an argument: the beliefs list is the argument's skeleton — write claims, not topics.",
+    "Constraints shape the output more than adjectives: time slot, slide count, title style."
+  ],
+  "explanation": "A deck brief works when it names the room (audience + decision), the argument (claims they must believe), the proof (evidence per claim) and the shape (constraints). Given all four, an AI assistant produces a spine where every title is a claim and every claim has its evidence slot — a deck that can be checked before a single pixel is designed. Without the beliefs list, you get topic soup with your numbers stapled on.",
+  "skills": ["presentations", "structuring", "prompting"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-for-work/ai-for-presentations"],
+  "sampleSolution": "Audience and decision: the leadership team; we want approval to move 20% of the ads budget into the newsletter channel for one quarter. What they must believe: (1) newsletter engagement is growing while ads have plateaued; (2) newsletter subscribers convert roughly twice as well as ad traffic; (3) one quarter is enough to test the shift with clear success metrics. Evidence: growth claim — the six-month engagement chart; conversion claim — the cohort comparison table; test design — the proposed success criteria and stop conditions. Constraints: fifteen-minute slot, ten slides maximum, every title a full-sentence claim, no paragraphs on slides, speaker notes one short paragraph each in my register, end with the single ask slide.",
+  "draft": false
+}

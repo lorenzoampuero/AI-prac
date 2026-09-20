@@ -1,0 +1,97 @@
+---
+title: Cross-check AI answers
+description: "One source is a claim; a second independent source begins a check. How to verify AI answers by triangulating — and what actually counts as independent."
+track: ai-research
+order: 6
+level: intermediate
+estimatedMinutes: 5
+skills: ["research", "verification"]
+prerequisites: ["ai-research/ask-for-uncertainty"]
+learningOutcome: "Verify a claim by triangulating genuinely independent sources."
+class: evergreen
+sources: []
+seo:
+  intent: "how to verify ai answers — cross-checking claims across independent sources"
+  cluster: "E2"
+exercises: ["judge-the-cross-check"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+A single source — even a confident, official-looking one — is a claim, not a check. And it is worse than it looks: two articles citing the same survey are also one claim. Verification begins when a **genuinely independent** source agrees, and stays honest when you write down what it disagreed about.
+
+## Independence is the whole trick
+
+Before you count sources, count origins:
+
+- A press release and the news articles about it: **one** source.
+- Three HR blogs quoting the same statistic: **one** source.
+- The model restating any of the above: not a source at all.
+- A different author, a different dataset, a different method: that is a second source.
+
+“Multiple sources confirm” means nothing until you can say *where each one got it*. Common origin means common errors — and copied errors are the most convincing kind.
+
+## The triangulation loop
+
+<StepReveal
+  steps={[
+    'Extract the load-bearing claim — the one fact your decision actually hangs on, in a single sentence.',
+    'Find the primary source: the dataset, filing, law, benchmark or first-hand report that originated the claim.',
+    'Add one genuinely independent check — different author, different method, different origin.',
+    'Compare the specifics, not the vibe: numbers, dates, scope. “Broadly agrees” is not agreement if the number or the year differs.',
+    'Record what disagreed. A noted conflict is a finding; a hidden one is a future embarrassment.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Is it true that 60% of teams use AI weekly?”
+>
+> “Yes — many reports confirm that around 60% of teams use AI weekly.” You now hold the same unverified claim with better grammar, and a citation-shaped sentence you could accidentally forward.
+
+## A better example
+
+> **Ask:** “Give me the claim split into its parts — the number, the population, the period — plus candidate sources with dates. Then check two genuinely independent ones against the original and tell me exactly what differs.”
+>
+> You get an origin, a comparison and a list of discrepancies — the actual raw material of a decision.
+
+## Why it works
+
+An AI answer is a synthesis of patterns: fluent, often right, and structurally unverified. Independent agreement attacks the two ways a claim fails — being wrong, and being a copied echo of the same wrong original. And when sources disagree, that disagreement is not noise; it is the most useful thing you found, because it tells you where the uncertainty lives. Pair this loop with [uncertainty you asked for up front](/learn/ai-research/ask-for-uncertainty) and gaps surface even before the first check.
+
+<CheckUnderstanding
+  id="cu-rs-triangulate"
+  question="You verify “60% of teams use AI weekly” against three articles — then notice all three cite the same vendor survey. What do you actually have?"
+  options={[
+    { text: 'Three confirmations — good enough to ship the number', feedback: 'three retellings of one survey are one source; if the original is wrong or self-serving, all three are too.' },
+    { text: 'One source echoed three times — find an independent check before using the figure', correct: true, feedback: 'count origins, not articles. One independent method against the original is worth more than any number of echoes.' },
+    { text: 'The claim is proven because it is widely repeated', feedback: 'repetition measures reach, not truth — widely repeated wrong numbers are the normal case.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="judge-the-cross-check" />
+
+## Transfer
+
+- Board numbers: one primary source (filing, survey) plus one independent check, dated.
+- Health and science claims: the primary source is the study itself — read the abstract, not the article about it.
+- When echoes outnumber origins, treat the claim as a hypothesis, not evidence.
+- Keep the discrepancy list — it belongs in the footnote, not in the bin.
+
+<KeyTakeaways
+  items={[
+    'Count origins, not articles: same original means same single source.',
+    'Independent agreement — different author, method, data — is what turns a claim into a check.',
+    'Specifics are where disagreements live: numbers, dates, scope. Record them.',
+  ]}
+/>
+
+## Next
+
+Next: **[Check dates and freshness](/learn/ai-research/check-dates-and-freshness)** — because a well-corroborated claim can still be out of date. The [primary source entry](/glossary/primary-source) covers origins, and [unsupported claims](/glossary/unsupported-claim) covers what a missing check looks like.
