@@ -4,6 +4,7 @@
 
 import { ASSESSMENT_ITEMS } from '../data/assessment';
 import { resultBand, scoreAssessment, type AssessmentResult } from '../lib/assessment';
+import { refreshHeaderWidget, syncBadges } from './feedback';
 
 const STORAGE_KEY = 'aip:assessment:v1';
 
@@ -106,6 +107,8 @@ export function initAssessment(): void {
     renderSummary(summary, result);
     if (retake) retake.hidden = false;
     storeResult(storage, result);
+    syncBadges();
+    refreshHeaderWidget();
 
     summary.hidden = false;
     summary.focus();

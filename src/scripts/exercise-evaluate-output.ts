@@ -4,6 +4,7 @@
 
 import { gradeEvaluateOutput } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
+import { afterProgress } from './feedback';
 
 interface EvaluateOutputConfig {
   id: string;
@@ -76,8 +77,10 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     explanation.hidden = false;
     explanation.open = true;
 
-    const attempt = recordExerciseAttempt(load(storage), config.id, result.correct);
+    const previous = load(storage);
+    const attempt = recordExerciseAttempt(previous, config.id, result.correct);
     save(storage, attempt.state);
+    if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
       xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;

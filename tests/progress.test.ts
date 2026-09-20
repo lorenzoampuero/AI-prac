@@ -3,6 +3,7 @@ import {
   completeLesson,
   emptyState,
   EXERCISE_XP,
+  LEGACY_STORAGE_KEY,
   LESSON_XP,
   load,
   parseState,
@@ -10,6 +11,7 @@ import {
   save,
   STORAGE_KEY,
   toggleBookmark,
+  touchVisit,
   type StorageLike,
 } from '../src/lib/progress';
 
@@ -139,5 +141,60 @@ describe('progress store — robustness', () => {
     const storage = memoryStorage();
     save(storage, emptyState());
     expect(Object.keys(storage.dump())).toEqual([STORAGE_KEY]);
+  });
+
+  it('migrates v1 payloads without losing progress', () => {
+    const storage = memoryStorage();
+    const v1 = {
+      version: 1,
+      lessons: { 'ai-foundations/x': { completedAt: '2026-09-19T00:00:00.000Z' } },
+      exercises: { ex1: { completedAt: '2026-09-19T00:00:00.000Z', attempts: 2 } },
+      bookmarks: ['ai-foundations/x'],
+      xp: 25,
+      streak: { count: 3, lastDay: '2026-09-19' },
+      lastUpdated: '2026-09-19T00:00:00.000Z',
+    };
+    storage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(v1));
+
+    const migrated = load(storage);
+    expect(migrated.version).toBe(2);
+    expect(migrated.xp).toBe(25);
+    expect(Object.keys(migrated.lessons)).toEqual(['ai-foundations/x']);
+    expect(migrated.exercises['ex1']).toEqual({
+      completedAt: '2026-09-19T00:00:00.000Z',
+      attempts: 2,
+      firstTry: false,
+    });
+    expect(migrated.badges).toEqual({});
+    expect(migrated.lastVisited).toBeNull();
+  });
+
+  it('tracks first-try solves and never flips them later', () => {
+    const firstTry = recordExerciseAttempt(emptyState(), 'ex', true, day(2026, 9, 19));
+    expect(firstTry.state.exercises['ex']?.firstTry).toBe(true);
+    const again = recordExerciseAttempt(firstTry.state, 'ex', true, day(2026, 9, 20));
+    expect(again.state.exercises['ex']?.firstTry).toBe(true);
+
+    const wrongFirst = recordExerciseAttempt(emptyState(), 'ex2', false, day(2026, 9, 19));
+    const later = recordExerciseAttempt(wrongFirst.state, 'ex2', true, day(2026, 9, 19));
+    expect(later.state.exercises['ex2']?.firstTry).toBe(false);
+  });
+
+  it('records the last visited lesson without granting XP', () => {
+    const state = touchVisit(emptyState(), 'prompting/clear-instructions', day(2026, 9, 20));
+    expect(state.lastVisited?.lessonId).toBe('prompting/clear-instructions');
+    expect(state.xp).toBe(0);
+  });
+
+  it('sanitizes badge maps and lastVisited from v2 payloads', () => {
+    const parsed = parseState(
+      JSON.stringify({
+        version: 2,
+        badges: { ok: '2026-09-20T00:00:00.000Z', bad: 7 },
+        lastVisited: { lessonId: 'a/b', at: '2026-09-20T00:00:00.000Z' },
+      }),
+    );
+    expect(parsed.badges).toEqual({ ok: '2026-09-20T00:00:00.000Z' });
+    expect(parsed.lastVisited).toEqual({ lessonId: 'a/b', at: '2026-09-20T00:00:00.000Z' });
   });
 });

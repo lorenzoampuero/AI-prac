@@ -18,7 +18,10 @@ export default defineConfig({
     mdx(),
     // Only generated (published) pages reach the build — drafts are filtered in getStaticPaths, so they
     // cannot leak into the sitemap. Indexability policy is audited at the SEO gate (docs/SEO_PAGE_REGISTRY.md).
-    sitemap(),
+    sitemap({
+      // /progress is a device-local dashboard (noindex) — keep it out of the sitemap.
+      filter: (page) => !page.endsWith('/progress') && !page.endsWith('/progress/'),
+    }),
   ],
   build: {
     inlineStylesheets: 'auto',

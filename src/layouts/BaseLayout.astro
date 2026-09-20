@@ -3,6 +3,7 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/fraunces';
 import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
+import { getCollection } from 'astro:content';
 import { SITE_NAME } from '../config/site';
 import '../styles/global.css';
 
@@ -35,6 +36,27 @@ const NAV = [
   { href: '/glossary', label: 'Glossary' },
   { href: '/about', label: 'About' },
 ];
+
+// Build-time facts the client scripts need (gamification) — totals, the exercise→track map and titles.
+const allLessons = await getCollection('lessons', ({ data }) => !data.draft);
+const allExercises = await getCollection('exercises', ({ data }) => !data.draft);
+const lessonsTotalPerTrack: Record<string, number> = {};
+const exerciseTrack: Record<string, string> = {};
+const lessonTitles: Record<string, string> = {};
+for (const lesson of allLessons) {
+  lessonsTotalPerTrack[lesson.data.track] = (lessonsTotalPerTrack[lesson.data.track] ?? 0) + 1;
+  lessonTitles[lesson.id] = lesson.data.title;
+  for (const exerciseId of lesson.data.exercises) {
+    exerciseTrack[exerciseId] = lesson.data.track;
+  }
+}
+const siteMeta = {
+  totalLessons: allLessons.length,
+  totalExercises: allExercises.length,
+  lessonsTotalPerTrack,
+  exerciseTrack,
+  lessonTitles,
+};
 ---
 
 <!doctype html>
@@ -94,6 +116,7 @@ const NAV = [
     ))}
     {showAnalytics && <Analytics />}
     <ClientRouter />
+    <script type="application/json" data-site-meta set:html={JSON.stringify(siteMeta)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -108,6 +131,10 @@ const NAV = [
               </a>
             ))}
           </span>
+          <a class="level-widget" href="/progress" data-level-widget hidden>
+            <span data-lw-name>Lv 1 · Curious</span>
+            <span class="lw-xp" data-lw-xp>0 XP</span>
+          </a>
           <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
             <span class="visually-hidden">Toggle dark mode</span>
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -145,6 +172,7 @@ const NAV = [
         <div>
           <h2>About</h2>
           <ul>
+            <li><a href="/progress">My progress</a></li>
             <li><a href="/about">How it works</a></li>
             <li><a href="/privacy">Privacy</a></li>
           </ul>

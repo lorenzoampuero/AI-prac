@@ -2,6 +2,9 @@
 // scripts only on the first page load, so binding happens here AND on every `astro:page-load`
 // (client-side navigation with ClientRouter). All bindings are idempotent.
 
+import { load } from '../lib/progress';
+import { getStorage, readSiteMeta, refreshHeaderWidget, syncBadges } from './feedback';
+
 let revealObserver: IntersectionObserver | null = null;
 
 function initReveals(): void {
@@ -71,10 +74,30 @@ function initThemeToggle(): void {
   });
 }
 
+function initContinueStrip(): void {
+  const strip = document.querySelector<HTMLElement>('[data-continue]');
+  if (!strip) return;
+  const meta = readSiteMeta();
+  const state = load(getStorage());
+  const last = state.lastVisited;
+  if (!last) {
+    strip.hidden = true;
+    return;
+  }
+  const link = strip.querySelector<HTMLAnchorElement>('[data-continue-link]');
+  const titleEl = strip.querySelector<HTMLElement>('[data-continue-title]');
+  if (link) link.href = `/learn/${last.lessonId}`;
+  if (titleEl) titleEl.textContent = meta?.lessonTitles[last.lessonId] ?? 'Pick up where you left off';
+  strip.hidden = false;
+}
+
 function boot(): void {
   applyStoredTheme();
   initThemeToggle();
   initReveals();
+  initContinueStrip();
+  refreshHeaderWidget();
+  syncBadges();
 }
 
 if (document.readyState === 'loading') {

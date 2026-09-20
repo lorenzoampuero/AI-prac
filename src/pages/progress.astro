@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'My progress';
+const description =
+  'Your level, XP, badges and per-track mastery — stored on this device only, never sent anywhere.';
+---
+
+<BaseLayout title={title} description={description} noindex>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">My progress</li>
+    </ol>
+  </nav>
+
+  <h1>My progress</h1>
+  <p class="lede">
+    Everything here lives in this browser only — no account, nothing sent anywhere. Complete a lesson or
+    an exercise and your level, badges and per-track mastery update on this page.
+  </p>
+
+  <div class="progress-layout" data-progress-root>
+    <section class="card level-card" aria-label="Level">
+      <div class="level-head">
+        <p class="lc-level" data-lc-level>Level 1</p>
+        <p class="lc-name" data-lc-name>Curious</p>
+      </div>
+      <div class="xp-bar" role="img" aria-label="Progress to the next level">
+        <span data-lc-bar style="transform: scaleX(0)"></span>
+      </div>
+      <p class="meta-line">
+        <strong data-lc-xp>0</strong> XP total · <span data-lc-next>60 XP to Explorer</span> · streak
+        <strong data-lc-streak>0</strong> days
+      </p>
+    </section>
+
+    <section aria-labelledby="stats-title">
+      <h2 id="stats-title">Overview</h2>
+      <ul class="stats-row" data-progress-stats></ul>
+    </section>
+
+    <section aria-labelledby="tracks-progress-title">
+      <h2 id="tracks-progress-title">Tracks</h2>
+      <div class="track-progress" data-track-progress></div>
+    </section>
+
+    <section aria-labelledby="badges-title">
+      <h2 id="badges-title">Badges</h2>
+      <p class="meta-line" data-badges-count></p>
+      <div class="badges-grid" data-badges></div>
+    </section>
+
+    <section aria-labelledby="activity-title">
+      <h2 id="activity-title">Recent activity</h2>
+      <ul class="activity-list" data-activity></ul>
+    </section>
+
+    <section aria-labelledby="bookmarks-title">
+      <h2 id="bookmarks-title">Bookmarked lessons</h2>
+      <p class="meta-line">Use “Save for later” on any lesson to add it here.</p>
+      <ul class="activity-list" data-bookmarks></ul>
+    </section>
+
+    <section aria-labelledby="data-title">
+      <h2 id="data-title">Your data</h2>
+      <p class="meta-line">
+        Progress is stored in this browser's localStorage. Export it to keep a backup or move to another
+        device.
+      </p>
+      <div class="cta-row">
+        <button class="button secondary" type="button" data-export>Export JSON</button>
+        <button class="button secondary" type="button" data-import-toggle>Import JSON</button>
+        <button class="button secondary" type="button" data-reset>Reset progress</button>
+      </div>
+      <div data-io hidden>
+        <label class="field-label" for="progress-io">Progress JSON</label>
+        <textarea id="progress-io" class="prompt-editor" rows="6" data-io-box></textarea>
+        <div class="cta-row">
+          <button class="button" type="button" data-import-apply>Apply import</button>
+          <span class="meta-line" data-io-status></span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import '../scripts/progress-page';
+  </script>
+</BaseLayout>

@@ -4,10 +4,12 @@
 // Product rules (master brief §20/§22): learning works without an account; progress lives on this device
 // only; XP and streaks are light encouragements — no freezes, no punishment, no fake scarcity.
 //
-// The key is versioned (`aip:progress:v1`). Unknown or corrupt payloads reset to a fresh state — stored
-// progress must never crash the lesson UI.
+// The key is versioned (`aip:progress:v2`; v1 payloads are migrated on read). Unknown or corrupt payloads
+// reset to a fresh state — stored progress must never crash the lesson UI.
 
-export const STORAGE_KEY = 'aip:progress:v1';
+export const STORAGE_KEY = 'aip:progress:v2';
+/** Pre-v2 payloads are migrated on read — nobody loses progress. */
+export const LEGACY_STORAGE_KEY = 'aip:progress:v1';
 export const LESSON_XP = 10;
 export const EXERCISE_XP = 15;
 
@@ -18,10 +20,14 @@ export interface StorageLike {
 }
 
 export interface ProgressState {
-  version: 1;
+  version: 2;
   lessons: Record<string, { completedAt: string }>;
-  exercises: Record<string, { completedAt: string; attempts: number }>;
+  exercises: Record<string, { completedAt: string; attempts: number; firstTry: boolean }>;
   bookmarks: string[];
+  /** Earned badge ids → ISO date first earned. Never removed, even if a streak lapses. */
+  badges: Record<string, string>;
+  /** Last lesson a learner opened — powers the “continue learning” strip. */
+  lastVisited: { lessonId: string; at: string } | null;
   xp: number;
   streak: { count: number; lastDay: string | null };
   lastUpdated: string;
@@ -35,10 +41,12 @@ export interface CompletionResult {
 
 export function emptyState(): ProgressState {
   return {
-    version: 1,
+    version: 2,
     lessons: {},
     exercises: {},
     bookmarks: [],
+    badges: {},
+    lastVisited: null,
     xp: 0,
     streak: { count: 0, lastDay: null },
     lastUpdated: '',
@@ -65,13 +73,25 @@ export function parseState(raw: string | null): ProgressState {
   }
 
   const o = asRecord(parsed);
-  if (!o || o.version !== 1) return emptyState();
+  if (!o || (o.version !== 1 && o.version !== 2)) return emptyState();
 
   const state = emptyState();
   if (typeof o.xp === 'number' && Number.isFinite(o.xp) && o.xp > 0) state.xp = Math.floor(o.xp);
   if (typeof o.lastUpdated === 'string') state.lastUpdated = o.lastUpdated;
   if (Array.isArray(o.bookmarks)) {
     state.bookmarks = o.bookmarks.filter((b): b is string => typeof b === 'string');
+  }
+
+  const badges = asRecord(o.badges);
+  if (badges) {
+    for (const [id, value] of Object.entries(badges)) {
+      if (typeof value === 'string') state.badges[id] = value;
+    }
+  }
+
+  const lastVisited = asRecord(o.lastVisited);
+  if (lastVisited && typeof lastVisited.lessonId === 'string' && typeof lastVisited.at === 'string') {
+    state.lastVisited = { lessonId: lastVisited.lessonId, at: lastVisited.at };
   }
 
   const lessons = asRecord(o.lessons);
@@ -88,7 +108,7 @@ export function parseState(raw: string | null): ProgressState {
       const rec = asRecord(v);
       if (rec && typeof rec.completedAt === 'string') {
         const attempts = typeof rec.attempts === 'number' && rec.attempts > 0 ? Math.floor(rec.attempts) : 1;
-        state.exercises[id] = { completedAt: rec.completedAt, attempts };
+        state.exercises[id] = { completedAt: rec.completedAt, attempts, firstTry: rec.firstTry === true };
       }
     }
   }
@@ -106,7 +126,10 @@ export function parseState(raw: string | null): ProgressState {
 export function load(storage: StorageLike | null): ProgressState {
   if (!storage) return emptyState();
   try {
-    return parseState(storage.getItem(STORAGE_KEY));
+    const current = storage.getItem(STORAGE_KEY);
+    if (current !== null) return parseState(current);
+    // One-time migration path from v1: read it, upgrade in memory; the next save writes v2.
+    return parseState(storage.getItem(LEGACY_STORAGE_KEY));
   } catch {
     return emptyState();
   }
@@ -144,7 +167,7 @@ export function completeLesson(state: ProgressState, lessonId: string, now: Date
   return { state: next, gained: LESSON_XP, isNew: true };
 }
 
-/** Records an attempt; XP is granted once, on the first solve. */
+/** Records an attempt; XP is granted once, on the first solve. “First try” means attempt #1 solved it. */
 export function recordExerciseAttempt(
   state: ProgressState,
   exerciseId: string,
@@ -156,12 +179,13 @@ export function recordExerciseAttempt(
   const wasSolved = prevCompletedAt !== '';
   const completedAt = wasSolved ? prevCompletedAt : solved ? now.toISOString() : '';
   const gained = solved && !wasSolved ? EXERCISE_XP : 0;
+  const firstTry = prev?.firstTry === true || (solved && (prev?.attempts ?? 0) === 0);
 
   const next: ProgressState = {
     ...state,
     exercises: {
       ...state.exercises,
-      [exerciseId]: { completedAt, attempts: (prev?.attempts ?? 0) + 1 },
+      [exerciseId]: { completedAt, attempts: (prev?.attempts ?? 0) + 1, firstTry },
     },
     xp: state.xp + gained,
     streak: bumpStreak(state.streak, now),
@@ -177,6 +201,12 @@ export function toggleBookmark(state: ProgressState, id: string, now: Date = new
     bookmarks: has ? state.bookmarks.filter((b) => b !== id) : [...state.bookmarks, id],
     lastUpdated: now.toISOString(),
   };
+}
+
+/** Records the lesson a learner just opened (continue-learning strip). No XP, no streak changes. */
+export function touchVisit(state: ProgressState, lessonId: string, now: Date = new Date()): ProgressState {
+  const stamp = now.toISOString();
+  return { ...state, lastVisited: { lessonId, at: stamp }, lastUpdated: stamp };
 }
 
 export function exportProgress(state: ProgressState): string {
