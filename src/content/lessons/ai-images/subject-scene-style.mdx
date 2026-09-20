@@ -1,0 +1,92 @@
+---
+title: Subject, scene, style
+description: "Most weak image prompts name a thing. Strong ones describe the subject, the scene, the style and the light — a repeatable four-part recipe you can build."
+track: ai-images
+order: 2
+level: beginner
+estimatedMinutes: 5
+skills: ["ai images", "prompting"]
+prerequisites: ["ai-images/how-image-generation-works"]
+learningOutcome: "Write a complete first-draft image prompt using four slots."
+class: evergreen
+sources: []
+seo:
+  intent: "how to write image prompts — subject scene style light recipe"
+  cluster: "D1"
+exercises: ["build-your-first-image-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+A strong image prompt fills four slots: **subject** (what is in frame), **scene** (what surrounds it), **style** (how it should look) and **light** (time of day, mood, direction). Naming a thing — “a dog” — leaves three of four slots to chance. Describing all four gives the model independent decisions to make well, and gives you independent dials to turn when you iterate.
+
+## The four slots
+
+1. **Subject** — one clear subject beats three competing ones. Add the telling details: what it is doing, what state it is in.
+2. **Scene** — where it sits, what is around it, how busy or calm the setting is.
+3. **Style** — a *look*, not praise: “quiet editorial photography”, “flat vector illustration”, “soft watercolor with visible paper grain”.
+4. **Light** — direction and mood: “soft morning light through sheer curtains”, “hard noon sun, crisp shadows”, “blue hour, city glow”.
+
+Style words guide when they describe something the model can render. [Generative systems](/glossary/generative-ai) do not reward praise: “stunning” and “amazing” decide nothing.
+
+<PromptCompare
+  weak={"a nice coffee photo, make it amazing"}
+  strong={"One ceramic cup of coffee with gentle steam (subject), on a wooden windowsill with a small plant (scene), calm editorial photography with shallow depth of field (style), soft morning light through sheer curtains (light)"}
+  notes={[
+    'Each of the four slots answers a question the model would otherwise guess.',
+    '“Calm editorial photography” describes a renderable look; “amazing” describes a feeling no model can act on.',
+    'The result is iterable: dislike the light? Change only the light slot.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “A dog.”
+>
+> Every meaningful decision — setting, style, time of day, mood — is made by the model. You get an image, but not yours.
+
+## A better example
+
+> **Ask:** “A corgi asleep on a windowsill (subject), minimalist room with two plants (scene), soft watercolor illustration with visible paper grain (style), warm late-afternoon light (light).”
+>
+> Same model, same effort — four deliberate choices instead of none.
+
+## Why it works
+
+The four slots are separable decisions. Filling them all makes the first draft close enough to iterate on, and when something is off you can tell *which slot* caused it. That is how prompt writing becomes engineering instead of guessing.
+
+<CheckUnderstanding
+  id="cu-img-slots"
+  question="“A golden retriever, stunning quality, 8k, masterpiece” — what is most missing?"
+  options={[
+    { text: 'More quality words — they push the model harder', feedback: 'praise and quality tags decide almost nothing; they are not a dial the model can act on.' },
+    { text: 'Scene, style and light — only the subject slot is filled', correct: true, feedback: 'setting, look and lighting are the decisions left to chance; fill them and the prompt becomes yours.' },
+    { text: 'Nothing — the prompt already covers everything', feedback: 'it names a subject and adds noise; three of four slots are empty.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="build-your-first-image-prompt" />
+
+## Transfer
+
+- Slides and headers: the four slots map one-to-one onto a usable brief.
+- Iteration: when something looks wrong, fix the slot responsible — not the whole prompt.
+- Briefs for others: the four slots are also a checklist to review someone else’s prompt.
+
+<KeyTakeaways
+  items={[
+    'Subject, scene, style, light — four slots, one recipe.',
+    'Style words describe a look; praise words do nothing.',
+    'A complete first draft exists to be iterated, one slot at a time.',
+  ]}
+/>
+
+## Next
+
+Next: **[Composition and framing](/learn/ai-images/composition-and-framing)** — where things sit in the frame. The [generative AI entry](/glossary/generative-ai) covers how these systems construct images in the first place.

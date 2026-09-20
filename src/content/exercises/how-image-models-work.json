@@ -1,0 +1,31 @@
+{
+  "engine": "model-choice",
+  "title": "Generation or editing — pick the mode",
+  "scenario": "A bakery wants their product photo kept exactly as it is — same pastry, same plate — but with the background replaced by a warm café table scene. Everything about the pastry itself must stay identical.",
+  "task": "Which mode fits the task best?",
+  "options": [
+    {
+      "text": "Generate a fresh image describing a pastry on a café table",
+      "correct": false,
+      "feedback": "You would be rebuilding the pastry from words — shape, texture and plating will drift. The brief says everything about it must stay identical."
+    },
+    {
+      "text": "Edit the existing photo: keep the pastry, describe only the new background",
+      "correct": true,
+      "feedback": "Exactly — an edit changes what you ask for and preserves the rest. One variable changes; the product photo stays trustworthy."
+    },
+    {
+      "text": "Generate many fresh images and pick the one that looks most similar",
+      "correct": false,
+      "feedback": "Similar is not identical. For product imagery, a close-enough pastry is simply the wrong pastry."
+    }
+  ],
+  "hints": [
+    "Ask: is the goal to construct something new, or to change one thing in an image that already exists?"
+  ],
+  "explanation": "Generation constructs from your words; editing transforms an image you supply. The moment a brief contains “keep everything else the same”, you want an edit — ideally on a selected region. That single choice is the difference between a product photo and a product photo of something that is no longer your product.",
+  "skills": ["ai images", "task fit"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-images/how-image-generation-works"],
+  "draft": false
+}

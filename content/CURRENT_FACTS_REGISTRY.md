@@ -11,6 +11,7 @@ lists the claim **as taught**, where it is used, its source and when it was last
 | 1 | OpenAI's lineup spans a flagship tier (GPT-6 Astra, $10 in / $50 out per MTok), balanced and cost tiers (GPT-5.6 Terra $2/$12; GPT-5.6 Luna $0.20/$1.20), with reasoning effort adjustable per request. | FN07 *Fast vs reasoning models* | https://developers.openai.com/api/docs/models | 2026-09-19 | 2026-12-18 |
 | 2 | Anthropic's Claude lineup spans Fable 5.1 (demanding reasoning; slower; $10/$50 per MTok), Sonnet 5 (speed + intelligence; $2/$10) and Haiku 4.5 (fastest; $1/$5); thinking is adaptive, steered by an effort setting. | FN07 *Fast vs reasoning models* | https://platform.claude.com/docs/en/docs/about-claude/models/overview | 2026-09-19 | 2026-12-18 |
 | 3 | The same Claude models are documented across multiple platforms — Claude API, Amazon Bedrock, Google Cloud, Microsoft Foundry — with platform-specific IDs, regions and lifecycle terms. | FN06 *Models vs products* | https://platform.claude.com/docs/en/docs/about-claude/models/overview | 2026-09-19 | 2026-12-18 |
+| 4 | OpenAI's image API separates *generation* (create an image from a scratch text prompt) from *edits* (modify an existing image with prompt guidance — partially via a mask, or entirely); current image models are `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`. | IM01 *How image generation works* | https://developers.openai.com/api/docs/guides/image-generation | 2026-09-20 | 2026-12-18 |
 
 ## Notes
 

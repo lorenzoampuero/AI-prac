@@ -1,0 +1,93 @@
+---
+title: How image generation works
+description: "Text-to-image models refine noise into a picture that matches your prompt, and they treat generating and editing as separate modes. Here is the pipeline."
+track: ai-images
+order: 1
+level: beginner
+estimatedMinutes: 6
+skills: ["ai images", "foundations"]
+prerequisites: []
+learningOutcome: "Explain generation vs editing and pick the right mode for a task."
+class: current
+lastReviewed: 2026-09-20
+sources:
+  - title: "OpenAI — Image generation guide"
+    url: "https://developers.openai.com/api/docs/guides/image-generation"
+seo:
+  intent: "how does ai image generation work — generation vs editing explained plainly"
+  cluster: "D1"
+exercises: ["how-image-models-work"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+A text-to-image model takes your prompt and **constructs** a picture — it does not look one up. Internally it starts from random noise and refines it step by step toward something that matches your words. The useful part is simpler than the internals: **generation** creates a new image from scratch, while **editing** changes an image you already have — and most tools treat these as separate modes.
+
+## The pipeline, plainly
+
+<StepReveal
+  steps={[
+    'Your prompt is read and encoded — the model builds an internal summary of the scene you described.',
+    'It starts from pure noise. There is no draft picture hidden inside waiting to be revealed.',
+    'It refines the noise in repeated passes — the diffusion process — nudging it toward your description.',
+    'Details settle: composition, light and texture are decided during these passes, which is why small wording changes can shift large parts of the image.',
+    'The finished image is decoded and returned. Run it again and you get a new sample, not the same picture twice.',
+  ]}
+/>
+
+## Generation vs editing — two different jobs
+
+- **Generation** fits “make something new”: concepts, drafts, illustrations, mood boards.
+- **Editing** fits “change this one thing”: keep the photo, swap the lamp. Tools support editing the whole image with a new prompt, or a selected region only — you mark the area (a mask) and describe the change. [OpenAI’s image API, for example, separates generations from edits exactly this way.](https://developers.openai.com/api/docs/guides/image-generation)
+
+## A bad example
+
+> **Ask:** “Generate the exact photo I saw in that article last month.”
+>
+> The model has no gallery to search and no memory of your browsing. It will build something plausible instead — and it will not be the photo.
+
+## A better example
+
+> **Ask:** “Here is a photo of our product. Keep everything identical; replace only the background with a light grey studio backdrop and a soft shadow under the object.”
+>
+> An edit of material you supplied — surgical, verifiable, and exactly what edit modes are for.
+
+## Why it works
+
+Hold two ideas and most image-tool behaviour follows: **generation constructs; editing transforms.** Construction tolerates variety — ask twice, get two samples. Transformation should preserve everything you did not ask to change, which is why dedicated edit modes beat re-describing a whole scene: fewer variables, less accidental drift.
+
+<CheckUnderstanding
+  id="cu-img-modes"
+  question="You have a photo of a room and want the same photo with a different lamp — everything else untouched. Which approach fits?"
+  options={[
+    { text: 'Generate a new image describing the room and the new lamp', feedback: 'everything else would drift — you would be rebuilding the room from words instead of keeping it.' },
+    { text: 'Use an edit: keep the photo, select the lamp area and describe the replacement', correct: true, feedback: 'one thing changes, everything else stays identical — that is exactly what edit modes and masks are for.' },
+    { text: 'Generate many candidates and pick the most similar', feedback: 'similar is not identical; for real rooms and products that difference matters.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="how-image-models-work" />
+
+## Transfer
+
+- Product photos: edit backgrounds and light; never regenerate the product itself.
+- Iteration: change one description at a time so you can tell what caused what.
+- Concepts and mood boards: generate several samples on purpose — variety is the feature here.
+
+<KeyTakeaways
+  items={[
+    'Models construct images from prompts — nothing is looked up or retrieved.',
+    'Generation creates from scratch; editing transforms an image you supply.',
+    'When the brief says “keep everything else the same”, you want an edit — ideally a masked one.',
+  ]}
+/>
+
+## Next
+
+Next: **[Subject, scene, style](/learn/ai-images/subject-scene-style)** — the four-part recipe behind every strong image prompt. The [diffusion entry](/glossary/diffusion) and [generative AI](/glossary/generative-ai) cover the background.

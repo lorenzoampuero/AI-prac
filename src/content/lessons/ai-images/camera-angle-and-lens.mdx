@@ -1,0 +1,87 @@
+---
+title: Camera angle and lens
+description: "Eye level, low angle, top-down, 85mm portrait — camera language steers perspective and distortion when you use it with intent instead of stacking buzzwords."
+track: ai-images
+order: 4
+level: intermediate
+estimatedMinutes: 5
+skills: ["ai images", "camera"]
+prerequisites: ["ai-images/composition-and-framing"]
+learningOutcome: "Use one or two camera terms deliberately to steer perspective."
+class: evergreen
+sources: []
+seo:
+  intent: "camera angle in image prompts — low angle, top-down, lens terms explained"
+  cluster: "D2"
+exercises: ["pick-the-camera"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+
+Camera words are shorthand for **perspective** — where the viewer stands and how that changes what the subject feels like. Used with intent, one or two of them do a lot of work. Stacked without thought, they contradict each other and the model averages noise.
+
+## Angles change meaning
+
+- **Eye level** — the viewer meets the subject as an equal. The neutral default for people.
+- **Low angle** (looking up) — the subject feels imposing, powerful, larger than life.
+- **High angle** (looking down) — smaller, vulnerable, observed — or practical, like a tabletop.
+- **Top-down (flat lay)** — graphic and organised: grids, layouts, food styling from above.
+
+## Lens terms, briefly
+
+- **Wide lens** — more environment, stronger perspective; close up it distorts (bigger nose, curved walls).
+- **85mm portrait feel** — compression and flattery: background softly falls away.
+- **Macro** — detail so close the subject becomes texture.
+
+One angle + one lens idea is usually plenty. “Low angle, 85mm portrait feel” says something. “Wide-angle close-up portrait with no distortion” says nothing — those words cancel out.
+
+## A bad example
+
+> **Ask:** “Portrait of a chef, wide-angle close-up, no distortion, everything sharp, low angle and top-down.”
+>
+> Contradictions. The model has to guess which instructions to honour, and the result shows it.
+
+## A better example
+
+> **Ask:** “Eye-level portrait of a chef plating a dish, 85mm feel with a softly blurred kitchen behind, warm light from the left.”
+>
+> One angle, one lens idea, one light direction — coherent and re-iterable.
+
+## Why it works
+
+Every camera term is a claim about where the viewer is standing and what lens they hold — and [generated images](/glossary/generative-ai) follow those claims the same way they follow scene words. Coherent stacks reinforce each other; contradictory ones dilute each other. Picking one angle and one perspective effect per image keeps the description honest — and lets you debug results by changing a single decision.
+
+<CheckUnderstanding
+  id="cu-img-camera"
+  question="You want a product to feel bigger and more commanding. Which phrase fits?"
+  options={[
+    { text: '“Top-down flat lay, macro, wide angle”', feedback: 'a flat lay is graphic and small-feeling — great for organisation, wrong for dominance.' },
+    { text: '“Low angle looking up, dramatic light”', correct: true, feedback: 'looking up makes the subject loom; the light reinforces the mood. One angle, one effect.' },
+    { text: '“All angles at once for maximum coverage”', feedback: 'angles that cancel out give the model guesswork, not coverage.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="pick-the-camera" />
+
+## Transfer
+
+- People: eye level is the honest default; go low or high only to say something.
+- Food and products: top-down for layout and patterns, low angle for appetite appeal.
+- Debugging: if perspective feels wrong, change one camera term at a time.
+
+<KeyTakeaways
+  items={[
+    'Angles are claims about meaning: low = imposing, high = smaller, eye = equal, top-down = graphic.',
+    'One angle plus one lens idea is enough — contradictions cancel out.',
+    'Camera terms are debuggable dials: change one at a time.',
+  ]}
+/>
+
+## Next
+
+Lighting and the rest of the image track arrive with the next content wave — the [track hub](/learn/ai-images) keeps the whole path in view. Meanwhile the [aspect ratio entry](/glossary/aspect-ratio) covers the canvas decision.

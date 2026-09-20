@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Set the frame deliberately",
+  "scenario": "An article about weekend baking needs a hero image: a loaf of bread on a kitchen counter, with clean space on the right where the headline will sit.",
+  "task": "Decide shot scale, placement, negative space and aspect ratio — then compare with the reference version.",
+  "fields": [
+    {
+      "id": "scale",
+      "label": "Shot scale (close-up, medium or wide)",
+      "placeholder": "medium shot…",
+      "required": true
+    },
+    {
+      "id": "placement",
+      "label": "Placement (where the subject sits)",
+      "placeholder": "on the left third of the frame…",
+      "required": true
+    },
+    {
+      "id": "space",
+      "label": "Negative space (what stays calm and empty)",
+      "placeholder": "empty counter surface on the right for text…",
+      "required": true
+    },
+    {
+      "id": "ratio",
+      "label": "Aspect ratio (the canvas)",
+      "placeholder": "16:9 header…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "The headline needs somewhere to live — reserve that space in the composition.",
+    "A ratio chosen first shapes every other framing decision."
+  ],
+  "explanation": "Framing is four independent decisions: scale, placement, negative space and canvas. Stating them turns a lucky composition into a repeatable one — and when a result disappoints, you can change exactly one dial: “move the subject to the right third”, not “redo the whole prompt”. Reserving negative space is also a planning act: it is where real text will go.",
+  "skills": ["ai images", "composition"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/composition-and-framing"],
+  "sampleSolution": "Medium shot of a rustic loaf of bread on a wooden kitchen counter, placed on the left third of the frame. Calm, uncluttered negative space on the right side where a headline can sit. Soft daylight from a window, warm editorial style. 16:9 wide header format.",
+  "draft": false
+}

@@ -1,0 +1,21 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Pick the camera description",
+  "scenario": "A portrait is meant to feel calm and professional for a speaker page. Both prompts below describe the same person and setting; only the camera language differs.",
+  "task": "Which prompt will guide the model better?",
+  "promptA": "Portrait of a woman holding a coffee cup, really good camera, professional, stunning, high detail, some angle, nice background blur maybe.",
+  "promptB": "Eye-level portrait of a woman holding a coffee cup, 85mm portrait feel with a softly blurred café behind her, soft window light from the left, shallow depth of field.",
+  "better": "B",
+  "feedback": {
+    "a": "Praise stacked on vague camera hints — “some angle”, “maybe”, “stunning” — describes no decision the model can act on. The result is luck, and you cannot debug luck.",
+    "b": "One angle (eye level), one lens idea (85mm feel), one light direction and one depth decision. Four coherent choices, each individually fixable if the result disappoints."
+  },
+  "hints": [
+    "Count the actual camera decisions in each prompt, not the adjectives."
+  ],
+  "explanation": "Camera language works when it states decisions: where the viewer stands, what lens that suggests, what stays sharp. Praise and vague hedges move none of those dials. The better prompt is shorter and far more specific — and when the portrait comes back wrong, you can change exactly one thing instead of rewriting everything.",
+  "skills": ["ai images", "camera"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/camera-angle-and-lens"],
+  "draft": false
+}

@@ -1,0 +1,97 @@
+---
+title: Composition and framing
+description: "Framing decides what the viewer notices first: shot scale, placement, negative space and aspect ratio — described in words image models can act on."
+track: ai-images
+order: 3
+level: intermediate
+estimatedMinutes: 6
+skills: ["ai images", "composition"]
+prerequisites: ["ai-images/subject-scene-style"]
+learningOutcome: "Control framing, placement and aspect ratio in an image prompt."
+class: evergreen
+sources: []
+seo:
+  intent: "image prompt composition — framing, placement, negative space, aspect ratio"
+  cluster: "D2"
+exercises: ["control-the-frame"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Framing is what the viewer sees **first** — and in image prompts it is four controllable decisions: **shot scale** (how much of the subject fills the frame), **placement** (where it sits), **negative space** (how calm the rest is) and **[aspect ratio](/glossary/aspect-ratio)** (the shape of the canvas). Say nothing, and the model picks all four for you. Often badly.
+
+## Shot scale
+
+- **Close-up** — texture, expression, intimacy. Great for products and faces.
+- **Medium** — subject plus a hint of context. The default for editorial images.
+- **Wide** — environment is the story; the subject anchors it.
+
+## Placement and negative space
+
+Name where things sit: “subject on the left third”, “centered, symmetrical”, “low in frame with sky above”. Negative space is a tool, not waste — a calm right side is where a headline will go later. Designers ask for it on purpose: “wide calm space on the right, nothing in it”.
+
+## Aspect ratio comes first
+
+Choose the canvas before composing: **1:1** for avatars and grids, **16:9** for headers and slides, **9:16** for stories and posters. A composition built for a square rarely survives a crop to widescreen — deciding the ratio first means the framing is designed for it.
+
+<PromptCompare
+  weak={"an office desk with laptop and coffee and plant, nice style"}
+  strong={"Wide 16:9 frame, one laptop on the left third of a wooden desk, a cup of coffee beside it, calm empty space on the right side (negative space for a headline), soft daylight, clean editorial style"}
+  notes={[
+    'Shot scale (“wide”), placement (“left third”) and negative space (“calm empty space on the right”) are all stated instead of guessed.',
+    'The aspect ratio is fixed first, so the composition is designed for the final crop.',
+    '“Empty space for a headline” is a decision with a purpose — it is where text will actually go.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “A busy scene with everything important in the center.”
+>
+> Dense center-compositions leave no room for text, crop badly, and give the eye nowhere to rest.
+
+## A better example
+
+> **Ask:** “Medium shot of a potter’s hands shaping a bowl, centered, shelves softly blurred behind, generous negative space above, 4:5 portrait.”
+>
+> Scale, placement, space and canvas — each stated, each fixable in the next iteration.
+
+## Why it works
+
+Framing decisions are independent dials: change the shot scale without touching the light, change the ratio without re-describing the scene. Models follow these words well enough to be useful, and when a composition disappoints, you know exactly which dial to turn.
+
+<CheckUnderstanding
+  id="cu-img-frame"
+  question="You need a header image where a headline will sit on the right side. What belongs in the prompt?"
+  options={[
+    { text: '“Masterpiece, best quality, everything centered”', feedback: 'centered compositions fight the later crop and leave no calm area for the headline.' },
+    { text: '“16:9 wide frame, subject on the left third, calm negative space on the right”', correct: true, feedback: 'canvas, placement and reserved space — the three decisions that make text possible afterwards.' },
+    { text: 'Nothing — cropping later will fix the composition', feedback: 'a crop cannot invent space that was never framed; composition has to be designed in.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="control-the-frame" />
+
+## Transfer
+
+- Slides: reserve negative space where titles will actually sit.
+- Social formats: pick 1:1 / 16:9 / 9:16 first, then compose for it.
+- Iteration: if the frame feels wrong, fix placement and scale before touching style.
+
+<KeyTakeaways
+  items={[
+    'Shot scale, placement, negative space and aspect ratio are four separate dials.',
+    'Choose the canvas first — composition is designed for the ratio, not cropped into it.',
+    'Negative space is a tool: reserve it wherever text or breathing room will live.',
+  ]}
+/>
+
+## Next
+
+Next: **[Camera angle and lens](/learn/ai-images/camera-angle-and-lens)** — perspective language that changes what an image says. The [aspect ratio entry](/glossary/aspect-ratio) is the one-line version of the canvas decision.

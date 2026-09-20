@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Build your first image prompt",
+  "scenario": "You need a header image for an article about slow mornings: a cup of coffee by a window, calm and warm, nothing busy in the frame.",
+  "task": "Fill all four slots — subject, scene, style and light — then compare with the reference version.",
+  "fields": [
+    {
+      "id": "subject",
+      "label": "Subject (what is in frame)",
+      "placeholder": "One ceramic cup of coffee, gentle steam rising…",
+      "required": true
+    },
+    {
+      "id": "scene",
+      "label": "Scene (what surrounds it)",
+      "placeholder": "on a wooden windowsill with a small plant…",
+      "required": true
+    },
+    {
+      "id": "style",
+      "label": "Style (how it should look)",
+      "placeholder": "calm editorial photography, shallow depth of field…",
+      "required": true
+    },
+    {
+      "id": "light",
+      "label": "Light (time and mood)",
+      "placeholder": "soft morning light through sheer curtains…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "One clear subject beats three competing ones.",
+    "Style words work when they describe a look — “quiet editorial photography” guides; “amazing” does not."
+  ],
+  "explanation": "The four slots — subject, scene, style, light — are the difference between naming a thing and describing an image. Each slot gives the model an independent decision to make well, and each one you skip is a decision made for you. Iteration starts from a complete first draft; that is what makes it possible to fix one thing at a time.",
+  "skills": ["ai images", "prompting"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-images/subject-scene-style"],
+  "sampleSolution": "Subject: one ceramic cup of coffee with gentle steam rising. Scene: a wooden windowsill with a small plant, quiet and uncluttered. Style: calm editorial photography with shallow depth of field. Light: soft morning light through sheer curtains, warm and low-contrast.",
+  "draft": false
+}
