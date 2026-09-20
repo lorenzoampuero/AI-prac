@@ -85,6 +85,13 @@ let counter = 0;
 
   <script>
     import { initAssessment } from '../scripts/assessment';
-    initAssessment();
+
+    // Runs on first load and after client-side navigation; the init is guarded, so double-boot is safe.
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAssessment, { once: true });
+    } else {
+      initAssessment();
+    }
+    document.addEventListener('astro:page-load', initAssessment);
   </script>
 </BaseLayout>

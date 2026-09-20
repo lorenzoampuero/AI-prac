@@ -372,13 +372,25 @@ if (order) {
         import { initFixPromptExercises } from '../scripts/exercise-fix-prompt';
         import { initOrderStepsExercises } from '../scripts/exercise-order-steps';
         import { initRealChallengeExercises } from '../scripts/exercise-real-challenge';
-        initBuildPromptExercises();
-        initChoiceExercises();
-        initEvaluateOutputExercises();
-        initFindProblemExercises();
-        initFixPromptExercises();
-        initOrderStepsExercises();
-        initRealChallengeExercises();
+
+        // Bind on first load and after every client-side navigation (ClientRouter). Each init is
+        // idempotent (cards are flagged once wired), so double-boot is safe.
+        function bootExercises() {
+          initBuildPromptExercises();
+          initChoiceExercises();
+          initEvaluateOutputExercises();
+          initFindProblemExercises();
+          initFixPromptExercises();
+          initOrderStepsExercises();
+          initRealChallengeExercises();
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', bootExercises, { once: true });
+        } else {
+          bootExercises();
+        }
+        document.addEventListener('astro:page-load', bootExercises);
       </script>
     </section>
   )

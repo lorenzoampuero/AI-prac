@@ -41,6 +41,8 @@ function readStored(storage: Storage | null): StoredAssessment | null {
 export function initAssessment(): void {
   const form = document.querySelector<HTMLFormElement>('[data-assessment-form]');
   if (!form) return;
+  if (form.dataset.wired === 'true') return;
+  form.dataset.wired = 'true';
 
   const submit = form.querySelector<HTMLButtonElement>('[data-assessment-submit]');
   const retake = form.querySelector<HTMLButtonElement>('[data-assessment-retake]');

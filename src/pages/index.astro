@@ -10,6 +10,8 @@ const description =
   'Short lessons and hands-on exercises that teach you to prompt, verify, research and work with AI — free, no account, progress stays on your device.';
 
 const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+const exercises = await getCollection('exercises', ({ data }) => !data.draft);
+const terms = await getCollection('glossary', ({ data }) => !data.draft);
 const trackPriority = new Map(TRACKS.map((track, index) => [track.id, index]));
 
 const counts = new Map<string, number>();
@@ -32,8 +34,9 @@ const firstLessonHref = firstLesson
   description={description}
   structuredData={[websiteJsonLd({ name: SITE_NAME, description, path: '/' }, origin)]}
 >
-  <section class="hero">
-    <h1>Build real AI skills, one exercise at a time.</h1>
+  <section class="hero hero-enter">
+    <p class="eyebrow">Practical AI literacy</p>
+    <h1>Build real AI skills, <em>one exercise</em> at a time.</h1>
     <p class="lede">
       Short lessons and hands-on practice that teach you to prompt, verify, research and work with AI.
       No signup, no API keys — and your progress stays on your device.
@@ -43,6 +46,12 @@ const firstLessonHref = firstLesson
       <a class="button secondary" href="/learn">Browse the curriculum</a>
       <a class="button secondary" href="/assessment">Take the skills check</a>
     </div>
+    <ul class="stats-row">
+      <li><span class="stat-value">{lessons.length}</span><span class="stat-label">lessons</span></li>
+      <li><span class="stat-value">{exercises.length}</span><span class="stat-label">exercises</span></li>
+      <li><span class="stat-value">{terms.length}</span><span class="stat-label">glossary terms</span></li>
+      <li><span class="stat-value">$0</span><span class="stat-label">free, no account</span></li>
+    </ul>
   </section>
 
   <section aria-labelledby="tracks-title">
@@ -51,17 +60,30 @@ const firstLessonHref = firstLesson
       {
         TRACKS.map((track) => {
           const count = counts.get(track.id) ?? 0;
-          return (
-            <div class="card">
-              <h3>{track.name}</h3>
+          const style = `--track-color: var(--track-${track.id})`;
+          const inner = (
+            <>
+              <h3>
+                <span class="track-dot" aria-hidden="true" />
+                {track.name}
+              </h3>
               <p class="meta-line">{track.tagline}</p>
               {count > 0 ? (
-                <a href={`/learn/${track.id}`}>
-                  {count} lesson{count === 1 ? '' : 's'} available
-                </a>
+                <span class="track-count">
+                  {count} lesson{count === 1 ? '' : 's'} — start the track →
+                </span>
               ) : (
-                <p class="meta-line">Lessons arrive in a later wave.</p>
+                <span class="track-count is-future">Lessons arrive in a later wave.</span>
               )}
+            </>
+          );
+          return count > 0 ? (
+            <a class="card card--lift track-card reveal" style={style} href={`/learn/${track.id}`}>
+              {inner}
+            </a>
+          ) : (
+            <div class="card track-card reveal" style={style}>
+              {inner}
             </div>
           );
         })
@@ -71,10 +93,19 @@ const firstLessonHref = firstLesson
 
   <section aria-labelledby="how-title">
     <h2 id="how-title" class="section-title">How it works</h2>
-    <ol>
-      <li><strong>Read the concept.</strong> Two minutes, plain language, with a bad and a better example.</li>
-      <li><strong>Practice immediately.</strong> Every lesson ends in a real exercise with feedback that explains why.</li>
-      <li><strong>Transfer it.</strong> The skill works in any AI tool — not one magic prompt.</li>
+    <ol class="how-grid">
+      <li class="card reveal">
+        <p><strong>Read the concept.</strong></p>
+        <p class="meta-line">Two minutes of plain language — with a weak and a stronger example side by side.</p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:80ms">
+        <p><strong>Practice immediately.</strong></p>
+        <p class="meta-line">Every lesson ends in a real exercise; feedback explains why, never just “wrong”.</p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:160ms">
+        <p><strong>Transfer it anywhere.</strong></p>
+        <p class="meta-line">Skills that work in any AI tool — principles, not one magic prompt.</p>
+      </li>
     </ol>
   </section>
 </BaseLayout>

@@ -16,6 +16,7 @@ describe('toolchain pins', () => {
     expect(pkg.dependencies['@astrojs/mdx']).toBe('8.0.1');
     expect(pkg.dependencies['@astrojs/sitemap']).toBe('3.7.4');
     expect(pkg.dependencies['@fontsource-variable/inter']).toBe('^5.3.0');
+    expect(pkg.dependencies['@fontsource-variable/fraunces']).toBe('^5.3.0');
     expect(pkg.devDependencies['@astrojs/check']).toBe('0.9.10');
     expect(pkg.devDependencies.typescript).toBe('6.0.3');
     expect(pkg.devDependencies.vitest).toBe('5.0.1');

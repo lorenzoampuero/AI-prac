@@ -1,5 +1,7 @@
 ---
 import '@fontsource-variable/inter';
+import '@fontsource-variable/fraunces';
+import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
 import { SITE_NAME } from '../config/site';
 import '../styles/global.css';
@@ -21,6 +23,18 @@ const canonical = new URL(Astro.url.pathname, origin);
 // Vercel Web Analytics — enabled only when the build runs on Vercel (process.env.VERCEL is set there).
 // Local and any non-Vercel hosting builds ship zero third-party scripts; see /privacy for the promise.
 const showAnalytics = Boolean(process.env.VERCEL);
+
+const pathname = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+
+const NAV = [
+  { href: '/learn', label: 'Learn' },
+  { href: '/practice', label: 'Practice' },
+  { href: '/assessment', label: 'Assessment' },
+  { href: '/glossary', label: 'Glossary' },
+  { href: '/about', label: 'About' },
+];
 ---
 
 <!doctype html>
@@ -28,6 +42,39 @@ const showAnalytics = Boolean(process.env.VERCEL);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Resolve the theme before first paint (no flash): a stored choice wins, otherwise follow the system.
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var saved = null;
+        try {
+          saved = localStorage.getItem('aip:theme');
+        } catch (err) {
+          saved = null;
+        }
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        var apply = function (theme) {
+          root.dataset.theme = theme;
+        };
+        if (saved === 'light' || saved === 'dark') {
+          apply(saved);
+        } else {
+          apply(mq.matches ? 'dark' : 'light');
+          mq.addEventListener('change', function (event) {
+            var has = null;
+            try {
+              has = localStorage.getItem('aip:theme');
+            } catch (err) {
+              has = null;
+            }
+            if (!has) apply(event.matches ? 'dark' : 'light');
+          });
+        }
+      })();
+    </script>
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14110c" media="(prefers-color-scheme: dark)" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
@@ -46,18 +93,31 @@ const showAnalytics = Boolean(process.env.VERCEL);
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
     {showAnalytics && <Analytics />}
+    <ClientRouter />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <header class="site-header" transition:persist="site-header">
       <nav class="container" aria-label="Main">
-        <a class="brand" href="/">{SITE_NAME}</a>
-        <span class="nav-links">
-          <a href="/learn">Learn</a>
-          <a href="/practice">Practice</a>
-          <a href="/assessment">Assessment</a>
-          <a href="/glossary">Glossary</a>
-          <a href="/about">About</a>
+        <a class="brand" href="/">{SITE_NAME}<span class="brand-dot">.</span></a>
+        <span class="nav-side">
+          <span class="nav-links">
+            {NAV.map((item) => (
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))}
+          </span>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span class="visually-hidden">Toggle dark mode</span>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+            </svg>
+          </button>
         </span>
       </nav>
     </header>
@@ -65,9 +125,34 @@ const showAnalytics = Boolean(process.env.VERCEL);
       <slot />
     </main>
     <footer class="site-footer">
-      <div class="container">
-        <p>Free, no account needed — progress is stored on this device only. · <a href="/privacy">Privacy</a></p>
+      <div class="container footer-grid">
+        <div>
+          <p><strong>{SITE_NAME}.</strong></p>
+          <p class="footer-tagline">
+            Practical AI skills, one exercise at a time. Free, no account — progress is stored on this
+            device only.
+          </p>
+        </div>
+        <div>
+          <h2>Learn</h2>
+          <ul>
+            <li><a href="/learn">Curriculum</a></li>
+            <li><a href="/practice">Practice</a></li>
+            <li><a href="/assessment">Skills check</a></li>
+            <li><a href="/glossary">Glossary</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>About</h2>
+          <ul>
+            <li><a href="/about">How it works</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+          </ul>
+        </div>
       </div>
     </footer>
+    <script>
+      import '../scripts/ui';
+    </script>
   </body>
 </html>
