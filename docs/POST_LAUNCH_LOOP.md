@@ -83,3 +83,9 @@ compare incoming queries against the P1 clusters in `research/KEYWORD_UNIVERSE.m
 - Font and Astro minor upgrades → re-run the full verify chain + audit script; pins are intentional.
 - If load patterns ever justify a CDN/edge change, the static output keeps that a hosting-side switcheroo
   with no code changes.
+- **New-domain security false positives:** reputation heuristics may block a freshly registered domain
+  (observed 2026-09-20: RAV Endpoint Protection blocked `www.getaipractice.site` on the owner's machine).
+  Same-day checks: Google Safe Browsing **clean**, Sucuri SiteCheck **clean** — nothing to fix on the
+  site. Allow it locally if needed and file a false-positive report with the vendor
+  (`support@reasonlabs.com` + `reasonlabs.com/help` for RAV); reputation consolidates with domain age,
+  indexing and traffic.
