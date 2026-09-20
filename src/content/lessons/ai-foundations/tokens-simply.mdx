@@ -20,12 +20,20 @@ draft: false
 import ExerciseCard from '../../../components/ExerciseCard.astro';
 import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
 import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import TokenSplit from '../../../components/lesson/TokenSplit.astro';
 
 A [token](/glossary/token) is the unit of text a model actually processes — a small chunk, roughly a word piece. "Cat" is usually one token; "internationalization" may be several; a single emoji can be two or more. Models never see your letters the way you do: everything is converted to tokens first.
 
 ## How the pieces are cut
 
 Tokenizers split text according to patterns learned from data: common words stay whole, rarer words get sliced into fragments (`international` + `ization`), and unusual characters — accents, code punctuation, emojis — often cost extra pieces.
+
+Here is one sentence, cut the way a model reads it:
+
+<TokenSplit
+  text="Unbelievably, internationalization breaks into pieces."
+  tokens={['Un', 'believ', 'ably', ',', ' international', 'ization', ' breaks', ' into', ' pieces', '.']}
+/>
 
 For everyday English, a rule of thumb is **about ¾ of a word per token** — roughly 100 tokens per 75 words. It is only an estimate: the count depends on the model, the language (many non-English languages cost more) and the content itself. Code and tables are token-hungry.
 

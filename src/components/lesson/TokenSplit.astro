@@ -1,0 +1,27 @@
+---
+// One sentence, split into tokens — the way a model reads it. Chips render immediately (no-JS safe);
+// the script staggers them in on first view and offers a replay.
+interface Props {
+  text: string;
+  tokens: string[];
+}
+const { text, tokens } = Astro.props;
+---
+<figure class="ts-split" data-ts-split aria-label={`Tokenisation example: ${text}`}>
+  <ol class="ts-row">
+    {tokens.map((token, index) => (
+      <li class="ts-token" style={`--i:${index}`}><span class="ts-token-text">{token}</span></li>
+    ))}
+  </ol>
+  <figcaption class="ts-caption" data-ts-caption>
+    The sentence “{text}” is read as <strong>{tokens.length} tokens</strong> — chunks, not letters.
+    Punctuation, rare words and word-fragments each take their own piece (example tokenisation;
+    exact cuts vary by model).
+  </figcaption>
+  <div class="visual-controls">
+    <button class="button secondary" type="button" data-ts-replay>Replay the split</button>
+  </div>
+  <script>
+    import '../../scripts/visuals';
+  </script>
+</figure>

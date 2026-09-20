@@ -24,6 +24,7 @@ import ExerciseCard from '../../../components/ExerciseCard.astro';
 import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
 import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 import StepReveal from '../../../components/lesson/StepReveal.astro';
+import DiffusionStrip from '../../../components/lesson/DiffusionStrip.astro';
 
 A text-to-image model takes your prompt and **constructs** a picture — it does not look one up. Internally it starts from random noise and refines it step by step toward something that matches your words. The useful part is simpler than the internals: **generation** creates a new image from scratch, while **editing** changes an image you already have — and most tools treat these as separate modes.
 
@@ -38,6 +39,10 @@ A text-to-image model takes your prompt and **constructs** a picture — it does
     'The finished image is decoded and returned. Run it again and you get a new sample, not the same picture twice.',
   ]}
 />
+
+Here is the same pipeline as a picture — five passes from noise to image:
+
+<DiffusionStrip />
 
 ## Generation vs editing — two different jobs
 

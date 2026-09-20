@@ -20,6 +20,7 @@ draft: false
 import ExerciseCard from '../../../components/ExerciseCard.astro';
 import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
 import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import ContextMeter from '../../../components/lesson/ContextMeter.astro';
 
 A [context window](/glossary/context-window) is the total amount of text a model can consider at one time. Your current message, earlier turns, pasted documents and the model's own replies all share it. When people say a model "remembers" — this is what they mean: the text still inside the window.
 
@@ -33,6 +34,21 @@ Two things, and both matter:
 
 - **Truncation.** Systems cut from the oldest end first — measured in [tokens](/glossary/token), the start of a long chat is the first to fall out. Some tools warn you; many do not.
 - **Attention dilution.** Even content still inside a very large window competes for attention. Instructions buried deep in a 100-page paste are easier to lose than the same instruction stated right where it is needed.
+
+Watch the window fill — and start pushing the oldest text out:
+
+<ContextMeter
+  capacity="The context window"
+  messages={[
+    { label: 'Summarise the contract', kind: 'you' },
+    { label: 'contract.pdf (40 pages)', kind: 'doc' },
+    { label: 'Summary ready', kind: 'ai' },
+    { label: 'Draft a reply', kind: 'you' },
+    { label: 'Reply drafted', kind: 'ai' },
+    { label: 'Compare both versions', kind: 'you' },
+    { label: 'Comparison below', kind: 'ai' },
+  ]}
+/>
 
 ## A bad example
 

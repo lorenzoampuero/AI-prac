@@ -20,6 +20,7 @@ draft: false
 import ExerciseCard from '../../../components/ExerciseCard.astro';
 import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
 import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import NextTokenDemo from '../../../components/lesson/NextTokenDemo.astro';
 
 A large language model (LLM) is a prediction engine. It generates text by repeatedly answering one narrow question — **given everything so far, what comes next?** — first one token, then another, then another. That is the whole mechanism, and it explains most of the quirks you will meet.
 
@@ -28,6 +29,19 @@ A large language model (LLM) is a prediction engine. It generates text by repeat
 The idea is autocomplete — the same thing your phone does in a text field, scaled dramatically. The model has no database of sentences and no rulebook. It has numeric weights, learned from enormous amounts of text, that estimate which token is likely to follow which context.
 
 The competence is real, but it emerges from that single discipline. To continue a legal paragraph, it has learned what legal continuations look like. To continue a recipe, recipe-like text. Asking it a question is really handing it a pattern to continue.
+
+Here is the mechanism drawn out — a partial sentence, and the continuation the model weighs before picking:
+
+<NextTokenDemo
+  prompt="The cat sat on the"
+  options={[
+    { token: 'mat', pct: 41 },
+    { token: 'floor', pct: 24 },
+    { token: 'windowsill', pct: 15 },
+    { token: 'sofa', pct: 11 },
+    { token: 'everything else', pct: 9 },
+  ]}
+/>
 
 ## Three consequences you will meet daily
 

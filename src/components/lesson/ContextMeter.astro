@@ -1,0 +1,54 @@
+---
+// The context window, visualised as a sliding strip: new messages push in from the right while the
+// oldest fall out on the left. Static first state renders without JavaScript; the script slides
+// through the states on first view and offers a replay.
+interface Message {
+  label: string;
+  kind: 'you' | 'ai' | 'doc';
+}
+interface Props {
+  capacity: string;
+  messages: Message[];
+  visible?: number;
+}
+const { capacity, messages, visible = 4 } = Astro.props;
+const states = Math.max(1, messages.length - visible + 1);
+const kindLabel: Record<Message['kind'], string> = { you: 'You', ai: 'AI', doc: 'Doc' };
+---
+<section
+  class="cm-demo"
+  data-cm-demo
+  data-cm-visible={String(visible)}
+  aria-label={`The context window (${capacity}), visualised as a sliding strip of messages`}
+>
+  <p class="cm-status">
+    <span class="cm-status-label">{capacity}</span>
+    <span class="cm-status-note">everything the model can see right now</span>
+  </p>
+  <div class="cm-window">
+    <div class="cm-track" data-cm-track>
+      {messages.map((message, index) => (
+        <div class={`cm-block cm-${message.kind}`} data-cm-block>
+          <span class="cm-kind">{kindLabel[message.kind]}</span>
+          <span class="cm-label">{message.label}</span>
+          <span class="cm-index" aria-hidden="true">{index + 1}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+  <p class="cm-caption">
+    New messages push in from the right — and the oldest text slides out of the window on the left.
+    Outside the window there is nothing: the model cannot look it up later.
+  </p>
+  <div class="visual-controls">
+    <button class="button secondary" type="button" data-cm-replay>Play it again</button>
+    <span class="cm-dots" aria-hidden="true">
+      {Array.from({ length: states }).map((_, index) => (
+        <span class={`cm-dot${index === 0 ? ' is-active' : ''}`} />
+      ))}
+    </span>
+  </div>
+  <script>
+    import '../../scripts/visuals';
+  </script>
+</section>

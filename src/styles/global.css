@@ -2020,3 +2020,442 @@ a.track-card:hover {
 .lesson-nav-card .lnc-title {
   font-weight: 600;
 }
+
+/* ==========================================================================
+   Animated teaching visuals (lesson diagrams)
+   NextTokenDemo · TokenSplit · ContextMeter · DiffusionStrip
+   Content is readable without JS; classes only drive the choreography.
+   ========================================================================== */
+
+.visual-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+html:not(.js) .visual-controls {
+  display: none;
+}
+
+/* Next-token demo */
+
+.nt-demo {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-5) 0;
+}
+
+.nt-prompt {
+  margin: 0 0 var(--space-3);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.nt-prompt-text {
+  font-family: var(--font-display);
+}
+
+.nt-caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  margin-left: 0.15em;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: nt-blink 1.15s steps(2, start) infinite;
+}
+
+.js:not(.nt-reduced) .nt-armed .nt-caret {
+  opacity: 0;
+}
+
+.nt-demo.is-in .nt-caret {
+  opacity: 1;
+}
+
+@keyframes nt-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+.nt-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.nt-option {
+  display: grid;
+  grid-template-columns: 6.6rem 1fr 2.6rem;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nt-token {
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nt-bar {
+  display: block;
+  height: 0.85rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.nt-fill {
+  display: block;
+  height: 100%;
+  width: var(--nt-target);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--primary-strong, var(--primary)));
+  transform-origin: left center;
+}
+
+.js .nt-armed .nt-fill {
+  width: 0;
+}
+
+.nt-demo.is-in .nt-fill {
+  width: var(--nt-target);
+  transition: width var(--dur-4, 700ms) var(--ease-out) calc(var(--i, 0) * 110ms);
+}
+
+.nt-pct {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+.nt-option.is-picked .nt-token {
+  color: var(--accent);
+}
+
+.nt-option.is-picked .nt-fill {
+  background: var(--accent);
+}
+
+.nt-option.is-picked .nt-pct {
+  color: var(--accent);
+}
+
+.nt-caption {
+  margin: var(--space-3) 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.nt-result {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Token split */
+
+.ts-split {
+  margin: var(--space-5) 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-4) var(--space-5);
+}
+
+.ts-row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.ts-token {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--bg-soft);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.ts-token-text {
+  white-space: pre;
+}
+
+.js .ts-armed .ts-token {
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+}
+
+.ts-split.is-in .ts-token {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-2, 240ms) var(--ease-out) calc(var(--i, 0) * 55ms),
+    transform var(--dur-2, 240ms) var(--ease-spring) calc(var(--i, 0) * 55ms);
+}
+
+.ts-caption {
+  margin: var(--space-3) 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Context meter */
+
+.cm-demo {
+  margin: var(--space-5) 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-4) var(--space-5);
+}
+
+.cm-status {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin: 0 0 var(--space-3);
+}
+
+.cm-status-label {
+  font-weight: 650;
+  font-size: 0.9rem;
+}
+
+.cm-status-note {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.cm-window {
+  overflow: hidden;
+  border: 1px dashed var(--border-strong, var(--border));
+  border-radius: var(--radius-m);
+  background: var(--bg-soft);
+  padding: 0.5rem;
+}
+
+.cm-track {
+  display: flex;
+  gap: 0.5rem;
+  transform: translateX(calc(-1 * var(--cm-index, 0) * (var(--cm-block-w) + 0.5rem)));
+  transition: transform 800ms var(--ease-out);
+}
+
+.cm-block {
+  --cm-block-w: 7.4rem;
+  position: relative;
+  flex: none;
+  width: var(--cm-block-w);
+  display: grid;
+  gap: 0.2rem;
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  padding: 0.5rem 0.6rem;
+  min-height: 4.6rem;
+}
+
+.cm-kind {
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cm-ai .cm-kind {
+  color: var(--primary);
+}
+
+.cm-doc .cm-kind {
+  color: var(--muted);
+}
+
+.cm-label {
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+.cm-index {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cm-block.is-dropped {
+  opacity: 0.35;
+  border-style: dashed;
+}
+
+.cm-block.is-dropped .cm-label {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.cm-caption {
+  margin: var(--space-3) 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.cm-dots {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.cm-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: var(--radius-full);
+  background: var(--border);
+  transition: background var(--dur-2) var(--ease-out);
+}
+
+.cm-dot.is-active {
+  background: var(--accent);
+}
+
+/* Diffusion strip */
+
+.ds-strip {
+  margin: var(--space-5) 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: var(--space-4) var(--space-5);
+  --ds-sky: #efe6d6;
+  --ds-sun: #d97706;
+  --ds-mountain: #14584a;
+  --ds-mountain-2: #3a7a68;
+  --ds-ground: #a16207;
+}
+
+html[data-theme='dark'] .ds-strip {
+  --ds-sky: #1d2a26;
+  --ds-sun: #f59e0b;
+  --ds-mountain: #58bb9f;
+  --ds-mountain-2: #3d8f78;
+  --ds-ground: #b8860b;
+}
+
+.ds-frames {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.ds-frame {
+  flex: 1 1 5.4rem;
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+  min-width: 0;
+}
+
+.ds-frame svg {
+  width: 100%;
+  max-width: 8.5rem;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+
+.ds-sky {
+  fill: var(--ds-sky);
+}
+
+.ds-sun {
+  fill: var(--ds-sun);
+}
+
+.ds-mountain {
+  fill: var(--ds-mountain);
+}
+
+.ds-mountain-2 {
+  fill: var(--ds-mountain-2);
+}
+
+.ds-ground {
+  fill: var(--ds-ground);
+}
+
+.ds-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.js .ds-armed .ds-frame {
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+}
+
+.ds-strip.is-in .ds-frame {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-3, 420ms) var(--ease-out) calc(var(--i, 0) * 150ms),
+    transform var(--dur-3, 420ms) var(--ease-spring) calc(var(--i, 0) * 150ms);
+}
+
+.ds-caption {
+  margin: var(--space-3) 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nt-caret {
+    animation: none;
+  }
+
+  .js .nt-armed .nt-fill,
+  .nt-demo.is-in .nt-fill {
+    width: var(--nt-target);
+    transition: none;
+  }
+
+  .js .ts-armed .ts-token,
+  .ts-split.is-in .ts-token,
+  .js .ds-armed .ds-frame,
+  .ds-strip.is-in .ds-frame {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cm-track {
+    transition: none;
+  }
+}

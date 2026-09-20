@@ -1,0 +1,44 @@
+---
+// Next-token prediction, visualised: a prompt and the probability bars for each plausible
+// continuation. Static bars + numbers render without JavaScript; the script adds the grow-in
+// animation and a "sample" button that demonstrates that the top token is not always picked.
+interface Option {
+  token: string;
+  pct: number;
+}
+interface Props {
+  prompt: string;
+  options: Option[];
+}
+const { prompt, options } = Astro.props;
+let picked: Option | undefined;
+for (const option of options) {
+  if (!picked || option.pct > picked.pct) picked = option;
+}
+---
+<section class="nt-demo" data-nt-demo aria-label="Next-token prediction, visualised">
+  <p class="nt-prompt">
+    <span class="nt-prompt-text">“{prompt}”</span><span class="nt-caret" aria-hidden="true"></span>
+  </p>
+  <ul class="nt-options">
+    {options.map((option, index) => (
+      <li class="nt-option" data-nt-option data-nt-pct={String(option.pct)} style={`--i:${index}`}>
+        <span class="nt-token" style={`--i:${index}`}>{option.token}</span>
+        <span class="nt-bar" aria-hidden="true"><span class="nt-fill" style={`--nt-target:${option.pct}%;--i:${index}`}></span></span>
+        <span class="nt-pct">{option.pct}%</span>
+      </li>
+    ))}
+  </ul>
+  <p class="nt-caption">
+    The model scores every plausible continuation — then picks one to continue the sentence. The
+    most likely token ({picked?.token}, {picked?.pct}%) is the usual pick, not the only possible one.
+  </p>
+  <div class="visual-controls">
+    <button class="button secondary" type="button" data-nt-sample>Sample the next token</button>
+    <p class="nt-result" data-nt-result aria-live="polite">Sample it a few times — a low-probability token can still win a round.</p>
+  </div>
+  <script type="application/json" data-nt-config set:html={JSON.stringify(options)} />
+  <script>
+    import '../../scripts/visuals';
+  </script>
+</section>
