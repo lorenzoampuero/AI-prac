@@ -76,6 +76,11 @@ redirect), then choose the hosting target (any static host/CDN works — the out
 - **Pending alignment:** the served URL (`www`) differs from the canonical/sitemap origin (apex). Set
   `getaipractice.site` as the primary domain in Vercel so `www` redirects to the apex and redirects
   agree with the canonical.
+- **Discovery baseline (2026-09-20):** zero indexed results externally (`site:` queries empty — day 0);
+  crawl-readiness verified (robots allows all, sitemap 108 URLs, no `X-Robots-Tag` on production).
+  IndexNow key shipped at `/5f3a9c1e7b2d4f8a6c0e2b9d1f7a3c5e.txt`; `npm run indexnow` notifies
+  Bing/Yandex; Google indexing flows through Search Console (owner step). See the Discovery section in
+  `docs/POST_LAUNCH_LOOP.md`.
 
 ## Post-launch verification (owner-owned, day 1–7)
 

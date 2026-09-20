@@ -1,13 +1,15 @@
 # POST-LAUNCH LOOP — maintenance, corrections and expansion rules
 
-**Date: 2026-09-19 · Companion to `docs/LAUNCH_READINESS.md`. Everything here is manual by design: no
-analytics, no automation accounts, no third-party scripts on the site.**
+**Date: 2026-09-19 · Updated 2026-09-20 · Companion to `docs/LAUNCH_READINESS.md`. Everything here is
+manual by design: no automation accounts; the only runtime addition is the owner-approved cookieless
+Vercel Analytics (gated to Vercel builds — see Metrics policy).**
 
 ## Cadence
 
 | When | What | Where the evidence goes |
 |---|---|---|
 | **Per report** | Correction workflow (below) | `docs/CONTENT_QA.md` corrections log |
+| **Per content release** | Run `npm run indexnow` once the deploy is live (Bing/Yandex ping; Google flows through the sitemap) | — (release note) |
 | **Weekly (light)** | Triage the public correction channel (opens with launch). Verify claim → fix or cut | Same log |
 | **Monthly** | Search Console: top queries vs the `seo.intent` map (`research/SEO_INTENT_MAP.md`). Find high-impression pages with weak content or missing intents | Notes in `docs/CONTENT_QA.md` |
 | **Quarterly** | Refresh `research/COMPETITOR_MATRIX.md`; re-run axe sweep + `scripts/audit-dist.mjs`; re-read `docs/CONTENT_STANDARDS.md` before any content batch | `docs/SEO_A11Y_PERF.md` update |
@@ -36,6 +38,33 @@ remaining Foundations ×4, remaining Work ×9), one wave at a time, and only whe
 
 Never: pages per profession, employer or tool ("prompt for [job]"), duplicate intents, or thin pages to
 chase volume. The registry tests (`tests/registry.test.ts`) enforce the slug and intent rules mechanically.
+
+## Discovery & indexing (first 14 days)
+
+**Day-0 baseline (2026-09-20):** zero indexed results on external engines (`site:` queries empty) —
+expected on a domain hours old; Google still has to crawl a brand-new site. Crawl-readiness is verified:
+robots allows everything, sitemap holds 108 URLs, production carries no `X-Robots-Tag`.
+
+**Owner step — Search Console (once):**
+
+1. `search.google.com/search-console` → Add property → **Domain** type → verify via DNS TXT (one
+   property covers apex, www and every subdomain).
+2. Sitemaps → submit `https://getaipractice.site/sitemap-index.xml`.
+3. URL Inspection → **Request Indexing** for the flagship pages: `/`, `/learn`, `/practice`,
+   `/assessment`, `/glossary` and one flagship lesson.
+4. Bing Webmaster Tools is optional (it can import the sitemap from Search Console).
+
+**Ping the other engines (recurring):** `npm run indexnow` submits every sitemap URL to IndexNow
+(Bing, Yandex, …). Run it once the key file is live, then after each content release — never for
+docs-only deploys. Google has no ping API: indexing there flows through the sitemap + crawling.
+
+**Honest timeline:** indexing of core pages — days (faster with Request Indexing) · first long-tail
+impressions — 2–6 weeks · meaningful organic clicks — 2–6 months of content-led work · competitive head
+terms (“prompt engineering”) — much longer. Backlinks are the slow variable: share the site only where
+it is genuinely useful.
+
+**Weekly spot-check (first month):** `site:getaipractice.site` plus a branded query on Google and Bing;
+compare incoming queries against the P1 clusters in `research/KEYWORD_UNIVERSE.md`; log surprises here.
 
 ## Metrics policy
 
