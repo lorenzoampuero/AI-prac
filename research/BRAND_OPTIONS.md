@@ -97,3 +97,17 @@ The realistic path for the current brand is **`aipractice.app`** (matches the sh
 Google Registry, HTTPS enforced via HSTS preload, available today) with `aipractice.dev` as the
 technical-audience alternative and `aipractice.site` as the ImgExact-style fallback. RDAP is a strong
 signal, not a guarantee — confirm at a registrar and run the trademark screen before buying.
+
+**Follow-up probe — phrase-style candidates (2026-09-20):**
+
+| Domain | Registry verdict |
+|---|---|
+| **practiceaboutai.com** | **AVAILABLE** (best .com for the concept) |
+| **practiceaboutai.app** | **AVAILABLE** |
+| practiceabout.ai | reported available via rdap.org (verify at registrar; `.ai` renews at ~€60–100+/yr) |
+| **getaipractice.com** | **AVAILABLE** (get-hack fallback) |
+| practicewithai.com · practiceai.com | registered (Namecheap / Name.com) |
+
+Note on `practiceaboutai.com`: descriptive and keyword-rich, but 18 characters, slower to dictate, and
+the phrase reads slightly off ("practice *about* AI"). A legitimate second choice; `aipractice.app`
+remains the shortest, on-brand match.

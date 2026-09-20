@@ -1,26 +1,29 @@
-// Domain availability check via RDAP (registry data) — much stronger signal than DNS.
-// 404 from rdap.org => domain not found in registry (very likely available to register).
-// 200 => registered. Other statuses => inconclusive (rate limit, unsupported TLD).
-// Run: node scripts/domain-check.mjs
-const domains = [
-  // Current brand: "AI Practice"
-  'aipractice.com',
-  'aipractice.app',
-  'aipractice.dev',
-  'aipractice.io',
-  'aipractice.site',
-  // Research finalists
-  'aiskillslab.com',
-  'aiskillslab.app',
-  'ailiteracy.com',
-  'promptgym.com',
-  'promptgym.app',
-  'aikata.com',
-  'promptkata.com',
-  'aidrills.com',
-  'promptloop.com',
-  'practicebench.com',
-];
+// Domain availability check via registry RDAP endpoints directly (no proxy), with a browser-like UA.
+// 404 => not in registry (very likely available). 200 => registered. Other => DNS fallback (weak signal).
+// Run: node scripts/domain-check.mjs [domain1 domain2 ...]
+import { resolve4 } from 'node:dns/promises';
+
+const domains = process.argv.slice(2).length
+  ? process.argv.slice(2)
+  : [
+      // Current brand: "AI Practice"
+      'aipractice.com',
+      'aipractice.app',
+      'aipractice.dev',
+      'aipractice.io',
+      'aipractice.site',
+      // Research finalists
+      'aiskillslab.com',
+      'aiskillslab.app',
+      'ailiteracy.com',
+      'promptgym.com',
+      'promptgym.app',
+      'aikata.com',
+      'promptkata.com',
+      'aidrills.com',
+      'promptloop.com',
+      'practicebench.com',
+    ];
 
 const HEADERS = {
   accept: 'application/rdap+json',
@@ -42,12 +45,14 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 for (const domain of domains) {
   let verdict = 'inconclusive';
   let detail = '';
+  let resolved = false;
   for (const url of endpointsFor(domain)) {
     try {
       const response = await fetch(url, { headers: HEADERS, redirect: 'follow' });
       if (response.status === 404) {
         verdict = 'AVAILABLE (not in registry)';
         detail = ` [via ${new URL(url).host}]`;
+        resolved = true;
         break;
       }
       if (response.status === 200) {
@@ -57,6 +62,7 @@ for (const domain of domains) {
           ?.vcardArray?.[1]?.find((row) => row[0] === 'fn')?.[3];
         verdict = 'registered';
         detail = ` [via ${new URL(url).host}]${registrar ? ` (registrar: ${registrar})` : ''}`;
+        resolved = true;
         break;
       }
       detail = ` (HTTP ${response.status} via ${new URL(url).host})`;
@@ -65,7 +71,17 @@ for (const domain of domains) {
     }
     await sleep(250);
   }
-  console.log(`${domain.padEnd(18)} ${verdict}${detail}`);
+  if (!resolved) {
+    // Weak fallback: DNS. Resolving strongly suggests registered; NXDOMAIN proves nothing.
+    try {
+      const addresses = await resolve4(domain);
+      verdict = 'inconclusive (DNS resolves — likely registered)';
+      detail = ` (${addresses[0]})${detail}`;
+    } catch {
+      verdict = 'inconclusive (RDAP blocked; DNS NXDOMAIN — weak signal, check a registrar)';
+    }
+  }
+  console.log(`${domain.padEnd(24)} ${verdict}${detail}`);
   await sleep(400);
 }
 
