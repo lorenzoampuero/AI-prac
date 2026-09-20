@@ -2,7 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getTrack } from '../../data/tracks';
-import { breadcrumbJsonLd } from '../../seo/schema';
+import { breadcrumbJsonLd, courseJsonLd } from '../../seo/schema';
 
 export async function getStaticPaths() {
   const lessons = await getCollection('lessons', ({ data }) => !data.draft);
@@ -35,6 +35,18 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
         { name: 'Learn', path: '/learn' },
         { name: info?.name ?? trackId ?? 'Track', path: `/learn/${trackId}` },
       ],
+      origin,
+    ),
+    courseJsonLd(
+      {
+        name: info?.name ?? trackId ?? 'Track',
+        description: `${info?.tagline ?? ''} Free lessons with hands-on practice; no account required.`.trim(),
+        path: `/learn/${trackId}`,
+        lessons: lessons.map((lesson) => ({
+          name: lesson.data.title,
+          path: `/learn/${lesson.data.track}/${lesson.id.split('/').slice(1).join('/')}`,
+        })),
+      },
       origin,
     ),
   ]}

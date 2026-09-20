@@ -1,0 +1,101 @@
+---
+title: Style references, honestly
+description: "Reference images steer look and feel — palette, light, texture — when you treat them as ingredients to decompose, not as a copy button."
+track: ai-images
+order: 11
+level: intermediate
+estimatedMinutes: 5
+skills: ["ai images", "references"]
+prerequisites: ["ai-images/consistency-across-images"]
+learningOutcome: "Use references for look and feel without overclaiming them."
+class: evergreen
+sources: []
+seo:
+  intent: "style reference images in ai generation — what they do and do not control"
+exercises: ["use-the-reference-well"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+A reference image is not a copy button. It is a bag of attributes — palette, light, texture, medium, mood — and the craft is taking the attributes you want while keeping authorship of the content. “Same as the reference” asks for everything at once, including the parts you must change. Decomposed attributes give you the look, on your terms.
+
+## What references do well
+
+- **Palette** — the exact family of colours, including the accents.
+- **Light** — direction, quality and mood: “soft window light from the left, warm evening.”
+- **Texture and medium** — watercolour grain, film grain, matte surfaces, print texture.
+- **Genre and mood** — editorial photo, flat vector, quiet minimalism.
+
+## What they do poorly
+
+- **Exact composition** — layouts do not transfer reliably, and copying one is usually not what you actually need.
+- **Exact likeness** — faces and mascots carried from a reference drift; that is a job for a locked description and edits, not a reference alone.
+- **“The style” as one thing** — every maker’s style is a blend of many decisions; a model reproduces influences, not a single hand. Replicating one specific artwork or one living artist’s signature output wholesale is also where the legal and ethical questions start — referencing look and feel, as one influence among several, is the ordinary creative workflow.
+
+## Two ways to reference
+
+1. **In words** — unpack the reference into attributes and describe them: “muted terracotta and sage, soft diffused light, visible paper grain, calm editorial spacing.”
+2. **As an image** — where your tool accepts reference images, supply it and say *what to take*: “use its palette and light; a new composition of a reading nook, my own layout.”
+
+<PromptCompare
+  weak={"make it in the exact same style as this reference photo, identical look"}
+  strong={"Using the reference for palette, light and texture only — terracotta and warm neutrals, soft window light from the left, visible paper grain — illustrate a quiet reading nook with my own layout and furniture"}
+  notes={[
+    'The weak line asks for everything, including the composition you do not want to copy.',
+    'The strong line names the attributes taken from the reference: palette, light, texture.',
+    '“My own layout” states what stays yours — the reference influences, it does not author.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Make it exactly like this photo.”
+>
+> Everything is up for transfer — including the layout and details you needed to change. And “exactly” is not a service the model provides anyway.
+
+## A better example
+
+> **Ask:** “Take the reference’s palette and light; build my own composition per the brief below.”
+>
+> Influences named, authorship kept. The result carries the look you loved without the parts you did not.
+
+## Why it works
+
+Styles decompose into attributes, and attributes are renderable — that is the same mechanism as every other lesson in this track. “Exact style” is not a renderable attribute; it is a bundle the model can only imitate approximately while guessing what mattered. By naming what you take from a reference, you make the transfer deliberate, combinable with other influences, and honest about where the design comes from. You also get something you can put in a brief or a credit line: *inspired by X for palette and light*, not *copied from X*.
+
+<CheckUnderstanding
+  id="cu-img-reference"
+  question="You love the palette and light of a photo, but the layout must be your own design. What makes the best use of the reference?"
+  options={[
+    { text: 'Supply it and ask for “exactly this image”', feedback: 'that copies the layout you must not copy — and “exactly this” is not something the model can honour.' },
+    { text: 'Take its attributes — palette, light, texture — into words or mark the reference as an influence, then describe your own composition', correct: true, feedback: 'you keep the look you loved, keep authorship of the layout, and the instruction is renderable.' },
+    { text: 'Add “in the style of” plus the source name to every prompt', feedback: 'a name is not a style description — it bundles everything, including the parts you wanted to change.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="use-the-reference-well" />
+
+## Transfer
+
+- Client work: unpack references into attribute lists — it doubles as the creative brief.
+- Mood boards: mix two or three references by naming the attribute taken from each.
+- When a reference transfers badly, check which attribute you actually wanted — usually palette or light, not composition.
+- Give credit honestly: influences named, authorship kept.
+
+<KeyTakeaways
+  items={[
+    'References are attribute bags: palette, light, texture, mood — take what you want, name it.',
+    '“Same as the reference” asks for the parts you needed to change; exact style is not renderable.',
+    'Referencing look and feel is ordinary practice; replicating a specific artwork or a living artist’s signature output is where the questions start.',
+  ]}
+/>
+
+## Next
+
+Next: **[Negative constraints](/learn/ai-images/negative-constraints)** — what actually happens to the elements you do not want. The [style reference entry](/glossary/style-reference) sums up the term, and the [generative AI entry](/glossary/generative-ai) covers the machinery behind influence and drift.

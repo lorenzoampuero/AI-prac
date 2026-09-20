@@ -1,0 +1,98 @@
+---
+title: Consistency across images
+description: "A character or brand that must look the same in every image needs a system, not luck: a locked description, reused mechanics and edits instead of re-rolls."
+track: ai-images
+order: 10
+level: advanced
+estimatedMinutes: 6
+skills: ["ai images", "consistency"]
+prerequisites: ["ai-images/iterate-and-edit"]
+learningOutcome: "Keep recurring subjects stable across a series of images."
+class: evergreen
+sources: []
+seo:
+  intent: "consistent characters and style across ai images — character sheet method"
+exercises: ["judge-the-image-series"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Every generation samples anew — that is the same property that makes results feel alive, and it is the enemy of a series. If a character, product or style must look the same across many images, consistency has to be engineered: **freeze the description, reuse the mechanics, and edit instead of re-rolling.**
+
+## Why series drift
+
+Each run decides everything fresh from your words. Re-describe your character loosely, in different words each time, and you re-open every decision — fur colour, proportions, style, line weight — for a new roll. Small phrasing changes move big properties. The fix is not “try harder to describe it the same”; it is having a description that is *the same by construction*.
+
+## The character sheet
+
+<PromptCompare
+  weak={"a friendly fox character for our storybook, cute style"}
+  strong={"Milo, a small red fox with a white chest patch, one notched left ear and dark paws; flat vector style, thick cream outlines, muted forest palette, soft even light"}
+  notes={[
+    'The weak line re-opens every decision each time it is rephrased: any fox, any style, any palette.',
+    'The character sheet fixes name, features, palette, style and light — the same words go into every prompt, unchanged.',
+    'Iteration happens on the scene around the character, not on the character itself.',
+  ]}
+/>
+
+## Mechanics that help
+
+- **Lock the text.** Keep the sheet in a file and paste it verbatim into every prompt. Never paraphrase per image — paraphrasing is re-rolling.
+- **Reuse the mechanics your tool offers.** Some tools expose a seed that fixes the starting randomness; reference images and edit chains also carry likeness forward. Use what your tool has — the principle is the same: fewer fresh samples.
+- **Edit around the subject.** When a composition is accepted, [edit the scene around the character](/learn/ai-images/iterate-and-edit) instead of regenerating the whole picture.
+- **Change one variable per image.** Poses, scenes and props vary; the subject block stays frozen.
+- **Audit the series.** Line the images up and check the frozen features one by one. Drift is easiest to catch side by side.
+
+## A bad example
+
+> **Ask (image 1):** “A cute orange fox for our storybook.”
+> **Ask (image 3):** “The fox, but in a forest, storybook style.”
+>
+> Two different cartoons. Every descriptor moved, so every descriptor was re-rolled.
+
+## A better example
+
+> **Ask:** the full sheet — “Milo, a small red fox with a white chest patch, one notched left ear and dark paws; flat vector style, thick cream outlines, muted forest palette, soft even light” — plus “standing in a misty forest clearing.”
+>
+> The character variables never move; only the scene line changes between images.
+
+## Why it works
+
+Consistency is not a quality you request — it is a set of variables you remove from the lottery. The sheet works because it is identical input, and identical input narrows the sampling space around the same character. The mechanics work because edits and reference-driven flows reuse existing pixels rather than describing them again. The more of the subject you freeze, the smaller the drift between images — and what drift remains, the side-by-side audit catches.
+
+<CheckUnderstanding
+  id="cu-img-consistent"
+  question="Four images of your mascot look like four different characters, even though each prompt said “keep the mascot consistent.” What is the structural fix?"
+  options={[
+    { text: 'Add “consistent” and “same as before” to each prompt', feedback: 'consistent is a wish, not a variable — it tells the model nothing about what to keep.' },
+    { text: 'Write a fixed character sheet — features, colours, style block — and reuse it verbatim, changing only the scene line', correct: true, feedback: 'the subject stops being re-described and starts being re-pasted; only the scene stays in the lottery.' },
+    { text: 'Generate until two images happen to match', feedback: 'matching by luck does not scale to a series, and the next image starts the search over.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="judge-the-image-series" />
+
+## Transfer
+
+- Brand kits: a product sheet with exact material, colour and light words reused in every asset.
+- Comics and storybooks: one character sheet, many scene lines.
+- Avatars and profile images: freeze the face description; vary pose and background.
+- When drift appears, find which line moved — then re-freeze it.
+
+<KeyTakeaways
+  items={[
+    'Each generation samples fresh — consistency means freezing the subject out of the lottery.',
+    'The character sheet works because it is identical input; paraphrase is re-roll.',
+    'Edit around an accepted subject instead of regenerating it; audit the series side by side.',
+  ]}
+/>
+
+## Next
+
+Next: **[Style references, honestly](/learn/ai-images/style-references)** — using reference images for look and feel without pretending they are a copy button. The [seed entry](/glossary/seed) covers the repeatability dial, and the [generative AI entry](/glossary/generative-ai) covers the machinery.

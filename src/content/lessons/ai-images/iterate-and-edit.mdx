@@ -1,0 +1,95 @@
+---
+title: Iterate and edit
+description: "Re-rolling the dice is not a method. Edit what you have, change one thing at a time, and keep a trail of versions you can compare and go back to."
+track: ai-images
+order: 9
+level: intermediate
+estimatedMinutes: 6
+skills: ["ai images", "iteration"]
+prerequisites: ["ai-images/text-inside-images"]
+learningOutcome: "Choose between editing and regenerating, one change at a time."
+class: evergreen
+sources: []
+seo:
+  intent: "iterate on ai images — edit vs regenerate, one change at a time"
+  cluster: "D5"
+exercises: ["order-the-edit-loop"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+An edit changes one thing and keeps everything else. Regenerating re-rolls everything. Most disappointment in image work comes from re-rolling when you should have been editing — the composition was right, and the whole thing was thrown away over a jacket colour.
+
+## Edit or regenerate?
+
+The test is one question: **if everything except this one thing stayed identical, would I be happy?**
+
+- **Yes → edit.** The foundation is right; only one variable needs moving.
+- **No → regenerate.** The subject, composition or concept itself is wrong, and no amount of tweaking will rescue it.
+
+Editing is how finished images get finished. Regenerating is how drafts get started.
+
+## The edit loop
+
+<StepReveal
+  steps={[
+    'Generate a small batch — two to four candidates, not twenty. You are choosing a direction, not searching for perfection.',
+    'Pick the closest candidate as your foundation. Closest, not perfect: the rest of the loop is what makes it right.',
+    'Name exactly one change. “Warmer light.” “The jacket, deep green.” One variable per pass, written down.',
+    'Apply it as an edit: a whole-image instruction that says what to keep and what to change — or, where your tool supports it, mark just the region and describe its replacement (a region edit like this is called inpainting).',
+    'Compare the new version with the previous one and keep the better of the two. If the change spread further than you asked, revert and try a smaller step.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Same image but make it better.”
+>
+> Nothing is named, so everything may change. There is no way to tell whether it improved — you only get a different image to react to.
+
+## A better example
+
+> **Ask:** “Keep everything exactly as it is; change only the light to soft and warm, and keep the shadows where they are.”
+>
+> One named variable, everything else pinned. The result is comparable, and the loop can continue.
+
+## Why it works
+
+Generation decides every variable at once, so a re-roll resets your progress along with it. An edit holds the variables you do not mention steady while it moves the one you named — which is why edit modes exist in every serious image tool. The side benefit is a trail: accepted versions become the base for the next pass, and “go back one step” becomes possible. Change one thing per pass and you always know what caused what.
+
+<CheckUnderstanding
+  id="cu-img-edit"
+  question="An image is 90% right — the composition, subject and styling all work — but the light reads too cold. What is the disciplined next step?"
+  options={[
+    { text: 'Regenerate with “warmer light” added to the original prompt', feedback: 'a re-roll puts everything back in the lottery — you may lose the composition and styling you already approved.' },
+    { text: 'Edit it: keep everything, change only the light to warm', correct: true, feedback: 'one variable moves, everything else is pinned — exactly what edit modes are for.' },
+    { text: 'Generate a large batch and pick the warmest', feedback: 'twenty fresh rolls reset your progress twenty times; luck is not a method.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="order-the-edit-loop" />
+
+## Transfer
+
+- Any tool with editing: prefer an edit over a re-roll when most of the image is right.
+- Keep versions numbered or saved — the previous version is your undo.
+- When an edit overshoots, revert and take a smaller step rather than piling on corrections.
+- New projects: use the loop from the start and iteration becomes routine, not a rescue.
+
+<KeyTakeaways
+  items={[
+    'Edit the close one; regenerate the wrong one. Ask: would everything else staying identical make me happy?',
+    'One named change per pass — that is what makes results comparable.',
+    'The version trail is part of the method: keep the better of each pair and move on.',
+  ]}
+/>
+
+## Next
+
+Next: **[Consistency across images](/learn/ai-images/consistency-across-images)** — keeping a character or brand stable across a whole series. The [inpainting entry](/glossary/inpaint) covers region edits, and the [diffusion entry](/glossary/diffusion) explains why re-rolls differ at all.

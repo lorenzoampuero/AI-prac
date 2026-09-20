@@ -75,6 +75,8 @@ const structuredData = [
       description: entry.data.description,
       path: lessonPath,
       minutes: entry.data.estimatedMinutes,
+      teaches: entry.data.learningOutcome,
+      course: { name: trackInfo?.name ?? entry.data.track, path: `/learn/${entry.data.track}` },
     },
     origin,
   ),

@@ -1,0 +1,23 @@
+{
+  "engine": "order-steps",
+  "title": "Order the edit loop",
+  "scenario": "You have four versions of a product shot. One composition is right; the background colour is slightly off and the label area needs a small replacement. Instead of another round of re-rolls, you decide to work by editing — one disciplined loop from foundation to finished image.",
+  "task": "Order the steps of the edit loop so each pass changes one thing and keeps everything else intact.",
+  "steps": [
+    "Generate a small batch — two to four candidates — and choose a direction.",
+    "Pick the closest candidate as your foundation — not the perfect one.",
+    "Name exactly one change you want to make.",
+    "Apply it as an edit: describe the change for the whole image, or mark the region and describe its replacement.",
+    "Compare the new version with the previous one and keep the better of the two.",
+    "Only if the change spread too far: revert, then take a smaller step from the better version."
+  ],
+  "hints": [
+    "A foundation comes before fine-tuning — pick the closest candidate first.",
+    "One variable per pass; anything else is a re-roll wearing a disguise."
+  ],
+  "explanation": "The loop is: choose a foundation, name one change, apply it as an edit, compare, keep the better version. Order matters because each step depends on the previous one — you cannot compare versions you did not keep, and you cannot name a change until a foundation exists. Run in order, the loop turns iteration into a series of comparable decisions instead of a slot machine.",
+  "skills": ["ai images", "iteration"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/iterate-and-edit"],
+  "draft": false
+}

@@ -1,0 +1,27 @@
+{
+  "engine": "evaluate-output",
+  "title": "Judge the image series",
+  "scenario": "A designer prepared two summaries of how they will keep a storybook mascot consistent across a five-image series. Read both and judge which method will hold up across the whole set.",
+  "task": "Compare the two methods against the consistency criteria, then pick the one you would trust with the series.",
+  "outputA": "Method A — “I will write a fresh prompt for each scene and add 'keep the mascot consistent, same cute style as before'. If an image looks off, I will re-roll it a few times and pick the closest. Each prompt will describe the fox the way it feels right for that page.”",
+  "outputB": "Method B — “I will keep one character sheet in a file: 'Milo, a small red fox with a white chest patch, one notched left ear and dark paws; flat vector style, thick cream outlines, muted forest palette, soft even light.' The sheet is pasted verbatim into every prompt; only the scene line changes per page. When a composition is accepted, I edit the scene around Milo instead of regenerating him, and I check each new image against the sheet's feature list.”",
+  "rubric": [
+    { "id": "subject", "label": "The subject description is locked word-for-word, not re-described per image" },
+    { "id": "variables", "label": "Exactly one thing changes between images — the scene" },
+    { "id": "verify", "label": "There is a concrete way to check each result against the reference features" },
+    { "id": "recovery", "label": "There is a plan for fixing drift without re-rolling the character" }
+  ],
+  "verdict": {
+    "better": "B",
+    "reasoning": "Method B removes the character from the sampling lottery: identical sheet text every time, one variable per image, edits around an accepted subject, and a feature checklist to audit drift. Method A keeps re-describing the fox, which is re-rolling the character in words, and 'consistent' plus re-rolls is luck dressed as process."
+  },
+  "hints": [
+    "Which method would produce identical input for the character across all five images?",
+    "Look for a check step — a way to detect drift, not just hope there is none."
+  ],
+  "explanation": "Consistency across a series is an input-discipline problem, not a quality wish. The winning method works because its subject text is identical every time (frozen, not paraphrased), it varies exactly one line per image, it reuses accepted pixels via edits, and it verifies against explicit features. The losing method fails structurally: every prompt re-opens the character, and 'pick the closest of several rolls' is a search that never converges.",
+  "skills": ["ai images", "consistency", "evaluation"],
+  "difficulty": "advanced",
+  "lessonRefs": ["ai-images/consistency-across-images"],
+  "draft": false
+}

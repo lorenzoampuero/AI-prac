@@ -21,7 +21,14 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[], origin: URL): Record<s
 }
 
 export function learningResourceJsonLd(
-  input: { name: string; description: string; path: string; minutes: number },
+  input: {
+    name: string;
+    description: string;
+    path: string;
+    minutes: number;
+    teaches?: string;
+    course?: { name: string; path: string };
+  },
   origin: URL,
 ): Record<string, unknown> {
   return {
@@ -34,6 +41,47 @@ export function learningResourceJsonLd(
     isAccessibleForFree: true,
     learningResourceType: 'Lesson',
     timeRequired: `PT${input.minutes}M`,
+    ...(input.teaches ? { teaches: input.teaches } : {}),
+    ...(input.course
+      ? {
+          isPartOf: {
+            '@type': 'Course',
+            name: input.course.name,
+            url: new URL(input.course.path, origin).href,
+          },
+        }
+      : {}),
+  };
+}
+
+/** A track hub is honestly describable as a course: an ordered set of free lessons under one name. */
+export function courseJsonLd(
+  input: {
+    name: string;
+    description: string;
+    path: string;
+    lessons: { name: string; path: string }[];
+  },
+  origin: URL,
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: input.name,
+    description: input.description,
+    url: new URL(input.path, origin).href,
+    inLanguage: 'en',
+    isAccessibleForFree: true,
+    provider: {
+      '@type': 'Organization',
+      name: 'AI Practice',
+      url: origin.href,
+    },
+    hasPart: input.lessons.map((lesson) => ({
+      '@type': 'LearningResource',
+      name: lesson.name,
+      url: new URL(lesson.path, origin).href,
+    })),
   };
 }
 

@@ -13,6 +13,7 @@ lists the claim **as taught**, where it is used, its source and when it was last
 | 3 | The same Claude models are documented across multiple platforms — Claude API, Amazon Bedrock, Google Cloud, Microsoft Foundry — with platform-specific IDs, regions and lifecycle terms. | FN06 *Models vs products* | https://platform.claude.com/docs/en/docs/about-claude/models/overview | 2026-09-19 | 2026-12-18 |
 | 4 | OpenAI's image API separates *generation* (create an image from a scratch text prompt) from *edits* (modify an existing image with prompt guidance — partially via a mask, or entirely); current image models are `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`. | IM01 *How image generation works* | https://developers.openai.com/api/docs/guides/image-generation | 2026-09-20 | 2026-12-18 |
 | 5 | Text rendering in image models has improved significantly, but the model can still struggle with precise text placement and clarity. | IM08 *Text inside images* | https://developers.openai.com/api/docs/guides/image-generation | 2026-09-20 | 2026-12-18 |
+| 6 | Where an element must be replaced, current tools do it through edits: OpenAI's image edits endpoint accepts a mask that identifies the areas to replace, and masking is entirely prompt-based — the model uses the mask as guidance but may not follow its exact shape with complete precision. | IM12 *Negative constraints* | https://developers.openai.com/api/docs/guides/image-generation | 2026-09-20 | 2026-12-18 |
 
 ## Notes
 

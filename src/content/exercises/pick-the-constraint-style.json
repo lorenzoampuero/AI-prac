@@ -1,0 +1,22 @@
+{
+  "engine": "pick-better-prompt",
+  "title": "Pick the constraint style",
+  "scenario": "A tea brand needs a product photo with nothing distracting: no text on the packaging mockup, no people, no clutter — just the box on a clean surface. Two drafts of the same prompt.",
+  "task": "Which prompt handles those constraints better?",
+  "promptA": "a tea box on a table, no text, no people, no clutter, not too busy, don't make it dark",
+  "promptB": "a single tea box on a bare pale-oak surface, unmarked plain packaging, generous empty space around it, bright even daylight",
+  "better": "B",
+  "feedback": {
+    "a": "Every line is a wish. The words text, people, clutter and dark still name things the model can draw — and wishes do not remove anything from the render.",
+    "b": "Describes the wanted state everywhere: plain packaging, empty space, bright light. There is nothing unwanted left to render — and every instruction is checkable."
+  },
+  "hints": [
+    "Sort each prompt into wishes versus states: which one describes the world where the problem cannot appear?",
+    "Words like “no”, “not” and “don’t” name the thing you fear — the model can still draw what is named."
+  ],
+  "explanation": "The stronger prompt converts every constraint into a renderable state: unmarked packaging instead of “no text”, empty space instead of “no clutter”, bright daylight instead of “don’t make it dark”. Conversion keeps you in the mode models handle best — rendering described things — while wishes only describe the absence of the problem until it returns under another name. Where true removal is still needed, the reliable path is an edit of that region, not a louder wish.",
+  "skills": ["ai images", "constraints", "prompting"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/negative-constraints"],
+  "draft": false
+}

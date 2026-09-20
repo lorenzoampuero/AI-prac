@@ -1,0 +1,111 @@
+---
+title: Negative constraints
+description: "“No people, no text” rarely works as a wish. Learn what exclusions actually render — and when to remove elements by editing the region instead."
+track: ai-images
+order: 12
+level: intermediate
+estimatedMinutes: 6
+skills: ["ai images", "constraints"]
+prerequisites: ["ai-images/style-references"]
+learningOutcome: "Handle unwanted elements with positive framing and edits."
+class: current
+lastReviewed: 2026-09-20
+sources:
+  - title: "OpenAI — Image generation guide"
+    url: "https://developers.openai.com/api/docs/guides/image-generation"
+seo:
+  intent: "negative prompts in ai images — what works, what does not, removal by editing"
+  cluster: "D4"
+exercises: ["pick-the-constraint-style"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+“No umbrellas” is a wish, and wishes are weak. A model renders what you describe — and naming a thing, even to forbid it, puts that thing in play. Negative constraints work when you **convert them**: describe the wanted state where the unwanted element cannot exist, or remove it afterwards with an edit.
+
+## Why wishes are weak
+
+Every word you write is something the model can draw. “A beach with no elephants” mentions elephants; the words carry weight in the same space as everything else. Rendered results show it: forbidden objects drift back in, watermarks shade into “no watermark” prompts, and “don’t make it dark” produces very dark images. The wish states what you fear; the model renders what is stated.
+
+## Convert instead of forbid
+
+Describe the state of the world where the unwanted thing does not exist:
+
+- “no people” → “a deserted street at dawn”
+- “no text” → “plain unmarked packaging, bare surfaces”
+- “not blurry” → “sharp focus throughout”
+- “no clutter” → “minimal composition with generous empty space”
+- “don’t make it dark” → “bright, evenly lit”
+
+Each conversion is renderable, checkable, and leaves nothing for the model to mis-draw.
+
+## What negative fields can and cannot do
+
+Some tools — often those you run or fine-tune yourself — offer an explicit **negative prompt** field: a list of things to steer away from. Where offered, it behaves as a nudge rather than a law: keep it short and concrete (a handful of nouns, not paragraphs of wishes), and treat the output as *probably* clear, not provably clear. Many hosted tools have no such parameter at all; there, conversion is the whole toolkit. Either way, the reliable mechanism for true removal comes next.
+
+## Removal by editing
+
+Where a tool supports edits, unwanted elements leave through the region: you supply the image, mark the area to change — a mask — and describe its replacement. Current editing APIs work this way: OpenAI's image edits endpoint accepts “a mask that identifies the areas to replace”, and the tool's own documentation notes that masking is entirely prompt-based — the model uses the mask as guidance but may not follow its exact shape with complete precision. So the professional loop for “make that thing gone” is: generate the scene close to right, then edit the region with a clear description of what should be there instead, then inspect that area closely. This is the same inpaint manoeuvre from the [edit loop](/learn/ai-images/iterate-and-edit), aimed at subtraction instead of adjustment.
+
+<PromptCompare
+  weak={"a clean kitchen counter, no mess, no plates, no crumbs, not blurry, no text or watermark"}
+  strong={"A bare stone kitchen counter, spotless and empty, sharp focus throughout, plain surfaces with nothing on them"}
+  notes={[
+    'The weak line stacks five wishes; each names something the model can draw.',
+    'The strong line describes the wanted state — bare, empty, spotless, sharp — so there is nothing unwanted left to render.',
+    'If a stray object still appears, an edit of that region is the reliable removal — not a louder wish.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “Office photo, no clutter, no people, don’t make it dark, no logos.”
+>
+> Four wishes and one instruction about the thing being described. The result has a good chance of a person-shaped blur, a dark corner, and a logo-like smudge.
+
+## A better example
+
+> **Ask:** “A tidy sunlit office, empty desk with a closed laptop, bright even light, plain walls.”
+>
+> Everything is a state the model can render — and the unwanted elements have nowhere to appear.
+
+## Why it works
+
+Both halves are the track so far, pointed at removal. Conversion keeps you in the mode models handle best: rendering described states, not interpreting prohibitions. Editing handles what conversion misses: actual pixels get replaced in the actual region. Wishes do neither — they describe the absence of the preferred arrangement until it returns under another name.
+
+<CheckUnderstanding
+  id="cu-img-negative"
+  question="A product shot must ship with no trace of a logo anywhere. What is the most reliable plan?"
+  options={[
+    { text: 'Write “no logos, no brands, no marks” three times in the prompt', feedback: 'repetition makes the wish louder, not stronger — the words still name the thing you fear.' },
+    { text: 'Describe plain unmarked packaging and check the result; remove any leftovers with a region edit', correct: true, feedback: 'positive state first, then targeted removal — both halves of the professional loop.' },
+    { text: 'Generate and ship — every model understands “no logo” as a hard rule', feedback: 'models render descriptions; prohibitions are followed approximately at best, and “hard rule” is wishful.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="pick-the-constraint-style" />
+
+## Transfer
+
+- Briefs in any tool: scan for “no / not / don’t” and convert each into the wanted state.
+- Cleanliness in product shots: “bare, spotless, empty” beats “no mess” every time.
+- True removal: mask the region and describe the replacement, then inspect closely.
+- Anywhere you need certainty: the deliverable gets checked — wishes never shipped anything.
+
+<KeyTakeaways
+  items={[
+    'Naming a thing — even to forbid it — puts it in play; describe the state where it cannot exist.',
+    'Negative fields exist in some tools and nudge rather than enforce; keep them short where you have them.',
+    'True removal is an edit: mark the region and describe its replacement, then inspect the result.',
+  ]}
+/>
+
+## Next
+
+That closes the image track — all twelve lessons. Put the whole set to work on the [practice floor](/practice), or check where you stand with the [skills check](/assessment). The [negative prompt entry](/glossary/negative-prompt) sums up the term, and [hallucination](/glossary/hallucination) covers the plausible-looking detail this lesson keeps at bay.

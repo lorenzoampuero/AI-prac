@@ -1,0 +1,32 @@
+{
+  "engine": "model-choice",
+  "title": "Use the reference well",
+  "scenario": "A client loves the palette and window light of a reference photo of a restaurant and wants an illustration that feels like it — but in a different room, with the client's own layout. You are writing the generation instruction.",
+  "task": "Which instruction makes honest, effective use of the reference?",
+  "options": [
+    {
+      "text": "Illustrate this exact photo — same room, same layout — in a painted style.",
+      "correct": false,
+      "feedback": "That copies the composition you were asked to replace, and “exact” is not something the model can honour anyway."
+    },
+    {
+      "text": "Using the reference for palette, light and texture only — warm terracotta and cream, soft window light from the left, visible watercolour grain — illustrate a different dining room with the client's own layout.",
+      "correct": true,
+      "feedback": "The attributes you actually want are named; the composition is explicitly yours. Renderable, honest and reusable as a brief."
+    },
+    {
+      "text": "Make an illustration in the style of the photo, very similar and beautiful.",
+      "correct": false,
+      "feedback": "“Similar” and “beautiful” transfer nothing specific — palette, light and texture stay in the lottery."
+    }
+  ],
+  "hints": [
+    "Which attributes do you actually want from the photo — and which do you need to leave behind?",
+    "An instruction works when every part of it is renderable: name the palette, the light, the texture, the new layout."
+  ],
+  "explanation": "References transfer best when decomposed: palette, light, texture, mood. The winning instruction names exactly those attributes and states what stays new — the room and the layout. “Exact photo” copies what you must change; “similar and beautiful” names nothing. Decomposing also gives you the credit line for free: inspired by the reference for palette and light, authored by you everywhere else.",
+  "skills": ["ai images", "references"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/style-references"],
+  "draft": false
+}
