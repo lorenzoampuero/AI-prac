@@ -11,6 +11,30 @@ Search Console data after launch is the re-validation mechanism (per master brie
 
 ---
 
+## Demand evidence — Google autocomplete pulls (2026-09-20)
+
+Live pulls from Google's public autocomplete endpoint during the v1.1 waves — the actual strings people
+type. Directional evidence, not measured volume (still no volume API available; Search Console remains
+the re-validation mechanism). Units below were authored/reordered with this evidence on the table.
+
+| Query family (seed) | Real suggestions pulled | Served by |
+|---|---|---|
+| how to write ai image prompts | “…like a pro”, “better”, “good … for ai image generation” | IM02 Subject, scene, style (existing) |
+| verify ai answers / how to fact check ai | “how can you verify ai answers”, “how to fact check ai answers / outputs” | **RS06 Cross-check AI answers (new)** |
+| ai outdated information | “ai outdated information” | **RS07 Check dates and freshness (new)** |
+| chatgpt wrong calculations | “chatgpt wrong calculations” | **RS08 Check the numbers (new)** |
+| ai presentation outline | “…generator”, “ai presentation maker from outline” | **WK07 AI for presentations (new)** |
+| ai report writing | “…tool / free / generator” | **WK08 Reports that hold up (new)** |
+| ai cover letter / tailor resume | “ai cover letter generator free”, “tailor resume with ai linkedin” | WK14 Job-search workflows (planned — strongest pull not yet served) |
+| chatgpt prompt templates | “chatgpt prompt templates free download” | PR16 Reusable prompt templates (planned) |
+| chatgpt excel formulas | “can chatgpt write excel formulas” | WK06 spreadsheets lesson exists; title/intent does not yet match the query — flagged |
+| ai for excel data analysis | “…free”, “dashboard” | WK13 Data cleanup (planned) |
+
+**Reading:** high-intent “tool/query” phrasing (“generator”, “free”, “tool”) surrounds every family — these
+searchers want a how-to, not a product. Lesson format (answer-first + exercise) is the honest match.
+
+---
+
 ## A. AI foundations (literacy core)
 
 | # | Cluster | Representative queries | Intent | MVP target | P |

@@ -2,6 +2,10 @@
 
 **Gate 1 artifact · Date: 2026-09-19 · Status: architecture locked for MVP; v1.1 units are planning-level only.**
 
+> **Shipped update (2026-09-20):** MVP 36/36 live · v1.1 waves shipped: **AI Images IM01–IM12 complete**,
+> **RS06–RS08** (cross-check, freshness, numbers) and **WK07–WK09** (presentations, reports, support) live,
+> FN02–FN04 + IM01 gained animated teaching diagrams. Details in `CONTENT_QA.md` v1.1 verdicts.
+
 **Sources:** `research/CURRICULUM_OPPORTUNITY.md` (MVP mix), `research/KEYWORD_UNIVERSE.md` (cluster refs),
 master brief §7–15 (track allocation 12/20/15/12/12/10/10/9). Slugs are finalized per unit at authoring time;
 uniqueness + intent rules are enforced by the registry tests defined in `research/SEO_INTENT_MAP.md` §6.

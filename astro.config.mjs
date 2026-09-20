@@ -21,6 +21,8 @@ export default defineConfig({
     sitemap({
       // /progress is a device-local dashboard (noindex) — keep it out of the sitemap.
       filter: (page) => !page.endsWith('/progress') && !page.endsWith('/progress/'),
+      // Stamped at build time: every deploy republishes the whole site, so each URL is genuinely fresh.
+      lastmod: new Date(),
     }),
   ],
   build: {

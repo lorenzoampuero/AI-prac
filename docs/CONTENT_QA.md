@@ -38,6 +38,17 @@ skims of shipped pages. Fixes applied in `2b43af2`.
 | Coding | CD01 what-ai-can-do-with-code · CD02 describe-vet-never-blind-run | **PASS** ×2 — code sample is ours, safe-by-construction, and the exercise vets it |
 | Safety | SF01 what-not-to-paste · SF02 prompt-injection-simply · SF03 when-not-to-rely-on-ai · SF04 using-ai-at-work | **PASS** ×4 — no policy overreach; judgment framing consistent |
 | Exercises | All 36 published | **PASS** — every engine has a live, browser-verified UI; deterministic grading or explicit self-assessment wording |
+
+## v1.1 waves (verified 2026-09-20)
+
+Same automated gate suite + browser verification per batch (blocks, exercises, XP, reduced-motion,
+390 px, live deploy). Totals after the waves: **153 pages · 65 tests green**.
+
+| Track | Units | Verdict |
+|---|---|---|
+| AI Images (v1.1) | IM01 how-image-generation-works (CUR) · IM02 subject-scene-style · IM03 composition-and-framing · IM04 camera-angle-and-lens · IM05 lighting-fundamentals · IM06 color-and-mood · IM07 materials-and-texture · IM08 text-inside-images (CUR) · IM09 iterate-and-edit · IM10 consistency-across-images · IM11 style-references · IM12 negative-constraints (CUR) | **PASS** ×12 — the three CUR units are registry-backed (rows #4–6, OpenAI image guide, review by 2026-12-18); every lesson carries ≥2 teaching blocks + KeyTakeaways; two rounds of extra teaching blocks added to IM04 during review |
+| Research (v1.1 wave) | RS06 cross-check-answers · RS07 check-dates-and-freshness · RS08 check-the-numbers | **PASS** ×3 — triangulation, dating and recomputation habits; exercises: evaluate-output / find-the-problem / model-choice; RS05→RS06 chain updated |
+| Work (v1.1 wave) | WK07 ai-for-presentations · WK08 reports-that-hold-up · WK09 support-replies-that-deescalate | **PASS** ×3 — claim-first deck briefs, [SOURCE?] report skeletons, policy-gated support replies; WK06→WK07 chain updated; WK09 closes the shipped wave |
 | Glossary | 23 terms | **PASS** — every term links ≥1 lesson; definitions plain-language |
 | Assessment | 18 items / 6 tracks | **PASS** — one correct option per item, honest band copy, device-local results |
 
