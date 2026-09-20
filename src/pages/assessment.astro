@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ASSESSMENT_ITEMS } from '../data/assessment';
 import { TRACKS } from '../data/tracks';
+import { breadcrumbJsonLd } from '../seo/schema';
+
+const origin = Astro.site ?? new URL('https://ai-practice.invalid');
 
 const grouped = TRACKS.map((track) => ({
   track,
@@ -14,7 +17,23 @@ let counter = 0;
 <BaseLayout
   title="AI skills assessment"
   description="Eighteen questions across the six tracks — foundations, prompting, research, work, coding and safety. Scored instantly in your browser; nothing is sent anywhere."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Home', path: '/' },
+        { name: 'Assessment', path: '/assessment' },
+      ],
+      origin,
+    ),
+  ]}
 >
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Assessment</li>
+    </ol>
+  </nav>
+
   <h1>AI skills assessment</h1>
   <p class="lede">
     Eighteen questions across the six tracks. This is a starting map, not a certificate: it shows what

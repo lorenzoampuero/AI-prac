@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getTrack } from '../../data/tracks';
+import { breadcrumbJsonLd } from '../../seo/schema';
 
 export async function getStaticPaths() {
   const lessons = await getCollection('lessons', ({ data }) => !data.draft);
@@ -21,11 +22,22 @@ type Props = { lessons: CollectionEntry<'lessons'>[] };
 const { lessons } = Astro.props as Props;
 const { track: trackId } = Astro.params;
 const info = getTrack(trackId ?? '');
+const origin = Astro.site ?? new URL('https://ai-practice.invalid');
 ---
 
 <BaseLayout
   title={info?.name ?? 'Track'}
   description={`${info?.name ?? 'Track'}: ${info?.tagline ?? ''} Lessons with hands-on practice, free and without an account.`}
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Home', path: '/' },
+        { name: 'Learn', path: '/learn' },
+        { name: info?.name ?? trackId ?? 'Track', path: `/learn/${trackId}` },
+      ],
+      origin,
+    ),
+  ]}
 >
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <ol>

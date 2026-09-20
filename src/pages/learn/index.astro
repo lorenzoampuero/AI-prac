@@ -2,6 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { TRACKS } from '../../data/tracks';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://ai-practice.invalid');
 
 const lessons = await getCollection('lessons', ({ data }) => !data.draft);
 const counts = new Map<string, number>();
@@ -13,7 +16,23 @@ for (const lesson of lessons) {
 <BaseLayout
   title="Learn AI"
   description="The practical AI curriculum: foundations, prompting, research, work, safety and more — built as short lessons with hands-on practice, free and without an account."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Home', path: '/' },
+        { name: 'Learn', path: '/learn' },
+      ],
+      origin,
+    ),
+  ]}
 >
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Learn</li>
+    </ol>
+  </nav>
+
   <h1>Learn practical AI skills</h1>
   <p class="lede">
     Tracks run from “what is generative AI” to designing reliable workflows. Every lesson ends in

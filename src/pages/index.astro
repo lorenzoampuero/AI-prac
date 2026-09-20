@@ -2,6 +2,12 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { TRACKS } from '../data/tracks';
+import { SITE_NAME } from '../config/site';
+import { websiteJsonLd } from '../seo/schema';
+
+const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const description =
+  'Short lessons and hands-on exercises that teach you to prompt, verify, research and work with AI — free, no account, progress stays on your device.';
 
 const lessons = await getCollection('lessons', ({ data }) => !data.draft);
 const trackPriority = new Map(TRACKS.map((track, index) => [track.id, index]));
@@ -23,7 +29,8 @@ const firstLessonHref = firstLesson
 
 <BaseLayout
   title="AI Practice"
-  description="Short lessons and hands-on exercises that teach you to prompt, verify, research and work with AI — free, no account, progress stays on your device."
+  description={description}
+  structuredData={[websiteJsonLd({ name: SITE_NAME, description, path: '/' }, origin)]}
 >
   <section class="hero">
     <h1>Build real AI skills, one exercise at a time.</h1>
