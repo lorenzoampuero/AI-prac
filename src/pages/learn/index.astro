@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { TRACKS } from '../../data/tracks';
 import { breadcrumbJsonLd } from '../../seo/schema';
 
-const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 
 const lessons = await getCollection('lessons', ({ data }) => !data.draft);
 const counts = new Map<string, number>();

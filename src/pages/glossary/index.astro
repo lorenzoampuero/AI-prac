@@ -6,7 +6,7 @@ import { breadcrumbJsonLd } from '../../seo/schema';
 const terms = await getCollection('glossary', ({ data }) => !data.draft);
 terms.sort((a, b) => a.data.term.localeCompare(b.data.term));
 
-const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 ---
 
 <BaseLayout

@@ -58,7 +58,7 @@ const { entry, prev, next } = Astro.props as Props;
 const { Content } = await render(entry);
 const trackInfo = getTrack(entry.data.track);
 
-const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 const lessonPath = `/learn/${entry.data.track}/${entry.id.split('/').slice(1).join('/')}`;
 const breadcrumbs = [
   { name: 'Home', path: '/' },

@@ -4,9 +4,9 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // `site` = production origin (canonical URLs, sitemap, robots). `PUBLIC_SITE_URL` overrides it for
-// staging/preview builds. Final domain decided in Gate 0 brand research — no purchases yet.
+// staging/preview builds. Domain decided 2026-09-20: getaipractice.site (registrar purchase pending).
 const SITE_ORIGIN =
-  (process.env.PUBLIC_SITE_URL ?? '').trim().replace(/\/+$/, '') || 'https://ai-practice.invalid';
+  (process.env.PUBLIC_SITE_URL ?? '').trim().replace(/\/+$/, '') || 'https://getaipractice.site';
 
 export default defineConfig({
   site: SITE_ORIGIN,

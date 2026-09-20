@@ -45,3 +45,7 @@ services, no analytics, no ads, nothing deployed.
 
 **Remote:** `origin` → `https://github.com/lorenzoampuero/AI-prac` (branch `main`, pushed 2026-09-19;
 the repository currently returns 404 to anonymous visitors, i.e. it is not public).
+
+**Domain:** decided 2026-09-20 — **`https://getaipractice.site`** (RDAP-verified available; registrar
+purchase still pending — nothing bought). The build's default origin now points there; `PUBLIC_SITE_URL`
+overrides it for staging/preview builds.

@@ -7,7 +7,7 @@ const exercises = await getCollection('exercises', ({ data }) => !data.draft);
 const lessons = await getCollection('lessons', ({ data }) => !data.draft);
 const lessonTitle = new Map(lessons.map((lesson) => [lesson.id, lesson.data.title]));
 
-const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 const DIFFICULTY_LABELS: Record<string, string> = {
   beginner: 'Beginner',
   intermediate: 'Intermediate',

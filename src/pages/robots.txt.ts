@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 // The explicit crawler policy (GPTBot, OAI-SearchBot, etc.) is verified against current official docs
 // and finalized at the SEO/GEO gate (master brief §57/§90). No hidden text, no fake GEO hacks.
 export const GET: APIRoute = ({ site }) => {
-  const origin = site ?? new URL('https://ai-practice.invalid');
+  const origin = site ?? new URL('https://getaipractice.site');
   const sitemap = new URL('sitemap-index.xml', origin).href;
   const body = `User-agent: *\nAllow: /\n\nSitemap: ${sitemap}\n`;
   return new Response(body, {

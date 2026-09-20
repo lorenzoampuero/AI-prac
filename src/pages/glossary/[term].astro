@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 type Props = { entry: CollectionEntry<'glossary'>; relatedLessons: RelatedLesson[] };
 const { entry, relatedLessons } = Astro.props as Props;
 
-const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 const termPath = `/glossary/${entry.id}`;
 ---
 

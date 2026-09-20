@@ -118,3 +118,12 @@ Perceived-trust ranking for a trust-sensitive education product: `.app`/`.dev` >
 `.info` (`.info` has a long spam-association history — avoid). `.site`/`.online` carry first-year promo
 pricing with meaningfully higher renewals; `.app` renews flat at ~€12–15/yr. Google treats all TLDs
 equally for ranking; the differences here are user perception and renewal cost, not SEO.
+
+---
+
+## 6. Decision — 2026-09-20
+
+**Chosen domain: `getaipractice.site`** (operator decision). RDAP-verified available on 2026-09-20;
+`getaipractice.com` was also available at probe time (useful as a redirect). The build default origin
+now points at the chosen domain; purchase and the trademark screen remain the operator's steps — this
+file still authorizes no spending.

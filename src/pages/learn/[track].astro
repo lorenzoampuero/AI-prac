@@ -22,7 +22,7 @@ type Props = { lessons: CollectionEntry<'lessons'>[] };
 const { lessons } = Astro.props as Props;
 const { track: trackId } = Astro.params;
 const info = getTrack(trackId ?? '');
-const origin = Astro.site ?? new URL('https://ai-practice.invalid');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 ---
 
 <BaseLayout

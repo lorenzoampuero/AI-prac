@@ -26,8 +26,10 @@ requires the owner's explicit approval (master-brief constraint).**
 
 ## Deployment plan (NOT executed — owner approval required at every step)
 
-1. **Approval + inputs (owner):** choose domain (registrar purchase), hosting target (any static host/CDN
-   works — output is plain files in `dist/`), and the public origin URL.
+1. **Approval + inputs (owner):** **register `getaipractice.site`** (domain decided 2026-09-20;
+purchase pending — optionally also grab `getaipractice.com`, which was still available, as a
+redirect), then choose the hosting target (any static host/CDN works — the output is plain files in
+`dist/`).
 2. **Freeze check:** confirm `content/CURRENT_FACTS_REGISTRY.md` review dates have not passed
    (currently review by **2026-12-18**); re-verify if later.
 3. **Build:** `npm ci && npm run verify` with `PUBLIC_SITE_URL=<final origin>` set.
@@ -54,8 +56,9 @@ of deploys: clearing/reverting the site never destroys visitor data, and no visi
 
 ## Boundary notes
 
-- The default origin is the deliberate placeholder `https://ai-practice.invalid`. Shipping with it is a
-  configuration bug — step 4 above exists to catch exactly that.
+- The default build origin is now the chosen domain `https://getaipractice.site`; step 4's origin guard
+  confirms every release build carries the intended origin, and `PUBLIC_SITE_URL` remains available for
+  staging/preview builds.
 - Hostile-storage browsers: progress/assessment saving degrades silently by design (features work, XP is
   just not remembered).
 - **Monetization is out of scope for launch.** Before any AdSense submission (later, with approval): the privacy-policy page (**already shipped at `/privacy`**) gets its contact channel added at launch, decide the cookie/consent approach, prepare `ads.txt` once an account exists, and re-run the anti-doorway audit against AdSense policy expectations (original content — already enforced by the registry tests).
