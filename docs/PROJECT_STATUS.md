@@ -42,3 +42,6 @@ npm run preview   # serve dist/ (astro preview start/stop/status)
 
 Phase 0 only: scaffold, pins, verification chain. No secrets, no env files, no external
 services, no analytics, no ads, nothing deployed.
+
+**Remote:** `origin` → `https://github.com/lorenzoampuero/AI-prac` (branch `main`, pushed 2026-09-19;
+the repository currently returns 404 to anonymous visitors, i.e. it is not public).
