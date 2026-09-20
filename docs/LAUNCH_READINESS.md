@@ -1,7 +1,8 @@
 # LAUNCH READINESS — AI Practice (Gate 11)
 
-**Date: 2026-09-19 · Status: READY TO LAUNCH — nothing deployed; every deploy/domain/account action
-requires the owner's explicit approval (master-brief constraint).**
+**Date: 2026-09-19 · Deploy notes 2026-09-20 · Status: LAUNCHING — Vercel project `aipractice`
+auto-deploys from GitHub `main` (owner-approved); domain purchase + DNS connection still pending
+(owner action).**
 
 ## What is verified (this session)
 
@@ -24,7 +25,7 @@ requires the owner's explicit approval (master-brief constraint).**
   chain still green.
 - Mechanism validated: launch-day origin change is a single env variable, nothing else.
 
-## Deployment plan (NOT executed — owner approval required at every step)
+## Deployment plan (Vercel connected 2026-09-20; domain steps pending owner action)
 
 1. **Approval + inputs (owner):** **register `getaipractice.site`** (domain decided 2026-09-20;
 purchase pending — optionally also grab `getaipractice.com`, which was still available, as a
@@ -35,11 +36,22 @@ redirect), then choose the hosting target (any static host/CDN works — the out
 3. **Build:** `npm ci && npm run verify` with `PUBLIC_SITE_URL=<final origin>` set.
 4. **Guard:** `node scripts/check-origin.mjs <final origin>` must exit 0 (blocks accidental placeholder
    deploys).
-5. **Deploy:** upload `dist/` to the host (no server runtime needed; no environment secrets).
+5. **Deploy:** Vercel auto-deploys every push to `main` (project `aipractice`, connected 2026-09-20;
+   no server runtime, no environment secrets, no env vars — the default origin is the final domain).
 6. **Tag:** `git tag launch-v1 && git push origin main launch-v1` (rollback anchor).
 7. **Post-deploy checks (5 minutes, manual):** load home + one lesson + `/assessment` from the real URL;
    confirm canonical/OG in view-source; fetch `/sitemap-index.xml` and `/robots.txt`; check `/404`; confirm
    no mixed-content or font 404s.
+
+### Deploy notes — Vercel commit ownership (learned 2026-09-20)
+
+- Vercel **blocks** ("Deployment Blocked") any Git-triggered deployment whose commit author does not
+  resolve to a GitHub account with access to the project. The bootstrap identity
+  `AI Practice Builder <dev@ai-practice.local>` triggered this on every push after the initial import.
+- Repo-local identity is now `lorenzoampuero <259212707+lorenzoampuero@users.noreply.github.com>`
+  (GitHub noreply address — always attributed to the owner's account). Keep it when committing in this
+  repo.
+- Manual dashboard deploys/redeploys are unaffected; automatic deploys need the attributed author.
 
 ## Post-launch verification (owner-owned, day 1–7)
 
