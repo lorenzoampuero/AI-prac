@@ -1,0 +1,85 @@
+---
+title: Materials and texture
+description: "“Leather” names a material; “scuffed, oiled, matte” decide how it looks. Four questions turn any surface description into something a model can render."
+track: ai-images
+order: 7
+level: intermediate
+estimatedMinutes: 5
+skills: ["ai images", "materials"]
+prerequisites: ["ai-images/color-and-mood"]
+learningOutcome: "Describe surfaces through material, finish, wear and state."
+class: evergreen
+sources: []
+seo:
+  intent: "describing materials and textures in ai image prompts — finishes, wear, surfaces"
+exercises: ["fix-the-material-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+A material word tells the model what something is made of; the finish, the wear and the moment decide how it looks. Most weak prompts stop at the material — and the render fills in everything else with the most generic version it knows. Surfaces are where general prompts fail quietly. Skins, fabric, wood, metal: everyone has handled these materials, which means everyone notices when a render gets them wrong. Precision here buys more realism than any other slot.
+
+## Four questions for any surface
+
+<StepReveal
+  steps={[
+    'What is it made of? Name the material the way a supplier would: oak, full-grain leather, brushed steel, linen, glazed ceramic.',
+    'How is it finished? Matte, satin or glossy; oiled, painted or raw; brushed or polished. The finish decides how light leaves the surface.',
+    'What condition is it in? Showroom-new, worn-in, weathered, sun-faded, cracked — wear is free storytelling.',
+    'What state is it in right now? Dry, wet, dusty, oily, steaming. State words change the render more than most people expect.',
+    'How does light meet it? Texture becomes visible when light rakes across a surface — pair the material words with a side light and the grain appears.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “A luxurious wooden table.”
+>
+> “Luxurious” is a price tag, not a property. The model picks a generic wood with a generic finish — and nothing in the result is debuggable.
+
+## A better example
+
+> **Ask:** “A thick oak table with an oiled finish, soft sheen, visible grain and gently worn edges; warm side light from the left.”
+>
+> Every word is a property: species, finish, condition, light. Change one — matt lacquer instead of oil — and the render changes predictably.
+
+## Why it works
+
+Materials are physical claims, and [generative systems](/glossary/generative-ai) render physical claims literally: brushed steel scatters light differently from polished steel because those are different surfaces, not different adjectives. Two extra words — oiled, worn — are often the difference between leather that renders like plastic and leather that looks photographed. The four questions are separable — so debugging a surface is a matter of restating the one answer that went wrong. And because texture only shows under directional light, this lesson stacks on the [lighting fundamentals](/learn/ai-images/lighting-fundamentals): material words describe, light reveals.
+
+<CheckUnderstanding
+  id="cu-img-material"
+  question="Which description gives the model the most to render for a knife blade?"
+  options={[
+    { text: '“A stainless steel knife”', feedback: 'stainless is the material only — brushed, mirror-polished and matte stainless are completely different renders, and the model must guess which one.' },
+    { text: '“A brushed-steel knife with a satin finish and faint scratches from use”', correct: true, feedback: 'material, finish and condition: three separable claims, each one renderable — and each one debuggable.' },
+    { text: '“A high-quality professional knife”', feedback: 'quality words render nothing; professional is a judgement about the object, not a property of its surface.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="fix-the-material-prompt" />
+
+## Transfer
+
+- Products: finish words carry perceived quality — matte and satin read premium, gloss reads plastic.
+- Interiors: condition words set the story — worn oak and faded linen say “lived in”, pristine surfaces say “showroom”.
+- Fabrics: name the weave and drape (chunky knit, crisp cotton, fluid silk), not just the fibre.
+- Debugging: when a surface looks wrong, ask which of the four questions went unanswered.
+
+<KeyTakeaways
+  items={[
+    'Material + finish + condition + state: four answers, one believable surface.',
+    '“Luxurious” and “quality” are prices, not properties — they render nothing.',
+    'Texture is revealed by light, not requested by adjectives.',
+  ]}
+/>
+
+## Next
+
+Next: **[Text inside images](/learn/ai-images/text-inside-images)** — what lettering current models really can and cannot do. The [generative AI entry](/glossary/generative-ai) and the [diffusion entry](/glossary/diffusion) cover the machinery behind every render.

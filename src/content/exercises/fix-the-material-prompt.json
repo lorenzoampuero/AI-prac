@@ -1,0 +1,39 @@
+{
+  "engine": "fix-prompt",
+  "title": "Fix the material prompt",
+  "scenario": "A furniture studio wants an editorial photo of its leather sofa. The brief was written in a hurry and has produced two generic renders in a row — the leather looks plastic and none of the wear the studio loves is visible.",
+  "task": "Rewrite the prompt so the sofa's material, finish, condition and state each give the model something specific to render.",
+  "weakPrompt": "a photo of a leather sofa in a nice living room, very premium quality, looks expensive",
+  "criteria": [
+    {
+      "id": "material",
+      "label": "Names the material precisely",
+      "hint": "Full-grain leather? Aniline? Bouclé? “Premium quality” names a price, not a surface."
+    },
+    {
+      "id": "finish",
+      "label": "Describes the finish and sheen",
+      "hint": "Matte, satin, oiled, brushed — how does light leave the surface?"
+    },
+    {
+      "id": "condition",
+      "label": "Says how worn it is",
+      "hint": "Showroom-new or lived-in? Creases on the arms, softened seats, a sun-faded back?"
+    },
+    {
+      "id": "state",
+      "label": "Gives the surface a present state or a light direction",
+      "hint": "Dusty, damp, softly lit — texture needs light to appear."
+    }
+  ],
+  "sampleSolution": "An editorial photo of a three-seat sofa in cognac leather with an oiled matte finish, a soft sheen along the cushions and gentle worn creases on the arms and seat; a quiet living room with warm afternoon side light raking across the leather from the left.",
+  "hints": [
+    "Replace every judgement with a property: “expensive” becomes a finish, “nice” becomes a material.",
+    "Texture hides in flat light — add one clause about how the light meets the surface."
+  ],
+  "explanation": "The weak prompt describes a price and a feeling; the fixed one describes a surface. Cognac, oiled, matte, worn creases: each answer narrows what the renderer can supply, and each is separable — so when the leather looks too new, you adjust one clause instead of the whole brief. Materials reward precision more than any other slot, because everyone recognises how a real surface should age.",
+  "skills": ["ai images", "materials", "prompting"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/materials-and-texture"],
+  "draft": false
+}

@@ -1,0 +1,92 @@
+---
+title: Lighting fundamentals
+description: "Direction, quality and time of day decide how a picture feels. Write light the way a photographer sets it: one source, one quality, one mood."
+track: ai-images
+order: 5
+level: intermediate
+estimatedMinutes: 6
+skills: ["ai images", "lighting"]
+prerequisites: ["ai-images/camera-angle-and-lens"]
+learningOutcome: "Write light into a prompt with direction, quality and time of day."
+class: evergreen
+sources: []
+seo:
+  intent: "lighting in ai image prompts — direction, soft vs hard, time of day"
+  cluster: "D3"
+exercises: ["set-the-lighting"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Light is the fastest way to change how an image feels. The same subject in the same scene reads as cosy or clinical, calm or dramatic, depending on three decisions you can write directly: **where the light comes from, how soft it is, and what time of day it is**. Adjectives like “cosy” tell the model how the picture should feel; light decisions tell it what to render.
+
+## Three dials
+
+- **Direction** — where the light sits relative to the subject. Front light fills and flattens. Side light rakes across surfaces and reveals texture. Back light (rim light) separates the subject from the background with a glowing edge. Overhead light drops shadows straight down.
+- **Quality** — soft or hard. Soft light comes from large, diffused sources — an overcast sky, a big window, a softbox — and gives gentle transitions. Hard light comes from small, direct ones — midday sun, a bare bulb — and gives crisp, defined shadows.
+- **Time of day** — golden hour is warm, low and glowing; blue hour is cool, even and quiet; overcast is neutral and soft; harsh noon is high-contrast and unforgiving.
+
+A complete light note combines all three and stays with one source. “Soft window light from the left, late afternoon” is a light decision. “Beautiful dramatic lighting everywhere” is a wish.
+
+<PromptCompare
+  weak={"a portrait of a baker in a bakery, nice warm lighting, cinematic"}
+  strong={"Eye-level portrait of a baker, soft window light from the left (direction), diffused through a large window (quality), golden late-afternoon warmth (time), gentle shadows falling to the right"}
+  notes={[
+    '“Warm” and “cinematic” describe a feeling; direction, quality and time describe what to render.',
+    'One source means one set of shadows — the scene stays physically coherent.',
+    'When the mood is off you change one dial: the direction, the quality or the time.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “A cosy reading nook, amazing lighting.”
+>
+> “Amazing” decides nothing, and with no direction the model may light the scene from everywhere at once — flat, shadowless, and not cosy at all.
+
+## A better example
+
+> **Ask:** “A reading nook with one soft lamp glowing low from the right, warm amber light pooling over a wool blanket, deep quiet shadows on the left.”
+>
+> One source, one quality, one colour. The shadows are as deliberate as the light.
+
+## Why it works
+
+Light is the most physical part of an image: it comes from somewhere, falls in one direction, and casts its own shadows. [Generative systems](/glossary/generative-ai) render those consequences faithfully when you name the source — and the [diffusion process](/glossary/diffusion) settles highlights and shadows in the same passes that decide everything else. That makes every light word a renderable claim: one you can add, remove and compare in isolation.
+
+<CheckUnderstanding
+  id="cu-img-light"
+  question="You want the rough texture of a knitted blanket to be clearly visible. Which lighting choice helps most?"
+  options={[
+    { text: 'Bright light straight from the front', feedback: 'front light fills every small shadow — ideal for flattery, but it flattens exactly the texture you want to show.' },
+    { text: 'Low light from one side, grazing the surface', correct: true, feedback: 'side light rakes across the fibres; the tiny shadows it casts are what make texture visible.' },
+    { text: 'No light description needed — texture is decided by the material words', feedback: 'the material decides what the surface is; the light decides whether anyone can see it. Same blanket, different light, different picture.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="set-the-lighting" />
+
+## Transfer
+
+- Portraits: soft light from a window at roughly 45 degrees is the reliable, flattering default.
+- Products: soft, diffused light shows form; hard light shows drama — pick one on purpose.
+- Mood: golden hour reads warm and nostalgic; blue hour reads calm and cool; overcast reads neutral and honest.
+- Debugging: if the mood is off, change one dial — direction, quality or time — and regenerate.
+
+<KeyTakeaways
+  items={[
+    'Light has three dials: direction, quality and time of day.',
+    'Soft light flatters and forgives; hard light dramatises and defines.',
+    'Write the light, not the feeling — “cosy” is an outcome, not an instruction.',
+  ]}
+/>
+
+## Next
+
+Next: **[Colour and mood](/learn/ai-images/color-and-mood)** — palettes and atmosphere, the other half of how a scene makes you feel. The [generative AI entry](/glossary/generative-ai) covers how these systems build an image from words.

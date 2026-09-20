@@ -1,0 +1,54 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the text trouble",
+  "scenario": "A neighbourhood fair asked for a poster for its harvest celebration. You got the image back along with a short summary of what it contains — and the printer is waiting for a decision on the artwork.",
+  "task": "Select every element you should not send to print as-is — the parts that need to be fixed, replaced or typeset yourself.",
+  "response": "Here is your poster! The headline “HARVEST FAIR” sits at the top in large bold capitals. Below it, a friendly line of body copy reads “Join us Saturday from 10am to 4pm in the town square for fresh produce, live music and family activities.” Down in the corner, a small badge shows the address “12 Mill Lane” and the website “harvestfair.local/visit”. A decorative script banner at the bottom reads “See you there!”, and behind everything there is a background of autumn leaves and bunting.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "The headline “HARVEST FAIR” in large bold capitals",
+      "problematic": false,
+      "feedback": "Short, large and high-contrast: the shape text rendering handles best. Give it a character-by-character glance, but it is not a known weak spot — this is the part you can trust the render with."
+    },
+    {
+      "id": "c2",
+      "text": "The body copy line: “Join us Saturday from 10am to 4pm in the town square for fresh produce, live music and family activities.”",
+      "problematic": true,
+      "feedback": "A long sentence of small live text — expect wobbles, doubled letters or an invented word. This is exactly the precision the current limitation describes. Set the body copy yourself."
+    },
+    {
+      "id": "c3",
+      "text": "The small badge showing the address “12 Mill Lane”",
+      "problematic": true,
+      "feedback": "An exact string at small size combines both hard requirements: many characters and zero tolerance for error. Replace it with typeset text."
+    },
+    {
+      "id": "c4",
+      "text": "The website “harvestfair.local/visit” in the corner",
+      "problematic": true,
+      "feedback": "A URL has to be character-perfect to work at all, and tiny generated text cannot carry that exactness. Typeset it yourself."
+    },
+    {
+      "id": "c5",
+      "text": "The decorative script banner reading “See you there!”",
+      "problematic": true,
+      "feedback": "Script and handwriting thin the letterforms — clarity is the first thing they lose. If the words are purely decorative you might keep the flourish, but check every stroke; if they must be readable, redraw them."
+    },
+    {
+      "id": "c6",
+      "text": "The background of autumn leaves and bunting behind the text",
+      "problematic": false,
+      "feedback": "No letters and no exactness requirement — rendering decorative detail from words is precisely what these models are for."
+    }
+  ],
+  "hints": [
+    "Two requirements make rendered text hard: length (many characters) and exactness (zero tolerance for error). Flag where both appear.",
+    "Large and short is the strong case; small, long or script is the weak one — and anything a customer will act on must be exact."
+  ],
+  "explanation": "The model draws letterforms as shapes rather than typesetting them from a font, so lettering can look right while being quietly wrong — the visual cousin of a hallucination. Short display words are the reliable case; long copy, small exact strings and decorative scripts are where placement and clarity strain. The professional fix is not re-rolling forever: decide which text is decoration and which is information, then typeset the information yourself.",
+  "skills": ["ai images", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/text-inside-images"],
+  "draft": false
+}

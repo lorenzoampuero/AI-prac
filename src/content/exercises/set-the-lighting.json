@@ -1,0 +1,36 @@
+{
+  "engine": "build-prompt",
+  "title": "Set the light",
+  "scenario": "A café wants a photo-style image of a steaming mug of cocoa on a wooden table for its evening menu. The owner keeps saying it should feel “cosy” — which, as written, is a feeling rather than an instruction.",
+  "task": "Fill the three light slots — direction, quality and time of day — so the mood comes from the light instead of from adjectives.",
+  "fields": [
+    {
+      "id": "direction",
+      "label": "Direction (where the light comes from)",
+      "placeholder": "Low light from the right, pooling across the table…",
+      "required": true
+    },
+    {
+      "id": "quality",
+      "label": "Quality (soft or hard, and from what kind of source)",
+      "placeholder": "Soft and diffused, like a shaded table lamp…",
+      "required": true
+    },
+    {
+      "id": "time",
+      "label": "Time and colour (when it reads as, and how warm or cool)",
+      "placeholder": "Evening: warm amber glow, deep soft shadows…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "Adjectives describe the goal — the slots describe what to render. “Cosy” is the outcome, not the instruction.",
+    "One source, one direction. Light “from everywhere” renders as no light at all."
+  ],
+  "explanation": "The three light dials turn “make it cosy” into renderable decisions: a low lamp on one side, a soft diffused source, evening warmth. Because each dial is separate, you can fix a wrong mood by changing one of them — swap the amber for cool daylight and the same scene reads as a crisp morning. Adjectives leave the model guessing; light slots leave it nothing to guess.",
+  "skills": ["ai images", "lighting", "prompting"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-images/lighting-fundamentals"],
+  "sampleSolution": "Direction: low light from the right, pooling across the wooden table and falling on the mug. Quality: soft and diffused — the glow of a shaded table lamp with gentle transitions and no hard edges. Time and colour: evening, warm amber, deep soft shadows stretching to the left.",
+  "draft": false
+}

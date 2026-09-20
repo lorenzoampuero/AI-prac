@@ -1,0 +1,103 @@
+---
+title: Colour and mood
+description: "Colour sets the emotional register before any detail is read. Steer it with a dominant hue, a temperature and a saturation level — not with adjectives."
+track: ai-images
+order: 6
+level: beginner
+estimatedMinutes: 5
+skills: ["ai images", "colour"]
+prerequisites: ["ai-images/lighting-fundamentals"]
+learningOutcome: "Steer palette and atmosphere with dominant, support and accent colours."
+class: evergreen
+sources: []
+seo:
+  intent: "colour and mood in ai image prompts — palette, temperature, saturation"
+  cluster: "D3"
+exercises: ["choose-the-palette"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Colour decides how an image feels before anyone reads its details. The same room can be calm or chaotic with the same furniture — change the palette. Two or three colour decisions carry most of that weight: **a dominant hue, its temperature and how saturated everything is**. All three are writable.
+
+## Build a palette like an interior designer
+
+- **Dominant** — one hue owns the picture; most of the frame is its family.
+- **Support** — one or two related colours carry the rest.
+- **Accent** — a single contrasting note, used sparingly, gives the eye somewhere to land.
+
+Name colours the way paint shops do — terracotta, sage, cream, charcoal, deep teal — rather than as “nice colours”. Concrete colour words are claims the model can render; vibes are not.
+
+## Temperature is the mood dial
+
+- **Warm** — amber, rust, gold: energy, nostalgia, comfort.
+- **Cool** — blue, slate, teal: calm, distance, technology.
+- **Neutral** — greys, beiges, off-whites: quiet and documentary.
+- **Mixed** — hot and cold together: tension and energy, best used on purpose.
+
+## Saturation is a volume dial
+
+Muted palettes feel considered and quiet; vivid ones feel loud and energetic. Pastels sit at the calm end: light and low-saturation. Say which one you want — “muted and matte” is a decision, “colourful” is an invitation for chaos.
+
+<PromptCompare
+  weak={"a modern living room, beautiful colour scheme, very aesthetic"}
+  strong={"a modern living room in warm neutrals — cream walls, oak floor, one rust-orange cushion; muted, matte, soft afternoon light"}
+  notes={[
+    'The palette names concrete colours and their relative weight: cream dominates, oak supports, rust accents.',
+    '“Muted and matte” fixes the saturation level; “beautiful” fixes nothing.',
+    'One accent colour survives the render intact and gives the composition a focal point.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “A kitchen with perfect colour harmony and lots of colour.”
+>
+> The model picks its own palette — usually a safe, generic one — and “harmony” cannot be rendered or debugged.
+
+## A better example
+
+> **Ask:** “A kitchen in cream and pale oak with muted sage-green cabinets, one terracotta bowl on the counter, soft morning light.”
+>
+> Two families, one accent, one saturation level: a palette you can adjust by editing a single word.
+
+## Why it works
+
+Colours are physical properties: a paint has a hue, a temperature and a finish, and [generative systems](/glossary/generative-ai) render those properties literally. A named palette also holds together across the frame — the same few colours recur everywhere, which is what “harmonious” actually means. And because colour sits inside light, the two compound: warm light amplifies warm palettes. Say both when the mood has to be unmistakable.
+
+<CheckUnderstanding
+  id="cu-img-colour"
+  question="A clinic wants images that read calm, clean and trustworthy — nothing loud. Which palette brief fits?"
+  options={[
+    { text: 'Vivid reds and yellows for energy', feedback: 'warm and saturated reads urgent and promotional — the opposite of calm.' },
+    { text: 'Cool blues and soft greys, muted, one white accent', correct: true, feedback: 'cool, desaturated and light: the classic calm-and-clean register, with one accent keeping it from going flat.' },
+    { text: 'Every colour, evenly balanced', feedback: 'a palette with no dominant hue reads as undirected — harmony comes from hierarchy, not equality.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="choose-the-palette" />
+
+## Transfer
+
+- Brands: pick the palette once, then reuse the same three colour words in every prompt.
+- Interiors and products: muted beats vivid when you want quality cues; vivid beats muted when you want attention.
+- Mood boards: vary one dial — temperature or saturation — to explore a direction quickly.
+- Debugging: colour problems are palette problems. Restate the palette instead of regenerating blindly.
+
+<KeyTakeaways
+  items={[
+    'A palette is three decisions: dominant hue, support, one accent.',
+    'Temperature sets emotion: warm comforts, cool calms, neutral documents.',
+    'Saturation is volume — muted is quiet and considered, vivid is loud on purpose.',
+  ]}
+/>
+
+## Next
+
+Next: **[Materials and texture](/learn/ai-images/materials-and-texture)** — describing surfaces precisely enough that the render shows them. The [generative AI entry](/glossary/generative-ai) covers the machinery behind these choices, and the [diffusion entry](/glossary/diffusion) explains why each run samples differently.

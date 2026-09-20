@@ -20,6 +20,7 @@ draft: false
 import ExerciseCard from '../../../components/ExerciseCard.astro';
 import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
 import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
 
 Camera words are shorthand for **perspective** — where the viewer stands and how that changes what the subject feels like. Used with intent, one or two of them do a lot of work. Stacked without thought, they contradict each other and the model averages noise.
 
@@ -37,6 +38,16 @@ Camera words are shorthand for **perspective** — where the viewer stands and h
 - **Macro** — detail so close the subject becomes texture.
 
 One angle + one lens idea is usually plenty. “Low angle, 85mm portrait feel” says something. “Wide-angle close-up portrait with no distortion” says nothing — those words cancel out.
+
+<PromptCompare
+  weak={"portrait of a cyclist, low angle and top-down, wide angle with no distortion, everything in focus"}
+  strong={"low-angle portrait of a cyclist at the finish line, 85mm portrait feel, background crowd softly blurred"}
+  notes={[
+    'The weak stack cancels itself: low angle and top-down cannot both be true, and a wide-lens close-up with no distortion is a contradiction.',
+    'The strong stack commits to one angle, one lens idea and one depth decision — the three claims reinforce each other.',
+    'When a result feels wrong, change one camera term at a time and watch what moves.',
+  ]}
+/>
 
 ## A bad example
 
@@ -84,4 +95,4 @@ Every camera term is a claim about where the viewer is standing and what lens th
 
 ## Next
 
-Lighting and the rest of the image track arrive with the next content wave — the [track hub](/learn/ai-images) keeps the whole path in view. Meanwhile the [aspect ratio entry](/glossary/aspect-ratio) covers the canvas decision.
+Next: **[Lighting fundamentals](/learn/ai-images/lighting-fundamentals)** — direction, quality and time of day, the next layer of image control. The [aspect ratio entry](/glossary/aspect-ratio) covers the canvas decision.

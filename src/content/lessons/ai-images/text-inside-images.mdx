@@ -1,0 +1,107 @@
+---
+title: Text inside images
+description: "Image models draw words as shapes, so lettering reads plausibly — but exactness is a different thing. Here is what to trust, what to fix and who typesets what."
+track: ai-images
+order: 8
+level: intermediate
+estimatedMinutes: 6
+skills: ["ai images", "typography"]
+prerequisites: ["ai-images/materials-and-texture"]
+learningOutcome: "Decide what text to render and what to typeset yourself."
+class: current
+lastReviewed: 2026-09-20
+sources:
+  - title: "OpenAI — Image generation guide"
+    url: "https://developers.openai.com/api/docs/guides/image-generation"
+seo:
+  intent: "text in ai images — limits and workarounds for lettering and signs"
+  cluster: "D4"
+exercises: ["spot-the-text-trouble"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Ask for a poster and the model will happily draw words — but it draws them as **shapes**, not as typeset letters from a font. That distinction explains everything: lettering often looks plausible while being quietly wrong, and the [current OpenAI image guide](https://developers.openai.com/api/docs/guides/image-generation) describes text rendering as significantly improved while still listing **precise text placement and clarity** as a limitation. The skill is not avoiding text; it is deciding which words are decoration and which are information.
+
+## What renders well, what wobbles
+
+- **Strong case:** short display words — a few characters, large, bold, high contrast against a calm background. “OPEN”, “SOLE”, a two-word title.
+- **Weak case:** anything long or exact — paragraphs of copy, price lists, addresses, URLs, phone numbers, dates. The more characters, the more chances to wobble; the more exactness required, the less plausibility serves you.
+- **Stylistic trap:** scripts, handwriting and decorative faces thin out the letterforms — clarity is the first thing they lose.
+- **Silent failure:** invented lettering. “COFFE”, “HARVEST FAIRR” — a swapped or doubled letter that reads almost-right at a glance. It is the visual cousin of a [hallucination](/glossary/hallucination): plausible-looking detail that is simply wrong.
+
+<PromptCompare
+  weak={"a chalkboard menu with twelve dishes and their prices listed clearly"}
+  strong={"a chalkboard menu with “TODAY'S SPECIAL” in large chalk capitals at the top, generous blank space below"}
+  notes={[
+    'The weak prompt asks for twelve exact strings at small size — precision the model cannot reliably deliver, and every wobble is a wrong price.',
+    'The strong prompt uses the case these models handle best: short, large, high-contrast words.',
+    'The blank space is deliberate — it is where your own typesetting will live.',
+  ]}
+/>
+
+## A bad example
+
+> **Ask:** “A poster with all the event details: address, website, ticket prices, opening times.”
+>
+> Four exact strings, none of them large: expect a plausible-looking result with at least one silent error, and no way to fake-check it at a glance.
+
+## A better example
+
+> **Ask:** “A poster with the headline ‘HARVEST FAIR’ in large bold letters at the top, plenty of clear space below.”
+>
+> The strong case, used on purpose: short and high-contrast in the render, everything exact later in a layout tool.
+
+## The safe workflow
+
+<StepReveal
+  steps={[
+    'Write the exact string first — capitalisation, punctuation, accents — before you write anything else in the prompt.',
+    'Keep it as short as the design can bear. Display words over sentences; if it needs three lines, it belongs in your layout tool.',
+    'Give it room: large type, high contrast, and calm imagery directly behind the letters.',
+    'Generate, then inspect character by character. Invented lettering hides in plain sight — read the words slowly, out loud if you must.',
+    'If the text must be perfect — brand names, URLs, prices, legal lines — leave space in the image and typeset the text yourself afterwards.',
+  ]}
+/>
+
+## Why it works
+
+A [generative system](/glossary/generative-ai) produces letterforms the way it produces leaves: as patterns that match the look of writing, [sampled from noise](/glossary/diffusion) until they fit the prompt. Plausibility is the model's strength; exactness is not. So the durable rule is about stakes, not avoidance: decorative words can tolerate a model's hand, and information-bearing text — names, numbers, addresses — gets typeset by you, in place, afterwards.
+
+<CheckUnderstanding
+  id="cu-img-text"
+  question="A café wants two designs: a window sign reading “OPEN”, and a chalkboard with a full price list. How do you split the work?"
+  options={[
+    { text: 'Ask the model for both — current models handle paragraphs of text fine now', feedback: 'improved, not solved: precise placement and clarity remain a listed limitation, and a price list is nothing but precision.' },
+    { text: 'Let the model render the “OPEN” sign; typeset the price list yourself afterwards', correct: true, feedback: 'short display words are the strong case; exact information goes to the tool that does exactness. Each job lands where it works.' },
+    { text: 'Avoid text in generated images entirely — it never renders correctly', feedback: 'an overcorrection: large, short, high-contrast words are exactly what current models do best.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="spot-the-text-trouble" />
+
+## Transfer
+
+- Quote cards and social graphics: one short line in the render is fine — check every character once.
+- Posters and menus: headline in the render, body copy and prices in your editor.
+- Packaging and labels: treat rendered text as a mockup placeholder; final artwork is typeset.
+- Proofreading habit: when a render contains readable text, read it letter by letter — invented lettering is built to pass a glance.
+
+<KeyTakeaways
+  items={[
+    'Models draw letterforms as shapes: plausible is normal, exact is not.',
+    'Short, large, high-contrast words are the strong case; long or exact strings are not.',
+    'Decide by stakes: decorative text can ride along, information text gets typeset by you.',
+  ]}
+/>
+
+## Next
+
+Iterating and editing — refine instead of regenerate — arrives with the next content wave; the [track hub](/learn/ai-images) keeps the whole path in view. The [hallucination entry](/glossary/hallucination) covers the pattern invented lettering belongs to.

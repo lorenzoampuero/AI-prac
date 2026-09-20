@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Choose the palette",
+  "scenario": "A bakery asks for a header image for its winter menu. The brief is warm, cosy and appetising — but the last attempt came back in cool blue-grey tones that felt clinical and cold.",
+  "task": "Which prompt gives the model the clearest direction toward a warm, appetising palette?",
+  "options": [
+    {
+      "text": "A bakery counter on a winter morning, beautiful warm and cosy colours, delicious pastries.",
+      "correct": false,
+      "feedback": "Feelings and praise again — nothing names an actual hue, so the model is free to return the cool look you just rejected."
+    },
+    {
+      "text": "A bakery counter in amber and cream with one deep-red accent, muted wood tones throughout, soft warm light.",
+      "correct": true,
+      "feedback": "Concrete hues, a dominant family, a support, one accent and a saturation level — every word is a decision the renderer can fulfil."
+    },
+    {
+      "text": "A bakery counter with maximum colour saturation and rainbow tones.",
+      "correct": false,
+      "feedback": "Saturation is a dial and this one is turned to maximum — loud is a different register from warm, and it walks away from the cosy brief."
+    },
+    {
+      "text": "A dark bakery counter in black and chrome, moody and minimal.",
+      "correct": false,
+      "feedback": "Muted, yes — but cool and dark reads austere. Cosiness needs warmth, not just restraint."
+    }
+  ],
+  "hints": [
+    "Name hues the way paint shops do — amber, cream, rust — not the feeling you hope for.",
+    "Compare the temperature: which option actually commits to warm?"
+  ],
+  "explanation": "“Warm and cosy” is the goal; amber, cream and muted wood are the instructions that achieve it. A palette brief works when it names a dominant family (amber), a support (cream and wood), an accent (deep red) and a saturation level (muted). Each of those is renderable, and each is a dial you can turn — swap the accent and the mood changes without rebuilding the scene.",
+  "skills": ["ai images", "colour"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-images/color-and-mood"],
+  "draft": false
+}
