@@ -1,0 +1,40 @@
+---
+// Weak vs stronger prompt, side by side. Fully readable without JavaScript.
+interface Props {
+  weak: string;
+  strong: string;
+  weakLabel?: string;
+  strongLabel?: string;
+  notes?: string[];
+}
+const {
+  weak,
+  strong,
+  weakLabel = 'Weak prompt',
+  strongLabel = 'Stronger prompt',
+  notes = [],
+} = Astro.props;
+---
+
+<section class="prompt-compare" aria-label="Prompt comparison">
+  <div class="pc-pane pc-weak">
+    <p class="pc-label">{weakLabel}</p>
+    <p class="pc-text">{weak}</p>
+  </div>
+  <div class="pc-pane pc-strong">
+    <p class="pc-label">{strongLabel}</p>
+    <p class="pc-text">{strong}</p>
+  </div>
+  {
+    notes.length > 0 && (
+      <details class="pc-notes">
+        <summary>Why the stronger one works</summary>
+        <ul>
+          {notes.map((note) => (
+            <li>{note}</li>
+          ))}
+        </ul>
+      </details>
+    )
+  }
+</section>

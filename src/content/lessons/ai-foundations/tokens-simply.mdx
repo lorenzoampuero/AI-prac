@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A [token](/glossary/token) is the unit of text a model actually processes — a small chunk, roughly a word piece. "Cat" is usually one token; "internationalization" may be several; a single emoji can be two or more. Models never see your letters the way you do: everything is converted to tokens first.
 
@@ -57,6 +59,16 @@ Once you know the unit, the tactics follow:
 
 A practical takeaway: short, precise input beats padded input. Every word you paste gets processed, and your instruction competes with the padding for attention. State the ask plainly, supply only the material that matters, and both the limits and the focus work in your favor.
 
+<CheckUnderstanding
+  id="cu-tokens"
+  question="You paste a dense 40-page PDF full of tables and code into a chat. What should you expect?"
+  options={[
+    { text: 'A page is about 500 words, so the estimate holds for any document', feedback: 'pages are not a fixed unit — tables, code and other languages cost far more tokens per page.' },
+    { text: 'It can fill the context window much faster than the word count suggests', correct: true, feedback: 'tokens — not words or pages — are the real unit, and dense content is token-hungry.' },
+    { text: 'Tables compress nicely because they are mostly numbers', feedback: 'the opposite: formatting, tables and code all inflate the token count.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-token-truths" />
@@ -66,6 +78,14 @@ A practical takeaway: short, precise input beats padded input. Every word you pa
 - Budgeting a subscription or API by "messages"? Check what is counted — tokens in, tokens out.
 - Long meeting transcript: summarize per segment, keep the decision bullets.
 - Dense PDF with tables: expect the token count to be much higher than the word count suggests.
+
+<KeyTakeaways
+  items={[
+    'Models read tokens — roughly ¾ of an English word each — not letters, words or pages.',
+    'Limits, costs and truncation are all counted in tokens.',
+    'Short, precise input beats padded input; chunk big jobs section by section.',
+  ]}
+/>
 
 ## Next
 

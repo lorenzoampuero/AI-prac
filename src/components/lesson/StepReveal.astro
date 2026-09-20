@@ -1,0 +1,31 @@
+---
+// Progressive step reveal — “show me the next step”. Without JavaScript every step stays visible,
+// so nothing is ever lost; with JavaScript the learner reveals one step at a time.
+interface Props {
+  steps: string[];
+  title?: string;
+}
+const { steps, title = 'How it works, step by step' } = Astro.props;
+---
+
+<section class="step-reveal" data-step-reveal aria-label={title}>
+  <p class="sr-title">{title}</p>
+  <ol class="sr-steps">
+    {
+      steps.map((step, index) => (
+        <li data-step-index={index}>
+          <span class="sr-number" aria-hidden="true">
+            {index + 1}
+          </span>
+          <span>{step}</span>
+        </li>
+      ))
+    }
+  </ol>
+  <button class="button secondary sr-next" type="button" data-sr-next hidden>
+    Reveal step 2
+  </button>
+  <script>
+    import '../../scripts/teaching';
+  </script>
+</section>

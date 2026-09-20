@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A [context window](/glossary/context-window) is the total amount of text a model can consider at one time. Your current message, earlier turns, pasted documents and the model's own replies all share it. When people say a model "remembers" — this is what they mean: the text still inside the window.
 
@@ -54,6 +56,16 @@ Treat the window as working memory you manage:
 
 A habit that keeps long sessions useful: whenever the goal shifts, restate the standing facts in the new message — the reader, the constraints, the format. Three lines of recap cost seconds and protect everything that came before; drift happens exactly where a recap was skipped. The model never gets tired of instructions — it only stops seeing them.
 
+<CheckUnderstanding
+  id="cu-context"
+  question="Deep into a very long chat, the assistant seems to “forget” what you said at the start. Most likely explanation?"
+  options={[
+    { text: 'It decided that part was not important', feedback: 'nothing is being ignored on purpose — the text may simply have fallen out of the window.' },
+    { text: 'The start of the conversation fell outside the context window — truncation drops the oldest first', correct: true, feedback: 'the window is all the model can see; what falls out is gone.' },
+    { text: 'It searched its memory store and failed to find it', feedback: 'there is no memory store to search outside the window.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="fix-the-forgetting-chat" />
@@ -63,6 +75,14 @@ A habit that keeps long sessions useful: whenever the goal shifts, restate the s
 - Long drafting project: keep a running "brief" to paste at the top of new sessions.
 - Research with many sources: work one source at a time, extract notes, then combine.
 - Any answer that contradicts something you said early: suspect the window before the model.
+
+<KeyTakeaways
+  items={[
+    'The context window is everything the model can see at once — your message, the history, the documents.',
+    'At the limit the oldest content is dropped first, and instructions buried in a huge paste compete for attention.',
+    'Carry a short brief forward into fresh chats instead of hoarding transcripts.',
+  ]}
+/>
 
 ## Next
 

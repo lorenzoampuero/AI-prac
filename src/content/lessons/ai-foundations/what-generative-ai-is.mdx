@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 [Generative AI](/glossary/generative-ai) is software that produces new content — text, images, audio or code — in response to an instruction you write. It doesn't look anything up: it constructs the most plausible response from patterns absorbed during training. That single fact explains both why it feels magical and why it can be confidently wrong.
 
@@ -54,6 +56,16 @@ A durable mental model: **training stores patterns; generation samples from them
 2. If it needs something the model cannot have — live data, your private files, exact computation, verified sources — pair it with a tool that provides that, or don't delegate it.
 3. When the output will be acted on, verify it. Confident phrasing costs the model nothing.
 
+<CheckUnderstanding
+  id="cu-generative"
+  question="Which task fits a plain generative AI well?"
+  options={[
+    { text: 'Find today’s EUR/USD exchange rate to four decimals', feedback: 'that needs live data the model cannot have — it will produce a confident number anyway.' },
+    { text: 'Turn these messy meeting notes into a five-bullet summary', correct: true, feedback: 'everything the task needs lives in the prompt — you supply the material, the model reshapes it.' },
+    { text: 'Confirm whether a law passed last week', feedback: 'freshness needs a live source; fluent phrasing is not accuracy.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-when-to-use-generative-ai" />
@@ -65,6 +77,14 @@ The test — "does it need something the model can't have?" — travels everywhe
 - Drafting email or meeting notes: everything lives in your prompt. Good fit.
 - Checking a price, a law or a statistic: needs a source. Use search or the primary source.
 - Deciding something with consequences (taxes, health, contracts): wrong delegation entirely.
+
+<KeyTakeaways
+  items={[
+    'Generative AI constructs the most plausible response — it does not look anything up.',
+    'Its home ground is transformation: rewriting, summarizing and structuring material you supply.',
+    'Freshness, precision and provenance need a tool that actually provides them.',
+  ]}
+/>
 
 ## Next
 

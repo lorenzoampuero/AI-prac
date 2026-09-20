@@ -17,6 +17,7 @@ cut — never shipped weak.
 | **Bad example** | The common mistake, shown, not described | snippet + ≤60 words |
 | **Better example** | The improvement | snippet + ≤60 words |
 | **Why it works** | The mechanism — teach transfer, not magic | 80–200 words |
+| **Teaching blocks** | Learner-facing interaction (see §11): ≥1 of CheckUnderstanding / PromptCompare / StepReveal, plus KeyTakeaways near the end | see §11 |
 | **Practice** | The embedded exercise (component) | see §5 |
 | **Transfer** | Where else this skill applies (2–3 situations) | ≤80 words |
 | **Next** | Prerequisite / next lesson / related exercise links | links only |
@@ -98,3 +99,16 @@ Build-time validation: missing/invalid fields fail the build; registry tests add
 Accuracy · clarity · originality · sources present + authoritative · exercise alignment (practices what the
 lesson teaches) · copyright clean · staleness (dates make sense) · hype-free · answer-first opening · links
 complete. Verdict recorded per unit in `docs/CONTENT_QA.md` — **fix or cut**, no partial passes.
+
+## 11. Teaching blocks (added 2026-09-20)
+
+- Every lesson includes **at least one interactive teaching block** — `<CheckUnderstanding>` (inline
+  micro-quiz), `<PromptCompare>` (weak vs stronger prompt, annotated) or `<StepReveal>` (progressive
+  steps) — and closes with `<KeyTakeaways>` before the Next section. New lessons in a wave carry ≥2
+  blocks; the 36 MVP lessons were retrofitted (foundations first, waves as they publish).
+- Blocks **teach, never gate**: no XP, no locking, no counters. Without JavaScript every block degrades
+  to readable static text — never hidden content.
+- Feedback copy follows §5: the correct option explains why; wrong options name the misconception in one
+  line and invite another try ("Try another option — this one is free practice").
+- Micro-quiz questions must be answerable from the lesson itself; they check the exact fact the lesson
+  teaches, not trivia around it.

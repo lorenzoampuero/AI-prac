@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Send the same prompt twice, get two different answers. Nothing broke: a model chooses each next [token](/glossary/token) by sampling from a range of plausible options — not by looking up one fixed reply. Small differences — your wording, the order of the conversation, the product's settings — shift which option gets picked.
 
@@ -52,6 +54,16 @@ Treat model output as a **draft with variance**, not a deterministic function:
 
 The practical consequence: keep prompts like recipes, not incantations. Save the version that produced a good result, note what you changed when it stops working, and treat every run as a sample rather than the model's single true answer. Two samples that agree are stronger evidence than one sample you liked — that is the whole habit in one line.
 
+<CheckUnderstanding
+  id="cu-variance"
+  question="A teammate regenerates an approved paragraph and it comes back worded differently. What is the reliable fix?"
+  options={[
+    { text: 'Re-run until the text matches the approved version exactly', feedback: 'exact repeats are not retrievable — you will burn time chasing a sample.' },
+    { text: 'Keep the approved text saved and work from that copy whenever you need edits', correct: true, feedback: 'drafting tolerates variance; commitments do not — the saved text is the commitment.' },
+    { text: 'Ask the model to “say it exactly like before”', feedback: 'there is nothing to retrieve unless the previous text is in front of it.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="expect-the-variance" />
@@ -61,6 +73,14 @@ The practical consequence: keep prompts like recipes, not incantations. Save the
 - Approved copy: keep it in a document; paste it for edits, never regenerate.
 - Code you shipped: the diff is the truth, not the chat that produced it.
 - Brainstorming: ask for ten variations — variance is the tool.
+
+<KeyTakeaways
+  items={[
+    'Model output is a sample, not a fixed answer — wording, context and settings shift every run.',
+    'Drafting tolerates variance; commitments do not — save approved text and work from the copy.',
+    'Re-run on purpose for alternatives; snapshot everything else.',
+  ]}
+/>
 
 ## Next
 

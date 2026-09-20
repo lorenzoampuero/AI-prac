@@ -1,0 +1,14 @@
+---
+// A small framed note — tip, common-mistake warning, or a “why it works” explanation.
+interface Props {
+  variant?: 'tip' | 'caution' | 'why';
+  title?: string;
+}
+const { variant = 'tip', title } = Astro.props;
+const labels: Record<string, string> = { tip: 'Tip', caution: 'Common mistake', why: 'Why it works' };
+---
+
+<aside class={`callout callout--${variant}`}>
+  <p class="callout-title">{title ?? labels[variant]}</p>
+  <div class="callout-body"><slot /></div>
+</aside>

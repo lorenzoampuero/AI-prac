@@ -21,6 +21,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 When people say "ChatGPT" or "Claude", they usually mean the **product** — the app they type into. The **model** is the engine underneath: a different thing, with a different name, released on its own schedule. Keeping the layers apart explains most "why does it work here but not there?" puzzles.
 
@@ -52,6 +54,16 @@ When something behaves differently than expected, ask three questions in order: 
 
 The model sets the ceiling; the product decides what you can reach. That ordering is stable even as names churn: engines improve, products add memory and tools, features come and go. Judging the layer you are actually talking to is what keeps expectations accurate — and it is the first step of every tool-selection decision.
 
+<CheckUnderstanding
+  id="cu-layers"
+  question="An app can’t read your spreadsheet, but a colleague says the AI handles spreadsheets fine. Who is right?"
+  options={[
+    { text: 'The colleague — the model reads files by itself', feedback: 'wrong layer: reading files is a product capability, not something a bare model can do.' },
+    { text: 'Both: the model may have the capability, but this product never exposed or enabled it', correct: true, feedback: 'model = ceiling, product = what you can reach, feature = what is switched on. Most mysteries end at layer two.' },
+    { text: 'Neither — LLMs cannot work with spreadsheets at all', feedback: 'file access is a product feature; the same engine handles sheets wherever it is enabled.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="diagnose-the-layer" />
@@ -61,6 +73,14 @@ The model sets the ceiling; the product decides what you can reach. That orderin
 - Trying a new tool? Ask what is *enabled*, not just which model it claims.
 - A feature the competition has? It may be a product layer your current app can add.
 - Writing or talking about AI capability: name the layer — engine or app.
+
+<KeyTakeaways
+  items={[
+    'Model, product, feature — three layers that change on different schedules.',
+    'When behaviour differs between apps, ask: capability, exposure, or configuration?',
+    'Name the layer when you talk about AI capability — engine or app.',
+  ]}
+/>
 
 ## Next
 

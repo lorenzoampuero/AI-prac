@@ -23,6 +23,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 Two models, same brand, same chat box — one answers instantly, the other takes a minute and shows a "thinking" spinner. The difference is not quality versus speed with a clear winner. It is a **trade: time and cost for deliberate problem-solving** — and choosing correctly is a skill.
 
@@ -65,6 +67,16 @@ The trade is visible in the pricing. **Current example (September 2026, official
 
 Extraction is a pattern task; conflict analysis is a reasoning task. Two tiers, two jobs, better result than either alone.
 
+<CheckUnderstanding
+  id="cu-tier"
+  question="You need to check a 30-page contract against five constraints. Which approach fits the calibration advice?"
+  options={[
+    { text: 'Run everything on the fastest, cheapest tier to save budget', feedback: 'a missed penalty clause costs more than think-time — multi-constraint analysis is when to escalate.' },
+    { text: 'Extract the clauses with the fast tier, then analyze conflicts with the reasoning tier', correct: true, feedback: 'fast tier for pattern extraction, reasoning for judgment — two tiers, two jobs.' },
+    { text: 'Always use the reasoning tier for everything, to be safe', feedback: 'wasteful for one-pass transformations — for interactive work, latency is the feature.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="pick-the-tier" />
@@ -74,6 +86,14 @@ Extraction is a pattern task; conflict analysis is a reasoning task. Two tiers, 
 - Daily drafting: fast tier, always.
 - Decisions with money, law or health stakes: reasoning tier *plus* a source check.
 - High-volume pipelines: fast first, escalate only the exceptions.
+
+<KeyTakeaways
+  items={[
+    'Reasoning models trade time and cost for deliberation; fast models win on one-pass transformations.',
+    'Escalate on doubt — re-run shaky results on the reasoning tier instead of starting heavy.',
+    'Reasoning is not truth: long chains can still hallucinate, so verify specifics as always.',
+  ]}
+/>
 
 ## Next
 

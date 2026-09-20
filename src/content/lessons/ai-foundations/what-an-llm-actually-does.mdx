@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A large language model (LLM) is a prediction engine. It generates text by repeatedly answering one narrow question — **given everything so far, what comes next?** — first one token, then another, then another. That is the whole mechanism, and it explains most of the quirks you will meet.
 
@@ -54,6 +56,16 @@ Match the task to the mechanism:
 
 That single distinction prevents a large share of real-world AI mistakes.
 
+<CheckUnderstanding
+  id="cu-llm"
+  question="What is an LLM actually doing when it answers you?"
+  options={[
+    { text: 'Searching a database of stored sentences for the best match', feedback: 'there is no database of sentences — it continues a pattern from learned weights.' },
+    { text: 'Repeatedly predicting the most likely next token, one at a time', correct: true, feedback: 'that single discipline explains both the competence and the failure modes.' },
+    { text: 'Retrieving the exact original text from its training data', feedback: 'it reconstructs rather than retrieves — which is why “verbatim” quotes break.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="choose-how-llms-work" />
@@ -64,6 +76,14 @@ That single distinction prevents a large share of real-world AI mistakes.
 - Rewriting in a different tone: continuation. Good fit.
 - Quoting, citing, or "the latest" anything: retrieval. Find the source.
 - Any number that will appear in a document: verify it.
+
+<KeyTakeaways
+  items={[
+    'An LLM is a prediction engine: given everything so far, what comes next?',
+    'Continuation-shaped tasks — rewrite, summarize, draft from your notes — fit; retrieval-shaped tasks do not.',
+    'Confidence is free: every token is chosen to fit, including false ones.',
+  ]}
+/>
 
 ## Next
 

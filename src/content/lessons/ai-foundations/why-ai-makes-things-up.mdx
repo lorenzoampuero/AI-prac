@@ -18,6 +18,8 @@ draft: false
 ---
 
 import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
 
 A [hallucination](/glossary/hallucination) is a fluent, confident piece of AI output that simply is not true. Models generate what plausibly comes next — not what is accurate — so the most convincing sentences can be the least reliable. Knowing where fabrications cluster is most of the defence.
 
@@ -59,6 +61,16 @@ The goal is not blanket suspicion — it is calibration: fast trust for low stak
 
 One honest note on scale: this is not a bug you can wait out. Catching fabrications is a skill — the checklist in the research track is the same one every careful reader uses, and it works on any model, current or future. The tool changes; the verification habit travels with you.
 
+<CheckUnderstanding
+  id="cu-hallucination"
+  question="A draft quotes “a 2024 study in the Journal of Workplace Science, DOI 10.1037/x123”. What is the most reliable next step?"
+  options={[
+    { text: 'Trust it — a DOI is specific and verifiable', feedback: 'reference-shaped text is exactly where fabrications cluster; DOIs are easy to generate and impossible to trust unclicked.' },
+    { text: 'Open the DOI or verify the journal before the citation goes anywhere', correct: true, feedback: 'specifics are claims, not facts — numbers, names, dates, quotes and citations get checked.' },
+    { text: 'Ask the same model to double-check that the study exists', feedback: 'asking the generator is not verification — it may confirm its own invention.' },
+  ]}
+/>
+
 ## Practice
 
 <ExerciseCard id="spot-the-fabrication" />
@@ -69,6 +81,14 @@ One honest note on scale: this is not a bug you can wait out. Catching fabricati
 - "A quick summary of the regulations": find the regulation.
 - An email draft: read it and send — low stakes.
 - Anything with a DOI or a link: click it, or delete it.
+
+<KeyTakeaways
+  items={[
+    'Fabrications cluster around specifics: numbers, dates, names, quotes and citations.',
+    'Plausibility is generated; truth is not.',
+    'Set the verification budget by the consequence — a glance for a draft, a primary source for a number in a report.',
+  ]}
+/>
 
 ## Next
 

@@ -1,0 +1,37 @@
+---
+// Inline micro-quiz: one question, instant feedback on selection, freely replayable.
+// No XP — the economy stays lessons + exercises; this is teaching, not scoring.
+interface Option {
+  text: string;
+  correct?: boolean;
+  feedback?: string;
+}
+interface Props {
+  id: string;
+  question: string;
+  options: Option[];
+}
+const { id, question, options } = Astro.props;
+const config = options.map((option) => ({
+  correct: option.correct === true,
+  feedback: option.feedback ?? '',
+}));
+---
+
+<fieldset class="check-understanding" data-check-understanding data-cu-id={id}>
+  <legend class="cu-question">{question}</legend>
+  <div class="cu-options">
+    {options.map((option, index) => (
+      <label class="cu-option">
+        <input type="radio" name={`cu-${id}`} value={String(index)} data-cu-input />
+        <span>{option.text}</span>
+      </label>
+    ))}
+  </div>
+  <p class="cu-feedback" data-cu-feedback role="status" hidden />
+  <script type="application/json" data-cu-config set:html={JSON.stringify(config)} />
+</fieldset>
+
+<script>
+  import '../../scripts/teaching';
+</script>
