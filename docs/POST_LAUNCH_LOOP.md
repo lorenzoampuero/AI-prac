@@ -63,6 +63,11 @@ impressions — 2–6 weeks · meaningful organic clicks — 2–6 months of con
 terms (“prompt engineering”) — much longer. Backlinks are the slow variable: share the site only where
 it is genuinely useful.
 
+**Batch 3 deployed (2026-09-20):** pushed `bbcc4c2` → Vercel auto-deploy; externally verified within the
+minute: `/faq`, `/llms.txt`, the new workflow lesson and the 175-URL sitemap all serving fresh
+(`x-vercel-cache: MISS`, `age: 0`). IndexNow re-submitted all 175 URLs (accepted). Owner step still
+open: Search Console → **Request Indexing** for `/faq` alongside the flagship pages.
+
 **Weekly spot-check (first month):** `site:getaipractice.site` plus a branded query on Google and Bing;
 compare incoming queries against the P1 clusters in `research/KEYWORD_UNIVERSE.md`; log surprises here.
 
