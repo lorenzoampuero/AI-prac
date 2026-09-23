@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Monta un prompt para tu hoja de cálculo",
+  "scenario": "Tu registro de gastos tiene un recibo por fila — fecha, proveedor, categoría e importe. Quieres un total acumulado por categoría para un informe mensual, y una fórmula que entiendas lo suficiente como para fiarte.",
+  "task": "Rellena todos los campos para montar un prompt que describa tu hoja y pida una fórmula comprobable — y luego compáralo con un ejemplo sólido.",
+  "fields": [
+    {
+      "id": "structure",
+      "label": "Estructura — describe la hoja tal como es",
+      "placeholder": "Columnas: A = fecha, B = proveedor, C = categoría, D = importe; filas de datos 2–340",
+      "required": true
+    },
+    {
+      "id": "outcome",
+      "label": "Resultado — el dato exacto que quieres",
+      "placeholder": "Un total acumulado por categoría para un mes que elijo en una celda…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "Formato — cómo debe volver la respuesta",
+      "placeholder": "Primero supuestos, luego la fórmula, luego el desglose, luego una prueba…",
+      "required": true
+    },
+    {
+      "id": "guard",
+      "label": "Protección — lo que no debe hacer",
+      "placeholder": "Sin columnas que no he descrito; pregunta en vez de asumir…",
+      "required": true
+    }
+  ],
+  "sampleSolution": "Mi hoja tiene un recibo por fila. Columnas: A = fecha, B = proveedor, C = categoría, D = importe. Las filas de datos van de la 2 a la 340.\n\nQuiero un total acumulado por categoría para un mes que selecciono en una sola celda, mostrado en un bloque de resumen pequeño.\n\nDame, en este orden: (1) los supuestos que hayas hecho sobre la estructura — antes de la fórmula; (2) la fórmula lista para pegar; (3) un desglose en lenguaje claro de cada parte; (4) una prueba: ¿qué debería devolver para tres filas de ejemplo que pueda comprobar a mano?\n\nNo referencies columnas, hojas ni rangos que no te haya descrito. Si algo de mi estructura no queda claro, pregúntame en vez de asumirlo.\n\nDetalles:\n[disposición del bloque de resumen + una muestra de valores esperados]",
+  "hints": [
+    "¿Qué no sabe el modelo de tu hoja si no se lo dices?",
+    "¿Qué parte de la respuesta te permite demostrar la fórmula antes de fiarte?"
+  ],
+  "explanation": "El prompt montado sustituye la suposición por una descripción: columnas reales, rango real, nada de estructura inventada. Pedir los supuestos antes de la fórmula hace visibles los errores, el desglose hace la fórmula enseñable, y la pregunta de prueba convierte la confianza en algo que puedes verificar en cinco segundos sobre una copia.",
+  "skills": ["hojas de cálculo", "verificación"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/spreadsheets-describe-dont-guess"],
+  "draft": false
+}

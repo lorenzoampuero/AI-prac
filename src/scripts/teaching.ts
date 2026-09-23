@@ -1,6 +1,8 @@
 // Interactive teaching blocks used inside lessons: the inline micro-quiz (CheckUnderstanding) and the
 // progressive steps (StepReveal). Boots on first load and after client-side navigation; idempotent.
 
+import { t } from '../i18n/client';
+
 interface CuConfig {
   correct: boolean;
   feedback: string;
@@ -52,7 +54,7 @@ function initStepReveal(): void {
         step.hidden = index >= revealed;
       });
       button.hidden = revealed >= steps.length;
-      button.textContent = revealed >= steps.length - 1 ? 'Reveal final step' : `Reveal step ${revealed + 1}`;
+        button.textContent = revealed >= steps.length - 1 ? t().revealFinal : t().revealStep(revealed + 1);
     };
     render();
 

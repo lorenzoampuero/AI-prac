@@ -1,0 +1,83 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getTrack } from '../../../data/tracks';
+import { breadcrumbJsonLd, courseJsonLd } from '../../../seo/schema';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
+  const byTrack = new Map<string, CollectionEntry<'lessonsEs'>[]>();
+  for (const lesson of lessons) {
+    const list = byTrack.get(lesson.data.track) ?? [];
+    list.push(lesson);
+    byTrack.set(lesson.data.track, list);
+  }
+  return [...byTrack.entries()].map(([track, list]) => ({
+    params: { track },
+    props: { lessons: [...list].sort((a, b) => a.data.order - b.data.order) },
+  }));
+}
+
+type Props = { lessons: CollectionEntry<'lessonsEs'>[] };
+const { lessons } = Astro.props as Props;
+const { track: trackId } = Astro.params;
+const info = getTrack(trackId ?? '');
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+---
+
+<BaseLayout
+  locale="es"
+  title={info?.seoTitleEs ?? info?.nameEs ?? 'Sección'}
+  description={
+    info?.seoDescriptionEs ??
+    `${info?.nameEs ?? 'Sección'}: ${info?.taglineEs ?? ''} Lecciones con práctica real, gratis y sin cuenta.`
+  }
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Aprender', path: '/es/learn' },
+        { name: info?.nameEs ?? trackId ?? 'Sección', path: `/es/learn/${trackId}` },
+      ],
+      origin,
+    ),
+    courseJsonLd(
+      {
+        name: info?.nameEs ?? trackId ?? 'Sección',
+        description: `${info?.taglineEs ?? ''} Lecciones gratis con práctica real; sin cuenta.`.trim(),
+        path: `/es/learn/${trackId}`,
+        lessons: lessons.map((lesson) => ({
+          name: lesson.data.title,
+          path: `/es/learn/${lesson.data.track}/${lesson.id.split('/').slice(1).join('/')}`,
+        })),
+      },
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li><a href="/es/learn">Aprender</a></li>
+      <li aria-current="page">{info?.nameEs ?? trackId}</li>
+    </ol>
+  </nav>
+
+  <h1>{info?.nameEs ?? trackId}</h1>
+  <p class="lede">{info?.taglineEs}</p>
+
+  <ul class="lesson-list">
+    {
+      lessons.map((lesson) => (
+        <li>
+          <a href={`/es/learn/${lesson.data.track}/${lesson.id.split('/').slice(1).join('/')}`}>
+            {lesson.data.title}
+          </a>
+          <div class="lesson-meta">
+            {lesson.data.estimatedMinutes} min · {lesson.data.learningOutcome}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

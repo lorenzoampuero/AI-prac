@@ -1,0 +1,39 @@
+{
+  "engine": "fix-prompt",
+  "title": "Arregla el prompt del correo al jefe",
+  "scenario": "Una compañera necesita ayuda para redactar un correo de estado a su jefa y escribió este prompt. Es el paquete clásico: el tema está, la situación falta.",
+  "task": "Reescribe el prompt para que alguien sin ningún contexto pueda producir el correo correcto sin preguntar nada.",
+  "weakPrompt": "Ayúdame a escribir un correo a mi jefa sobre el proyecto.",
+  "criteria": [
+    {
+      "id": "outcome",
+      "label": "Nombra el resultado y el formato exactos",
+      "hint": "Longitud, forma, nivel de lenguaje — por ejemplo «un correo de estado de cinco frases»."
+    },
+    {
+      "id": "context",
+      "label": "Añade para quién es y cuál es la situación",
+      "hint": "Relación y estado: logro, riesgo, retraso, petición…"
+    },
+    {
+      "id": "content",
+      "label": "Enumera lo que debe incluirse o evitarse",
+      "hint": "Hechos que deben sobrevivir, límites de tono, cosas que no se pueden prometer."
+    },
+    {
+      "id": "check",
+      "label": "Define «bueno» de forma lo bastante concreta como para comprobarlo",
+      "hint": "Prefiere palabras contables: «sin jerga», «termina con la petición», «directo, sin excusas»."
+    }
+  ],
+  "sampleSolution": "Escribe un correo de estado de cinco frases a mi jefa sobre el Proyecto Atlas. Situación: el hito de integración se ha movido al 4 de octubre; todo lo demás va en plazo; necesito dos días más de apoyo de QA para mantener la nueva fecha. Tono: directo y orientado a soluciones, sin excusas y sin jerga. Termina con la petición concreta en la última frase.",
+  "hints": [
+    "La prueba del desconocido: ¿alguien sin ningún contexto produciría el correo correcto?",
+    "Sube un peldaño por encima de lo cómodo: sustituye cada adjetivo por algo contable."
+  ],
+  "explanation": "El prompt arreglado plantea un solo trabajo con forma comprobable: para quién es, qué pasó, qué evitar y cómo termina. Cada requisito concreto estrecha el espacio de salidas plausibles — ese es todo el mecanismo de las «instrucciones claras».",
+  "skills": ["claridad", "instrucciones"],
+  "difficulty": "beginner",
+  "lessonRefs": ["prompting/write-clear-instructions"],
+  "draft": false
+}

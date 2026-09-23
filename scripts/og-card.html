@@ -16,28 +16,43 @@
       .card {
         width: 1200px;
         height: 630px;
-        background: #fafaf9;
-        color: #171717;
-        padding: 72px 80px;
+        background: #faf8f3;
+        color: #211b14;
+        padding: 64px 80px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
         overflow: hidden;
       }
+      .card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(520px 320px at 88% -10%, rgba(20, 88, 74, 0.1), transparent 70%),
+          radial-gradient(420px 280px at -6% 108%, rgba(180, 83, 9, 0.12), transparent 70%);
+      }
       .brand {
+        position: relative;
         display: flex;
         align-items: center;
         gap: 16px;
         font-size: 28px;
         font-weight: 700;
       }
+      .brand .url {
+        margin-left: auto;
+        font-size: 20px;
+        font-weight: 500;
+        color: #6f665a;
+      }
       .mark {
         width: 52px;
         height: 52px;
         border-radius: 12px;
-        background: #4f46e5;
-        color: #fff;
+        background: #14584a;
+        color: #faf8f3;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -45,28 +60,33 @@
         font-weight: 800;
       }
       h1 {
-        font-size: 66px;
-        font-weight: 800;
+        position: relative;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 64px;
+        font-weight: 700;
         letter-spacing: -0.02em;
-        line-height: 1.06;
-        max-width: 980px;
+        line-height: 1.08;
+        max-width: 1000px;
       }
       .sub {
-        margin-top: 24px;
-        font-size: 26px;
-        color: #57534e;
+        position: relative;
+        margin-top: 22px;
+        font-size: 25px;
+        color: #6f665a;
       }
       .strip {
+        position: relative;
         display: flex;
+        flex-wrap: wrap;
         gap: 12px;
-        font-size: 20px;
-        color: #44403c;
+        font-size: 19px;
+        color: #3f382e;
       }
       .pill {
-        border: 1px solid #d6d3d1;
+        border: 1px solid #d9cfbc;
         border-radius: 999px;
         padding: 8px 18px;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.75);
       }
       .bar {
         position: absolute;
@@ -74,7 +94,7 @@
         right: 0;
         bottom: 0;
         height: 12px;
-        background: #4f46e5;
+        background: linear-gradient(90deg, #14584a, #b45309);
       }
     </style>
   </head>
@@ -83,18 +103,21 @@
       <div class="brand">
         <span class="mark">A</span>
         <span>AI Practice</span>
+        <span class="url">getaipractice.site</span>
       </div>
       <div>
       <h1>Build real AI skills, one&nbsp;exercise at a time.</h1>
-      <p class="sub">36 short lessons · 36 hands-on exercises · free, no account</p>
+      <p class="sub">Short lessons · hands-on exercises · free, no account</p>
     </div>
     <div class="strip">
       <span class="pill">Foundations</span>
       <span class="pill">Prompting</span>
-      <span class="pill">Research</span>
+      <span class="pill">Verification</span>
       <span class="pill">Work</span>
-      <span class="pill">Coding</span>
       <span class="pill">Safety</span>
+      <span class="pill">Coding</span>
+      <span class="pill">Images</span>
+      <span class="pill">Workflows</span>
     </div>
       <div class="bar"></div>
     </div>

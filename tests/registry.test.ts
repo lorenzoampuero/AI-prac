@@ -24,6 +24,7 @@ interface LessonMeta {
   draft: boolean;
   title: string;
   seoIntent: string;
+  seoTitle: string;
   exercises: string[];
 }
 
@@ -64,7 +65,7 @@ const lessons: LessonMeta[] = listFiles(lessonsRoot, '.mdx').map((file) => {
   const data = parseFrontmatter(file);
   const id = normalise(file.slice(lessonsRoot.length + 1).replace(/\.mdx$/, ''));
   const segments = id.split('/');
-  const seo = (data.seo ?? {}) as { intent?: unknown };
+  const seo = (data.seo ?? {}) as { intent?: unknown; title?: unknown };
   return {
     id,
     track: String(data.track ?? ''),
@@ -72,6 +73,7 @@ const lessons: LessonMeta[] = listFiles(lessonsRoot, '.mdx').map((file) => {
     draft: data.draft === true,
     title: String(data.title ?? ''),
     seoIntent: String(seo.intent ?? '').trim().toLowerCase(),
+    seoTitle: String(seo.title ?? '').trim(),
     exercises: Array.isArray(data.exercises) ? (data.exercises as string[]) : [],
   };
 });
@@ -125,6 +127,19 @@ describe('curriculum registry — published content integrity', () => {
       expect(intents.has(lesson.seoIntent), `duplicate intent "${lesson.seoIntent}" in ${lesson.id}`).toBe(false);
       intents.add(lesson.seoIntent);
       expect(lesson.exercises.length, lesson.id).toBeGreaterThan(0);
+    }
+  });
+
+  it('published lessons expose a keyword-first seo.title within SERP width (≤50 chars, unique)', () => {
+    const titles = new Set<string>();
+    for (const lesson of publishedLessons) {
+      expect(lesson.seoTitle.length, `${lesson.id} seo.title is missing`).toBeGreaterThanOrEqual(15);
+      expect(
+        lesson.seoTitle.length,
+        `${lesson.id} seo.title is too long (${lesson.seoTitle.length} > 50): "${lesson.seoTitle}"`,
+      ).toBeLessThanOrEqual(50);
+      expect(titles.has(lesson.seoTitle), `duplicate seo.title "${lesson.seoTitle}" in ${lesson.id}`).toBe(false);
+      titles.add(lesson.seoTitle);
     }
   });
 

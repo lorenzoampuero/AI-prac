@@ -5,21 +5,40 @@ import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
 import { getCollection } from 'astro:content';
 import { SITE_NAME } from '../config/site';
+import { localeOf, uiStrings, type Locale } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
+  /** Set false when the title already carries the brand (home page). */
+  suffix?: boolean;
+  /** og:type — 'article' for lesson pages, 'website' everywhere else. */
+  ogType?: 'website' | 'article';
   noindex?: boolean;
+  /** Page language — defaults to the i18n routing locale (EN at the root, ES under /es). */
+  locale?: Locale;
   /** JSON-LD blocks built via src/seo/schema.ts. Rendered verbatim in <head>. */
   structuredData?: Record<string, unknown>[];
 }
 
-const { title, description, noindex = false, structuredData = [] } = Astro.props;
-const pageTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
+const {
+  title,
+  description,
+  suffix = true,
+  ogType = 'website',
+  noindex = false,
+  locale: localeProp,
+  structuredData = [],
+} = Astro.props;
+const locale = localeProp ?? localeOf(Astro.currentLocale);
+const s = uiStrings(locale);
+const base = locale === 'es' ? '/es' : '';
+const pageTitle = suffix && title !== SITE_NAME ? `${title} · ${SITE_NAME}` : title;
 
 const origin = Astro.site ?? new URL('https://getaipractice.site');
 const canonical = new URL(Astro.url.pathname, origin);
+const ogImage = new URL('/og.png', origin).href;
 
 // Vercel Web Analytics — enabled only when the build runs on Vercel (process.env.VERCEL is set there).
 // Local and any non-Vercel hosting builds ship zero third-party scripts; see /privacy for the promise.
@@ -29,12 +48,32 @@ const pathname = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
+// hreflang + language switcher — only for paths that exist in both languages (wave 1).
+const normalizedPath = pathname !== '/' ? pathname.replace(/\/+$/, '') : '/';
+const isEs = normalizedPath === '/es' || normalizedPath.startsWith('/es/');
+const enPath = isEs ? normalizedPath.replace(/^\/es/, '') || '/' : normalizedPath;
+const esPath = isEs ? normalizedPath : normalizedPath === '/' ? '/es' : `/es${normalizedPath}`;
+const ES_STATIC_PATHS = new Set(['/', '/learn', '/practice', '/glossary', '/faq', '/assessment', '/about', '/privacy']);
+const esLessonsAll = await getCollection('lessonsEs', ({ data }) => !data.draft);
+const esExercisesAll = await getCollection('exercisesEs', ({ data }) => !data.draft);
+const esTermsAll = await getCollection('glossaryEs', ({ data }) => !data.draft);
+const esPathSet = new Set<string>(ES_STATIC_PATHS);
+for (const lesson of esLessonsAll) {
+  esPathSet.add(`/learn/${lesson.data.track}/${lesson.id.split('/').slice(1).join('/')}`);
+}
+for (const track of new Set(esLessonsAll.map((lesson) => lesson.data.track))) {
+  esPathSet.add(`/learn/${track}`);
+}
+for (const exercise of esExercisesAll) esPathSet.add(`/practice/${exercise.id}`);
+for (const term of esTermsAll) esPathSet.add(`/glossary/${term.id}`);
+const hasEsCounterpart = isEs || esPathSet.has(normalizedPath);
+
 const NAV = [
-  { href: '/learn', label: 'Learn' },
-  { href: '/practice', label: 'Practice' },
-  { href: '/assessment', label: 'Assessment' },
-  { href: '/glossary', label: 'Glossary' },
-  { href: '/about', label: 'About' },
+  { href: `${base}/learn`, label: s.nav.learn },
+  { href: `${base}/practice`, label: s.nav.practice },
+  { href: `${base}/assessment`, label: s.nav.assessment },
+  { href: `${base}/glossary`, label: s.nav.glossary },
+  { href: `${base}/about`, label: s.nav.about },
 ];
 
 // Build-time facts the client scripts need (gamification) — totals, the exercise→track map and titles.
@@ -43,6 +82,10 @@ const allExercises = await getCollection('exercises', ({ data }) => !data.draft)
 const lessonsTotalPerTrack: Record<string, number> = {};
 const exerciseTrack: Record<string, string> = {};
 const lessonTitles: Record<string, string> = {};
+const esTitles: Record<string, string> = {};
+for (const lesson of esLessonsAll) {
+  esTitles[lesson.id] = lesson.data.title;
+}
 for (const lesson of allLessons) {
   lessonsTotalPerTrack[lesson.data.track] = (lessonsTotalPerTrack[lesson.data.track] ?? 0) + 1;
   lessonTitles[lesson.id] = lesson.data.title;
@@ -55,12 +98,13 @@ const siteMeta = {
   totalExercises: allExercises.length,
   lessonsTotalPerTrack,
   exerciseTrack,
-  lessonTitles,
+  // On ES pages, translated titles win — the resume strip then speaks the page's language.
+  lessonTitles: locale === 'es' ? { ...lessonTitles, ...esTitles } : lessonTitles,
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -100,16 +144,30 @@ const siteMeta = {
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
+    {
+      hasEsCounterpart && (
+        <>
+          <link rel="alternate" hreflang="es" href={new URL(esPath, origin).href} />
+          <link rel="alternate" hreflang="en" href={new URL(enPath, origin).href} />
+          <link rel="alternate" hreflang="x-default" href={new URL(enPath, origin).href} />
+        </>
+      )
+    }
     {noindex && <meta name="robots" content="noindex" />}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
-    <meta property="og:image" content={new URL('/og.png', origin).href} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={`${SITE_NAME} — practical AI skills, one exercise at a time`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {structuredData.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -119,10 +177,10 @@ const siteMeta = {
     <script type="application/json" data-site-meta set:html={JSON.stringify(siteMeta)} />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{s.skipLink}</a>
     <header class="site-header" transition:persist="site-header">
       <nav class="container" aria-label="Main">
-        <a class="brand" href="/">{SITE_NAME}<span class="brand-dot">.</span></a>
+        <a class="brand" href={base || '/'}>{SITE_NAME}<span class="brand-dot">.</span></a>
         <span class="nav-side">
           <span class="nav-links">
             {NAV.map((item) => (
@@ -131,12 +189,25 @@ const siteMeta = {
               </a>
             ))}
           </span>
+          {
+            hasEsCounterpart && (
+              <a
+                class="lang-switch"
+                href={isEs ? enPath : esPath}
+                lang={isEs ? 'en' : 'es'}
+                aria-label={s.langSwitchAria}
+                data-lang-switch
+              >
+                {s.langSwitch}
+              </a>
+            )
+          }
           <a class="level-widget" href="/progress" data-level-widget hidden>
-            <span data-lw-name>Lv 1 · Curious</span>
+            <span data-lw-name>{s.levelChip}</span>
             <span class="lw-xp" data-lw-xp>0 XP</span>
           </a>
           <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-            <span class="visually-hidden">Toggle dark mode</span>
+            <span class="visually-hidden">{s.themeToggle}</span>
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="4" />
               <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
@@ -156,26 +227,25 @@ const siteMeta = {
         <div>
           <p><strong>{SITE_NAME}.</strong></p>
           <p class="footer-tagline">
-            Practical AI skills, one exercise at a time. Free, no account — progress is stored on this
-            device only.
+            {s.footer.tagline}
           </p>
         </div>
         <div>
-          <h2>Learn</h2>
+          <h2>{s.footer.learnHeading}</h2>
           <ul>
-            <li><a href="/learn">Curriculum</a></li>
-            <li><a href="/practice">Practice</a></li>
-            <li><a href="/assessment">Skills check</a></li>
-            <li><a href="/glossary">Glossary</a></li>
-            <li><a href="/faq">AI questions</a></li>
+            <li><a href={`${base}/learn`}>{s.footer.curriculum}</a></li>
+            <li><a href={`${base}/practice`}>{s.footer.practice}</a></li>
+            <li><a href={`${base}/assessment`}>{s.footer.skillsCheck}</a></li>
+            <li><a href={`${base}/glossary`}>{s.footer.glossary}</a></li>
+            <li><a href={`${base}/faq`}>{s.footer.aiQuestions}</a></li>
           </ul>
         </div>
         <div>
-          <h2>About</h2>
+          <h2>{s.footer.aboutHeading}</h2>
           <ul>
-            <li><a href="/progress">My progress</a></li>
-            <li><a href="/about">How it works</a></li>
-            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/progress">{s.footer.myProgress}</a></li>
+            <li><a href={`${base}/about`}>{s.footer.howItWorks}</a></li>
+            <li><a href={`${base}/privacy`}>{s.footer.privacy}</a></li>
           </ul>
         </div>
       </div>

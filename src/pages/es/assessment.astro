@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ASSESSMENT_ITEMS_ES } from '../../data/assessment-es';
+import { TRACKS } from '../../data/tracks';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+
+const grouped = TRACKS.map((track) => ({
+  track,
+  items: ASSESSMENT_ITEMS_ES.filter((item) => item.track === track.id),
+})).filter((group) => group.items.length > 0);
+
+let counter = 0;
+---
+
+<BaseLayout
+  locale="es"
+  title="Test de nivel de IA: comprueba qué aprender"
+  description="Un test de nivel de IA gratis: dieciocho preguntas por las secciones principales, corregidas al momento en tu navegador. Nada se envía a ningún sitio."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Evaluación', path: '/es/assessment' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Evaluación</li>
+    </ol>
+  </nav>
+
+  <h1>Test de nivel de IA</h1>
+  <p class="lede">
+    Dieciocho preguntas por las secciones principales. Es un mapa de partida, no un certificado:
+    muestra qué practicar después. Cada respuesta se corrige al momento en tu navegador — nada se
+    envía a ningún sitio.
+  </p>
+  <p class="meta-line" data-assessment-last hidden></p>
+
+  <form data-assessment-form novalidate>
+    {
+      grouped.map((group) => (
+        <section class="quiz-track" aria-labelledby={`quiz-track-${group.track.id}`}>
+          <h2 id={`quiz-track-${group.track.id}`} class="section-title">
+            {group.track.nameEs}
+          </h2>
+          {group.items.map((item) => {
+            counter += 1;
+            return (
+              <div class="quiz-item">
+                <fieldset class="quiz-fieldset">
+                  <legend class="question">
+                    {counter}. {item.question}
+                  </legend>
+                  {item.options.map((option, optionIndex) => (
+                    <label class="quiz-option">
+                      <input type="radio" name={`q-${item.id}`} value={optionIndex} />
+                      <span>{option.text}</span>
+                    </label>
+                  ))}
+                  <div class="quiz-feedback" data-item-feedback={item.id} hidden />
+                </fieldset>
+              </div>
+            );
+          })}
+        </section>
+      ))
+    }
+
+    <div class="exercise-actions">
+      <button class="button" type="button" data-assessment-submit>
+        Corregir mis respuestas
+      </button>
+      <button class="button secondary" type="button" data-assessment-retake hidden>
+        Borrar y repetir
+      </button>
+    </div>
+  </form>
+
+  <section class="quiz-summary" data-assessment-summary tabindex="-1" aria-label="Tus resultados" hidden></section>
+
+  <script>
+    import { initAssessment } from '../../scripts/assessment';
+
+    // Runs on first load and after client-side navigation; the init is guarded, so double-boot is safe.
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAssessment, { once: true });
+    } else {
+      initAssessment();
+    }
+    document.addEventListener('astro:page-load', initAssessment);
+  </script>
+</BaseLayout>

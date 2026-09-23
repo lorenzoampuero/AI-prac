@@ -1,0 +1,37 @@
+{
+  "engine": "model-choice",
+  "title": "Elige la forma correcta",
+  "scenario": "Tu equipo tiene cuatro ideas de automatización sobre la mesa y una sola línea de presupuesto. Antes de elegir herramientas, hay que evitar que la respuesta «con agentes» se aplique a problemas que son flujos.",
+  "task": "Elige la idea que de verdad necesita un agente — un sistema que decide sus propios pasos — y no un flujo fijo o un prompt único.",
+  "options": [
+    {
+      "text": "Introducir tres campos fijos de cada factura entrante en el libro de cuentas",
+      "correct": false,
+      "feedback": "El camino es conocido y la salida comprobable: un flujo, a volumen, con manejo de excepciones para la factura rara. No hacen falta decisiones en bucle."
+    },
+    {
+      "text": "Triar 300 tickets de soporte al día hacia cinco colas definidas por reglas escritas",
+      "correct": false,
+      "feedback": "Reglas fijas, colas fijas — un flujo. Será más barato, y sus errores se encuentran auditando las reglas."
+    },
+    {
+      "text": "Averiguar por qué subieron las bajas en una región el mes pasado, tirando de informes, encuestas y notas de soporte",
+      "correct": true,
+      "feedback": "El siguiente paso depende de lo que encontró el anterior — esa es la firma del agente. Limítalo con una pregunta, un presupuesto y una revisión humana, y su bucle se gana su sitio."
+    },
+    {
+      "text": "Convertir una carpeta de 80 formularios escaneados en filas de hoja de cálculo",
+      "correct": false,
+      "feedback": "Repetitivo, con pasos conocidos y salida verificable — flujo. Si una página falla, va a una cola humana; no requiere decisiones paso a paso."
+    }
+  ],
+  "hints": [
+    "Pregúntate si el camino se conoce de antemano. Camino conocido → flujo; camino desconocido que reacciona a lo encontrado → quizá agente.",
+    "Si puedes escribir los pasos como una lista antes de empezar, un agente suele ser una lista más cara."
+  ],
+  "explanation": "Tres de las cuatro ideas tienen el camino escrito: extraer, clasificar, convertir — pasos repetitivos con salidas comprobables. Esas son flujos, y así deben quedarse. La investigación de bajas es distinta: el siguiente movimiento útil depende del último resultado, así que la secuencia no puede escribirse de antemano. Ahí un bucle de agente puede pagar — siempre que esté acotado por una pregunta clara, un presupuesto y una puerta de revisión al final.",
+  "skills": ["agentes", "flujos de trabajo"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-foundations/what-an-agent-is"],
+  "draft": false
+}

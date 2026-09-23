@@ -1,0 +1,87 @@
+---
+title: Textos largos sin perder el hilo
+description: "Los documentos largos rompen los prompts de formas previsibles: las instrucciones se diluyen, el centro se salta y la ventana se desborda. El arreglo: trocear, extraer y montar."
+track: prompting
+order: 3
+level: intermediate
+estimatedMinutes: 7
+skills: ["prompts", "entrada larga"]
+prerequisites: ["prompting/reusable-prompt-templates"]
+learningOutcome: "Procesar un documento largo con un proceso por bloques en vez de un pegado gigante."
+class: evergreen
+sources: []
+seo:
+  intent: "resumir textos largos con ia — proceso por bloques sin perder detalles"
+  title: "Resumir textos largos con IA sin perder detalles"
+  cluster: "B11"
+exercises: ["order-the-long-document-process"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+
+Pegar un documento de 120 páginas y pedir «sácame todas las fechas y responsables» es la versión digital de tirar el libro al escáner y esperar magia. Los textos largos fallan de formas previsibles: las instrucciones se diluyen entre el material, el centro del documento se lee peor que los extremos y la [ventana de contexto](/es/glossary/context-window) se desborda sin avisar.
+
+## Qué se rompe, y por qué
+
+- **Dilución** — tus reglas compiten con miles de palabras. Cuanto más largo el pegado, más pesa el texto y menos la instrucción.
+- **Truncado silencioso** — si la entrada supera la ventana, lo más antiguo se descarta primero. Tú crees que el modelo «vio» todo; no lo hizo.
+- **Deriva** — cada pasada con un formato ligeramente distinto produce notas que ya no se pueden combinar.
+
+## El proceso por bloques
+
+El arreglo no es un prompt mejor, es una secuencia:
+
+1. **Fija la especificación antes de pegar nada.** Tarea y formato exacto de salida: qué campos, en qué orden, con qué convenciones.
+2. **Trocea con lógica** — secciones, capítulos, páginas. Bloques con sentido propio, no cortes a mitad de frase.
+3. **Una pasada por bloque**, extrayendo siempre al mismo formato fijo. Cada pasada trabaja dentro de la zona donde la atención es alta y las instrucciones sobreviven.
+4. **Guarda las extracciones en un archivo tuyo**, no en el chat. Esas notas son la memoria que la sesión no tiene: el chat puede desbordarse sin llevarse tu trabajo por delante.
+5. **Monta la respuesta final desde tus notas** y compruébala contra el original — las fechas límite y los responsables concretos se verifican en la fuente, no en el resumen.
+
+La ventaja del proceso es que convierte una pasada imposible en muchas pasadas pequeñas y comprobables: cada bloque se puede corregir por separado, y el archivo de notas se revisa a ojo en dos minutos.
+
+## Un mal ejemplo
+
+> **Pide:** «Aquí tienes el manual completo. Sácame todas las fechas límite y responsables, y de paso un resumen general.»
+>
+> Recibirás una lista parcial, sin que nadie te avise de qué bloques se quedaron fuera — y ninguna forma de saberlo sin releerte el manual entero.
+
+## Un ejemplo mejor
+
+> **Pide (bloque a bloque):** «De esta sección, extrae a este formato fijo: [fecha límite — responsable — cita textual]. Si algo no consta, escribe "no consta" — no lo deduzcas.»
+>
+> Cada sección produce las mismas columnas, las notas se acumulan en tu archivo y el resultado final se monta y se verifica desde ahí.
+
+<CheckUnderstanding
+  id="cu-es-pr-longinput"
+  question="¿Por qué se procesa un documento largo por bloques en vez de en un único pegado?"
+  options={[
+    { text: 'Porque el modelo cobra menos por menos texto', feedback: 'el coste no es la razón principal: la razón es que las instrucciones y los detalles se pierden en un pegado gigante.' },
+    { text: 'Porque la atención a las instrucciones y a los detalles se degrada con entradas enormes, y el truncado es silencioso', correct: true, feedback: 'dilución, truncado y deriva: los tres fallos previsibles se atacan con bloques y formato fijo.' },
+    { text: 'Porque los documentos largos no se pueden pegar nunca', feedback: 'se pueden pegar; otra cosa es que el resultado sea completo y verificable — que es lo que un proceso por bloques garantiza mejor.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="order-the-long-document-process" />
+
+## Transferencia
+
+- Manuales y contratos: especificación primero, bloques con sentido, formato fijo, notas fuera del chat.
+- Resúmenes ejecutivos: monta desde notas; no dejes que el modelo improvise la síntesis final sobre material que ya no ve.
+- Auditoría rápida: si el archivo de notas no permite reconstruir el resultado, la pasada fue demasiado gruesa.
+
+<KeyTakeaways
+  items={[
+    'Los prompts largos fallan por dilución, truncado silencioso y deriva de formato.',
+    'Fija la especificación antes de pegar y documenta el proceso en bloques.',
+    'Tus notas fuera del chat son la memoria que la sesión no tiene.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[Verificar respuestas de IA](/es/learn/ai-research/cross-check-answers)** — la habilidad que convierte cualquier extracción en algo utilizable. El glosario amplía [salvedad](/es/glossary/caveat) y [ventana de contexto](/es/glossary/context-window).

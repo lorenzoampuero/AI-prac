@@ -1,5 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
+import { localeOf, uiStrings } from '../i18n/ui';
 import {
   isBuildPrompt,
   isChoiceFamily,
@@ -25,7 +26,9 @@ interface Props {
 }
 
 const { id, showHeading = true } = Astro.props;
-const entry = await getEntry('exercises', id);
+const isEs = localeOf(Astro.currentLocale) === 'es';
+const s = uiStrings(isEs ? 'es' : 'en');
+const entry = isEs ? await getEntry('exercisesEs', id) : await getEntry('exercises', id);
 const published = Boolean(entry && !entry.data.draft);
 
 let options: ChoiceOption[] | null = null;
@@ -93,7 +96,7 @@ if (order) {
       {options && (
         <form>
           <fieldset>
-            <legend class="meta-line">Choose one option</legend>
+            <legend class="meta-line">{s.exerciseCard.legendChoose}</legend>
             <div class="options">
               {options.map((option) => (
                 <label class="option">
@@ -108,7 +111,7 @@ if (order) {
           </fieldset>
           <div class="exercise-actions">
             <button class="button" type="button" data-check>
-              Check answer
+              {s.exerciseCard.checkAnswer}
             </button>
             <span class="xp-note" data-xp hidden />
           </div>
@@ -117,11 +120,11 @@ if (order) {
 
       {claims && (
         <div>
-          <p class="example-label">The AI answer</p>
+          <p class="example-label">{s.exerciseCard.aiAnswer}</p>
           <blockquote class="ai-response">{aiResponse}</blockquote>
           <form>
             <fieldset>
-              <legend class="meta-line">Select every part that should not be trusted as-is</legend>
+              <legend class="meta-line">{s.exerciseCard.legendClaims}</legend>
               <div class="claims">
                 {claims.map((claim) => (
                   <label class="claim">
@@ -133,7 +136,7 @@ if (order) {
             </fieldset>
             <div class="exercise-actions">
               <button class="button" type="button" data-check>
-                Check answer
+                {s.exerciseCard.checkAnswer}
               </button>
               <span class="xp-note" data-xp hidden />
             </div>
@@ -143,21 +146,21 @@ if (order) {
 
       {fix && (
         <div>
-          <p class="example-label">The weak prompt</p>
+          <p class="example-label">{s.exerciseCard.weakPrompt}</p>
           <blockquote class="ai-response">{fix.weakPrompt}</blockquote>
           <form>
             <label class="field-label" for={`fix-input-${entry.id}`}>
-              Your improved version
+              {s.exerciseCard.improvedLabel}
             </label>
             <textarea
               id={`fix-input-${entry.id}`}
               class="prompt-editor"
               rows="5"
               data-fix-input
-              placeholder="Write the improved prompt here…"
+              placeholder={s.exerciseCard.improvedPlaceholder}
             />
             <fieldset>
-              <legend class="meta-line">Self-check — does your version address these?</legend>
+              <legend class="meta-line">{s.exerciseCard.selfCheckCriteria}</legend>
               <div class="claims">
                 {fix.criteria.map((criterion) => (
                   <label class="claim">
@@ -171,13 +174,13 @@ if (order) {
             </fieldset>
             <div class="exercise-actions">
               <button class="button" type="button" data-check>
-                Compare with a strong version
+                {s.exerciseCard.compareStrongVersion}
               </button>
               <span class="xp-note" data-xp hidden />
             </div>
           </form>
           <details data-solution hidden>
-            <summary>A strong version (self-assessment — not machine-graded)</summary>
+            <summary>{s.exerciseCard.strongVersionSummary}</summary>
             <p class="solution-text">{fix.sampleSolution}</p>
           </details>
         </div>
@@ -191,10 +194,10 @@ if (order) {
                 <li data-step-index={item.index}>
                   <span class="step-text">{item.text}</span>
                   <span class="step-actions">
-                    <button type="button" class="step-button" data-move="up" aria-label="Move step up">
+                    <button type="button" class="step-button" data-move="up" aria-label={s.exerciseCard.moveUp}>
                       ↑
                     </button>
-                    <button type="button" class="step-button" data-move="down" aria-label="Move step down">
+                    <button type="button" class="step-button" data-move="down" aria-label={s.exerciseCard.moveDown}>
                       ↓
                     </button>
                   </span>
@@ -203,13 +206,13 @@ if (order) {
             </ol>
             <div class="exercise-actions">
               <button class="button" type="button" data-check>
-                Check order
+                {s.exerciseCard.checkOrder}
               </button>
               <span class="xp-note" data-xp hidden />
             </div>
           </form>
           <details data-solution hidden>
-            <summary>Correct order</summary>
+            <summary>{s.exerciseCard.correctOrderSummary}</summary>
             <ol class="step-list step-list-canonical">
               {order.map((step) => (
                 <li>
@@ -228,7 +231,7 @@ if (order) {
               <div class="field-block">
                 <label class="field-label" for={`build-${entry.id}-${field.id}`}>
                   {field.label}
-                  {field.required ? '' : ' — optional'}
+                  {field.required ? '' : s.exerciseCard.optionalSuffix}
                 </label>
                 <textarea
                   id={`build-${entry.id}-${field.id}`}
@@ -240,20 +243,20 @@ if (order) {
                 />
               </div>
             ))}
-            <p class="example-label">Your prompt, assembled</p>
+            <p class="example-label">{s.exerciseCard.yourPromptAssembled}</p>
             <pre
               class="prompt-preview"
               data-prompt-preview
-              data-placeholder="Fill the fields above — this shows exactly what you would paste into the chat."></pre>
+              data-placeholder={s.exerciseCard.previewPlaceholder}></pre>
             <div class="exercise-actions">
               <button class="button" type="button" data-check>
-                Compare with a strong example
+                {s.exerciseCard.compareStrongExample}
               </button>
               <span class="xp-note" data-xp hidden />
             </div>
           </form>
           <details data-solution hidden>
-            <summary>A strong example (self-assessment — not machine-graded)</summary>
+            <summary>{s.exerciseCard.strongExampleSummary}</summary>
             <p class="solution-text">{build.sampleSolution}</p>
           </details>
         </div>
@@ -272,7 +275,7 @@ if (order) {
             </div>
           </div>
           <div class="rubric">
-            <p class="example-label">Rubric — answer each question for both outputs before deciding</p>
+            <p class="example-label">{s.exerciseCard.rubricIntro}</p>
             <ul class="rubric-list">
               {evaluate.rubric.map((item) => (
                 <li>{item.label}</li>
@@ -281,27 +284,27 @@ if (order) {
           </div>
           <form>
             <fieldset>
-              <legend class="meta-line">Which output would you ship?</legend>
+              <legend class="meta-line">{s.exerciseCard.whichOutput}</legend>
               <div class="options">
                 <label class="option">
                   <input type="radio" name={`verdict-${entry.id}`} value="A" data-evaluate-input />
                   <span>
                     <span class="option-label">Output A</span>
-                    <span>This is the one I would ship.</span>
+                    <span>{s.exerciseCard.shipThis}</span>
                   </span>
                 </label>
                 <label class="option">
                   <input type="radio" name={`verdict-${entry.id}`} value="B" data-evaluate-input />
                   <span>
                     <span class="option-label">Output B</span>
-                    <span>This is the one I would ship.</span>
+                    <span>{s.exerciseCard.shipThis}</span>
                   </span>
                 </label>
               </div>
             </fieldset>
             <div class="exercise-actions">
               <button class="button" type="button" data-check>
-                Check verdict
+                {s.exerciseCard.checkVerdict}
               </button>
               <span class="xp-note" data-xp hidden />
             </div>
@@ -313,17 +316,17 @@ if (order) {
         <div>
           <form>
             <label class="field-label" for={`challenge-input-${entry.id}`}>
-              Your plan
+              {s.exerciseCard.yourPlan}
             </label>
             <textarea
               id={`challenge-input-${entry.id}`}
               class="prompt-editor"
               rows="6"
               data-challenge-input
-              placeholder="Write your plan here — even bullet points are enough…"
+              placeholder={s.exerciseCard.planPlaceholder}
             />
             <fieldset>
-              <legend class="meta-line">Self-check — does your plan cover these?</legend>
+              <legend class="meta-line">{s.exerciseCard.selfCheckPlan}</legend>
               <div class="claims">
                 {challenge.rubric.map((item) => (
                   <label class="claim">
@@ -335,13 +338,13 @@ if (order) {
             </fieldset>
             <div class="exercise-actions">
               <button class="button" type="button" data-check>
-                Compare with a model answer
+                {s.exerciseCard.compareModel}
               </button>
               <span class="xp-note" data-xp hidden />
             </div>
           </form>
           <details data-solution hidden>
-            <summary>A model answer (self-assessment — not machine-graded)</summary>
+            <summary>{s.exerciseCard.modelSummary}</summary>
             <p class="solution-text">{challenge.modelAnswer}</p>
           </details>
         </div>
@@ -351,7 +354,7 @@ if (order) {
 
       {entry.data.hints.length > 0 && (
         <details>
-          <summary>Hint</summary>
+          <summary>{s.exerciseCard.hintSummary}</summary>
           {entry.data.hints.map((hint) => (
             <p>{hint}</p>
           ))}
@@ -359,7 +362,7 @@ if (order) {
       )}
 
       <details data-explanation hidden>
-        <summary>Why this is the answer</summary>
+        <summary>{s.exerciseCard.explanationSummary}</summary>
         <p>{entry.data.explanation}</p>
       </details>
 

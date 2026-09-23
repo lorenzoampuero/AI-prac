@@ -1,0 +1,186 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NextTokenDemo from '../../components/lesson/NextTokenDemo.astro';
+import { TRACKS } from '../../data/tracks';
+import { SITE_NAME } from '../../config/site';
+import { organizationJsonLd, websiteJsonLd } from '../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+const description =
+  'Aprende habilidades prácticas de IA con lecciones cortas y ejercicios: prompts, verificación, investigación y trabajo. Sin cuenta; tu progreso se queda en tu dispositivo.';
+
+const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
+const exercises = await getCollection('exercisesEs', ({ data }) => !data.draft);
+const terms = await getCollection('glossaryEs', ({ data }) => !data.draft);
+const trackPriority = new Map(TRACKS.map((track, index) => [track.id, index]));
+
+const counts = new Map<string, number>();
+for (const lesson of lessons) {
+  counts.set(lesson.data.track, (counts.get(lesson.data.track) ?? 0) + 1);
+}
+
+const firstLesson = [...lessons].sort((a, b) => {
+  const trackDiff = (trackPriority.get(a.data.track) ?? 99) - (trackPriority.get(b.data.track) ?? 99);
+  return trackDiff !== 0 ? trackDiff : a.data.order - b.data.order;
+})[0];
+
+const firstLessonHref = firstLesson
+  ? `/es/learn/${firstLesson.data.track}/${firstLesson.id.split('/').slice(1).join('/')}`
+  : '/es/learn';
+---
+
+<BaseLayout
+  locale="es"
+  title="AI Practice — Aprende IA con ejercicios prácticos"
+  suffix={false}
+  description={description}
+  structuredData={[
+    websiteJsonLd({ name: SITE_NAME, description, path: '/es' }, origin),
+    organizationJsonLd(
+      {
+        name: SITE_NAME,
+        description: 'Una forma gratuita y práctica de aprender habilidades de IA.',
+        logoPath: '/og.png',
+      },
+      origin,
+    ),
+  ]}
+>
+  <section class="hero hero-enter">
+    <p class="eyebrow">Aprendizaje práctico de IA</p>
+    <h1>Aprende IA de verdad, <em>un ejercicio</em> a la vez.</h1>
+    <p class="lede">
+      Lecciones cortas y práctica real para escribir prompts, verificar respuestas, investigar y
+      trabajar con IA. Sin registro y sin claves de API — tu progreso se queda en tu dispositivo.
+    </p>
+    <div class="cta-row">
+      <a class="button" href={firstLessonHref}>Empezar la primera lección</a>
+      <a class="button secondary" href="/es/learn">Ver el currículo</a>
+      <a class="button secondary" href="/es/assessment">Hacer el test de nivel</a>
+    </div>
+    <ul class="stats-row">
+      <li><span class="stat-value">{lessons.length}</span><span class="stat-label">lecciones</span></li>
+      <li><span class="stat-value">{exercises.length}</span><span class="stat-label">ejercicios</span></li>
+      <li><span class="stat-value">{terms.length}</span><span class="stat-label">términos del glosario</span></li>
+      <li><span class="stat-value">$0</span><span class="stat-label">gratis, sin cuenta</span></li>
+    </ul>
+  </section>
+
+  <section class="continue-strip" data-continue hidden aria-label="Continuar aprendiendo">
+    <div>
+      <p class="cs-label">Sigue donde lo dejaste</p>
+      <p class="cs-title" data-continue-title>Continúa donde lo dejaste</p>
+    </div>
+    <a class="button" href="/es/learn" data-continue-link>Continuar</a>
+  </section>
+
+  <section class="demo-band" aria-labelledby="demo-title">
+    <div class="demo-copy">
+      <p class="eyebrow">Pruébalo antes de leer nada</p>
+      <h2 id="demo-title" class="section-title">Mira cómo el modelo predice la siguiente palabra</h2>
+      <p class="meta-line">
+        Este es el diagrama real de la primera sección: la IA escribe puntuando cada continuación
+        plausible y muestreando una. Ese único paso explica las alucinaciones, por qué las respuestas
+        varían y por qué verificar es una habilidad — no un truco. Pruébalo tú mismo.
+      </p>
+      <a class="button secondary" href="/es/learn/ai-foundations/what-generative-ai-is">
+        Ver la lección de introducción
+      </a>
+    </div>
+    <div class="demo-widget">
+      <NextTokenDemo
+        prompt="El gato se sentó en la"
+        options={[
+          { token: 'alfombra', pct: 41 },
+          { token: 'silla', pct: 24 },
+          { token: 'ventana', pct: 15 },
+          { token: 'mesa', pct: 11 },
+          { token: 'todo lo demás', pct: 9 },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section aria-labelledby="tracks-title">
+    <h2 id="tracks-title" class="section-title">Secciones</h2>
+    <div class="grid">
+      {
+        TRACKS.map((track) => {
+          const count = counts.get(track.id) ?? 0;
+          const style = `--track-color: var(--track-${track.id})`;
+          const inner = (
+            <>
+              <h3>
+                <span class="track-dot" aria-hidden="true" />
+                {track.nameEs}
+              </h3>
+              <p class="meta-line">{track.taglineEs}</p>
+              {count > 0 ? (
+                <span class="track-count">
+                  {count} lección{count === 1 ? '' : 'es'} — empezar la sección →
+                </span>
+              ) : (
+                <span class="track-count is-future">Las lecciones llegan en una próxima ola.</span>
+              )}
+            </>
+          );
+          return count > 0 ? (
+            <a class="card card--lift track-card reveal" style={style} href={`/es/learn/${track.id}`}>
+              {inner}
+            </a>
+          ) : (
+            <div class="card track-card reveal" style={style}>
+              {inner}
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="section-title">Cómo funciona</h2>
+    <ol class="how-grid">
+      <li class="card reveal">
+        <p><strong>Lee el concepto.</strong></p>
+        <p class="meta-line">Dos minutos en lenguaje claro — con un ejemplo débil y otro sólido lado a lado.</p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:80ms">
+        <p><strong>Practica al momento.</strong></p>
+        <p class="meta-line">Cada lección termina en un ejercicio real; la respuesta explica por qué, nunca solo “mal”.</p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:160ms">
+        <p><strong>Llévalo a cualquier herramienta.</strong></p>
+        <p class="meta-line">Habilidades que funcionan con cualquier IA — principios, no un prompt mágico.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="trust-band" aria-labelledby="trust-title">
+    <h2 id="trust-title" class="section-title">Por qué puedes fiarte de esta práctica</h2>
+    <ul class="trust-grid">
+      <li class="card reveal">
+        <p><strong>{lessons.length} lecciones, {exercises.length} ejercicios.</strong></p>
+        <p class="meta-line">
+          Cada lección termina en una tarea real con feedback que explica el porqué — no un test de
+          definiciones.
+        </p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:80ms">
+        <p><strong>Con fuentes y fechas.</strong></p>
+        <p class="meta-line">
+          Los datos específicos de producto llevan fuente y fecha de revisión, y todo pasa un control
+          de calidad antes de publicarse.
+        </p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:160ms">
+        <p><strong>Sin anuncios, sin cuenta, sin claves de API.</strong></p>
+        <p class="meta-line">
+          La corrección ocurre en tu navegador y el progreso se queda en tu dispositivo — mira
+          <a href="/es/about"> cómo funciona</a>.
+        </p>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

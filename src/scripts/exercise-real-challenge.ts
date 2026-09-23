@@ -6,6 +6,7 @@
 import { isUsableSubmission } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface RealChallengeConfig {
   id: string;
@@ -57,7 +58,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
 
   checkBtn.addEventListener('click', () => {
     if (!isUsableSubmission(textarea.value)) {
-      setFeedback(feedback, 'none', 'Write your plan first — even bullet points are enough.');
+      setFeedback(feedback, 'none', t().writeFirstPlan);
       textarea.focus();
       return;
     }
@@ -74,8 +75,8 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     setFeedback(
       feedback,
       'done',
-      'Good — now compare your plan with the model answer below.',
-      'This is self-assessment: nothing was graded by a machine. Check your plan against each line of the model answer.',
+      t().realGood,
+      t().realNote,
     );
 
     const previous = load(storage);
@@ -84,7 +85,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }

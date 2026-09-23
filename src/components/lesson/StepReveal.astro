@@ -1,15 +1,19 @@
 ---
 // Progressive step reveal — “show me the next step”. Without JavaScript every step stays visible,
 // so nothing is ever lost; with JavaScript the learner reveals one step at a time.
+import { localeOf, uiStrings } from '../../i18n/ui';
+
 interface Props {
   steps: string[];
   title?: string;
 }
-const { steps, title = 'How it works, step by step' } = Astro.props;
+const { steps, title } = Astro.props;
+const s = uiStrings(localeOf(Astro.currentLocale));
+const heading = title ?? s.stepRevealTitle;
 ---
 
-<section class="step-reveal" data-step-reveal aria-label={title}>
-  <p class="sr-title">{title}</p>
+<section class="step-reveal" data-step-reveal aria-label={heading}>
+  <p class="sr-title">{heading}</p>
   <ol class="sr-steps">
     {
       steps.map((step, index) => (
@@ -23,7 +27,7 @@ const { steps, title = 'How it works, step by step' } = Astro.props;
     }
   </ol>
   <button class="button secondary sr-next" type="button" data-sr-next hidden>
-    Reveal step 2
+    {s.stepRevealButton(2)}
   </button>
   <script>
     import '../../scripts/teaching';

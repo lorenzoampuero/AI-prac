@@ -3,8 +3,10 @@
 // one localStorage record on the visitor's device (§18 — no API, nothing sent anywhere).
 
 import { ASSESSMENT_ITEMS } from '../data/assessment';
+import { ASSESSMENT_ITEMS_ES } from '../data/assessment-es';
 import { resultBand, scoreAssessment, type AssessmentResult } from '../lib/assessment';
 import { refreshHeaderWidget, syncBadges } from './feedback';
+import { currentLocale, t } from '../i18n/client';
 
 const STORAGE_KEY = 'aip:assessment:v1';
 
@@ -52,25 +54,26 @@ export function initAssessment(): void {
   if (!submit || !summary) return;
 
   const storage = getStorage();
+  const items = currentLocale() === 'es' ? ASSESSMENT_ITEMS_ES : ASSESSMENT_ITEMS;
 
   const previous = readStored(storage);
   if (lastLine && previous) {
     lastLine.hidden = false;
-    lastLine.textContent = `Previous result on this device: ${previous.correctCount}/${previous.total}.`;
+    lastLine.textContent = t().assessmentPrevious(previous.correctCount, previous.total);
   }
 
   submit.addEventListener('click', () => {
     const answers: Record<string, number> = {};
-    for (const item of ASSESSMENT_ITEMS) {
+    for (const item of items) {
       const checked = form.querySelector<HTMLInputElement>(`input[name="q-${item.id}"]:checked`);
       if (checked) answers[item.id] = Number(checked.value);
     }
 
-    const result = scoreAssessment(ASSESSMENT_ITEMS, answers);
+    const result = scoreAssessment(items, answers, currentLocale());
 
     for (const itemResult of result.items) {
       const box = form.querySelector<HTMLElement>(`[data-item-feedback="${itemResult.id}"]`);
-      const item = ASSESSMENT_ITEMS.find((candidate) => candidate.id === itemResult.id);
+      const item = items.find((candidate) => candidate.id === itemResult.id);
       if (!box || !item) continue;
       const chosenIndex = answers[item.id];
       const correctOption = item.options.find((option) => option.correct);
@@ -84,20 +87,20 @@ export function initAssessment(): void {
       box.append(heading);
 
       if (itemResult.correct && typeof chosenIndex === 'number') {
-        heading.textContent = 'Correct.';
+        heading.textContent = t().correct;
         const detail = document.createElement('p');
         detail.textContent = item.options[chosenIndex]?.feedback ?? '';
         box.append(detail);
       } else if (typeof chosenIndex === 'number') {
-        heading.textContent = 'Not quite.';
+        heading.textContent = t().notQuite;
         const detail = document.createElement('p');
         detail.textContent = item.options[chosenIndex]?.feedback ?? '';
         if (detail.textContent) box.append(detail);
         const answer = document.createElement('p');
-        answer.textContent = `The answer: “${correctOption?.text ?? ''}” — ${correctOption?.feedback ?? ''}`;
+        answer.textContent = t().assessmentTheAnswer(correctOption?.text ?? '', correctOption?.feedback ?? '');
         box.append(answer);
       } else {
-        heading.textContent = 'No answer selected — counted as incorrect.';
+        heading.textContent = t().assessmentNoAnswer;
         const answer = document.createElement('p');
         answer.textContent = `The answer: “${correctOption?.text ?? ''}” — ${correctOption?.feedback ?? ''}`;
         box.append(answer);
@@ -132,16 +135,16 @@ function renderSummary(summary: HTMLElement, result: AssessmentResult): void {
   summary.replaceChildren();
 
   const heading = document.createElement('h2');
-  heading.textContent = 'Your result';
+  heading.textContent = t().assessmentResult;
   summary.append(heading);
 
   const score = document.createElement('p');
   score.className = 'quiz-score';
-  score.textContent = `${result.correctCount} of ${result.total} correct.`;
+  score.textContent = t().assessmentScore(result.correctCount, result.total);
   summary.append(score);
 
   const band = document.createElement('p');
-  band.textContent = resultBand(result.correctCount, result.total);
+  band.textContent = resultBand(result.correctCount, result.total, currentLocale());
   summary.append(band);
 
   const list = document.createElement('ul');
@@ -156,7 +159,7 @@ function renderSummary(summary: HTMLElement, result: AssessmentResult): void {
       li.append(document.createTextNode(' — '));
       const link = document.createElement('a');
       link.href = `/learn/${track.track}`;
-      link.textContent = 'revisit this track';
+      link.textContent = t().assessmentRevisit;
       li.append(link);
     }
     list.append(li);
@@ -165,8 +168,7 @@ function renderSummary(summary: HTMLElement, result: AssessmentResult): void {
 
   const note = document.createElement('p');
   note.className = 'meta-line';
-  note.textContent =
-    'Scored in your browser and saved on this device only — nothing was sent anywhere. Retake any time; the assessment gates nothing.';
+  note.textContent = t().assessmentNote;
   summary.append(note);
 }
 

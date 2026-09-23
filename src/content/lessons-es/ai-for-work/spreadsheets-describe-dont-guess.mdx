@@ -1,0 +1,95 @@
+---
+title: "Hojas de cálculo: describe, no adivines"
+description: "La IA no conoce tu hoja: describe las columnas y rangos reales, pide supuestos y una prueba — y luego demuestra la fórmula sobre una copia con valores que puedas comprobar a mano."
+track: ai-for-work
+order: 1
+level: intermediate
+estimatedMinutes: 7
+skills: ["hojas de cálculo", "verificación"]
+prerequisites: ["prompting/work-with-long-input"]
+learningOutcome: "Obtener fórmulas con los supuestos a la vista y una forma de probarlas."
+class: evergreen
+sources: []
+seo:
+  intent: "fórmulas de excel con chatgpt — describe tu estructura y comprueba supuestos"
+  title: "Fórmulas de Excel con IA: describe, no adivines"
+  cluster: "C5"
+exercises: ["assemble-a-spreadsheet-help-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Una fórmula es una hipótesis sobre tu hoja hasta que se demuestra. Y la primera vez que lo entiendes de verdad es cuando la IA te da una fórmula de aspecto perfecto que apunta a columnas que no existen — porque nadie describió la hoja, así que el modelo la inventó. Este es el patrón que convierte «dame una fórmula» en «dame una fórmula que pueda probar».
+
+## La IA no conoce tu hoja
+
+El modelo no ve tus celdas. Ve tu texto. Si el texto no describe las columnas, los rangos y el tipo de datos, cualquiera de esas cosas queda a merced de la suposición — y las suposiciones de una hoja se ven exactamente igual que los datos reales.
+
+Describe la estructura como se la contarías a alguien que va a editarla: qué hay en cada columna, en qué filas empiezan los datos, cuántas filas hay. Nunca necesitas pegar las filas reales: una fila de ejemplo inventada comunica la estructura igual de bien.
+
+## Pide supuestos, desglose y prueba
+
+Una petición buena produce cuatro cosas, en este orden:
+
+- **Supuestos primero** — qué asumió el modelo sobre tu estructura, antes de la fórmula. Las suposiciones visibles se corrigen; las invisibles se descubren tarde.
+- **La fórmula**, lista para pegar, sin más adornos.
+- **El desglose** en lenguaje claro, parte por parte, para que la fórmula te enseñe algo en vez de quedarse en magia.
+- **Una prueba** — «¿qué debería devolver para estas tres filas?» — que ejecutas sobre una **copia** de la hoja con valores comprobables a mano.
+
+Esa prueba es una pequeña [simulación](/es/glossary/dry-run): tres filas, cinco segundos, y la fórmula queda fiable o arreglada. El chequeo barato evita el error caro.
+
+Describe estructura, no contenido: los nombres, salarios o registros reales no necesitan viajar con la fórmula — una muestra inventada comunica lo mismo y evita mezclar datos reales en el chat.
+
+## Un mal ejemplo
+
+> **Pide:** «¿Cómo puedo sumar por categorías en Excel?»
+>
+> Recibirás una fórmula genérica para una hoja genérica: referencias a columnas que no tienes y ningún supuesto a la vista.
+
+## Un ejemplo mejor
+
+<PromptCompare
+  weak="Dame una fórmula para sumar por categorías en mi hoja."
+  strong="Mi hoja tiene un recibo por fila — A: fecha, B: proveedor, C: categoría, D: importe; datos de la fila 2 a la 340. Quiero un total acumulado por categoría para un mes que elijo en una celda. Dame primero los supuestos, luego la fórmula, luego un desglose, y por último una prueba con tres filas de ejemplo. No referencies nada que no haya descrito."
+  notes={[
+    'Columnas y rango reales sustituyen el hueco donde el modelo adivinaba.',
+    'Los supuestos antes de la fórmula hacen visible cualquier malentendido.',
+    'La pregunta de prueba convierte la confianza en verificación de cinco segundos.',
+  ]}
+/>
+
+<CheckUnderstanding
+  id="cu-es-wk-sheets"
+  question="La fórmula llega y funciona en tu primera prueba con tres filas. ¿Qué has demostrado?"
+  options={[
+    { text: 'Que la fórmula es correcta para toda la hoja', feedback: 'tres filas prueban el mecanismo, no cada caso — los bordes (duplicados, blancos, meses raros) siguen sin probar.' },
+    { text: 'Que el mecanismo básico funciona; los casos límite se prueban aparte o se aceptan conscientemente', correct: true, feedback: 'una prueba barata descarta el error grosero; el resto es gestión de riesgo informada.' },
+    { text: 'Que ya no hace falta comparar con el resultado a mano', feedback: 'el sentido de la prueba es justo comparar con un valor que ya conoces — sin eso no demuestra nada.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="assemble-a-spreadsheet-help-prompt" />
+
+## Transferencia
+
+- Antes de pegar: describe columnas, rango y una fila de ejemplo — nunca filas reales.
+- Exige supuestos primero y una prueba después; ejecútala sobre una copia.
+- Si la fórmula toca dinero o informes, compara el total con una referencia calculada por ti.
+
+<KeyTakeaways
+  items={[
+    'La IA no ve tu hoja: la estructura que no describes se convierte en suposición.',
+    'Supuestos primero, fórmula después, desglose y prueba: el orden que hace verificable una fórmula.',
+    'Prueba sobre copia con valores conocidos — el chequeo barato antes del error caro.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[CV y cartas con IA](/es/learn/ai-for-work/job-search-workflows)** — el otro gran flujo de trabajo del conocimiento. El glosario amplía [simulación](/es/glossary/dry-run) y [anonimización](/es/glossary/redaction).

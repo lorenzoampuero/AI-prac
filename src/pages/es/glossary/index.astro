@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../../seo/schema';
+import { clipAtSentence } from '../../../lib/seo-text';
+
+const terms = await getCollection('glossaryEs', ({ data }) => !data.draft);
+terms.sort((a, b) => a.data.term.localeCompare(b.data.term, 'es'));
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+---
+
+<BaseLayout
+  locale="es"
+  title="Glosario de IA: definiciones en lenguaje claro"
+  description="Definiciones claras de términos de IA: ventana de contexto, alucinación, tokens y más — cada entrada enlaza la lección que la enseña. Sin muros de jerga."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Glosario', path: '/es/glossary' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Glosario</li>
+    </ol>
+  </nav>
+
+  <h1>Glosario de IA</h1>
+  <p class="lede">
+    Definiciones en lenguaje claro de los términos que importan en la práctica. Cada entrada enlaza la
+    lección que la enseña.
+  </p>
+
+  <ul class="lesson-list">
+    {
+      terms.map((term) => (
+        <li>
+          <a href={`/es/glossary/${term.id}`}>{term.data.term}</a>
+          <div class="lesson-meta">{clipAtSentence(term.data.definition, 120)}</div>
+        </li>
+      ))
+    }
+  </ul>
+
+  {terms.length === 0 && <p class="meta-line">Los términos se añaden junto a las lecciones que los usan.</p>}
+</BaseLayout>

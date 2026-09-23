@@ -1,0 +1,85 @@
+---
+title: "Entrenamiento vs inferencia: qué cambia un chat"
+description: "Tus mensajes hacen inferencia — no reentrenan el modelo. Aprende qué le pasa a una conversación y qué guardan de verdad las funciones de memoria."
+track: ai-foundations
+order: 3
+level: intermediate
+estimatedMinutes: 5
+skills: ["entrenamiento", "modelos mentales"]
+prerequisites: ["ai-foundations/why-ai-makes-things-up"]
+learningOutcome: "Explicar por qué un chat no reentrena el modelo y qué guardan las funciones de memoria."
+class: evergreen
+sources: []
+seo:
+  intent: "la ia aprende de mis chats — entrenamiento vs inferencia"
+  title: "Entrenamiento vs inferencia: ¿qué cambia un chat?"
+  cluster: "A12"
+exercises: ["spot-the-training-myths"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+
+El entrenamiento fija los pesos de un modelo antes de que tú lo uses; la [inferencia](/es/glossary/inference) es lo que ocurre cada vez que envías un mensaje. Tu conversación hace inferencia — **no** reentrena el modelo. Todo lo que parece un «aprendizaje» a mitad de chat es, en realidad, contexto que sigue a la vista o una nota que una función de memoria guardó para después.
+
+## Tres capas que no conviene mezclar
+
+Casi toda la confusión sobre privacidad y memoria viene de mezclar tres cosas distintas:
+
+- **Los pesos** — el resultado del entrenamiento. Quedan fijos hasta que el proveedor entrene una versión nueva; tu conversación no los toca.
+- **El contexto** — lo que el modelo puede ver ahora mismo: tu mensaje, la conversación y lo que hayas adjuntado. Se cuenta en tokens y vive dentro de la [ventana de contexto](/es/glossary/context-window).
+- **La memoria del producto** — notas breves que la aplicación guarda y reinserta en chats futuros. Es un mecanismo visible y editable; no es el modelo aprendiendo.
+
+## Qué pasa cuando escribes un mensaje
+
+Tus palabras se convierten en [tokens](/es/glossary/token), se suman al contexto y el modelo predice una respuesta partiendo de unos pesos que quedaron fijados en el entrenamiento. Ese es el bucle completo. Nada se escribe de vuelta en los pesos mientras hablas, así que nada de lo que digas puede cambiar cómo se comporta el modelo para la siguiente persona — ni para ti mañana, en un chat nuevo.
+
+Por eso mañana encontrarás «la mirada en blanco»: un chat nuevo empieza con el contexto vacío. Lo que quieras que sepa hay que volver a aportarlo o guardarlo en una nota.
+
+## Qué significa para la privacidad
+
+«No hay reentrenamiento en vivo» **no** significa que todo sea privado. Significa que la pregunta correcta es otra: ¿qué hace el proveedor con las conversaciones que guarda — durante cuánto tiempo, con qué política y con qué configuración? Eso se lee en los términos y en los ajustes del producto; no se deduce del chat. El [entrenamiento y su fecha de corte](/es/glossary/training-cutoff) son otra capa más: nada posterior al corte existe para el modelo salvo que una herramienta lo traiga en vivo.
+
+## Un mal ejemplo
+
+> **Afirmar:** «El asistente ha actualizado su conocimiento con todo lo que le conté.»
+>
+> Nada se escribió dentro del modelo. Como mucho, tu texto sigue en la ventana de contexto — si el chat se pierde, la «actualización» desaparece con él.
+
+## Un ejemplo mejor
+
+> **Afirmar:** «Los pesos del modelo no cambian con esta conversación; si quieres que recuerde algo, guárdalo en una nota de memoria o vuelve a aportarlo en el próximo chat.»
+
+<CheckUnderstanding
+  id="cu-es-fn-training"
+  question="Cierras el chat y mañana el asistente no recuerda nada de lo hablado. ¿Qué lo explica?"
+  options={[
+    { text: 'El modelo borró recuerdos por privacidad tras la conversación', feedback: 'no se «borra» nada: la conversación simplemente dejó de estar dentro de su vista.' },
+    { text: 'El contexto de aquel chat ya no está; un chat nuevo empieza vacío salvo que algo se guarde como nota', correct: true, feedback: 'exacto: la continuidad viene de texto guardado y reinyectado, no de una memoria interna del modelo.' },
+    { text: 'El modelo aún está reentrenándose con tus mensajes y tardará unos días', feedback: 'ese reentrenamiento nocturno automático es un mito: los pesos no cambian con chatear.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="spot-the-training-myths" />
+
+## Transferencia
+
+- Decide qué información dar según qué guarda el producto, no según cómo suena el chat.
+- Para continuidad: notas de memoria o volver a aportar el texto — el modelo no «recuerda» por su cuenta.
+- Cuando alguien diga «la IA aprende de ti», separa las tres capas antes de responder.
+
+<KeyTakeaways
+  items={[
+    'Los pesos se fijan en el entrenamiento; chatear solo ejecuta inferencia.',
+    'La continuidad viene de contexto y notas guardadas, no de un modelo que aprende.',
+    'Privacidad depende de la política del proveedor, no del mecanismo del chat.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[Qué es un agente (y qué no)](/es/learn/ai-foundations/what-an-agent-is)** — cuando el modelo deja de responder una vez y empieza a ejecutar pasos. El glosario amplía [inferencia](/es/glossary/inference) y [fecha de corte](/es/glossary/training-cutoff).

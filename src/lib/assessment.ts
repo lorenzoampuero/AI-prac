@@ -3,6 +3,7 @@
 
 import { TRACKS, type TrackId } from '../data/tracks';
 import type { AssessmentItem } from '../data/assessment';
+import type { Locale } from '../i18n/ui';
 
 export interface ItemResult {
   id: string;
@@ -25,7 +26,11 @@ export interface AssessmentResult {
 }
 
 /** `answers` maps item id → chosen option index. Missing entries count as unanswered (incorrect). */
-export function scoreAssessment(items: AssessmentItem[], answers: Record<string, number>): AssessmentResult {
+export function scoreAssessment(
+  items: AssessmentItem[],
+  answers: Record<string, number>,
+  locale: Locale = 'en',
+): AssessmentResult {
   const itemResults: ItemResult[] = items.map((item) => {
     const chosen = answers[item.id];
     const answered = typeof chosen === 'number' && chosen >= 0 && chosen < item.options.length;
@@ -39,7 +44,7 @@ export function scoreAssessment(items: AssessmentItem[], answers: Record<string,
       const correct = trackItems.filter(
         (item) => itemResults.find((result) => result.id === item.id)?.correct === true,
       ).length;
-      return { track: track.id, name: track.name, correct, total: trackItems.length };
+      return { track: track.id, name: locale === 'es' ? track.nameEs : track.name, correct, total: trackItems.length };
     },
   );
 
@@ -52,8 +57,13 @@ export function scoreAssessment(items: AssessmentItem[], answers: Record<string,
 }
 
 /** Honest, band-based summary copy — no certificate language, no flattery. */
-export function resultBand(correctCount: number, total: number): string {
+export function resultBand(correctCount: number, total: number, locale: Locale = 'en'): string {
   const ratio = total === 0 ? 0 : correctCount / total;
+  if (locale === 'es') {
+    if (ratio >= 0.9) return 'Sólido en todas las áreas — mantén el nivel en la práctica.';
+    if (ratio >= 0.6) return 'Una base sólida. Las secciones de abajo indican qué repasar primero.';
+    return 'Un buen mapa de partida — recorre las secciones de abajo a tu ritmo.';
+  }
   if (ratio >= 0.9) {
     return 'Strong across the board — keep it sharp on the practice floor.';
   }

@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+---
+
+<BaseLayout
+  locale="es"
+  title="Acerca de AI Practice: cómo se hacen las lecciones"
+  description="Cómo se construye AI Practice: estándares de las lecciones, política de fuentes, revisiones de datos cambiantes, progreso solo local y neutralidad de herramientas."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Acerca de', path: '/es/about' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Acerca de</li>
+    </ol>
+  </nav>
+
+  <h1>Acerca de este proyecto</h1>
+  <p class="lede">
+    Una forma gratuita y práctica de aprender habilidades de IA — con lecciones cortas y ejercicios
+    reales, en lugar de cursos en vídeo y listas de prompts.
+  </p>
+
+  <h2>Quién escribe esto</h2>
+  <p>
+    AI Practice es un proyecto independiente de una sola persona. Empezó como una colección personal
+    de las comprobaciones que de verdad cambiaron mi forma de usar la IA en el trabajo — verificar
+    afirmaciones, anclar respuestas en fuentes, mantener los datos sensibles fuera del chat — y
+    acabó convertida en lecciones con práctica. No hay ningún proveedor al que venderte nada ni un
+    curso que encajar: el sitio se mantiene neutral respecto a herramientas porque es la única
+    versión honesta de este consejo.
+  </p>
+
+  <h2>Cómo se escriben las lecciones</h2>
+  <p>
+    Cada lección sigue la misma plantilla: un concepto corto, un ejemplo débil y otro mejor, el
+    mecanismo que explica por qué funciona, y un ejercicio. El feedback explica qué estuvo bien, qué
+    faltaba y por qué importa — una respuesta fallada es parte de la lección, no un castigo.
+  </p>
+
+  <h2>Práctica sin cuenta</h2>
+  <p>
+    Los ejercicios se corrigen en tu navegador — no se llama a ninguna API de IA y no existe ninguna
+    cuenta. Tu progreso (lecciones completadas, XP, racha) se guarda solo en este dispositivo;
+    borrar los datos del navegador lo borra.
+  </p>
+
+  <h2>Datos que cambian</h2>
+  <p>
+    Los productos de IA se mueven rápido, así que el contenido separa los principios estables de los
+    detalles de producto. Las afirmaciones específicas de producto llevan fuente y fecha de revisión,
+    y lo que no se puede mantener al día se escribe como principio.
+  </p>
+
+  <h2>Neutral por diseño</h2>
+  <p>
+    El sitio es agnóstico de herramientas: las habilidades se enseñan para transferirse entre
+    cualquier IA, y ningún proveedor paga por aparecer. No hay listas de "la mejor IA" — solo
+    explicaciones de para qué sirve cada capacidad.
+  </p>
+
+  <h2>Correcciones</h2>
+  <p>
+    Las correcciones son bienvenidas. Los arreglos salen con el siguiente despliegue y cada dato
+    específico de producto se revisa con un calendario — el registro de hechos guarda una fecha de
+    revisión para cada uno (siguiente pasada completa: diciembre de 2026).
+  </p>
+  <!-- TODO(owner): add a public correction channel (email or issue tracker) when available. -->
+</BaseLayout>

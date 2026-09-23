@@ -1231,6 +1231,74 @@ html[data-theme='dark'] .chip {
   color: var(--muted);
 }
 
+/* Language switcher (i18n wave 1) */
+
+.lang-switch {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.25rem 0.4rem;
+}
+
+.lang-switch:hover {
+  color: var(--text);
+}
+
+/* Home: interactive demo band + closing trust band (SEO/trust pass) */
+
+.demo-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: center;
+  margin-bottom: var(--space-7);
+}
+
+@media (min-width: 56rem) {
+  .demo-band {
+    grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.demo-band .section-title {
+  margin-top: 0;
+}
+
+.demo-copy .meta-line {
+  max-width: 40rem;
+  margin-bottom: var(--space-4);
+}
+
+.demo-widget {
+  min-width: 0;
+}
+
+.trust-grid {
+  display: grid;
+  gap: var(--space-4);
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .trust-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.trust-grid .card {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.trust-grid p {
+  margin: 0;
+}
+
 /* Track cards */
 
 .track-card {

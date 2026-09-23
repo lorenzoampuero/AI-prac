@@ -6,6 +6,7 @@
 import { isUsableSubmission } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface FixPromptConfig {
   id: string;
@@ -57,7 +58,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
 
   checkBtn.addEventListener('click', () => {
     if (!isUsableSubmission(textarea.value)) {
-      setFeedback(feedback, 'none', 'Write your improved version first — even two lines is enough.');
+      setFeedback(feedback, 'none', t().writeFirst);
       textarea.focus();
       return;
     }
@@ -74,8 +75,8 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     setFeedback(
       feedback,
       'done',
-      'Good — now compare your version with the strong one below.',
-      'This is self-assessment: nothing was graded by a machine. Check your draft against each line of the strong version.',
+      t().fixGood,
+      t().fixNote,
     );
 
     const previous = load(storage);
@@ -84,7 +85,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }

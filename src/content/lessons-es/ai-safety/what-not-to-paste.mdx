@@ -1,0 +1,89 @@
+---
+title: Qué no pegar en un chat de IA
+description: "Secretos, datos personales y cifras confidenciales no tienen sitio en un chat — qué clasificar antes de pegar, y el arreglo de anonimizar y marcar huecos para todo lo demás."
+track: ai-safety
+order: 1
+level: beginner
+estimatedMinutes: 6
+skills: ["privacidad", "verificación"]
+prerequisites: ["ai-foundations/training-vs-inference"]
+learningOutcome: "Clasificar qué se puede pegar en una herramienta de IA y anonimizar el resto."
+class: evergreen
+sources: []
+seo:
+  intent: "qué no pegar en un chat de ia — secretos, datos personales, confidencial"
+  title: "Qué no pegar nunca en un chat de IA"
+  cluster: "H2"
+exercises: ["spot-what-should-not-be-pasted"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import Callout from '../../../components/lesson/Callout.astro';
+
+Dobla un papel con tu contraseña y tíralo por la ventana de la oficina. Aproximadamente eso es pegar una credencial en un chat: el gesto dura un segundo y ya no puedes recuperarlo. Antes de pegar algo, clasifícalo en tres cajones — secretos, datos personales ajenos y material confidencial — y deja fuera lo que caiga en cualquiera de ellos.
+
+## Tres cajones que no viajan
+
+- **Secretos** — claves de API, contraseñas, tokens, cadenas de conexión. Una clave pegada es una clave filtrada: descríbela («una clave de facturación que empieza por sk_live»), no la pegues, y rótala si ya lo hiciste.
+- **Datos personales de otras personas** — nombres, correos, historiales, cualquier cosa con la que se pueda identificar a alguien. Tú tienes derecho a usar tus datos; los de tus clientes no son tuyos para pegarlos.
+- **Material confidencial de negocio** — precios sin publicar, contratos, planes, código propietario. Pregúntate qué diría tu política interna antes de que la pregunta la conteste un incidente.
+
+## El arreglo: anonimizar
+
+Para casi todo lo demás, dos movimientos — reemplazar y generalizar, que es todo lo que significa la [anonimización](/es/glossary/redaction) — hacen que el contenido sea seguro:
+
+- **Reemplaza** los valores concretos por [marcadores](/es/glossary/placeholder) — `[importe]`, `[cliente]` — la misma convención que mantiene honestos los borradores.
+- **Generaliza** lo que quede: «una empresa mediana de logística» comunica igual de bien que el nombre real para casi cualquier tarea.
+
+La estructura de un documento lleva lo que la tarea necesita; las identidades y los secretos, casi nunca. Y si algo no se puede lavar sin destruir la tarea, esa es la señal de que no iba a estar bien pegarlo.
+
+## Un mal ejemplo
+
+> **Pegar:** «Nuestra clave sk_live_4d91 dejó de funcionar. Además, resume clientes_export.csv (12.000 filas con nombres y correos) por segmentos.»
+>
+> Tres cajones abiertos de golpe: una credencial activa, datos personales de miles de personas y una tarea que ni siquiera los necesitaba.
+
+## Un ejemplo mejor
+
+> **Pegar:** «Una clave de API dejó de funcionar con el error ECONNREFUSED — ¿qué compruebo primero? Y para segmentar: uso columnas [fecha alta, [plan], [uso mensual]] con 12.000 filas; ¿qué reglas de agrupación recomiendas?»
+>
+> El síntoma sin el secreto, la estructura sin las identidades, y la tarea sigue siendo resoluble.
+
+<Callout variant="caution" title="La regla del reenvío">
+  Si el contenido te haría dudar antes de reenviarlo a un desconocido, tampoco debería ir a un chat. La prueba no es «¿puedo escribir esto?», sino «¿quién más va a poder leerlo?».
+</Callout>
+
+<CheckUnderstanding
+  id="cu-es-sf-paste"
+  question="¿Cuál de estos elementos es seguro pegar en un chat de IA personal?"
+  options={[
+    { text: 'Una exportación de clientes con nombres y correos', feedback: 'datos personales de personas reales: sustitúyelos por una muestra ficticia — la estructura es todo lo que la tarea necesita.' },
+    { text: 'Un mensaje de error técnico como ECONNREFUSED, sin datos adjuntos', correct: true, feedback: 'detalle técnico sin secretos ni datos personales: justo lo seguro (y lo útil) de pegar.' },
+    { text: 'La captura de una página de precios sin publicar', feedback: 'material confidencial de negocio: revisa la política y generaliza antes de pegar nada.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="spot-what-should-not-be-pasted" />
+
+## Transferencia
+
+- Clave o token. Si se filtró, rótala hoy; la descripción del síntoma no necesita el secreto.
+- Datos de clientes o compañeros: nunca reales; estructura y valores inventados comunican lo mismo.
+- Duda razonable: deja fuera lo que decide la política, no lo que decide la prisa.
+
+<KeyTakeaways
+  items={[
+    'Tres cajones que no viajan: secretos, datos personales ajenos y material confidencial.',
+    'Anonimizar = reemplazar valores por marcadores y generalizar los detalles restantes.',
+    'Los mensajes de error y tu propio texto pueden viajar; las credenciales, jamás.',
+  ]}
+/>
+
+## Next
+
+Con esto cierras la parte de seguridad de esta ola. Para la siguiente habilidad práctica, salta a **[Hojas de cálculo: describe, no adivines](/es/learn/ai-for-work/spreadsheets-describe-dont-guess)**. El glosario amplía [anonimización](/es/glossary/redaction) y [marcador](/es/glossary/placeholder).

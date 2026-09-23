@@ -12,9 +12,7 @@ const level = z.enum(['beginner', 'intermediate', 'advanced']);
 const contentClass = z.enum(['evergreen', 'current']);
 const track = z.enum(TRACK_IDS);
 
-const lessons = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/lessons' }),
-  schema: z.object({
+const lessonSchema = z.object({
     title: z.string().max(80),
     description: z.string().min(50).max(180),
     track,
@@ -27,10 +25,24 @@ const lessons = defineCollection({
     class: contentClass,
     lastReviewed: z.coerce.date().optional(),
     sources: z.array(z.object({ title: z.string(), url: z.string() })).default([]),
-    seo: z.object({ intent: z.string(), cluster: z.string().optional() }),
+    seo: z.object({
+      intent: z.string(),
+      // Rendered as <title>/og:title (keyword-first, ≤50 chars so the " · AI Practice" suffix stays inside SERP width).
+      title: z.string().min(15).max(50),
+      cluster: z.string().optional(),
+    }),
     exercises: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-  }),
+  });
+
+const lessons = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/lessons' }),
+  schema: lessonSchema,
+});
+
+const lessonsEs = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/lessons-es' }),
+  schema: lessonSchema,
 });
 
 const exerciseBase = {
@@ -47,9 +59,7 @@ const exerciseBase = {
 
 // One schema per practice engine (docs/CURRICULUM_MAP.md legend). Deterministic grading only — no API,
 // no LLM judge; open-ended tasks are rubric self-assessment with a model answer.
-const exercises = defineCollection({
-  loader: glob({ pattern: '**/*.json', base: './src/content/exercises' }),
-  schema: z.discriminatedUnion('engine', [
+const exerciseSchema = z.discriminatedUnion('engine', [
     z.object({
       engine: z.literal('pick-better-prompt'),
       ...exerciseBase,
@@ -112,18 +122,34 @@ const exercises = defineCollection({
       rubric: z.array(z.object({ id: z.string(), label: z.string() })).min(2),
       modelAnswer: z.string(),
     }),
-  ]),
+  ]);
+
+const exercises = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/exercises' }),
+  schema: exerciseSchema,
 });
 
-const glossary = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/glossary' }),
-  schema: z.object({
+const exercisesEs = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/exercises-es' }),
+  schema: exerciseSchema,
+});
+
+const glossarySchema = z.object({
     term: z.string().max(60),
     definition: z.string().min(40).max(1200),
     relatedLessons: z.array(z.string()).default([]),
     relatedExercises: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-  }),
+  });
+
+const glossary = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/glossary' }),
+  schema: glossarySchema,
 });
 
-export const collections = { lessons, exercises, glossary };
+const glossaryEs = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/glossary-es' }),
+  schema: glossarySchema,
+});
+
+export const collections = { lessons, lessonsEs, exercises, exercisesEs, glossary, glossaryEs };

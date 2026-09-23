@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+---
+
+<BaseLayout
+  locale="es"
+  title="Privacidad: qué se guarda y qué no"
+  description="Qué guarda este sitio y qué no hace nunca: sin cuentas, sin anuncios y sin rastreo entre sitios — el progreso y los resultados se quedan en tu navegador."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Privacidad', path: '/es/privacy' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Privacidad</li>
+    </ol>
+  </nav>
+
+  <h1>Privacidad</h1>
+  <p class="lede">
+    Versión corta: sin cuentas, sin anuncios y sin rastreo entre sitios. Todo lo que haces aquí se
+    queda en tu navegador — el despliegue de producción cuenta visitas con analítica agregada y sin
+    cookies, como se detalla abajo.
+  </p>
+
+  <h2>Qué se guarda en tu dispositivo</h2>
+  <ul>
+    <li>
+      <strong>Progreso</strong> — lecciones completadas, intentos de ejercicio, XP y racha se guardan
+      en el almacenamiento local de tu navegador bajo claves que empiezan por <code>aip:</code>.
+    </li>
+    <li><strong>Resultados del test</strong> — tu última puntuación del test de nivel se guarda igual.</li>
+  </ul>
+  <p>
+    Borrar los datos del navegador lo borra todo. Nada se envía a ningún sitio — no hay ningún
+    componente de servidor que reciba datos personales, porque no hay cuentas ni formularios.
+  </p>
+
+  <h2>Qué no hace el sitio</h2>
+  <ul>
+    <li>Sin publicidad y sin incrustaciones de terceros.</li>
+    <li>Sin cookies y sin rastreo entre sitios.</li>
+    <li>Sin recogida de correos, sin registros, sin perfiles.</li>
+  </ul>
+
+  <h2>Analítica</h2>
+  <p>
+    El despliegue de producción (en Vercel) usa Vercel Web Analytics: recuentos agregados de páginas
+    vistas y referrers, sin cookies y sin ninguna forma de identificar o perfilar a visitantes
+    individuales. Solo se carga en el despliegue alojado — las copias locales y las compilaciones
+    fuera de Vercel no envían ninguna analítica. Contar visitas fue una decisión explícita, registrada
+    aquí primero, como se prometió.
+  </p>
+
+  <h2>Alojamiento</h2>
+  <p>
+    Como cualquier sitio web, el host que sirve estas páginas puede guardar registros de servidor
+    estándar de corta duración (dirección IP, hora, página solicitada) para seguridad y operación.
+    Ese registro es a nivel de infraestructura e idéntico en cualquier sitio; este proyecto no lo lee,
+    no lo usa para perfilar y no lo comparte.
+  </p>
+
+  <h2>Correcciones y contacto</h2>
+  <p>
+    Las correcciones son bienvenidas y el canal público se enlazará aquí en cuanto esté disponible.
+    Hasta entonces, los problemas detectados en las auditorías de contenido se corrigen en las
+    lecciones y quedan registrados en el historial de calidad del proyecto.
+  </p>
+
+  <h2 id="changes">Cambios en esta página</h2>
+  <p>
+    La analítica se activó el 20 de septiembre de 2026 y está documentada arriba. Cualquier función
+    futura que recogiera o transmitiera datos — anuncios, cuentas, cualquier cosa nueva — seguirá
+    necesitando una actualización visible de esta página antes de publicarse. El compromiso se
+    mantiene: nada extra sin contártelo aquí primero.
+  </p>
+</BaseLayout>

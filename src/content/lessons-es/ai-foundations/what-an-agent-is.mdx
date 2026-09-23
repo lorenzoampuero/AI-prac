@@ -1,0 +1,96 @@
+---
+title: Qué es un agente (y qué no)
+description: "Los agentes ejecutan un modelo en bucle — objetivo, pasos, herramientas, resultados. Aprende la diferencia entre chat, flujo y agente, y cuándo un trabajo necesita uno."
+track: ai-foundations
+order: 4
+level: intermediate
+estimatedMinutes: 6
+skills: ["agentes", "modelos mentales"]
+prerequisites: ["ai-foundations/training-vs-inference"]
+learningOutcome: "Clasificar una tarea como chat, flujo o agente antes de construir nada."
+class: evergreen
+sources: []
+seo:
+  intent: "qué son los agentes de ia — chat vs flujo vs agente, en claro"
+  title: "¿Qué son los agentes de IA? Chat, flujo y agente"
+  cluster: "G2"
+exercises: ["pick-the-right-shape"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Un [agente](/es/glossary/agent) es un sistema en el que el modelo corre en bucle: dado un objetivo, decide el siguiente paso, llama a herramientas, lee los resultados y continúa hasta que termina o te devuelve el control. Un chat responde una vez. Un [flujo de trabajo](/es/glossary/workflow) sigue una secuencia que tú fijaste de antemano. Un agente elige sus propios pasos — y esa elección es a la vez su valor y su coste.
+
+## Tres formas de usar el mismo motor
+
+Antes de construir nada, clasifica el trabajo:
+
+- **Chat** — una pregunta, una respuesta. Perfecto para transformar material y para pensar en voz alta.
+- **Flujo** — pasos conocidos con salidas comprobables: extraer, clasificar, convertir. El orden está escrito y por eso el coste, los fallos y las revisiones son previsibles.
+- **Agente** — el camino no se conoce de antemano: el siguiente paso depende de lo que encontró el anterior. Investiga, prueba, corrige el rumbo.
+
+La mayoría de las «ideas con agentes» son en realidad flujos. Y eso es una buena noticia: un flujo es más barato, más rápido y más fácil de auditar. Si puedes escribir los pasos como una lista antes de empezar, un agente suele ser una lista más cara.
+
+## La firma del agente
+
+<StepReveal
+  steps={[
+    'El objetivo está claro y es acotado — una pregunta o una meta concreta, no un tema general.',
+    'El siguiente movimiento no se puede fijar de antemano: depende de lo que devuelva el paso anterior.',
+    'Hay herramientas que leer — informes, datos, conversaciones — y el orden de consultarlas lo decide el sistema.',
+    'Existe una condición de parada y un presupuesto: cuánto puede gastar, cuándo para y qué te consulta.',
+    'Todo lo que escribe, envía o borra pasa por una puerta humana antes de ejecutarse.',
+  ]}
+/>
+
+## Herramientas y límites
+
+Cuando el modelo necesita tocar el mundo, pide que el sistema ejecute una [llamada a funciones](/es/glossary/function-calling): consultar un calendario, buscar un pedido, enviar un mensaje. El modelo propone; tu sistema decide. Permisos, confirmaciones y registros viven de ese lado de la línea — y cuanto más largo es el bucle, más importan: un agente que se equivoca cinco veces seguidas multiplica el error por cinco.
+
+## Un mal ejemplo
+
+> **Pedir:** «Monta un agente que gestione las facturas entrantes.»
+>
+> El camino es conocido — extraer tres campos y anotarlos — así que aquí un agente añade coste y opacidad sin añadir nada. Es un flujo, y debería quedarse como flujo con manejo de excepciones.
+
+## Un ejemplo mejor
+
+> **Pedir:** «Investiga por qué subieron las bajas en una región el mes pasado; decide tú qué mirar según lo que encuentres, con un máximo de veinte pasos y una revisión humana al final.»
+>
+> El siguiente movimiento depende de los hallazgos: esa es la situación donde un bucle acotado gana a cualquier secuencia fija.
+
+<CheckUnderstanding
+  id="cu-es-fn-agent"
+  question="¿Cuál de estos trabajos necesita de verdad un agente, y no un flujo?"
+  options={[
+    { text: 'Convertir cada factura entrante en tres campos de una tabla', feedback: 'camino fijo y salida comprobable: un flujo de manual, sin decisiones que tomar.' },
+    { text: 'Averiguar la causa de un problema analizando informes y notas, cambiando de enfoque según lo que aparezca', correct: true, feedback: 'el siguiente paso depende de lo encontrado — la firma del agente, siempre que esté acotado.' },
+    { text: 'Triar 300 mensajes al día en cinco categorías con reglas escritas', feedback: 'reglas fijas y categorías fijas describen un flujo — más barato y auditable.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="pick-the-right-shape" />
+
+## Transferencia
+
+- Antes de presupuestar herramientas, clasifica cada idea: chat, flujo o agente.
+- Un agente necesita pregunta, presupuesto, condición de parada y revisión humana.
+- Para tareas repetitivas con reglas: flujo. Para investigación abierta: quizá agente.
+
+<KeyTakeaways
+  items={[
+    'Chat responde una vez; el flujo sigue un orden fijo; el agente elige sus pasos.',
+    'Camino conocido quiere flujo — el agente cuesta más y se audita peor.',
+    'Un agente honesto lleva presupuesto, parada y puerta humana en las escrituras.',
+  ]}
+/>
+
+## Next
+
+Con esto cierras la primera sección de fundamentos en español. Si vienes del inglés, el [currículo completo](/es/learn) sigue creciendo por olas. Para la parte de prompts, empieza por **[Instrucciones claras](/es/learn/prompting/write-clear-instructions)**. El glosario define también [llamada a funciones](/es/glossary/function-calling) y [flujo de trabajo](/es/glossary/workflow).

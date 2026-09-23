@@ -11,6 +11,7 @@ import {
 } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface BuildPromptConfig {
   id: string;
@@ -82,7 +83,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
   checkBtn.addEventListener('click', () => {
     const values = readValues();
     if (!isBuildPromptReady(values, config.fields)) {
-      setFeedback(feedback, 'none', 'Fill every required field first — a rough line is enough.');
+      setFeedback(feedback, 'none', t().fillRequired);
       const firstIncomplete = config.fields.find(
         (field) => field.required && (values[field.id] ?? '').trim().length < MIN_FIELD_CHARS,
       );
@@ -104,8 +105,8 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     setFeedback(
       feedback,
       'done',
-      'Good — compare your assembled prompt with the strong example below.',
-      'This is self-assessment: nothing was graded by a machine. Check your version against each move in the example.',
+      t().buildGood,
+      t().buildNote,
     );
 
     const previous = load(storage);
@@ -114,7 +115,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }

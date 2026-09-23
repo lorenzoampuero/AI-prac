@@ -1,0 +1,48 @@
+{
+  "engine": "build-prompt",
+  "title": "Monta la plantilla",
+  "scenario": "Tu equipo de soporte lee cada lunes las conversaciones de la semana y envía un resumen corto a producto. El prompt que funcionó la semana pasada se improvisó con prisa; esta semana lo conviertes en una plantilla que todo el equipo pueda ejecutar.",
+  "task": "Rellena los cinco huecos de la plantilla — trabajo, entradas, reglas fijas, forma de salida y línea de comprobación — y compara con la versión de referencia.",
+  "fields": [
+    {
+      "id": "job",
+      "label": "El trabajo que hace la plantilla, en una frase",
+      "placeholder": "Resume las conversaciones de soporte de esta semana en un informe de problemas recurrentes para producto…",
+      "required": true
+    },
+    {
+      "id": "inputs",
+      "label": "Huecos con nombre para lo que cambia (y en qué estado llega)",
+      "placeholder": "[INICIO_SEMANA]-[FIN_SEMANA] y <<<CONVERSACIONES>>> — pegadas como un bloque, una conversación por sección…",
+      "required": true
+    },
+    {
+      "id": "rules",
+      "label": "Reglas fijas — los límites que no deben cambiar entre usos",
+      "placeholder": "Nunca inventes cifras de volumen; agrupa por problema, no por cliente; descarta lo mencionado una sola vez…",
+      "required": true
+    },
+    {
+      "id": "format",
+      "label": "La forma de salida que necesita quien la lee",
+      "placeholder": "Máximo cinco viñetas; cada una: problema → frecuencia descrita en palabras → una cita representativa…",
+      "required": true
+    },
+    {
+      "id": "check",
+      "label": "La línea de comprobación que el modelo ejecuta antes de responder",
+      "placeholder": "Si una sección es demasiado fina para juzgarla, dilo en una línea en vez de generalizar…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "El texto fijo es lo que corregirías a alguien nuevo; los huecos son lo que esa persona te preguntaría.",
+    "La línea de comprobación nombra tu peor miedo: cifras inventadas, frecuencia adivinada, generalidades sin sustancia."
+  ],
+  "explanation": "Una plantilla que funciona separa los dos tipos de texto: reglas que defenderías en una revisión y entradas que cambian cada semana. Los huecos hacen visible lo que falta, la línea de formato protege a quien lee y la de comprobación convierte tu peor fallo en una instrucción declarada. Rellénala así una vez y el resumen de los lunes deja de depender de quién lo teclee.",
+  "skills": ["prompts", "plantillas", "soporte"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/reusable-prompt-templates"],
+  "sampleSolution": "Trabajo: convertir una semana de conversaciones de soporte en un informe de problemas recurrentes para producto, con evidencia. Entradas: [INICIO_SEMANA] a [FIN_SEMANA], y <<<CONVERSACIONES>>> pegadas en un bloque, una conversación por sección, cada una empezando con su fecha. Reglas fijas: agrupa por problema de producto, nunca por cliente; incluye un problema solo si aparece en tres o más conversaciones; cita como máximo veinte palabras textuales por problema; nunca afirmes ni estimes cifras de uso — describe la frecuencia como «varias», «unas cuantas», «generalizado»; si al bloque le faltan secciones o es ilegible, dilo en vez de resumir alrededor. Salida: cinco viñetas máximo, cada una con la forma «problema → frecuencia observada descrita en palabras → una cita representativa con fecha»; termina con una línea «No cubierto esta semana:» cuando la entrada estuviera incompleta. Línea de comprobación: antes de responder, verifica que cada viñeta cita el bloque de conversaciones y que no aparece ningún número que no sea una fecha o una cita.",
+  "draft": false
+}

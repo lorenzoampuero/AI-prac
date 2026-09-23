@@ -1,0 +1,27 @@
+{
+  "engine": "evaluate-output",
+  "title": "Juzga la verificación cruzada",
+  "scenario": "A un asistente de IA se le pidió verificar una afirmación para un informe: «El trabajo remoto reduce los costes de alquiler de oficinas un 30% de media». Volvieron dos análisis. Necesitas usar la afirmación en un documento de cliente.",
+  "task": "Compara los dos análisis contra los criterios de verificación y elige el que te merecería confianza.",
+  "outputA": "La afirmación está bien respaldada. Múltiples fuentes la confirman: una gran publicación de negocios informa de que el trabajo remoto ha reducido los costes de oficina de forma significativa; una encuesta laboral reporta ahorros medios cercanos al 30%; y varios blogs de recursos humanos citan la misma cifra. Conclusión: el número es fiable y seguro para el informe.",
+  "outputB": "Aún no he podido confirmar la cifra exacta. El «30%» se remonta a una única encuesta de un proveedor de 2022 (unas 120 empresas, ahorros autodeclarados). El artículo de negocios y los posts de RR. HH. citan todos esa misma encuesta — un origen y tres recontadas. Consulté una referencia independiente (informe de una asociación de gestores inmobiliarios, 2023): muestra ahorros medianos menores, 11–18%, con una metodología distinta (datos reales de contratos, no autodeclaraciones). Recomendación: descarta el 30% preciso, o atribúyelo con precisión — «una encuesta de un proveedor de 2022 a 120 empresas reportó alrededor del 30%» — con la fecha y el tamaño de muestra a la vista.",
+  "rubric": [
+    { "id": "independence", "label": "Distingue fuentes realmente independientes de recontadas de un mismo origen" },
+    { "id": "primary", "label": "Rastrea la afirmación hasta su fuente de origen" },
+    { "id": "compare", "label": "Compara detalles — números, fechas, método — en vez de conformarse con un acuerdo general" },
+    { "id": "conclusion", "label": "Termina en una recomendación lista para decidir, con atribución honesta" }
+  ],
+  "verdict": {
+    "better": "B",
+    "reasoning": "El análisis B hace la comprobación de verdad: rastrea el 30% hasta una única encuesta de un proveedor, muestra que las «confirmaciones» son recontadas de esa misma fuente, trae una referencia independiente con otro método que discrepa del número, y acaba con una decisión usable — atribuir con precisión o descartar. El análisis A cuenta ecos como evidencia y declara el número fiable sin fechar la fuente, sin nombrar el método y sin notar que todos los caminos llevan a una sola encuesta autodeclarada."
+  },
+  "hints": [
+    "Cuenta orígenes, no artículos — ¿cuántas fuentes independientes establece de verdad cada análisis?",
+    "Fíjate en qué le pasa al número cuando otro método mira la misma pregunta."
+  ],
+  "explanation": "Los dos análisis parecen igual de seguros; la diferencia es estructural. Una afirmación verificada tiene un origen (quién produjo los datos), un método (cómo), una fecha y al menos una comparación independiente. El análisis más débil tiene repetición — tres artículos que hacen eco de una encuesta — que es justo la forma en la que viajan la desinformación y los números de marketing. El más fuerte separa esos ecos, encuentra el origen, lo contradice con evidencia independiente y aun así te deja algo usable: la afirmación, atribuida con precisión, o nada.",
+  "skills": ["verificación", "investigación"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-research/cross-check-answers"],
+  "draft": false
+}

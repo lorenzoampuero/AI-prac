@@ -5,6 +5,7 @@
 import { gradeChoice, type ChoiceOption } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface ExerciseConfig {
   id: string;
@@ -55,7 +56,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
   checkBtn.addEventListener('click', () => {
     const selected = card.querySelector<HTMLInputElement>('input[type="radio"]:checked');
     if (!selected) {
-      showFeedback(feedback, 'none', 'Choose one option first.', '');
+      showFeedback(feedback, 'none', t().chooseOneOption, '');
       card.querySelector<HTMLInputElement>('input[type="radio"]')?.focus();
       return;
     }
@@ -64,8 +65,8 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     showFeedback(
       feedback,
       result.correct ? 'correct' : 'incorrect',
-      result.correct ? 'Correct.' : 'Not quite.',
-      result.correct ? result.feedback : `${result.feedback} Try another option — attempts are free.`,
+      result.correct ? t().correct : t().notQuite,
+      result.correct ? result.feedback : `${result.feedback} ${t().tryAnotherOption}`,
     );
 
     explanation.hidden = false;
@@ -78,7 +79,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }

@@ -1,13 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import NextTokenDemo from '../components/lesson/NextTokenDemo.astro';
 import { TRACKS } from '../data/tracks';
 import { SITE_NAME } from '../config/site';
-import { websiteJsonLd } from '../seo/schema';
+import { organizationJsonLd, websiteJsonLd } from '../seo/schema';
 
 const origin = Astro.site ?? new URL('https://getaipractice.site');
 const description =
-  'Short lessons and hands-on exercises that teach you to prompt, verify, research and work with AI — free, no account, progress stays on your device.';
+  'Learn AI skills with short, free lessons and hands-on exercises — prompting, verification, research and work. No account; progress stays on your device.';
 
 const lessons = await getCollection('lessons', ({ data }) => !data.draft);
 const exercises = await getCollection('exercises', ({ data }) => !data.draft);
@@ -30,9 +31,20 @@ const firstLessonHref = firstLesson
 ---
 
 <BaseLayout
-  title="AI Practice"
+  title="AI Practice — Learn AI Skills With Hands-On Exercises"
+  suffix={false}
   description={description}
-  structuredData={[websiteJsonLd({ name: SITE_NAME, description, path: '/' }, origin)]}
+  structuredData={[
+    websiteJsonLd({ name: SITE_NAME, description, path: '/' }, origin),
+    organizationJsonLd(
+      {
+        name: SITE_NAME,
+        description: 'A free, practice-first way to learn practical AI skills.',
+        logoPath: '/og.png',
+      },
+      origin,
+    ),
+  ]}
 >
   <section class="hero hero-enter">
     <p class="eyebrow">Practical AI literacy</p>
@@ -60,6 +72,33 @@ const firstLessonHref = firstLesson
       <p class="cs-title" data-continue-title>Pick up where you left off</p>
     </div>
     <a class="button" href="/learn" data-continue-link>Resume</a>
+  </section>
+
+  <section class="demo-band" aria-labelledby="demo-title">
+    <div class="demo-copy">
+      <p class="eyebrow">Try it before you read a thing</p>
+      <h2 id="demo-title" class="section-title">Watch the model predict the next word</h2>
+      <p class="meta-line">
+        This is the real diagram from the first track: AI writes by scoring every plausible
+        continuation and sampling one. That single step explains hallucinations, why answers vary,
+        and why verification is a skill — not a trick. Sample it yourself.
+      </p>
+      <a class="button secondary" href="/learn/ai-foundations/what-an-llm-actually-does">
+        Open the lesson this comes from
+      </a>
+    </div>
+    <div class="demo-widget">
+      <NextTokenDemo
+        prompt="The cat sat on the"
+        options={[
+          { token: 'mat', pct: 41 },
+          { token: 'floor', pct: 24 },
+          { token: 'windowsill', pct: 15 },
+          { token: 'sofa', pct: 11 },
+          { token: 'everything else', pct: 9 },
+        ]}
+      />
+    </div>
   </section>
 
   <section aria-labelledby="tracks-title">
@@ -115,5 +154,32 @@ const firstLessonHref = firstLesson
         <p class="meta-line">Skills that work in any AI tool — principles, not one magic prompt.</p>
       </li>
     </ol>
+  </section>
+
+  <section class="trust-band" aria-labelledby="trust-title">
+    <h2 id="trust-title" class="section-title">Why you can trust this practice</h2>
+    <ul class="trust-grid">
+      <li class="card reveal">
+        <p><strong>{lessons.length} lessons, {exercises.length} exercises.</strong></p>
+        <p class="meta-line">
+          Every lesson ends in a real task with feedback that explains why — not a quiz about
+          definitions.
+        </p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:80ms">
+        <p><strong>Sourced, dated, checked.</strong></p>
+        <p class="meta-line">
+          Product-specific claims carry a source and a review date, and content QA runs before
+          anything ships.
+        </p>
+      </li>
+      <li class="card reveal" style="--reveal-delay:160ms">
+        <p><strong>No ads, no account, no API keys.</strong></p>
+        <p class="meta-line">
+          Grading runs in your browser and progress stays on your device — see
+          <a href="/about">how it works</a>.
+        </p>
+      </li>
+    </ul>
   </section>
 </BaseLayout>

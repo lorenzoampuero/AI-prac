@@ -68,6 +68,14 @@ minute: `/faq`, `/llms.txt`, the new workflow lesson and the 175-URL sitemap all
 (`x-vercel-cache: MISS`, `age: 0`). IndexNow re-submitted all 175 URLs (accepted). Owner step still
 open: Search Console → **Request Indexing** for `/faq` alongside the flagship pages.
 
+**Keyword-first sprint + ES wave (2026-09-22, in the repo — pending deploy):** every EN page now renders
+a keyword-first `<title>` (lesson `seo.title`, hub `seoTitle`), descriptions are clipped at sentence
+boundaries, and the sitemap carries reciprocal EN↔ES hreflang pairs. The Spanish wave ships under `/es`:
+core pages + 12 lessons + 12 exercises + 20 glossary terms, with a keyword universe pulled from Spanish
+autocomplete (see `research/KEYWORD_UNIVERSE.md` §Demanda en español). **235 pages · 79 tests.** After the
+next deploy: `npm run indexnow`, then Request Indexing for `/es` and `/es/learn` alongside the flagship
+pages — and include Spanish queries in the weekly spot-checks.
+
 **Weekly spot-check (first month):** `site:getaipractice.site` plus a branded query on Google and Bing;
 compare incoming queries against the P1 clusters in `research/KEYWORD_UNIVERSE.md`; log surprises here.
 

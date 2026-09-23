@@ -1,14 +1,17 @@
 ---
 // End-of-lesson summary card. Bullets animate in as the card scrolls into view.
+import { localeOf, uiStrings } from '../../i18n/ui';
+
 interface Props {
   items: string[];
   title?: string;
 }
-const { items, title = 'Key takeaways' } = Astro.props;
+const { items, title } = Astro.props;
+const heading = title ?? uiStrings(localeOf(Astro.currentLocale)).takeawaysTitle;
 ---
 
-<section class="takeaways reveal" aria-label={title}>
-  <p class="takeaways-title">{title}</p>
+<section class="takeaways reveal" aria-label={heading}>
+  <p class="takeaways-title">{heading}</p>
   <ul>
     {items.map((item) => (
       <li>{item}</li>

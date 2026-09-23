@@ -1,0 +1,86 @@
+---
+title: Qué es la IA generativa
+description: "La IA generativa crea texto, imágenes o código nuevos a partir de tus instrucciones. Aprende el modelo mental que te dice qué tareas le encajan — y cuáles conviene mantener lejos."
+track: ai-foundations
+order: 1
+level: beginner
+estimatedMinutes: 5
+skills: ["fundamentos", "encaje de tarea"]
+prerequisites: []
+learningOutcome: "Explicar qué es la IA generativa y decidir qué tareas le encajan."
+class: evergreen
+sources: []
+seo:
+  intent: "qué es la ia generativa — definición para empezar y cuándo usarla"
+  title: "Qué es la IA generativa: guía en lenguaje claro"
+  cluster: "A3"
+exercises: ["choose-when-to-use-generative-ai"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+
+La [IA generativa](/es/glossary/generative-ai) es software que produce contenido nuevo — texto, imágenes, audio o código — en respuesta a una instrucción que escribes tú. No busca nada: construye la respuesta más plausible a partir de patrones absorbidos durante el entrenamiento. Ese único hecho explica a la vez por qué parece magia y por qué puede equivocarse con total seguridad.
+
+## No busca: construye
+
+Cuando le pides una respuesta a un modelo, no consulta una base de datos de hechos verificados. Un [modelo grande de lenguaje](/es/glossary/large-language-model) predice, pieza a pieza, qué texto resulta más probable a continuación. Lo plausible es lo que se genera; lo verdadero no viene incluido.
+
+Eso tiene dos caras. La buena: transformar material que tú aportas — reescribir, resumir, estructurar, extraer — le sale extraordinariamente bien, porque todo lo que la tarea necesita está delante. La mala: en cuanto la tarea exige algo que el modelo no puede tener, rellena el hueco con una invención que suena igual de bien que un dato real.
+
+## La prueba del encaje
+
+Antes de pedir algo, pregúntate qué necesita la tarea que el modelo no tiene:
+
+- **Datos en vivo** — cotizaciones, precios, noticias de hoy. Sin una herramienta conectada a la web, la respuesta será plausible y estará desactualizada.
+- **Cálculo exacto** — una calculadora no es un modelo de texto. Pide los pasos y recalcula.
+- **Fuentes verificadas** — citas, páginas, estudios. Es la zona clásica de las invenciones.
+
+Si la tarea es una transformación de lo que aportas, el encaje es bueno. Si depende de frescura, precisión o procedencia garantizadas, necesitarás herramientas adicionales o una verificación seria.
+
+## Un mal ejemplo
+
+> **Pide:** «¿Cuál es el IVA exacto de 8.432,19 € al 21% y cuál es la regla legal de redondeo?»
+>
+> Recibes un número con decimales y una explicación legal que suena oficial. Ni el número está garantizado ni la regla tiene fuente.
+
+## Un ejemplo mejor
+
+> **Pide:** «Convierte estas 14 notas de reunión en tres párrafos limpios, sin añadir ningún dato que no esté en las notas.»
+>
+> Todo lo necesario está dentro del prompt, la salida es comprobable contra el original y no hay nada que inventar.
+
+<CheckUnderstanding
+  id="cu-es-fn-gen"
+  question="¿Cuál de estas peticiones encaja mejor con un modelo generativo a secas, sin herramientas?"
+  options={[
+    { text: 'Dame el tipo de cambio euro-dólar de esta mañana con cuatro decimales', feedback: 'eso necesita un dato en vivo que el modelo no tiene — producirá un número plausible sin avisar.' },
+    { text: 'Transforma estas notas desordenadas en un resumen estructurado, sin añadir nada nuevo', correct: true, feedback: 'es una transformación de material que aportas — el caso en el que el modelo es más fuerte.' },
+    { text: 'Cítame un estudio de 2019 sobre hábitos de compra, página incluida', feedback: 'las citas precisas son la zona clásica de invención: autores, años y páginas se generan con facilidad.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="choose-when-to-use-generative-ai" />
+
+## Transferencia
+
+- Redacción y reescritura: encaje perfecto, con las restricciones bien puestas.
+- Resúmenes y extracción: excelente si el material está delante y marcas lo que falte.
+- Cifras que importan: recalcula siempre por tu cuenta antes de reutilizarlas.
+- Datos que cambian: verifica en una fuente actual, no en la memoria del modelo.
+
+<KeyTakeaways
+  items={[
+    'La IA generativa construye lo plausible; no busca lo verdadero.',
+    'Fuerte en transformar lo que aportas; débil en datos vivos, cálculo y fuentes.',
+    'Encajar la tarea con la herramienta evita la mayoría de los sustos.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[Por qué la IA se inventa cosas](/es/learn/ai-foundations/why-ai-makes-things-up)** — el mecanismo detrás de las respuestas que suenan perfectas y están mal. Si quieres la versión corta, la entrada de [alucinación](/es/glossary/hallucination) la resume en un párrafo.

@@ -1,6 +1,11 @@
 # PROJECT STATUS — AI Practice (interactive AI-literacy platform)
 
-**Last updated:** 2026-09-20 (**LIVE at `https://getaipractice.site`; batch 3 shipped — 62 lessons · 177 pages · 70 tests: foundations 12/12, workflows track opened (WF01–WF02), PR16 + WK14 demand lessons, every lesson now carries an interactive teaching block + KeyTakeaways, /faq with FAQPage schema and generated /llms.txt live for answer engines; owner actions left: enable Analytics, align primary domain, Search Console**) · **Status vocabulary:** DONE (implemented) · TESTED (verified by execution) · PARTIAL · BLOCKED · NOT STARTED
+**Last updated:** 2026-09-22 (**SEO keyword-first sprint + Spanish wave shipped to the repo (deploy
+pending) — 74 lesson files (62 EN + 12 ES) · 235 built pages · 79 tests green: EN pages render
+keyword-first titles/descriptions from the existing intents, reciprocal EN↔ES hreflang, `/es` core +
+12 lessons live in the build, favicon/OG rebranded to the site palette, home gains an interactive demo +
+trust band, and the exact Search Console/domain owner guide lives in `docs/LAUNCH_READINESS.md`**)
+· **Status vocabulary:** DONE (implemented) · TESTED (verified by execution) · PARTIAL · BLOCKED · NOT STARTED
 **Rule applied:** nothing says TESTED unless it was actually executed and observed in this session.
 
 ---
@@ -28,6 +33,7 @@
 | AI Images IM01–IM12 (`f8bb637` → `dbafa45`) | full images track + animated diagrams | 141 pages · 65 tests |
 | Demand wave (`66fb5d8`, `e9df942`) | RS06–RS08, WK07–WK09 (autocomplete-backed) | 153 pages |
 | **Batch 3 — traffic + interaction + GEO (this session)** | **FN09–FN12 (foundations 12/12) · WF01–WF02 (workflows track opened) · PR16 templates + WK14 job-search (strongest unserved autocomplete pulls) · 28-lesson teaching-block retrofit now enforced by tests · /faq with FAQPage schema · generated /llms.txt · explicit AI-crawler robots policy** | **177 pages · 70 tests green · axe 0 violations (WCAG A/AA) on /faq + three new lessons · browser-verified CU feedback, StepReveal, +15 XP** |
+| **Keyword-first SEO + ES wave (2026-09-22)** | **All 62 EN lessons render `seo.title` (keyword-first, test-enforced ≤50 chars) · hub/static/home titles rewritten · sentence-clipped descriptions · Organization + Person + dateModified JSON-LD · og:type/twitter/og:locale completed · sitemap without synthetic lastmod · `relatedExercises` rendered · favicon + og.png rebranded to pine/amber · home interactive demo + trust band · `/about` author bio · i18n: EN at root, ES under `/es` with reciprocal hreflang + language switcher + ES UI dictionary · ES content: 12 lessons, 12 exercises, 20 glossary terms, FAQ/assessment/about/privacy** | **235 pages · 79 tests green (new `content-qa-es` contract 8/8) · ES HTML externally-verifiable in dist: `lang=es`, hreflang pairs + x-default, `og:locale es_ES`, keyword-first ES titles** |
 
 ## Operating constraints (from the master brief)
 

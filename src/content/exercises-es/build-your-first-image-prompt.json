@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Monta tu primer prompt de imagen",
+  "scenario": "Necesitas una imagen de cabecera para un artículo sobre mañanas tranquilas: una taza de café junto a una ventana, calmada y cálida, sin nada cargado en el encuadre.",
+  "task": "Rellena los cuatro huecos — sujeto, escena, estilo y luz — y compara con la versión de referencia.",
+  "fields": [
+    {
+      "id": "subject",
+      "label": "Sujeto (qué aparece en el encuadre)",
+      "placeholder": "Una taza de cerámica con café, vapor suave subiendo…",
+      "required": true
+    },
+    {
+      "id": "scene",
+      "label": "Escena (qué lo rodea)",
+      "placeholder": "sobre un alféizar de madera con una planta pequeña…",
+      "required": true
+    },
+    {
+      "id": "style",
+      "label": "Estilo (cómo debe verse)",
+      "placeholder": "fotografía editorial calmada, poca profundidad de campo…",
+      "required": true
+    },
+    {
+      "id": "light",
+      "label": "Luz (momento y ambiente)",
+      "placeholder": "luz suave de mañana a través de visillos…",
+      "required": true
+    }
+  ],
+  "hints": [
+    "Un sujeto claro gana a tres que compiten.",
+    "Las palabras de estilo funcionan cuando describen un aspecto — «fotografía editorial tranquila» guía; «impresionante» no."
+  ],
+  "explanation": "Los cuatro huecos — sujeto, escena, estilo y luz — son la diferencia entre nombrar una cosa y describir una imagen. Cada hueco da al modelo una decisión independiente que resolver bien, y cada uno que te saltas es una decisión tomada por ti. Iterar empieza desde un primer borrador completo; eso es lo que permite arreglar una cosa a la vez.",
+  "skills": ["imágenes con IA", "prompts"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-images/subject-scene-style"],
+  "sampleSolution": "Sujeto: una taza de cerámica con café y vapor suave subiendo. Escena: un alféizar de madera con una planta pequeña, tranquilo y despejado. Estilo: fotografía editorial calmada con poca profundidad de campo. Luz: luz suave de mañana a través de visillos, cálida y de bajo contraste.",
+  "draft": false
+}

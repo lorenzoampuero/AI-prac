@@ -5,6 +5,7 @@
 import { gradeEvaluateOutput } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface EvaluateOutputConfig {
   id: string;
@@ -59,8 +60,8 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
       showFeedback(
         feedback,
         'none',
-        'Pick a verdict first.',
-        'Work through every rubric question for both outputs, then decide.',
+        t().pickVerdict,
+        t().workThroughRubric,
       );
       card.querySelector<HTMLInputElement>('input[data-evaluate-input]')?.focus();
       return;
@@ -70,7 +71,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     showFeedback(
       feedback,
       result.correct ? 'correct' : 'incorrect',
-      result.correct ? 'Correct.' : 'Not quite.',
+      result.correct ? t().correct : t().notQuite,
       result.feedback,
     );
 
@@ -83,7 +84,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }

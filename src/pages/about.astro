@@ -1,15 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
 ---
 
 <BaseLayout
-  title="About"
+  title="About AI Practice: How the Lessons Are Made"
   description="How AI Practice is built: lesson standards, source policy, changing-fact reviews, local-only progress and vendor neutrality."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Home', path: '/' },
+        { name: 'About', path: '/about' },
+      ],
+      origin,
+    ),
+  ]}
 >
   <h1>About this project</h1>
   <p class="lede">
     A free, practice-first way to learn practical AI skills — built around short lessons and real
     exercises instead of video courses and prompt lists.
+  </p>
+
+  <h2>Who writes this</h2>
+  <p>
+    AI Practice is an independent, one-person project. It started as a personal collection of the
+    checks that actually changed how I use AI at work — verifying claims, grounding answers in
+    sources, keeping sensitive data out of chats — and turned into lessons with practice. There is
+    no vendor to sell you anything and no course to upsell; the site stays model-agnostic because
+    that is the only version of this advice that is honest.
   </p>
 
   <h2>How lessons are written</h2>
@@ -41,8 +62,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <h2>Corrections</h2>
   <p>
-    The site is in pre-launch build-out; a public correction channel opens with the launch. Until
-    then, issues found during content audits are fixed in the lessons and recorded in the project’s
-    quality log.
+    Corrections are welcome. Fixes ship with the next deploy, and every product-specific fact is
+    re-reviewed on a schedule — the facts registry records a review date for each one (next full
+    pass: December 2026).
   </p>
+  <!-- TODO(owner): add a public correction channel (email or issue tracker) when available. -->
 </BaseLayout>

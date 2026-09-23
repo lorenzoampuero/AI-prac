@@ -3,6 +3,7 @@
 
 import { completeLesson, LESSON_XP, load, save, toggleBookmark, touchVisit } from '../lib/progress';
 import { afterProgress, getStorage, refreshHeaderWidget, syncBadges } from './feedback';
+import { t } from '../i18n/client';
 
 let readingBound = false;
 
@@ -51,7 +52,7 @@ function initLesson(): void {
     if (bookmarkBtn) {
       const saved = current.bookmarks.includes(lessonId);
       bookmarkBtn.setAttribute('aria-pressed', String(saved));
-      bookmarkBtn.textContent = saved ? 'Saved ✓' : 'Save for later';
+      bookmarkBtn.textContent = saved ? t().bookmarkSaved : t().bookmarkSave;
     }
     card.dataset.completed = String(completed);
   };

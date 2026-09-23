@@ -1,0 +1,44 @@
+{
+  "engine": "fix-prompt",
+  "title": "Arregla el prompt de la carta de presentación",
+  "scenario": "Una amiga está aplicando a un puesto de analista de producto y te pide ayuda con el prompt de IA que usa. Sus dos últimas cartas se leían bien en el momento, pero en una entrevista le pidieron explicar una afirmación que no podía respaldar.",
+  "task": "Reescribe el prompt para que el modelo adapte la carta a la oferta usando solo evidencia real — y pida los datos que falten en vez de inventarlos.",
+  "weakPrompt": "Coge mi CV y escribe una carta de presentación para este puesto de analista de producto. Hazla muy impresionante y segura — añade lo que sea para destacar, y haz que mi experiencia suene más sénior de lo que muestra el CV. No te preocupes por la longitud.",
+  "criteria": [
+    {
+      "id": "boundary",
+      "label": "Fija un límite de verdad: nada más allá de la evidencia aportada",
+      "hint": "Di explícitamente que no puede añadir, subir de nivel ni estirar nada — y qué hacer en su lugar."
+    },
+    {
+      "id": "posting",
+      "label": "Aporta los requisitos de la oferta como lista para mapear",
+      "hint": "Una carta es un argumento sobre el encaje; la lista de requisitos es su esqueleto."
+    },
+    {
+      "id": "evidence",
+      "label": "Aporta el banco de evidencias (o lo pide) y exige marcar los huecos",
+      "hint": "Puestos, proyectos, números y resultados que la persona pueda defender — más la instrucción de señalar lo que falta."
+    },
+    {
+      "id": "format",
+      "label": "Limita la salida pensando en quien la va a leer",
+      "hint": "Un tope de longitud, estructura simple y los pares requisito-evidencia más fuertes a la vista."
+    },
+    {
+      "id": "check",
+      "label": "Añade un autochequeo: cada frase trazable al banco de evidencias",
+      "hint": "Pide al modelo que marque cualquier frase que no pueda trazar — esa marca es el blindaje para la entrevista."
+    }
+  ],
+  "sampleSolution": "Aquí tienes la lista de requisitos de la oferta y mi banco de evidencias. Mapea cada requisito con la evidencia más cercana, o márcalo como hueco — no rellenes huecos con nada que yo no haya aportado. Después escribe una carta de presentación de 210 palabras que use solo el banco de evidencias: mismos hechos, misma escala, nada mejorado ni estirado. Si un requisito necesita un dato que no te he dado, pídemelo en vez de inventarlo. Termina con los tres pares requisito-evidencia más fuertes en una lista breve, y marca cualquier frase de la carta que no puedas trazar hasta el banco de evidencias.",
+  "hints": [
+    "Sustituye cada invitación a exagerar («impresionante», «más sénior») por una instrucción sobre fidelidad.",
+    "El modelo necesita dos artefactos para ser honesto: la lista de requisitos y el banco de evidencias — nombra los dos."
+  ],
+  "explanation": "El prompt débil pide seguridad y autoriza inventar — y el fallo aparece semanas después, en una entrevista. El prompt arreglado cambia el trabajo de «hazme quedar bien» a «mapea mi evidencia real contra sus requisitos y di qué falta». Por eso los criterios importan en conjunto: el límite mantiene las afirmaciones honestas, la lista de la oferta mantiene la carta relevante, el banco de evidencias da material legítimo, el formato la mantiene legible y el autochequeo caza la frase por la que te habrían preguntado.",
+  "skills": ["búsqueda de empleo", "escritura", "anclaje"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-for-work/job-search-workflows"],
+  "draft": false
+}

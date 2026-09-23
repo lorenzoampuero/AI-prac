@@ -10,6 +10,7 @@ import {
   type AssessmentSummary,
   type SiteMeta,
 } from '../lib/gamification';
+import { t } from '../i18n/client';
 
 const ASSESSMENT_KEY = 'aip:assessment:v1';
 
@@ -79,7 +80,7 @@ export function showXpToast(amount: number): void {
     const strong = document.createElement('strong');
     strong.className = 'xp-amount';
     strong.textContent = `+${amount} XP`;
-    item.append(strong, document.createTextNode(' — saved on this device'));
+    item.append(strong, document.createTextNode(t().xpToastSaved));
   });
 }
 
@@ -87,7 +88,7 @@ function showBadgeToast(name: string, description: string): void {
   pushToast((item) => {
     const strong = document.createElement('strong');
     strong.textContent = name;
-    item.append('Badge unlocked — ', strong, ` · ${description}`);
+    item.append(t().badgeUnlocked, strong, ` · ${description}`);
   });
 }
 
@@ -96,7 +97,7 @@ export function showLevelUp(level: number, name: string): void {
   card.className = 'levelup-card';
   const eyebrow = document.createElement('p');
   eyebrow.className = 'lu-eyebrow';
-  eyebrow.textContent = `Level ${level}`;
+  eyebrow.textContent = t().levelLabel(level);
   const title = document.createElement('p');
   title.className = 'lu-name';
   title.textContent = name;
@@ -113,7 +114,7 @@ export function refreshHeaderWidget(state?: ProgressState): void {
   const status = levelStatus(current.xp);
   const nameEl = widget.querySelector<HTMLElement>('[data-lw-name]');
   const xpEl = widget.querySelector<HTMLElement>('[data-lw-xp]');
-  if (nameEl) nameEl.textContent = `Lv ${status.current.level} · ${status.current.name}`;
+  if (nameEl) nameEl.textContent = t().levelChip(status.current.level, status.current.name);
   if (xpEl) xpEl.textContent = `${current.xp} XP`;
   widget.hidden = false;
 }

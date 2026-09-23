@@ -1,0 +1,36 @@
+{
+  "engine": "model-choice",
+  "title": "¿Qué tarea encaja con un modelo generativo a secas?",
+  "scenario": "Usas un chatbot general sin acceso a la web y sin calculadora. Genera respuestas a partir de patrones aprendidos en el entrenamiento.",
+  "task": "¿Cuál de estas peticiones encaja mejor con esa configuración?",
+  "options": [
+    {
+      "text": "¿Cuál es el tipo de cambio EUR/USD actual, con cuatro decimales?",
+      "correct": false,
+      "feedback": "Los tipos en vivo cambian constantemente y un modelo a secas no tiene ninguna fuente. Producirá un número plausible en lugar del real — y rara vez admitirá la diferencia."
+    },
+    {
+      "text": "Calcula el IVA exacto de 8.432,19 € al 21% y describe la regla legal de redondeo.",
+      "correct": false,
+      "feedback": "Dos problemas en uno: los modelos de lenguaje no son calculadoras exactas fiables, y la «regla legal» necesita una fuente verificada, no una predicción."
+    },
+    {
+      "text": "Convierte estas 14 notas de reunión desordenadas en tres párrafos limpios.",
+      "correct": true,
+      "feedback": "Sí — es una transformación de texto que tú aportas. Todo lo que la tarea necesita está dentro de tu prompt, que es justo donde los modelos generativos son fuertes."
+    },
+    {
+      "text": "Dame la cita exacta de un estudio de 2019, con números de página.",
+      "correct": false,
+      "feedback": "Las citas son una zona clásica de alucinación. Una referencia que parece real — autores, revista, páginas — puede estar inventada por completo, así que esto necesita una fuente real."
+    }
+  ],
+  "hints": [
+    "Pregúntate: ¿la tarea necesita algo que el modelo no puede tener — datos en vivo, cálculo exacto o fuentes verificadas?"
+  ],
+  "explanation": "Los modelos generativos brillan transformando contenido que tú aportas: estructurar, reescribir, resumir, extraer. Son más débiles justo donde necesitas frescura, precisión o procedencia garantizadas. Encajar la tarea con la herramienta es la primera habilidad práctica de IA — evita la mayoría de las historias de «la IA se equivocó» antes de que ocurran.",
+  "skills": ["fundamentos", "encaje de tarea"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/what-generative-ai-is"],
+  "draft": false
+}

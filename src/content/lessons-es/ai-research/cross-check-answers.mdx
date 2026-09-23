@@ -1,0 +1,98 @@
+---
+title: "Cómo verificar respuestas de IA"
+description: "Una fuente es una afirmación; una segunda fuente independiente empieza una verificación. Cómo verificar respuestas de IA triangulando — y qué cuenta de verdad como independiente."
+track: ai-research
+order: 1
+level: intermediate
+estimatedMinutes: 5
+skills: ["investigación", "verificación"]
+prerequisites: ["ai-foundations/why-ai-makes-things-up"]
+learningOutcome: "Verificar una afirmación triangulando fuentes genuinamente independientes."
+class: evergreen
+sources: []
+seo:
+  intent: "verificar respuestas de ia — contrastar afirmaciones en fuentes independientes"
+  title: "Cómo verificar respuestas de IA: cruza las fuentes"
+  cluster: "E2"
+exercises: ["judge-the-cross-check"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Una sola fuente — aunque sea confiada y con aspecto oficial — es una afirmación, no una comprobación. Y es peor de lo que parece: dos artículos que citan la misma encuesta también son **una** sola fuente. La verificación empieza cuando una fuente **genuinamente independiente** coincide, y se mantiene honesta cuando anotas también en qué discrepó.
+
+## La independencia es todo el truco
+
+Antes de contar fuentes, cuenta orígenes:
+
+- Una nota de prensa y los artículos que la cubren: **una** fuente.
+- Tres blogs que citan la misma estadística: **una** fuente.
+- El modelo reformulando cualquiera de las anteriores: no es una fuente en absoluto.
+- Otro autor, otro conjunto de datos, otro método: esa sí es una segunda fuente.
+
+«Múltiples fuentes lo confirman» no significa nada hasta que puedes decir *de dónde lo sacó cada una*. Origen común significa errores comunes — y los errores copiados son los más convincentes de todos.
+
+## El bucle de triangulación
+
+<StepReveal
+  steps={[
+    'Extrae la afirmación que sostiene la decisión — el dato del que cuelga todo, en una sola frase.',
+    'Encuentra la fuente de origen: el conjunto de datos, el registro, la ley, la referencia o el informe de primera mano.',
+    'Añade una comprobación genuinamente independiente — otro autor, otro método, otro origen.',
+    'Compara los detalles, no la sensación: números, fechas, alcance. «Coincide en lo esencial» no es coincidir si el número o el año cambian.',
+    'Anota lo que discrepó. Un conflicto documentado es un hallazgo; uno escondido es una vergüenza futura.',
+  ]}
+/>
+
+## Un mal ejemplo
+
+> **Pide:** «¿Es verdad que el 60% de los equipos usa IA cada semana?»
+>
+> «Sí — muchos informes confirman que alrededor del 60% de los equipos usa IA semanalmente.» Ahora tienes la misma afirmación sin verificar, con mejor gramática y con una frase que parece una cita y que podrías reenviar por accidente.
+
+## Un ejemplo mejor
+
+> **Pide:** «Desglosa la afirmación — el número, la población, el periodo — y dame fuentes candidatas con fechas. Después comprueba dos genuinamente independientes contra el original y dime exactamente en qué difieren.»
+>
+> Recibes un origen, una comparación y una lista de discrepancias — la materia prima real de una decisión.
+
+## Por qué funciona
+
+Una respuesta de IA es una síntesis de patrones: fluida, a menudo acertada y estructuralmente sin verificar. El acuerdo independiente ataca las dos formas en que una afirmación falla: ser falsa, y ser el eco copiado de un original igualmente falso. Y cuando las fuentes discrepan, esa discrepancia no es ruido: es lo más valioso que has encontrado, porque te dice dónde vive la incertidumbre. Añádele una segunda capa: pedir desde el principio los [supuestos y la incertidumbre](/es/learn/ai-foundations/why-ai-makes-things-up) hace que los huecos aparezcan antes de la primera comprobación.
+
+<CheckUnderstanding
+  id="cu-es-rs-crosscheck"
+  question="Verificas «el 60% de los equipos usa IA semanalmente» contra tres artículos — y notas que los tres citan la misma encuesta. ¿Qué tienes en realidad?"
+  options={[
+    { text: 'Tres confirmaciones — suficiente para usar el dato', feedback: 'tres recontadas de una encuesta son una sola fuente; si el original está mal, los tres están mal.' },
+    { text: 'Una fuente repetida tres veces — busca una comprobación independiente antes de usar la cifra', correct: true, feedback: 'cuenta orígenes, no artículos: un método independiente contra el original vale más que cualquier número de ecos.' },
+    { text: 'La afirmación está probada porque se repite mucho', feedback: 'la repetición mide alcance, no verdad — los números falsos muy repetidos son el caso normal.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="judge-the-cross-check" />
+
+## Transferencia
+
+- Cifras para decidir: un origen primario (registro, encuesta) más una comprobación independiente, con fecha.
+- Salud y ciencia: la fuente primaria es el estudio mismo — lee el resumen del estudio, no el artículo sobre él.
+- Cuando los ecos superan a los orígenes, trata la afirmación como hipótesis, no como evidencia.
+- Guarda la lista de discrepancias: va a la nota al pie, no a la papelera.
+
+<KeyTakeaways
+  items={[
+    'Cuenta orígenes, no artículos: mismo original significa una sola fuente.',
+    'El acuerdo independiente — otro autor, otro método, otros datos — convierte una afirmación en comprobación.',
+    'Las discrepancias viven en los detalles: números, fechas, alcance. Anótalas.',
+  ]}
+/>
+
+## Next
+
+Vuelve al índice de **[Fundamentos de IA](/es/learn/ai-foundations)** si vienes empezando, o salta a **[Qué no pegar en un chat de IA](/es/learn/ai-safety/what-not-to-paste)** para la parte de seguridad. El glosario amplía [fuente primaria](/es/glossary/primary-source) y [anclaje en fuentes](/es/glossary/grounding).

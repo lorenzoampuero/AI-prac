@@ -1,0 +1,91 @@
+---
+title: Sujeto, escena, estilo y luz
+description: "Los prompts de imagen flojos nombran una cosa. Los buenos describen el sujeto, la escena, el estilo y la luz — una receta de cuatro partes que puedes construir y repetir."
+track: ai-images
+order: 1
+level: beginner
+estimatedMinutes: 5
+skills: ["imágenes con IA", "prompts"]
+prerequisites: []
+learningOutcome: "Escribir un primer borrador completo de prompt de imagen usando cuatro huecos."
+class: evergreen
+sources: []
+seo:
+  intent: "cómo escribir prompts para imágenes de ia — sujeto, escena, estilo y luz"
+  title: "Prompts para imágenes de IA: la receta de 4 partes"
+  cluster: "D1"
+exercises: ["build-your-first-image-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+La mayoría de los prompts de imagen flojos comparten el mismo pecado: nombran una cosa. «Un café» es un tema, no una imagen. Los prompts que funcionan describen **cuatro huecos** — sujeto, escena, estilo y luz — y cada hueco es una decisión que tomas tú en lugar de dejar al azar del muestreo.
+
+## Los cuatro huecos
+
+- **Sujeto** — qué está en el encuadre. Uno claro gana a tres compitiendo: «una taza de cerámica con café, vapor suave subiendo».
+- **Escena** — qué lo rodea: «en un alféizar de madera con una planta pequeña, despejado y tranquilo».
+- **Estilo** — cómo debe verse: «fotografía editorial calmada, poca profundidad de campo». Las palabras de estilo guían cuando describen un aspecto renderizable; «impresionante» y «precioso» no deciden nada.
+- **Luz** — momento y ambiente: «luz suave de mañana a través de visillos». La luz es el hueco que más cambia el resultado y el que más se olvida.
+
+La [IA generativa](/es/glossary/generative-ai) no reparte premios por elogios: «espectacular» no activa nada. Cada término concreto, en cambio, es una instrucción real.
+
+## Completar el primer borrador
+
+La disciplina útil es rellenar los cuatro huecos antes de generar nada. Un primer borrador completo tiene dos ventajas: se ve si el concepto funciona, y a partir de ahí se itera **cambiando una sola cosa por vez** — así sabes qué causó cada diferencia.
+
+Si generas con tres huecos y el resultado no encaja, no sabes cuál de las cien cosas no dichas fue la culpable. Con los cuatro puestos, cada ajuste posteriores es una hipótesis clara.
+
+## Un mal ejemplo
+
+> **Pide:** «Una foto increíble de un café, muy especial.»
+>
+> «Increíble» y «especial» no describen nada; recibirás una interpretación aleatoria del tema «café» y no sabrás qué cambiar.
+
+## Un ejemplo mejor
+
+<PromptCompare
+  weak="Una foto increíble de un café, que sea muy especial."
+  strong="Una taza de cerámica con café y vapor suave subiendo, sobre un alféizar de madera con una planta pequeña. Fotografía editorial calmada, poca profundidad de campo, luz suave de mañana a través de visillos, cálida y de bajo contraste."
+  notes={[
+    'Sujeto, escena, estilo y luz: los cuatro huecos cubiertos, nada al azar.',
+    'Los términos concretos (profundidad de campo, luz de mañana) son renderizables; los elogios no.',
+    'El borrador completo deja listo el siguiente paso: cambiar una cosa por iteración.',
+  ]}
+/>
+
+<CheckUnderstanding
+  id="cu-es-im-recipe"
+  question="Describes el sujeto y la escena, generas, y el resultado no tiene la atmósfera que buscabas. ¿Qué falta más probablemente?"
+  options={[
+    { text: 'Más adjetivos de calidad: «más bonito», «más profesional»', feedback: 'los adjetivos de elogio no describen decisiones de renderizado — no mueven el resultado.' },
+    { text: 'El estilo y sobre todo la luz, los huecos que más cambian la atmósfera', correct: true, feedback: 'la luz y el estilo son los que definen el ambiente; sin ellos, el modelo elige un valor por defecto que no conoces.' },
+    { text: 'Un sujeto totalmente distinto', feedback: 'el sujeto está puesto y el encuadre funciona: cambia primero lo que controla la atmósfera, no el tema.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="build-your-first-image-prompt" />
+
+## Transferencia
+
+- Antes de generar, revisa los cuatro huecos: sujeto, escena, estilo, luz.
+- Sustituye elogios por términos técnicos concretos: tipo de plano, hora, fuente de luz.
+- Itera cambiando una sola cosa por vez para poder atribuir cada diferencia.
+
+<KeyTakeaways
+  items={[
+    'Cuatro huecos — sujeto, escena, estilo, luz — convierten un tema en una imagen.',
+    'El estilo y la luz se describen con términos concretos; los elogios no activan nada.',
+    'Un primer borrador completo es lo que hace posible iterar cambiando una cosa por vez.',
+  ]}
+/>
+
+## Next
+
+Con esto cierras la primera lección de imagen de esta ola. Vuelve al **[currículo](/es/learn)** para elegir la siguiente sección, o pasa por las **[preguntas frecuentes](/es/faq)** si quieres respuestas rápidas. El glosario amplía [IA generativa](/es/glossary/generative-ai) y [prompt](/es/glossary/prompt).

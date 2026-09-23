@@ -1,9 +1,10 @@
 # LAUNCH READINESS — AI Practice (Gate 11)
 
-**Date: 2026-09-19 · Updated 2026-09-20 · Status: LIVE — the site serves publicly at
+**Date: 2026-09-19 · Updated 2026-09-22 · Status: LIVE — the site serves publicly at
 `https://getaipractice.site` (apex 308-redirects to `www.getaipractice.site`, which serves 200;
-canonical + sitemap use the apex origin). Remaining owner actions: enable Analytics in the dashboard,
-align the primary domain with the canonical origin, then Search Console.**
+canonical + sitemap use the apex origin). Repo state after the SEO/keyword sprint + ES wave: 62+12
+lessons, 235 built pages, 79 tests. Remaining owner actions (all in the section below): verify Search
+Console, submit the sitemap + request indexing, and align the primary domain.**
 
 ## What is verified (this session)
 
@@ -88,6 +89,49 @@ redirect), then choose the hosting target (any static host/CDN works — the out
 - Render check: paste 3 URLs into a link preview/debugger (OG tags) and one AI-search style query to see
   indexability.
 - Re-run `node scripts/audit-dist.mjs` against the produced build for a final artifact record.
+
+## SEO discovery unblock — exact owner steps (2026-09-22)
+
+The site is crawl-ready (robots allow-all, sitemap live, hreflang pairs, IndexNow key) but Google has
+not been told it exists. Three actions, in order, unlock discovery.
+
+### 1. Search Console — verify the domain (10 minutes)
+
+1. Open https://search.google.com/search-console → **Add property** → choose **Domain** (not URL prefix).
+2. Enter `getaipractice.site` (the apex without `www` — a Domain property covers every subdomain and
+   both protocols, so one property is enough).
+3. Copy the `google-site-verification=…` TXT value shown.
+4. In the domain registrar's DNS panel, add a **TXT record on the bare domain** (`@` host) with that
+   value. Keep existing TXT rows; add a new one rather than replacing anything.
+5. Back in Search Console, press **Verify**. DNS can take minutes to hours; retries are free.
+
+### 2. Search Console — submit the sitemap and request indexing (5 minutes)
+
+1. Left menu → **Sitemaps** → enter `sitemap-index.xml` → **Submit**. Status should read success
+   within a day.
+2. Left menu → **URL Inspection** → inspect each URL below and press **Request Indexing** after each:
+   - `https://www.getaipractice.site/`
+   - `/learn` · `/practice` · `/assessment` · `/glossary` · `/faq`
+   - `/learn/ai-research/cross-check-answers` (flagship lesson — “verify ai answers”)
+   - `/es` and `/es/learn` (the Spanish wave)
+3. That is the whole Google-side setup; everything after it is wait time.
+
+### 3. Vercel — make the apex the primary domain (2 minutes)
+
+Today `getaipractice.site` 308-redirects to `www`, while canonical + sitemap advertise the apex.
+Aligning the two removes the conflicting signal.
+
+1. Vercel dashboard → project **aipractice** → Settings → Domains.
+2. Select `getaipractice.site` → **Set as Primary** (from then on `www` redirects to the apex,
+   agreeing with the canonical origin).
+3. Re-check: `https://getaipractice.site` should answer 200 directly; `https://www.getaipractice.site`
+   should 308 to the apex.
+
+### Honest expectations (unchanged)
+
+Day 0 = zero indexed URLs. Core pages typically appear within days; first long-tail impressions take
+2–6 weeks; meaningful organic clicks take 2–6 months of content-led work. Backlinks remain the slow
+variable — Search Console is the measurement baseline, not a growth lever.
 
 ## Rollback
 

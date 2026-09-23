@@ -1,0 +1,106 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import { breadcrumbJsonLd, learningResourceJsonLd } from '../../../seo/schema';
+import { clipAtSentence } from '../../../lib/seo-text';
+
+interface RelatedLesson {
+  title: string;
+  href: string;
+}
+
+export async function getStaticPaths() {
+  const exercises = await getCollection('exercisesEs', ({ data }) => !data.draft);
+  const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
+  const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+
+  return exercises.map((entry) => ({
+    params: { exercise: entry.id },
+    props: {
+      entry,
+      relatedLessons: entry.data.lessonRefs
+        .map((ref) => lessonById.get(ref))
+        .filter((lesson): lesson is CollectionEntry<'lessonsEs'> => Boolean(lesson))
+        .map(
+          (lesson): RelatedLesson => ({
+            title: lesson.data.title,
+            href: `/es/learn/${lesson.data.track}/${lesson.id.split('/').slice(1).join('/')}`,
+          }),
+        ),
+    },
+  }));
+}
+
+type Props = { entry: CollectionEntry<'exercisesEs'>; relatedLessons: RelatedLesson[] };
+const { entry, relatedLessons } = Astro.props as Props;
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+const exercisePath = `/es/practice/${entry.id}`;
+const DIFFICULTY_LABELS: Record<string, string> = {
+  beginner: 'Principiante',
+  intermediate: 'Intermedio',
+  advanced: 'Avanzado',
+};
+const difficultyLabel = DIFFICULTY_LABELS[entry.data.difficulty] ?? entry.data.difficulty;
+---
+
+<BaseLayout
+  locale="es"
+  title={`Ejercicio de IA: ${entry.data.title}`}
+  description={clipAtSentence(`${entry.data.task} ${entry.data.scenario}`, 155)}
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Practicar', path: '/es/practice' },
+        { name: entry.data.title, path: exercisePath },
+      ],
+      origin,
+    ),
+    learningResourceJsonLd(
+      {
+        name: entry.data.title,
+        description: entry.data.task,
+        path: exercisePath,
+        resourceType: 'Exercise',
+        course: { name: 'Ejercicios de AI Practice', path: '/es/practice' },
+      },
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li><a href="/es/practice">Practicar</a></li>
+      <li aria-current="page">{entry.data.title}</li>
+    </ol>
+  </nav>
+
+  <h1>{entry.data.title}</h1>
+  <p class="meta-line">
+    {difficultyLabel} · {entry.data.skills.join(' · ')}
+  </p>
+
+  <ExerciseCard id={entry.id} showHeading={false} />
+
+  {
+    relatedLessons.length > 0 && (
+      <section aria-labelledby="from-lesson">
+        <h2 id="from-lesson">De la lección</h2>
+        <ul class="lesson-list">
+          {relatedLessons.map((lesson) => (
+            <li>
+              <a href={lesson.href}>{lesson.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <p>
+    <a href="/es/practice">← Toda la práctica</a>
+  </p>
+</BaseLayout>

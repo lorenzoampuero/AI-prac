@@ -29,14 +29,17 @@ const samples = [
   'dist/glossary/index.html',
   'dist/glossary/token/index.html',
   'dist/assessment/index.html',
-  'dist/about.html',
+  'dist/about/index.html',
+  'dist/es/index.html',
+  'dist/es/learn/ai-research/cross-check-answers/index.html',
   'dist/404.html',
 ];
 for (const key of samples) {
   try {
     const text = readFileSync(key, 'utf8');
     const types = [...new Set([...text.matchAll(/"@type":\s*"([^"]+)"/g)].map((m) => m[1]))];
-    console.log(`  ${key.replace('dist/', '')} | crumb: ${text.includes('aria-label="Breadcrumb"')} | ld: ${types.join(',') || '-'}`);
+    const alternates = (text.match(/rel="alternate"/g) ?? []).length;
+    console.log(`  ${key.replace('dist/', '')} | crumb: ${text.includes('aria-label="Breadcrumb"')} | hreflang: ${alternates} | ld: ${types.join(',') || '-'}`);
   } catch {
     console.log(`  ${key} MISSING`);
   }

@@ -1,0 +1,94 @@
+---
+title: Por qué la IA se inventa cosas (alucinaciones)
+description: "La IA no miente a propósito: predice lo que suena bien. Aprende por qué ocurren las respuestas seguras y falsas, qué detalles sospechar y cómo verificar antes de fiarte."
+track: ai-foundations
+order: 2
+level: beginner
+estimatedMinutes: 6
+skills: ["verificación", "fundamentos"]
+prerequisites: ["ai-foundations/what-generative-ai-is"]
+learningOutcome: "Explicar por qué ocurren las alucinaciones y detectarlas antes de usar una respuesta."
+class: evergreen
+sources: []
+seo:
+  intent: "alucinaciones de ia — por qué la ia inventa cosas y cómo detectarlas"
+  title: "Alucinaciones de IA: por qué inventa cosas"
+  cluster: "A7"
+exercises: ["spot-the-fabrication"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+
+Una [alucinación](/es/glossary/hallucination) es una respuesta de IA fluida y segura de sí misma — o un detalle dentro de ella — que sencillamente no es cierta. Los modelos generan lo que resulta plausible, no lo que está comprobado, así que las frases más convincentes pueden ser justo las menos fiables. Saber dónde se concentran las invenciones es la mitad de la defensa.
+
+## No hay ningún verificador interno
+
+Un [modelo de lenguaje](/es/glossary/large-language-model) no lleva dentro ningún comprobador de hechos. Cuando el patrón pide una cita, un número o una cita textual, el modelo produce la **forma** de esa cosa: autores, años, estadísticas, números de página. La salida está optimizada para parecer una respuesta correcta, porque el texto que parece correcto es el que recompensó su entrenamiento.
+
+Por eso la confianza del texto no dice nada sobre su verdad. Una cifra inventada y una correcta se generan exactamente igual, con la misma fluidez y el mismo tono seguro.
+
+## Dónde se concentran las invenciones
+
+Los detalles concretos son los sospechosos habituales:
+
+- **Números** — porcentajes, importes, tamaños de muestra.
+- **Fechas y versiones** — años de estudios, lanzamientos, plazos.
+- **Nombres** — personas, instituciones, productos.
+- **Citas textuales** — frases entrecomilladas que nadie dijo.
+- **Referencias** — estudios con título, revista y página que no existen.
+
+Alrededor de esos detalles, el texto suele ser correcto y genérico — y esa mezcla es precisamente la trampa: lo falso viaja escoltado por párrafos que suenan razonables. Trata la precisión como un motivo para verificar, nunca como un motivo para creer.
+
+## La rutina en tres pasos
+
+1. **Marca lo específico.** Subraya cada nombre, número, fecha y cita de la respuesta.
+2. **Comprueba lo que puedas abrir.** Si no encuentras la fuente, el detalle queda sin verificar — no importa lo bien escrito que esté.
+3. **Pide la fuente explícitamente** si el dato va a viajar a un documento: una respuesta con referencia comprobable es mucho más útil que una respuesta segura.
+
+## Un mal ejemplo
+
+> **Pide:** «Dame el dato de productividad de equipos híbridos con su estudio.»
+>
+> «Un estudio de 2023 del Instituto para la Investigación del Trabajo encontró un 41% más de productividad, y su autora lo llamó "la mayor ganancia desde la máquina de escribir".» Todo el paquete — institución, cifra y cita — puede estar fabricado de principio a fin.
+
+## Un ejemplo mejor
+
+> **Pide:** «Separa lo que sabes con seguridad de lo que no; para cada cifra, indica la fuente o marca claramente que no la tienes.»
+>
+> Recibes la misma información con las zonas de riesgo señaladas — y ese etiquetado es lo que te permite decidir qué reutilizar y qué comprobar.
+
+<CheckUnderstanding
+  id="cu-es-fn-halluc"
+  question="Una respuesta incluye una estadística precisa con institución, año y autora, pero sin enlace. ¿Cuál es la actitud correcta?"
+  options={[
+    { text: 'Fiarse: cuantos más detalles concretos lleve, más creíble es', feedback: 'al contrario: la precisión sin fuente accesible es la firma típica de una invención.' },
+    { text: 'Tratarla como no verificada hasta encontrar la fuente por tu cuenta', correct: true, feedback: 'esa es la regla: lo que no se puede abrir no se da por bueno, por bien escrito que esté.' },
+    { text: 'Preguntarle al modelo si está seguro del dato', feedback: 'la seguridad es estilo, no evidencia — preguntarle al origen del invento no prueba nada.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="spot-the-fabrication" />
+
+## Transferencia
+
+- En documentos: todo número ajeno se comprueba antes de reenviarlo.
+- En conversaciones: si un dato decide algo, pide fuente y fecha en la misma respuesta.
+- En listas y resúmenes: las afirmaciones amplias suelen estar bien; los detalles concretos, no.
+- La regla de oro: verificar no es desconfiar de todo — es saber dónde mirar.
+
+<KeyTakeaways
+  items={[
+    'La alucinación no busca engañarte: es el resultado de predecir lo plausible.',
+    'Números, fechas, nombres, citas y referencias: ahí se concentra el riesgo.',
+    'La precisión es un motivo para verificar, no para creer.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[Entrenamiento vs inferencia](/es/learn/ai-foundations/training-vs-inference)** — qué cambia de verdad una conversación y qué no. La entrada de [afirmación sin respaldo](/es/glossary/unsupported-claim) describe la forma exacta que adoptan estos errores.

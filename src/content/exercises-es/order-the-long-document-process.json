@@ -1,0 +1,22 @@
+{
+  "engine": "order-steps",
+  "title": "Ordena el proceso del documento largo",
+  "scenario": "Tienes que extraer cada fecha límite y cada responsable de un manual de proyecto de 120 páginas — sin perderte la mitad del documento por el camino.",
+  "task": "Pon los cinco pasos en un orden que funcione usando los controles de subir y bajar.",
+  "steps": [
+    "Fijar la tarea y el formato exacto de salida antes de pegar nada.",
+    "Partir el documento en bloques lógicos — secciones, capítulos, páginas.",
+    "Procesar un bloque por pasada, extrayendo siempre al mismo formato fijo.",
+    "Recoger las extracciones en notas que tú controlas (un archivo), no en el chat.",
+    "Escribir la respuesta final desde tus notas y comprobarla contra el original."
+  ],
+  "hints": [
+    "¿Dónde debe vivir el formato de salida — antes o después de la entrada?",
+    "¿Qué artefacto sobrevive cuando el chat desaparece?"
+  ],
+  "explanation": "Los documentos largos fallan por dilución, truncado y deriva. Declarar la especificación primero, trocear con lógica, extraer en un formato fijo, guardar tus propias notas y sintetizar desde ellas convierte una pasada imposible en una secuencia de pasos pequeños y comprobables — y tus notas se vuelven la memoria que la sesión no tiene.",
+  "skills": ["entrada larga"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["prompting/work-with-long-input"],
+  "draft": false
+}

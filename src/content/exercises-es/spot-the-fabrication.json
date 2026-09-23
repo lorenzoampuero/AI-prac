@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Detecta la invención",
+  "scenario": "Un asistente de IA respondió a una pregunta sobre investigación laboral. Ahora mismo no puedes abrir ninguna fuente — solo tienes el texto de abajo.",
+  "task": "Selecciona cada parte de la respuesta que no deberías dar por buena tal cual.",
+  "response": "El trabajo híbrido se ha vuelto común en muchas empresas desde 2020. Un estudio de 2023 del Instituto para la Investigación del Trabajo encontró que los equipos híbridos eran un 41% más productivos que los equipos totalmente presenciales, y su autora principal, la Dra. Helena Marsh, lo llamó «la mayor ganancia de productividad desde la máquina de escribir». Los horarios híbridos suelen combinar días de oficina con días en remoto.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "«El trabajo híbrido se ha vuelto común en muchas empresas desde 2020»",
+      "problematic": false,
+      "feedback": "Amplio y poco discutible — no cuelga de él ningún número preciso ni ninguna fuente. Correcto tal cual."
+    },
+    {
+      "id": "c2",
+      "text": "«Un estudio de 2023 del Instituto para la Investigación del Trabajo»",
+      "problematic": true,
+      "feedback": "Una institución que no puedes situar, un año y ningún enlace — la forma clásica de una cita fabricada. Verifícala o descártala."
+    },
+    {
+      "id": "c3",
+      "text": "«los equipos híbridos eran un 41% más productivos que los equipos totalmente presenciales»",
+      "problematic": true,
+      "feedback": "Una estadística precisa e impresionante sin fuente accesible. La precisión parece evidencia; no lo es."
+    },
+    {
+      "id": "c4",
+      "text": "«la mayor ganancia de productividad desde la máquina de escribir» — Dra. Helena Marsh",
+      "problematic": true,
+      "feedback": "Una cita llamativa de una persona que no puedes verificar. Las citas inventadas son un patrón estándar de alucinación."
+    },
+    {
+      "id": "c5",
+      "text": "«Los horarios híbridos suelen combinar días de oficina con días en remoto»",
+      "problematic": false,
+      "feedback": "Una afirmación de tipo definición — aquí no hay nada concreto que inventar."
+    }
+  ],
+  "hints": [
+    "Los sospechosos son los detalles concretos: nombres, números, fechas, citas, referencias.",
+    "Las afirmaciones genéricas sin ningún dato medible rara vez son el problema."
+  ],
+  "explanation": "Las alucinaciones se concentran en lo concreto: nombres, fechas, números y citas, además de cualquier referencia que no puedas abrir. Las afirmaciones amplias que las rodean suelen estar bien — y eso es justo lo que hace que los detalles inventados pasen desapercibidos. Trata la precisión como un motivo para verificar, no para creer.",
+  "skills": ["verificación", "alucinaciones"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-foundations/why-ai-makes-things-up"],
+  "draft": false
+}

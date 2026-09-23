@@ -1,0 +1,172 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getTrack } from '../../../../data/tracks';
+import { breadcrumbJsonLd, learningResourceJsonLd } from '../../../../seo/schema';
+
+interface NavLesson {
+  id: string;
+  href: string;
+  title: string;
+}
+
+export async function getStaticPaths() {
+  // NOTE: getStaticPaths is extracted into its own chunk during build — it must be self-contained
+  // (imports only; no references to module-level constants).
+  const toNav = (entry: CollectionEntry<'lessonsEs'>): NavLesson => ({
+    id: entry.id,
+    title: entry.data.title,
+    href: `/es/learn/${entry.data.track}/${entry.id.split('/').slice(1).join('/')}`,
+  });
+
+  const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
+
+  const byTrack = new Map<string, CollectionEntry<'lessonsEs'>[]>();
+  for (const lesson of lessons) {
+    const list = byTrack.get(lesson.data.track) ?? [];
+    list.push(lesson);
+    byTrack.set(lesson.data.track, list);
+  }
+
+  const paths: {
+    params: { track: string; lesson: string };
+    props: { entry: CollectionEntry<'lessonsEs'>; prev: NavLesson | null; next: NavLesson | null };
+  }[] = [];
+
+  for (const [track, list] of byTrack) {
+    const sorted = [...list].sort((a, b) => a.data.order - b.data.order);
+    sorted.forEach((entry, index) => {
+      const prevEntry = index > 0 ? sorted[index - 1] : undefined;
+      const nextEntry = index < sorted.length - 1 ? sorted[index + 1] : undefined;
+      paths.push({
+        params: { track, lesson: entry.id.split('/').slice(1).join('/') },
+        props: {
+          entry,
+          prev: prevEntry ? toNav(prevEntry) : null,
+          next: nextEntry ? toNav(nextEntry) : null,
+        },
+      });
+    });
+  }
+
+  return paths;
+}
+
+type Props = { entry: CollectionEntry<'lessonsEs'>; prev: NavLesson | null; next: NavLesson | null };
+const { entry, prev, next } = Astro.props as Props;
+
+const { Content, headings } = await render(entry);
+const trackInfo = getTrack(entry.data.track);
+const toc = headings.filter((heading) => heading.depth === 2);
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+const lessonPath = `/es/learn/${entry.data.track}/${entry.id.split('/').slice(1).join('/')}`;
+const breadcrumbs = [
+  { name: 'Inicio', path: '/es' },
+  { name: 'Aprender', path: '/es/learn' },
+  { name: trackInfo?.nameEs ?? entry.data.track, path: `/es/learn/${entry.data.track}` },
+  { name: entry.data.title, path: lessonPath },
+];
+const structuredData = [
+  breadcrumbJsonLd(breadcrumbs, origin),
+  learningResourceJsonLd(
+    {
+      name: entry.data.title,
+      description: entry.data.description,
+      path: lessonPath,
+      minutes: entry.data.estimatedMinutes,
+      teaches: entry.data.learningOutcome,
+      modifiedDate: entry.data.lastReviewed?.toISOString(),
+      course: { name: trackInfo?.nameEs ?? entry.data.track, path: `/es/learn/${entry.data.track}` },
+    },
+    origin,
+  ),
+];
+
+const LEVEL_LABELS: Record<string, string> = {
+  beginner: 'Principiante',
+  intermediate: 'Intermedio',
+  advanced: 'Avanzado',
+};
+const levelLabel = LEVEL_LABELS[entry.data.level] ?? entry.data.level;
+---
+
+<BaseLayout
+  locale="es"
+  title={entry.data.seo.title}
+  description={entry.data.description}
+  ogType="article"
+  structuredData={structuredData}
+>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li><a href="/es/learn">Aprender</a></li>
+      <li><a href={`/es/learn/${entry.data.track}`}>{trackInfo?.nameEs ?? entry.data.track}</a></li>
+      <li aria-current="page">{entry.data.title}</li>
+    </ol>
+  </nav>
+
+  <div class="lesson-layout">
+    <div class="lesson-main">
+      <article class="prose" data-lesson-page data-lesson-id={entry.id}>
+        <header>
+          <h1>{entry.data.title}</h1>
+          <p class="meta-line">
+            {levelLabel} · {entry.data.estimatedMinutes} min · {entry.data.learningOutcome}
+          </p>
+          {entry.data.class === 'current' && entry.data.lastReviewed && (
+            <p class="meta-line">Detalles específicos de producto revisados: {entry.data.lastReviewed.toISOString().slice(0, 10)}</p>
+          )}
+          <ul class="chips">
+            {entry.data.skills.map((skill) => <li class="chip">{skill}</li>)}
+          </ul>
+        </header>
+
+        <Content />
+      </article>
+
+      <section class="lesson-finish" data-lesson-complete aria-label="Fin de la lección">
+        <div>
+          <p class="lf-title">¿Terminaste esta lección?</p>
+          <p class="lf-note" data-lesson-done hidden>Aprendida — queda en tu registro.</p>
+        </div>
+        <div class="lf-actions">
+          <button class="button" type="button" data-lesson-complete-btn>Marcar como aprendida · +10 XP</button>
+          <button class="button secondary" type="button" data-bookmark-btn aria-pressed="false">Guardar para después</button>
+        </div>
+      </section>
+
+      <nav aria-label="Navegación entre lecciones" class="lesson-nav">
+        {prev && (
+          <a class="lesson-nav-card" href={prev.href}>
+            <span class="lnc-label">← Anterior</span>
+            <span class="lnc-title">{prev.title}</span>
+          </a>
+        )}
+        {next && (
+          <a class="lesson-nav-card" href={next.href}>
+            <span class="lnc-label">Siguiente →</span>
+            <span class="lnc-title">{next.title}</span>
+          </a>
+        )}
+      </nav>
+    </div>
+
+    {toc.length > 2 && (
+      <aside class="lesson-toc" aria-label="En esta página">
+        <p class="toc-title">En esta página</p>
+        <ul>
+          {toc.map((heading) => (
+            <li><a href={`#${heading.slug}`}>{heading.text}</a></li>
+          ))}
+        </ul>
+      </aside>
+    )}
+  </div>
+
+  <script>
+    import '../../../../scripts/lesson';
+  </script>
+</BaseLayout>

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../seo/schema';
+import { clipAtSentence } from '../../lib/seo-text';
 
 const terms = await getCollection('glossary', ({ data }) => !data.draft);
 terms.sort((a, b) => a.data.term.localeCompare(b.data.term));
@@ -10,8 +11,8 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
 ---
 
 <BaseLayout
-  title="AI glossary"
-  description="Plain-language definitions of AI terms — every entry links to the lesson that teaches it. No jargon walls, no dictionary filler."
+  title="AI Glossary: Plain-Language Definitions"
+  description="Plain-language definitions of AI terms: context windows, hallucinations, tokens and more — each entry links to the lesson that teaches it. No jargon walls."
   structuredData={[
     breadcrumbJsonLd(
       [
@@ -40,10 +41,7 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
       terms.map((term) => (
         <li>
           <a href={`/glossary/${term.id}`}>{term.data.term}</a>
-          <div class="lesson-meta">
-            {term.data.definition.slice(0, 120)}
-            {term.data.definition.length > 120 ? '…' : ''}
-          </div>
+          <div class="lesson-meta">{clipAtSentence(term.data.definition, 120)}</div>
         </li>
       ))
     }

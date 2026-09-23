@@ -1,0 +1,86 @@
+---
+title: Plantillas de prompts que sí reutilizas
+description: "Una plantilla convierte un prompt que funcionó una vez en una herramienta de confianza: reglas fijas, huecos con nombre y un ejemplo. Aprende a montarla y cuándo retirarla."
+track: prompting
+order: 2
+level: intermediate
+estimatedMinutes: 6
+skills: ["prompts", "plantillas"]
+prerequisites: ["prompting/write-clear-instructions"]
+learningOutcome: "Convertir un prompt que funciona en una plantilla reutilizable con huecos con nombre."
+class: evergreen
+sources: []
+seo:
+  intent: "plantillas de prompts para chatgpt — crea y reutiliza las tuyas"
+  title: "Plantillas de prompts de ChatGPT que reutilizas"
+  cluster: "B16"
+exercises: ["build-the-template"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+
+Una [plantilla de prompt](/es/glossary/prompt-template) es un prompt con huecos con nombre: texto fijo para las reglas que quieres siempre, y [marcadores](/es/glossary/placeholder) para las partes que cambian cada vez. El orden importa — monta la plantilla **después** de que un prompt haya funcionado dos veces, no antes. Una plantilla es la recompensa por un problema resuelto, no una apuesta sobre uno imaginario.
+
+## Fijo y variable
+
+Todo prompt de trabajo se parte en dos montones:
+
+- **Fijo** — las reglas que defenderías en una revisión: qué no se puede inventar, qué formato debe salir, qué se descarta. Esto no cambia entre ejecuciones.
+- **Variable** — el tema, el público, el texto de origen, el tono cuando cambia de verdad. Cada parte variable recibe un nombre — `[PUBLICO]`, `<<<TEXTO>>>` — para que un hueco que falta se vea, en vez de rellenarse con una suposición silenciosa.
+
+Un marcador que el modelo puede ver es una pregunta que puede hacer; uno que no ve se convierte en una invención. Esa es toda la diferencia entre una plantilla honesta y una fábrica de datos plausibles.
+
+## Cómo se construye
+
+1. Parte del prompt que ya funcionó — no de una idea de prompt.
+2. Nombra cada parte variable y pregunta: ¿puedo rellenarla siempre, o a veces falta?
+3. Añade una línea de comprobación: qué debe verificar el modelo antes de responder (por ejemplo, que ninguna cifra aparezca que no sea una cita o una fecha).
+4. Prueba la plantilla con un caso real distinto — si necesitas retocar el texto fijo, ese texto no era tan fijo.
+5. Retírala cuando el producto o el proceso cambien: una plantilla sin fecha de caducidad es una promesa sin revisar.
+
+## Un mal ejemplo
+
+> **Plantilla:** «Resume esto: [pegar conversaciones]. Sé útil.»
+>
+> «Sé útil» no dice nada y no hay reglas: cada persona que la use obtendrá un formato distinto y nadie sabrá qué falta.
+
+## Un ejemplo mejor
+
+> **Plantilla:** «Convierte `<<<CONVERSACIONES>>>` de `[INICIO]` a `[FIN]` en un informe de problemas recurrentes. Reglas: agrupa por problema, no por cliente; incluye solo lo que aparece tres o más veces; nunca estimes cifras de volumen. Formato: cinco viñetas máximo, cada una con problema, frecuencia en palabras y una cita representativa. Comprobación: ninguna cifra que no sea una fecha o una cita.»
+>
+> Misma tarea, misma forma cada semana — y la plantilla puede pasarse a cualquier compañero sin explicación añadida.
+
+<CheckUnderstanding
+  id="cu-es-pr-template"
+  question="¿Cuándo conviertes un prompt en plantilla?"
+  options={[
+    { text: 'Antes de usarlo, para ahorrar el primer intento', feedback: 'una plantilla de algo que nunca ha funcionado no ahorra nada: congela suposiciones.' },
+    { text: 'Después de que haya funcionado dos veces, separando lo fijo de lo variable', correct: true, feedback: 'una plantilla premia un problema ya resuelto — no es una apuesta sobre uno imaginario.' },
+    { text: 'Cuando quieras compartirlo con el equipo, aunque nadie lo haya probado aún', feedback: 'compartir sin probar reparte el fallo por todo el equipo a la vez.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="build-the-template" />
+
+## Transferencia
+
+- Reglas fijas = lo que corregirías a alguien nuevo; huecos = lo que esa persona te preguntaría.
+- Pregunta en voz alta los huecos que falten en vez de dejar que se rellenen solos.
+- Revisa la plantilla cuando cambie tu caso de uso; retirarla también es mantenimiento.
+
+<KeyTakeaways
+  items={[
+    'Una plantilla congela reglas fijas y deja huecos con nombre para lo variable.',
+    'Se construye después de que un prompt funcione dos veces, nunca antes.',
+    'La línea de comprobación convierte tu peor fallo en una instrucción declarada.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[Textos largos sin perder el hilo](/es/learn/prompting/work-with-long-input)** — qué hacer cuando el documento no cabe de una vez. El glosario amplía [few-shot prompting](/es/glossary/few-shot-prompting) y [marcador](/es/glossary/placeholder).

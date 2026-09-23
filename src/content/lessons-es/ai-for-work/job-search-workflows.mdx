@@ -1,0 +1,90 @@
+---
+title: "CV y cartas con IA"
+description: "La IA puede adaptar tu carta a una oferta sin inventar un solo dato. Aprende el flujo con evidencia primero: reúne pruebas, mapéalas contra la oferta y redacta dentro de la verdad."
+track: ai-for-work
+order: 2
+level: beginner
+estimatedMinutes: 6
+skills: ["búsqueda de empleo", "escritura"]
+prerequisites: ["ai-for-work/spreadsheets-describe-dont-guess"]
+learningOutcome: "Adaptar un CV o una carta con IA sin exagerar nada."
+class: evergreen
+sources: []
+seo:
+  intent: "cv y carta de presentación con ia — un flujo honesto y gratis"
+  title: "CV y cartas con IA: un flujo honesto"
+  cluster: "C3"
+exercises: ["fix-the-cover-letter-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import Callout from '../../../components/lesson/Callout.astro';
+
+Pedir «una carta impresionante» funciona de maravilla — hasta la entrevista, donde te preguntan por una frase que no puedes respaldar. La versión honesta no es menos potente: es un flujo que empieza por la evidencia y deja que la IA haga lo que sabe hacer, adaptar redacción, sin inventar hechos.
+
+## Paso 1: el banco de evidencias
+
+Antes de escribir nada, escribe una página de pruebas: puestos y fechas, proyectos y qué hiciste tú personalmente, números que puedas defender, herramientas que usaste de verdad y resultados con su contexto. Es tu banco de [anclaje](/es/glossary/grounding): el único material del que el modelo tiene permiso para tirar. No conoce tu historia, y un borrador sin anclar es una suposición bien redactada sobre un desconocido.
+
+## Paso 2: mapear la oferta
+
+Coge la lista de requisitos del anuncio y mapea cada uno contra tu banco: este requisito lo cubre esta evidencia. Lo que no tenga evidencia se marca como hueco — y un hueco marcado te dice dónde preparar una respuesta honesta en la entrevista. El mapeo es el esqueleto del argumento: una carta no es una biografía, es un caso sobre el encaje.
+
+## Paso 3: redactar dentro de la verdad
+
+Aquí entra la restricción que lo cambia todo: el modelo escribe **solo** con el banco de evidencias, con la misma escala — nada de «lideré» donde contribuiste, nada de «años de experiencia» donde hay un proyecto. Si un requisito necesita un dato que no le has dado, que pregunte en vez de inventarlo.
+
+## Paso 4: la revisión que caza exageraciones
+
+Antes de enviar, lee cada frase y señala la evidencia que hay detrás. Todo lo que no puedas señalar es una [afirmación sin respaldo](/es/glossary/unsupported-claim) — recórtala o corrígela a su escala real. Dos patrones que hay que cazar: el **ascenso de alcance** («lideré» cuando contribuiste; «gestioné» cuando apoyaste) y el **estiramiento temporal** («años de» donde la evidencia es un proyecto). Los dos se leen bien y los dos se hunden con una sola repregunta del entrevistador.
+
+<Callout variant="why" title="Por qué funciona">
+  Los reclutadores no premian las cartas más audaces: premian el encaje demostrable. Una carta construida sobre evidencia real y auditada contra ella es, además, tu mejor preparación de entrevista — cada frase ya tiene su respuesta lista.
+</Callout>
+
+## Un mal ejemplo
+
+> **Pide:** «Coge mi CV y escribe una carta para este puesto. Hazla muy impresionante y haz que mi experiencia suene más sénior.»
+>
+> Recibes una carta preciosa con alcances inflados; la trampa espera en la primera pregunta incómoda.
+
+## Un ejemplo mejor
+
+> **Pide:** «Aquí está la lista de requisitos de la oferta y mi banco de evidencias. Mapea cada requisito con la evidencia más cercana o márcalo como hueco. Escribe una carta de 210 palabras usando solo el banco: mismos hechos, misma escala. Si falta un dato, pídemelo.»
+>
+> El resultado es tuyo, verdadero y verificable frase a frase — y el mapeo te deja los puntos fuertes a la vista.
+
+<CheckUnderstanding
+  id="cu-es-wk-jobs"
+  question="La carta generada incluye «lideré la migración» cuando en realidad contribuiste a ella. ¿Qué ha fallado?"
+  options={[
+    { text: 'El modelo, que inventó el dato sin avisar', feedback: 'el modelo hizo lo que le dejas: sin banco de evidencias ni escalas fijadas, rellenó el hueco con lo más vistoso.' },
+    { text: 'La falta de una restricción de escala: el prompt permitió el ascenso de alcance', correct: true, feedback: 'exacto: sin «misma escala, nada de subir el alcance», el idioma por defecto es vendedor, no honesto.' },
+    { text: 'Nada — «lideré» y «contribuí» son sinónimos en una carta', feedback: 'no lo son, y esa pregunta es la que espera en la entrevista: ahí es donde el sinónimo se paga caro.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="fix-the-cover-letter-prompt" />
+
+## Transferencia
+
+- Construye el banco de evidencias una vez y reutilízalo en cada candidatura.
+- Mapea siempre requisito → evidencia → hueco antes de redactar.
+- Revisa con la prueba de la evidencia: cada frase, o tiene respaldo, o se recorta.
+
+<KeyTakeaways
+  items={[
+    'Sin banco de evidencias no hay carta honesta: la IA rellena huecos con ficción bien escrita.',
+    'Mapea la oferta primero: la carta es un caso sobre el encaje, no una biografía.',
+    'El ascenso de alcance y el estiramiento temporal son los dos fallos que caza la repregunta.',
+  ]}
+/>
+
+## Next
+
+Con esto cierras el bloque de trabajo de esta ola. Prueba **[Sujeto, escena y estilo](/es/learn/ai-images/subject-scene-style)** si te interesa la parte visual, o vuelve al **[currículo completo](/es/learn)**. El glosario amplía [anclaje en fuentes](/es/glossary/grounding) y [afirmación sin respaldo](/es/glossary/unsupported-claim).

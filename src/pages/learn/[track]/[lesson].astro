@@ -76,6 +76,7 @@ const structuredData = [
       path: lessonPath,
       minutes: entry.data.estimatedMinutes,
       teaches: entry.data.learningOutcome,
+      modifiedDate: entry.data.lastReviewed?.toISOString(),
       course: { name: trackInfo?.name ?? entry.data.track, path: `/learn/${entry.data.track}` },
     },
     origin,
@@ -90,7 +91,12 @@ const LEVEL_LABELS: Record<string, string> = {
 const levelLabel = LEVEL_LABELS[entry.data.level] ?? entry.data.level;
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} structuredData={structuredData}>
+<BaseLayout
+  title={entry.data.seo.title}
+  description={entry.data.description}
+  ogType="article"
+  structuredData={structuredData}
+>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <ol>

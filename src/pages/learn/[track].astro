@@ -26,8 +26,11 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
 ---
 
 <BaseLayout
-  title={info?.name ?? 'Track'}
-  description={`${info?.name ?? 'Track'}: ${info?.tagline ?? ''} Lessons with hands-on practice, free and without an account.`}
+  title={info?.seoTitle ?? info?.name ?? 'Track'}
+  description={
+    info?.seoDescription ??
+    `${info?.name ?? 'Track'}: ${info?.tagline ?? ''} Lessons with hands-on practice, free and without an account.`
+  }
   structuredData={[
     breadcrumbJsonLd(
       [

@@ -1,14 +1,16 @@
 ---
 // A small framed note — tip, common-mistake warning, or a “why it works” explanation.
+import { localeOf, uiStrings } from '../../i18n/ui';
+
 interface Props {
   variant?: 'tip' | 'caution' | 'why';
   title?: string;
 }
 const { variant = 'tip', title } = Astro.props;
-const labels: Record<string, string> = { tip: 'Tip', caution: 'Common mistake', why: 'Why it works' };
+const { callout } = uiStrings(localeOf(Astro.currentLocale));
 ---
 
 <aside class={`callout callout--${variant}`}>
-  <p class="callout-title">{title ?? labels[variant]}</p>
+  <p class="callout-title">{title ?? callout[variant]}</p>
   <div class="callout-body"><slot /></div>
 </aside>

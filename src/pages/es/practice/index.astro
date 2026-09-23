@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../../seo/schema';
+
+const exercises = await getCollection('exercisesEs', ({ data }) => !data.draft);
+const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
+const lessonTitle = new Map(lessons.map((lesson) => [lesson.id, lesson.data.title]));
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+const DIFFICULTY_LABELS: Record<string, string> = {
+  beginner: 'Principiante',
+  intermediate: 'Intermedio',
+  advanced: 'Avanzado',
+};
+---
+
+<BaseLayout
+  locale="es"
+  title={`Práctica de prompts con IA: ${exercises.length} ejercicios`}
+  description="Ejercicios prácticos de IA con corrección instantánea y determinista — encaje de la tarea, prompts y más. Sin cuenta y sin claves de API; el progreso se queda en tu dispositivo."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Practicar', path: '/es/practice' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Practicar</li>
+    </ol>
+  </nav>
+
+  <h1>Practica habilidades de IA</h1>
+  <p class="lede">
+    Cada ejercicio da feedback al momento y explica por qué la respuesta es la correcta — sin cuenta
+    y sin claves de API. La mayoría pertenece a una lección; todos funcionan también por separado.
+  </p>
+
+  <ul class="lesson-list">
+    {
+      exercises.map((exercise) => {
+        const firstRef = exercise.data.lessonRefs[0];
+        const fromLesson = firstRef ? lessonTitle.get(firstRef) : undefined;
+        return (
+          <li>
+            <a href={`/es/practice/${exercise.id}`}>{exercise.data.title}</a>
+            <div class="lesson-meta">
+              {DIFFICULTY_LABELS[exercise.data.difficulty] ?? exercise.data.difficulty} ·{' '}
+              {exercise.data.skills.join(' · ')}
+              {fromLesson ? ` — de “${fromLesson}”` : ''}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+</BaseLayout>

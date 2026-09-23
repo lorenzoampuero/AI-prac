@@ -25,8 +25,12 @@ export function learningResourceJsonLd(
     name: string;
     description: string;
     path: string;
-    minutes: number;
+    minutes?: number;
+    /** schema.org learningResourceType — 'Lesson' by default, 'Exercise' on practice pages. */
+    resourceType?: string;
     teaches?: string;
+    /** ISO date from frontmatter lastReviewed — real freshness instead of a build timestamp. */
+    modifiedDate?: string;
     course?: { name: string; path: string };
   },
   origin: URL,
@@ -39,9 +43,10 @@ export function learningResourceJsonLd(
     url: new URL(input.path, origin).href,
     inLanguage: 'en',
     isAccessibleForFree: true,
-    learningResourceType: 'Lesson',
-    timeRequired: `PT${input.minutes}M`,
+    learningResourceType: input.resourceType ?? 'Lesson',
+    ...(input.minutes ? { timeRequired: `PT${input.minutes}M` } : {}),
     ...(input.teaches ? { teaches: input.teaches } : {}),
+    ...(input.modifiedDate ? { dateModified: input.modifiedDate } : {}),
     ...(input.course
       ? {
           isPartOf: {
@@ -110,6 +115,36 @@ export function websiteJsonLd(input: { name: string; description: string; path: 
     name: input.name,
     description: input.description,
     url: new URL(input.path, origin).href,
+  };
+}
+
+/** Author node — one named person behind the site; no invented credentials. */
+export function personJsonLd(
+  input: { name: string; url: string; description: string },
+  origin: URL,
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: input.name,
+    url: new URL(input.url, origin).href,
+    description: input.description,
+    worksFor: { '@type': 'Organization', name: 'AI Practice', url: origin.href },
+  };
+}
+
+/** Publisher node — search engines expect an Organization behind the site. No fake credentials. */
+export function organizationJsonLd(
+  input: { name: string; description: string; logoPath: string },
+  origin: URL,
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: input.name,
+    url: origin.href,
+    description: input.description,
+    logo: new URL(input.logoPath, origin).href,
   };
 }
 

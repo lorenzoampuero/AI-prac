@@ -33,6 +33,29 @@ the re-validation mechanism). Units below were authored/reordered with this evid
 **Reading:** high-intent “tool/query” phrasing (“generator”, “free”, “tool”) surrounds every family — these
 searchers want a how-to, not a product. Lesson format (answer-first + exercise) is the honest match.
 
+## Demanda en español (ES) — autocomplete pulls (2026-09-22)
+
+Live pulls with `hl=es&gl=es` when the `/es` version was approved (wave 1). Same caveat as EN:
+directional evidence, not measured volume. Product tutorials deliberately excluded (doorway rule).
+
+| Query family (seed) | Real suggestions pulled (es) | ES unit targeted |
+|---|---|---|
+| como escribir prompts | “…para claude / gemini / imágenes / copilot / chatgpt” | Prompts claros (PR01 ES) |
+| chatgpt formulas excel | “chatgpt formulas excel” | Hojas de cálculo (WK06 ES) |
+| verificar respuestas ia | “verificar respuestas ia”, “es confiable chatgpt”, “cuan confiable es chatgpt” | Verificar respuestas (RS06 ES) |
+| ia alucinaciones | “alucinaciones ia ejemplos”, “ia generativa alucinaciones” | Por qué la IA inventa cosas (FN07 ES) |
+| plantillas de prompts | “plantillas de prompts para chatgpt” | Plantillas de prompts (PR16 ES) |
+| resumir texto con ia | “…gratis”, “resumir texto largo con ia” | Textos largos sin perder el hilo (PR07 ES) |
+| cv con ia / carta de presentación | “cv con ia gratis sin registro”, “carta de presentación ia gratis” | Búsqueda de empleo (WK14 ES) |
+| prompts imagenes ia | “prompts para generar imagenes ia”, “mejores prompts para imagenes ia” | Sujeto, escena, estilo (IM02 ES) |
+| agentes de ia | “agentes de ia ejemplos”, “agentes de ia gratis” | Qué es un agente (FN12 ES) |
+| como aprender ia | “como aprender ia desde cero gratis”, “…en español” | Home ES + /es/learn |
+| errores comunes de chatgpt | “errores comunes de chatgpt”, “errores al usar chatgpt” | FN07 ES + FAQ ES |
+| es seguro pegar datos en chatgpt | (sin pull — nucleo de seguridad, respaldado por FAQ) | Qué no pegar (SF03 ES) |
+
+**Reading (ES):** same pattern as EN — “gratis”, “ejemplos”, “plantillas”, “para chatgpt” dominate; the
+audience wants practical templates and verification over vendor walkthroughs.
+
 ---
 
 ## A. AI foundations (literacy core)

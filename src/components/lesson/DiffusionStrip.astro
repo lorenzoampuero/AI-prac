@@ -2,17 +2,18 @@
 // Noise to image, pass by pass: five frames of the same scene with decreasing noise. The scene is a
 // simple inline SVG (no image assets); feTurbulence supplies the noise. Without JavaScript every
 // frame renders in its refined state; the script staggers the reveal and offers a replay.
+import { localeOf, uiStrings } from '../../i18n/ui';
+
 interface Props {
   caption?: string;
 }
 const { caption } = Astro.props;
+const s = uiStrings(localeOf(Astro.currentLocale)).diffusion;
 const uid = Math.random().toString(36).slice(2, 7);
-const DEFAULT_CAPTION =
-  'The same process drawn out: each pass nudges random noise toward the prompt. There is no draft hidden underneath — every pass refines what the last one produced.';
 const baseFrequency = [0.9, 0.68, 0.46, 0.26, 0.08];
 const noiseOpacity = [1, 0.72, 0.46, 0.22, 0];
 ---
-<section class="ds-strip" data-ds-strip aria-label="From noise to image, pass by pass">
+<section class="ds-strip" data-ds-strip aria-label={s.aria}>
   <ol class="ds-frames">
     {baseFrequency.map((frequency, index) => (
       <li class="ds-frame" data-ds-frame style={`--i:${index}`}>
@@ -20,10 +21,10 @@ const noiseOpacity = [1, 0.72, 0.46, 0.22, 0];
           viewBox="0 0 120 90"
           role="img"
           aria-label={index === 0
-            ? 'First pass: pure noise'
+            ? s.ariaFirst
             : index === baseFrequency.length - 1
-              ? 'Final pass: the finished image'
-              : `Pass ${index + 1}: partly refined noise`}
+              ? s.ariaFinal
+              : s.ariaPass(index + 1)}
         >
           <defs>
             <filter id={`ds-noise-${uid}-${index}`} x="0" y="0" width="100%" height="100%">
@@ -44,14 +45,14 @@ const noiseOpacity = [1, 0.72, 0.46, 0.22, 0];
           <rect width="120" height="90" filter={`url(#ds-noise-${uid}-${index})`} opacity={String(noiseOpacity[index])} />
         </svg>
         <span class="ds-label">
-          {index === 0 ? 'noise' : index === baseFrequency.length - 1 ? 'your image' : `pass ${index + 1}`}
+          {index === 0 ? s.noise : index === baseFrequency.length - 1 ? s.yourImage : s.pass(index + 1)}
         </span>
       </li>
     ))}
   </ol>
-  <p class="ds-caption">{caption ?? DEFAULT_CAPTION}</p>
+  <p class="ds-caption">{caption ?? s.caption}</p>
   <div class="visual-controls">
-    <button class="button secondary" type="button" data-ds-replay>Replay the passes</button>
+    <button class="button secondary" type="button" data-ds-replay>{s.replay}</button>
   </div>
   <script>
     import '../../scripts/visuals';

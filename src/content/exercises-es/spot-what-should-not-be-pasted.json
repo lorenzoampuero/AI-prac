@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Detecta qué no debes pegar",
+  "scenario": "Una compañera preparó una petición para un chat de IA. Tienes una sola pasada de revisión antes de que se pegue — comprueba qué puede viajar y qué no.",
+  "task": "Marca cada parte que no deberías pegar tal cual.",
+  "response": "Ayúdame con varias cosas. Nuestra clave de API de facturación sk_live_4d91 dejó de funcionar esta mañana, y no deja de aparecer este error: «ECONNREFUSED». Además, resume el archivo adjunto clientes_export.csv (12.000 filas con nombres, correos e historial de compras) en nuestros segmentos principales. Para el tono, mira la captura de nuestra página de precios del Q4 sin publicar. Y por último, arregla este párrafo sobre la fiesta de la oficina — aquí va.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "nuestra clave de API de facturación sk_live_4d91 dejó de funcionar",
+      "problematic": true,
+      "feedback": "Una credencial activa. Todo lo que se pega debe darse por salido de tu empresa — quita la clave, rótala y describe el síntoma sin el secreto."
+    },
+    {
+      "id": "c2",
+      "text": "resume el archivo adjunto clientes_export.csv (12.000 filas con nombres, correos e historial de compras)",
+      "problematic": true,
+      "feedback": "Datos personales de miles de personas reales. La tarea de segmentación necesita la estructura, no las identidades — sustitúyelas por una muestra ficticia (Cliente A, a@ejemplo.com) antes de pegar."
+    },
+    {
+      "id": "c3",
+      "text": "mira la captura de nuestra página de precios del Q4 sin publicar",
+      "problematic": true,
+      "feedback": "Los precios sin publicar son material confidencial de negocio — revisa primero la política y prefiere una descripción general («una página de precios de tres niveles») antes que las cifras reales."
+    },
+    {
+      "id": "c4",
+      "text": "no deja de aparecer este error: «ECONNREFUSED»",
+      "problematic": false,
+      "feedback": "Un mensaje de error a secas no contiene secretos ni datos personales — justo el tipo de detalle técnico que sí se puede (y conviene) pegar."
+    },
+    {
+      "id": "c5",
+      "text": "arregla este párrafo sobre la fiesta de la oficina — aquí va",
+      "problematic": false,
+      "feedback": "Tu propio texto sobre una fiesta no lleva secretos, ni datos personales ajenos, ni nada confidencial — adelante."
+    }
+  ],
+  "hints": [
+    "Clasifica cada elemento en un cajón: ¿secreto, datos personales, confidencial, o correcto?",
+    "¿Cuáles seguirían funcionando para la IA después de un lavado — y cuáles deben salir de la petición sin más?"
+  ],
+  "explanation": "Tres cajones, tres marcas: una credencial, datos personales de otras personas y cifras de negocio sin publicar. El mensaje de error y el párrafo de la fiesta no llevan nada de eso — se quedan como están. El arreglo del medio no es «no usar nunca la IA», sino lavar: marcadores para identidades y valores, y generalizar el resto.",
+  "skills": ["privacidad", "verificación"],
+  "difficulty": "beginner",
+  "lessonRefs": ["ai-safety/what-not-to-paste"],
+  "draft": false
+}

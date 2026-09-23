@@ -1,0 +1,48 @@
+{
+  "engine": "find-the-problem",
+  "title": "Detecta los mitos del entrenamiento",
+  "scenario": "Una compañera redactó una explicación para la wiki del equipo: «Cómo aprende el asistente de nosotros». Necesitas que sea precisa antes de que empiece a moldear cómo piensan tus colegas sobre privacidad y datos.",
+  "task": "Selecciona cada afirmación que describe mal cómo funcionan el entrenamiento y la inferencia. Deja las que sean correctas.",
+  "response": "Cada mensaje que envías se usa para reentrenar el modelo por la noche. Los pesos del modelo quedan fijos cuando termina el entrenamiento, así que una conversación no puede cambiar cómo se comporta con nadie más. He actualizado mi conocimiento con todo lo que me contaste. El asistente recordará tus preferencias en chats futuros porque hemos activado la función de memoria, que guarda notas breves y las reinserta en conversaciones nuevas. Cuando abres un chat nuevo, empieza con el contexto vacío, así que lo que quieras que sepa hay que volver a aportarlo o guardarlo.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "«Cada mensaje que envías se usa para reentrenar el modelo por la noche»",
+      "problematic": true,
+      "feedback": "El reentrenamiento automático nocturno es un mito. Que las conversaciones se recojan o no para entrenamientos futuros es una decisión escrita en la política del proveedor — no una propiedad del chat."
+    },
+    {
+      "id": "c2",
+      "text": "«Los pesos del modelo quedan fijos cuando termina el entrenamiento, así que una conversación no puede cambiar cómo se comporta con nadie más»",
+      "problematic": false,
+      "feedback": "Correcto, y es el núcleo de la distinción: la inferencia lee pesos fijos."
+    },
+    {
+      "id": "c3",
+      "text": "«He actualizado mi conocimiento con todo lo que me contaste»",
+      "problematic": true,
+      "feedback": "No se escribió nada dentro del modelo. Como mucho, tu texto sigue dentro de la ventana de contexto — pierde el chat y la «actualización» desaparece."
+    },
+    {
+      "id": "c4",
+      "text": "«El asistente recordará tus preferencias en chats futuros porque hemos activado la función de memoria, que guarda notas breves y las reinserta en conversaciones nuevas»",
+      "problematic": false,
+      "feedback": "Enfoque correcto: es una nota guardada que luego se recupera, no un modelo cambiado — continuidad útil con un mecanismo visible y editable."
+    },
+    {
+      "id": "c5",
+      "text": "«Cuando abres un chat nuevo, empieza con el contexto vacío, así que lo que quieras que sepa hay que volver a aportarlo o guardarlo»",
+      "problematic": false,
+      "feedback": "Exacto, y explica el síntoma de cada día: la mirada en blanco de mañana."
+    }
+  ],
+  "hints": [
+    "Separa tres capas: los pesos (entrenamiento), la conversación (contexto) y las notas del producto (memoria).",
+    "Las afirmaciones que atribuyen memoria al propio modelo — como si chatear escribiera algo dentro — son las que hay que marcar."
+  ],
+  "explanation": "Aquí trabajan dos ideas. Primera: los pesos no cambian durante una conversación — la inferencia los lee, no los escribe. Segunda: la continuidad viene de texto guardado y reinyectado — el contexto de hoy o la nota de memoria de mañana. Cualquier frase que diga que el modelo aprendió de tu chat cruza esas capas; cualquier frase que mantenga separados almacenamiento, contexto y pesos es correcta.",
+  "skills": ["entrenamiento", "modelos mentales"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-foundations/training-vs-inference"],
+  "draft": false
+}

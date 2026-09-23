@@ -1,0 +1,90 @@
+---
+title: Instrucciones claras
+description: "Una instrucción clara hace un solo trabajo, en palabras que un desconocido podría seguir — sin peticiones apiladas ni adjetivos haciendo de requisitos. Aquí está el arreglo."
+track: prompting
+order: 1
+level: beginner
+estimatedMinutes: 6
+skills: ["prompts", "claridad"]
+prerequisites: ["ai-foundations/what-generative-ai-is"]
+learningOutcome: "Convertir peticiones vagas o sobrecargadas en instrucciones únicas y comprobables."
+class: evergreen
+sources: []
+seo:
+  intent: "cómo escribir prompts — instrucciones claras, un trabajo cada una"
+  title: "Cómo escribir prompts: instrucciones claras"
+  cluster: "B2, B3"
+exercises: ["fix-the-boss-email-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import PromptCompare from '../../../components/lesson/PromptCompare.astro';
+
+Un [prompt](/es/glossary/prompt) es todo lo que le das al modelo para trabajar: la instrucción, el contexto, los ejemplos y el material. Y una instrucción clara hace **una sola cosa**, en palabras que seguiría un desconocido — sin tres peticiones apiladas, sin adjetivos cargando con el peso de los requisitos.
+
+## La prueba del desconocido
+
+Antes de enviar, relee tu instrucción imaginando que la recibe alguien competente que no sabe nada de tu situación. ¿Podría producir lo que quieres sin preguntarte nada? Cada palabra que tiene que interpretar es una decisión que le dejas tomar por ti.
+
+«Escribe un correo sobre el proyecto» pasa la prueba a medias: hay un tema, no una tarea. ¿A quién? ¿Con qué tono? ¿Qué debe lograr? El modelo rellenará todos esos huecos con lo más común — y lo más común rara vez es lo tuyo.
+
+## Concreta, no decorativa
+
+Las instrucciones funcionan estrechando el espacio de respuestas plausibles: cada requisito comprobable elimina un tramo de resultados que no querías. «Profesional» no elimina casi nada; «cinco frases, directo, sin jerga, terminando con la petición» elimina casi todo menos el objetivo.
+
+El mecanismo es literal: cada palabra que eliges reduce las continuaciones posibles. Los adjetivos que no puedes comprobar («bueno», «impactante», «creativo») no reducen nada; las condiciones que sí puedes comprobar (longitud, formato, qué incluir y qué evitar) reducen casi todo.
+
+Y si una instrucción necesita una explicación para entenderse, probablemente son dos instrucciones cosidas: pártelas y quedará claro cuál es el trabajo de cada una. El modelo no puede elegir bien entre dos objetivos a la vez, pero tú sí puedes ordenarlos en dos pasos.
+
+## Un mal ejemplo
+
+> **Pide:** «Ayúdame a escribir un correo a mi jefe sobre el proyecto.»
+>
+> El desconocido no sabe qué proyecto, qué ha pasado, ni qué quieres conseguir. Recibirás un correo genérico sobre un proyecto genérico.
+
+## Un ejemplo mejor
+
+<PromptCompare
+  weak="Escribe un correo a mi jefe sobre el proyecto."
+  strong="Escribe un correo de estado de cinco frases a mi jefa sobre el Proyecto Atlas. Situación: el hito de integración se movió al 4 de octubre; todo lo demás va en plazo; necesito dos días más de QA para mantener la fecha. Tono: directo y orientado a soluciones, sin excusas ni jerga. Termina con la petición concreta."
+  notes={[
+    'El resultado tiene forma comprobable: cinco frases, termina con la petición.',
+    'La situación aporta los hechos que deben sobrevivir — y los huecos rellenables.',
+    'El tono se define con palabras contables: sin jerga, sin excusas.',
+  ]}
+/>
+
+<CheckUnderstanding
+  id="cu-es-pr-instructions"
+  question="¿Cuál de estas instrucciones es comprobable de verdad?"
+  options={[
+    { text: 'Haz que el texto sea realmente bueno e impactante', feedback: 'ninguno de esos adjetivos se puede comprobar: el modelo adivina y tú revisas contra nada.' },
+    { text: 'Recorta el texto a tres viñetas y conserva cada cifra', correct: true, feedback: 'contable, verificable y protege lo importante — así se ve una instrucción comprobable.' },
+    { text: 'Usa tu mejor criterio para mejorarlo', feedback: 'eso entrega tu criterio al modelo en vez de decir qué quieres exactamente.' },
+  ]}
+/>
+
+## Práctica
+
+<ExerciseCard id="fix-the-boss-email-prompt" />
+
+## Transferencia
+
+- Una instrucción, un trabajo: si lleva tres verbos, probablemente sean tres pasos.
+- Sustituye cada adjetivo por algo contable antes de enviar.
+- Si dudas, aplica la prueba del desconocido: ¿podría seguirla sin preguntar?
+
+<KeyTakeaways
+  items={[
+    'Las instrucciones claras hacen un solo trabajo y las seguiría un desconocido.',
+    'Los requisitos comprobables estrechan la salida; los adjetivos no estrechan nada.',
+    'La prueba del desconocido detecta huecos antes de malgastar una respuesta.',
+  ]}
+/>
+
+## Next
+
+Continúa con **[Plantillas de prompts que sí reutilizas](/es/learn/prompting/reusable-prompt-templates)** — el siguiente nivel: convertir lo que funciona en una herramienta repetible. El glosario define [prompt](/es/glossary/prompt) y [few-shot prompting](/es/glossary/few-shot-prompting).

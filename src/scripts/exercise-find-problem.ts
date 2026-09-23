@@ -5,6 +5,7 @@
 import { gradeFindProblem, type ClaimResult, type FindProblemClaim } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface FindProblemConfig {
   id: string;
@@ -38,12 +39,12 @@ export function initFindProblemExercises(): void {
   }
 }
 
-const STATUS_LABELS: Record<ClaimResult['status'], string> = {
-  caught: 'Good catch',
-  missed: 'Missed one',
-  'over-flagged': 'Not a problem',
-  'correctly-left': 'Fine as-is',
-};
+const statusLabels = (): Record<ClaimResult['status'], string> => ({
+  caught: t().statusCaught,
+  missed: t().statusMissed,
+  'over-flagged': t().statusOverFlagged,
+  'correctly-left': t().statusCorrectlyLeft,
+});
 
 function wire(card: HTMLElement, storage: StorageLike | null): void {
   const configEl = card.querySelector<HTMLScriptElement>('script[data-exercise-config]');
@@ -67,7 +68,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     );
 
     if (selected.length === 0) {
-      renderFeedback(feedback, false, [], 'Select at least one part of the answer first.');
+      renderFeedback(feedback, false, [], t().selectSomething);
       return;
     }
 
@@ -77,8 +78,8 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
       result.correct,
       result.results,
       result.correct
-        ? 'Correct — you flagged exactly the parts that needed verification.'
-        : 'Not quite — compare your picks with the breakdown below.',
+        ? t().findProblemCorrect
+        : t().findProblemIncorrect,
     );
 
     explanation.hidden = false;
@@ -90,7 +91,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }
@@ -111,7 +112,7 @@ function renderFeedback(el: HTMLElement, correct: boolean, results: ClaimResult[
     for (const result of results) {
       const item = document.createElement('li');
       const label = document.createElement('strong');
-      label.textContent = `${STATUS_LABELS[result.status]}: `;
+      label.textContent = `${statusLabels()[result.status]}: `;
       item.append(label);
       item.append(document.createTextNode(result.feedback));
       list.append(item);

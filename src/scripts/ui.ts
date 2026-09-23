@@ -4,6 +4,7 @@
 
 import { load } from '../lib/progress';
 import { getStorage, readSiteMeta, refreshHeaderWidget, syncBadges } from './feedback';
+import { t } from '../i18n/client';
 
 let revealObserver: IntersectionObserver | null = null;
 
@@ -87,7 +88,7 @@ function initContinueStrip(): void {
   const link = strip.querySelector<HTMLAnchorElement>('[data-continue-link]');
   const titleEl = strip.querySelector<HTMLElement>('[data-continue-title]');
   if (link) link.href = `/learn/${last.lessonId}`;
-  if (titleEl) titleEl.textContent = meta?.lessonTitles[last.lessonId] ?? 'Pick up where you left off';
+  if (titleEl) titleEl.textContent = meta?.lessonTitles[last.lessonId] ?? t().resumeDefault;
   strip.hidden = false;
 }
 

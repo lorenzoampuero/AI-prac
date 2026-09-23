@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, faqJsonLd } from '../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+
+// Respuestas directas, un párrafo honesto por pregunta, y el enlace a la lección ES que enseña la
+// habilidad. Mismo principio que /faq: la página responde, la lección enseña.
+interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+  links: { href: string; label: string }[];
+}
+
+const faqs: FaqItem[] = [
+  {
+    id: 'verificar-respuesta',
+    question: '¿Cómo verifico una respuesta de IA antes de fiarme?',
+    answer:
+      'Contrástala con al menos dos fuentes que no compartan origen y abre cada cita que te dé. Que el texto suene bien no es prueba: una respuesta falsa puede leerse igual de fluida que una correcta, así que la comprobación mira siempre la fuente, nunca la seguridad con que está escrita.',
+    links: [{ href: '/es/learn/ai-research/cross-check-answers', label: 'Cómo verificar respuestas de IA' }],
+  },
+  {
+    id: 'por-que-inventa',
+    question: '¿Por qué la IA se inventa cosas?',
+    answer:
+      'Porque predice texto plausible, no verdad. Un precio inventado y uno correcto se producen igual, así que el modelo no tiene ninguna alarma interna cuando un detalle es falso — por eso tirar de fuentes reales y comprobar los detalles concretos es un hábito, no un parche.',
+    links: [{ href: '/es/learn/ai-foundations/why-ai-makes-things-up', label: 'Por qué la IA se inventa cosas' }],
+  },
+  {
+    id: 'aprende-de-chats',
+    question: '¿La IA aprende de mis chats?',
+    answer:
+      'No en el sentido que suele creerse: una conversación hace inferencia sobre pesos que quedaron fijos en el entrenamiento, así que nada de lo que escribes se guarda dentro del modelo. Las funciones de memoria almacenan notas breves y las reinsertan, y que el proveedor use tus conversaciones para entrenar es una decisión de política que debes leer en sus condiciones.',
+    links: [
+      { href: '/es/learn/ai-foundations/training-vs-inference', label: 'Entrenamiento vs inferencia' },
+      { href: '/es/learn/ai-safety/what-not-to-paste', label: 'Qué no pegar' },
+    ],
+  },
+  {
+    id: 'mejor-prompt',
+    question: '¿Cómo escribo un prompt mejor?',
+    answer:
+      'Di el resultado que quieres, añade el contexto que cambia la respuesta, fija los límites y especifica cómo debe ser la salida. Si el resultado sigue mal, mejóralo desde la propia salida en vez de repetir a ciegas: el feedback concreto gana a otra tirada con suerte.',
+    links: [
+      { href: '/es/learn/prompting/write-clear-instructions', label: 'Instrucciones claras' },
+      { href: '/es/learn/prompting/reusable-prompt-templates', label: 'Plantillas de prompts' },
+    ],
+  },
+  {
+    id: 'numeros',
+    question: '¿Puedo fiarme de la IA con números y cálculos?',
+    answer:
+      'No por sí sola. Los modelos generan los números como texto, así que toda cifra es un borrador: recalcula tú, pide los pasos para que el razonamiento quede a la vista y comprueba unidades y orden de magnitud antes de que el número siga circulando.',
+    links: [{ href: '/es/learn/ai-research/cross-check-answers', label: 'Verificar antes de fiarte' }],
+  },
+  {
+    id: 'que-no-pegar',
+    question: '¿Qué no debería pegar nunca en un chat de IA?',
+    answer:
+      'Credenciales, datos personales de otras personas y cualquier material que tu organización considere confidencial. Anonimiza primero — sustituye nombres, números de cuenta y datos de clientes por marcadores — y empieza la tarea después: lo que ya pegaste no se puede despegar.',
+    links: [
+      { href: '/es/learn/ai-safety/what-not-to-paste', label: 'Qué no pegar' },
+      { href: '/es/glossary/redaction', label: 'Anonimización' },
+    ],
+  },
+  {
+    id: 'formulas-excel',
+    question: '¿Puede la IA escribir mis fórmulas de Excel?',
+    answer:
+      'Sí — y funciona mejor cuando describes la estructura (columnas, tipos, una fila de ejemplo) y el resultado que quieres, y luego pruebas la fórmula en una copia de la hoja. Describe la estructura, nunca pegues filas reales, y pídele que declare sus supuestos.',
+    links: [{ href: '/es/learn/ai-for-work/spreadsheets-describe-dont-guess', label: 'Hojas de cálculo: describe, no adivines' }],
+  },
+  {
+    id: 'cv-carta',
+    question: '¿Puede la IA escribir mi CV o mi carta de presentación?',
+    answer:
+      'Sí, y sigue siendo honesto si le das un banco de evidencias y le prohíbes inventar. Mapea cada requisito de la oferta a evidencia real, marca los huecos como huecos y revisa el borrador por si infla el alcance — el "lideré" donde contribuiste es justo la frase que el entrevistador te va a preguntar.',
+    links: [{ href: '/es/learn/ai-for-work/job-search-workflows', label: 'CV y cartas con IA' }],
+  },
+  {
+    id: 'que-son-agentes',
+    question: '¿Qué son los agentes de IA, en lenguaje llano?',
+    answer:
+      'Un sistema en el que el modelo corre en bucle: decide un paso, llama a una herramienta, lee el resultado y sigue hacia un objetivo que tú definiste. Un chat responde una vez; un flujo sigue una secuencia fija; un agente elige sus pasos — por eso necesita presupuesto, condición de parada y una puerta humana en todo lo que escribe.',
+    links: [{ href: '/es/learn/ai-foundations/what-an-agent-is', label: 'Qué es un agente (y qué no)' }],
+  },
+  {
+    id: 'info-desactualizada',
+    question: '¿Por qué la IA da información desactualizada?',
+    answer:
+      'Porque sus pesos quedaron fijos en una fecha de corte: no sabe nada de lo que pasó después salvo que una herramienta conecte con la web en vivo. Trata cualquier dato cambiante — precios, leyes, versiones — como sospechoso hasta que una fuente actual lo confirme.',
+    links: [
+      { href: '/es/learn/ai-foundations/training-vs-inference', label: 'Entrenamiento vs inferencia' },
+      { href: '/es/glossary/training-cutoff', label: 'Fecha de corte' },
+    ],
+  },
+  {
+    id: 'resumir-largo',
+    question: '¿Cómo hago que la IA resuma un texto largo sin perder detalles?',
+    answer:
+      'No se lo pidas de una vez. Trocea el documento, procesa cada parte hacia notas con la misma estructura (hechos, decisiones y salvedades) y monta el resumen desde esas notas. Así los detalles no se evaporan por el camino y puedes señalar de dónde sale cada punto.',
+    links: [{ href: '/es/learn/prompting/work-with-long-input', label: 'Textos largos' }],
+  },
+  {
+    id: 'prompts-imagenes',
+    question: '¿Cómo escribo prompts para imágenes con IA?',
+    answer:
+      'Trátalo como una receta: sujeto, escena, estilo y luz — en ese orden y con términos concretos. "Impactante" no decide nada; "luz de ventana suave, primer plano" sí. Y cambia una sola cosa por iteración para saber qué causó cada diferencia.',
+    links: [{ href: '/es/learn/ai-images/subject-scene-style', label: 'Sujeto, escena y estilo' }],
+  },
+];
+
+const structuredData = [
+  breadcrumbJsonLd(
+    [
+      { name: 'Inicio', path: '/es' },
+      { name: 'Preguntas', path: '/es/faq' },
+    ],
+    origin,
+  ),
+  faqJsonLd(
+    faqs.map((item) => ({ question: item.question, answer: item.answer })),
+    origin,
+    '/es/faq',
+  ),
+];
+---
+
+<BaseLayout
+  locale="es"
+  title="Preguntas sobre IA, con respuestas claras"
+  description="Respuestas cortas y honestas a las preguntas de IA que la gente busca de verdad — verificar respuestas, alucinaciones, privacidad, agentes y más — cada una enlazada a una lección completa."
+  structuredData={structuredData}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Preguntas</li>
+    </ol>
+  </nav>
+
+  <h1>Preguntas sobre IA, respondidas</h1>
+  <p class="lede">
+    Respuestas directas a las preguntas de IA que la gente busca de verdad, cada una enlazada a la
+    lección que enseña la habilidad. Sin cuenta y sin humo — y si una respuesta no te basta, en la
+    lección enlazada está la práctica.
+  </p>
+
+  <div class="faq-list">
+    {
+      faqs.map((item) => (
+        <section class="faq-item" aria-labelledby={item.id}>
+          <h2 id={item.id}>{item.question}</h2>
+          <p>{item.answer}</p>
+          <p class="meta-line">
+            {item.links.map((link, index) => (
+              <>
+                {index > 0 && ' · '}
+                <a href={link.href}>{link.label}</a>
+              </>
+            ))}
+          </p>
+        </section>
+      ))
+    }
+  </div>
+
+  <p class="meta-line" style="margin-top: var(--space-5);">
+    ¿Prefieres saber en qué punto estás? Haz el <a href="/es/assessment">test de nivel</a>, o empieza
+    el <a href="/es/learn">currículo</a> desde arriba.
+  </p>
+</BaseLayout>

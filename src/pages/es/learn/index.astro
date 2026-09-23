@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { TRACKS } from '../../../data/tracks';
+import { breadcrumbJsonLd } from '../../../seo/schema';
+
+const origin = Astro.site ?? new URL('https://getaipractice.site');
+
+const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
+const counts = new Map<string, number>();
+for (const lesson of lessons) {
+  counts.set(lesson.data.track, (counts.get(lesson.data.track) ?? 0) + 1);
+}
+---
+
+<BaseLayout
+  locale="es"
+  title="Aprende IA: currículo gratis y con práctica"
+  description="Aprende IA con lecciones cortas en secciones como fundamentos, prompts, verificación y trabajo. Cada lección termina en un ejercicio práctico. Gratis y sin cuenta."
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: 'Inicio', path: '/es' },
+        { name: 'Aprender', path: '/es/learn' },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="/es">Inicio</a></li>
+      <li aria-current="page">Aprender</li>
+    </ol>
+  </nav>
+
+  <h1>Aprende habilidades prácticas de IA</h1>
+  <p class="lede">
+    Las secciones van desde “qué es la IA generativa” hasta diseñar flujos de trabajo fiables. Cada
+    lección termina en práctica — no en un test de definiciones.
+  </p>
+
+  <div class="grid" style="margin-top: var(--space-5);">
+    {
+      TRACKS.map((track) => {
+        const count = counts.get(track.id) ?? 0;
+        return (
+          <div class="card">
+            <h3>{track.nameEs}</h3>
+            <p class="meta-line">{track.taglineEs}</p>
+            {count > 0 ? (
+              <a href={`/es/learn/${track.id}`}>
+                {count} lección{count === 1 ? '' : 'es'}
+              </a>
+            ) : (
+              <p class="meta-line">Las lecciones llegan en una próxima ola.</p>
+            )}
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <p class="meta-line" style="margin-top: var(--space-5);">
+    ¿Buscas la respuesta a una pregunta concreta — verificar respuestas de IA, privacidad, agentes,
+    cartas de presentación? La <a href="/es/faq">página de preguntas</a> las responde en lenguaje
+    claro y enlaza la lección que enseña cada una.
+  </p>
+</BaseLayout>

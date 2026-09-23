@@ -5,6 +5,7 @@
 import { gradeOrderSteps } from '../lib/exercise/grade';
 import { EXERCISE_XP, load, recordExerciseAttempt, save, type StorageLike } from '../lib/progress';
 import { afterProgress } from './feedback';
+import { t } from '../i18n/client';
 
 interface OrderStepsConfig {
   id: string;
@@ -79,9 +80,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     renderFeedback(
       feedback,
       result.correct,
-      result.correct
-        ? 'Correct — the steps are in a workable order.'
-        : `Not quite — ${result.misplaced.length} step${result.misplaced.length === 1 ? '' : 's'} sit in the wrong position. Compare with the correct order below.`,
+      result.correct ? t().orderCorrect : t().orderWrong(result.misplaced.length),
     );
 
     if (solution) {
@@ -99,7 +98,7 @@ function wire(card: HTMLElement, storage: StorageLike | null): void {
     if (attempt.gained > 0) afterProgress(previous.xp, attempt.state.xp);
     if (xpNote && attempt.gained > 0) {
       xpNote.hidden = false;
-      xpNote.textContent = `+${EXERCISE_XP} XP — saved on this device.`;
+      xpNote.textContent = t().xpSaved(EXERCISE_XP);
     }
   });
 }
