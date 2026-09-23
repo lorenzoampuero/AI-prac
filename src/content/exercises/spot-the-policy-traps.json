@@ -1,0 +1,54 @@
+{
+  "engine": "find-the-problem",
+  "title": "Spot the policy traps",
+  "scenario": "A teammate drafted a summary for the team wiki: “What happens to our ChatGPT data.” You get one review pass — it will shape what colleagues paste into chats, so every claim has to be right.",
+  "task": "Flag every claim that misstates what the provider's controls actually do. Leave the accurate ones.",
+  "response": "Here is our summary of what happens to our ChatGPT data. When you turn off model training in your personal account, new conversations stop being used to train OpenAI models, and your saved chats are automatically deleted at the same time. Archiving an old chat removes it from training eligibility. Temporary chats are excluded from history and memories and are never retained, though they can still be personalized if you choose. Content in Business and Enterprise workspaces is not used for training by default. Memory settings and model-training settings are the same control, so turning off memory also stops training. Finally, if you rate a response with a thumbs up or down, the whole conversation may be used for training even if you opted out.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "“your saved chats are automatically deleted at the same time”",
+      "problematic": true,
+      "feedback": "Turning training off does not delete or hide saved chats — the provider's page says so explicitly. Deletion is always a separate action; merging the two creates false reassurance."
+    },
+    {
+      "id": "c2",
+      "text": "“Archiving an old chat removes it from training eligibility”",
+      "problematic": true,
+      "feedback": "Archiving changes where a chat sits in your list, not whether it can be used for training. That is governed by the account setting."
+    },
+    {
+      "id": "c3",
+      "text": "“Temporary chats ... are never retained”",
+      "problematic": true,
+      "feedback": "Temporary chats may be retained for up to 30 days for safety purposes — “never retained” is the kind of absolute a policy page rarely grants."
+    },
+    {
+      "id": "c4",
+      "text": "“Content in Business and Enterprise workspaces is not used for training by default”",
+      "problematic": false,
+      "feedback": "Accurate: managed workspaces are excluded from training by default, with the organization's own policies governing retention and access."
+    },
+    {
+      "id": "c5",
+      "text": "“Memory settings and model-training settings are the same control”",
+      "problematic": true,
+      "feedback": "They are separate settings: memory controls personalization, training controls model improvement. Turning off one does not turn off the other."
+    },
+    {
+      "id": "c6",
+      "text": "“if you rate a response ... the whole conversation may be used for training even if you opted out”",
+      "problematic": false,
+      "feedback": "Accurate — and the most useful line in the draft: feedback actions can override the training setting for that conversation. Keep it."
+    }
+  ],
+  "hints": [
+    "Compare each claim against what a control toggles: future use, stored history, or neither?",
+    "Watch for absolutes (“never”, “automatically”, “same control”) — policy pages almost never grant them."
+  ],
+  "explanation": "Three traps and three truths: turning training off does not delete saved chats, archiving does not change training eligibility, and temporary chats can be retained up to 30 days for safety — while the managed-workspace default and the feedback override are accurate and worth keeping. Source: OpenAI's data-controls page, checked 2026-09-23. The wider lesson is the shape of the exercise: policy claims need a source, a date, and a precise verb — “stops training future conversations” is not the same as “deletes history”.",
+  "skills": ["privacy", "policy"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-safety/how-providers-handle-your-data"],
+  "draft": false
+}

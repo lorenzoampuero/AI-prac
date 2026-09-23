@@ -67,6 +67,13 @@ across 62 lessons. Totals after this batch: **177 pages · 70 tests · 62 lesson
 | Retrofit | 28 MVP lessons | **PASS** — each received one CheckUnderstanding + KeyTakeaways (ids cu-pr/wk/rs/sf/cd-\*), questions mined from the lesson bodies, ids unique |
 | Discovery assets (GEO) | /faq hub (11 Q&A, FAQPage schema) · /llms.txt (generated from collections) · robots AI-crawler allow list | **PASS** — verified in dist + browser: FAQPage JSON-LD, canonical, 0 axe violations (WCAG A/AA) on /faq and three new lessons; llms.txt serves 62 lessons / 106 bullets |
 
+## Wave WK13 + SF05 (2026-09-23)
+
+| Unit | Verdict |
+|---|---|
+| WK13 *Clean up messy data* | **PASS** — evergreen; demand-backed (“ai for excel data analysis”); build-prompt exercise `assemble-a-data-cleanup-prompt`; never-fill rule + per-pass verification |
+| SF05 *Does ChatGPT train on your data?* | **PASS** — class: current; sourced + dated (OpenAI data-controls, checked 2026-09-23); facts-registry row #7; find-the-problem exercise `spot-the-policy-traps` |
+
 ## Known non-blockers
 
 - Rolldown logs a benign `use astro:head-inject` hint from MDX asset propagation; the directive is absent

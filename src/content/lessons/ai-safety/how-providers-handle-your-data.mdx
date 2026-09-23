@@ -1,0 +1,103 @@
+---
+title: Does ChatGPT train on your data?
+description: "Chatting does not retrain the model — but policy decides what happens to the stored text. Read the actual controls, with dates, before you decide what to paste."
+track: ai-safety
+order: 5
+level: intermediate
+estimatedMinutes: 7
+skills: ["privacy", "policy"]
+prerequisites: ["ai-safety/using-ai-at-work"]
+learningOutcome: "Read a provider's data policy and find the controls that actually apply."
+class: current
+lastReviewed: 2026-09-23
+sources:
+  - title: "OpenAI — Data controls in ChatGPT"
+    url: "https://help.openai.com/en/articles/7730893-data-controls-faq"
+seo:
+  intent: "does chatgpt train on my data — settings, policies and what the controls do"
+  title: "Does ChatGPT Train on My Data? What to Check"
+  cluster: "H7"
+exercises: ["spot-the-policy-traps"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Two different questions hide behind "does the AI learn from my chats?" — and only one was answered by [training vs inference](/learn/ai-foundations/training-vs-inference). The **mechanism** question — does chatting change the weights? — has a clean answer: no, [inference](/glossary/inference) reads fixed weights. The **policy** question — what happens to the conversation the product stored? — has a different answer per provider, per plan and per setting. This lesson is about reading that second answer, using one provider's documentation as the worked example (checked 2026-09-23).
+
+## Mechanism is not policy
+
+A message you send lives in several places at once: the context window while the chat is open, the product's stored history, possibly a training pipeline and logs. The weights stay fixed — but the stored text is governed by policy, and policy is where the real privacy question lives. That is why "it does not retrain the model" is true and irrelevant at the same time: the interesting part is the stored conversation, not the [training cutoff](/glossary/training-cutoff).
+
+## What the controls actually control
+
+OpenAI's data-controls page (updated 2026-09-23) documents, among other things:
+
+- **Model training has its own switch** ("Improve the model for everyone"): turn it off and new conversations — and Codex tasks on personal plans — are not used to train OpenAI models. It applies across devices, and signed-out use remembers the choice in that browser.
+- **Turning it off does not delete or hide saved chats.** They stay in history until you delete them separately, and archiving a chat does not change its training eligibility.
+- **Temporary chats** stay out of history and memories, are not used to improve models — and may still be retained for up to 30 days for safety.
+- **Managed workspaces** (Business, Enterprise, Edu, Healthcare) are not used for training by default; the organization's retention and access policies govern instead.
+- **Feedback is a loophole worth knowing**: rating a response opens the possibility that the whole associated conversation is used for training — even after opting out.
+- **Memory and training are separate settings.** Turning off memory does not turn off training.
+
+That list is one provider on one date — the point is not to memorise it. When the page changes, the summary expires; the durable skill is asking the right five questions of any provider.
+
+## How to read any provider's policy
+
+<StepReveal
+  steps={[
+    'What is stored — chats, uploads, files — and for how long.',
+    'Is stored content used for training, and which control turns that off (account setting, form, privacy portal).',
+    'What the opt-out does not do — usually: it does not delete anything, and it does not change what was already collected.',
+    'What the enterprise tier defaults to, if your employer provides the account.',
+    'Which actions override the setting — feedback buttons are the classic one.',
+  ]}
+/>
+
+## A bad example
+
+> **Summary:** "We turned off training, so our old chats were deleted for safety — nothing to worry about."
+>
+> Two false claims in one sentence. Training off does not delete saved chats, and deletion is always a separate action. The reassurance is exactly backwards.
+
+## A better example
+
+> **Summary:** "Per the provider's data-controls page (checked today): new conversations are excluded from training after the opt-out; saved chats remain until deleted separately; temporary chats may be kept up to 30 days for safety. Not covered there: the retention window for our plan."
+>
+> Now the claim has a source, a date and an explicit boundary — something a reviewer can check instead of trust.
+
+<CheckUnderstanding
+  id="cu-sf-policy"
+  question="You turn off model training in your account settings today. Which statement is accurate?"
+  options={[
+    { text: 'Your saved chats were deleted at the same time', feedback: 'no: turning training off does not delete or hide saved chats — deletion is always a separate action.' },
+    { text: 'New conversations are excluded from training, while saved chats remain until you delete them', correct: true, feedback: 'exactly: the setting governs future use, not the past — and not your stored history.' },
+    { text: 'Archiving your old chats removes them from training eligibility', feedback: 'no: archiving changes where a chat lives in your list, not whether it can be used.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="spot-the-policy-traps" />
+
+## Transfer
+
+- Before pasting something sensitive, check three things: personal or workspace account, training setting, retention window.
+- One-off sensitive questions: temporary chat — remembering the 30-day safety retention and the personalization choice at the start.
+- Do not rate with thumbs what you would not want stored: feedback can opt a conversation in.
+- Keep the date with every policy claim, this lesson included; re-read the page when the product changes. The [redaction](/glossary/redaction) habit from earlier lessons still does the heavy lifting.
+
+<KeyTakeaways
+  items={[
+    'Mechanism ("does it retrain?") and policy ("what happens to stored text?") are different questions.',
+    'The training switch governs new conversations, not saved history — deletion is separate.',
+    'Every policy claim needs a source and a date; summaries go stale silently.',
+  ]}
+/>
+
+## Next
+
+That closes the safety track — five lessons covering what to paste, what can arrive hidden, when to delegate, what your organization expects, and what providers actually do with stored conversations. Keep going on the [practice floor](/practice), look terms up in the [glossary](/glossary), and continue with the **[workflows track](/learn/ai-workflows)**.

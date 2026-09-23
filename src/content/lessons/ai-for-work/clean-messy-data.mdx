@@ -1,0 +1,92 @@
+---
+title: Clean up messy data
+description: "AI cannot see your spreadsheet, but it can plan a cleanup you can verify. Learn the inspect-plan-fix-check loop — and why no cleanup step may invent a value."
+track: ai-for-work
+order: 11
+level: intermediate
+estimatedMinutes: 7
+skills: ["spreadsheets", "data cleanup"]
+prerequisites: ["ai-for-work/spreadsheets-describe-dont-guess"]
+learningOutcome: "Plan and verify a data cleanup with AI without inventing values."
+class: evergreen
+sources: []
+seo:
+  intent: "ai for excel data analysis — cleaning messy data safely before analysis"
+  title: "AI for Excel Data Analysis: Clean Messy Data"
+exercises: ["assemble-a-data-cleanup-prompt"]
+draft: false
+---
+
+import ExerciseCard from '../../../components/ExerciseCard.astro';
+import CheckUnderstanding from '../../../components/lesson/CheckUnderstanding.astro';
+import KeyTakeaways from '../../../components/lesson/KeyTakeaways.astro';
+import StepReveal from '../../../components/lesson/StepReveal.astro';
+
+Ask anyone who analyses data for a living where the work goes and you will hear the same answer: most of it disappears into cleaning. Dates arrive in three formats, one column carries two decimal separators, blanks mean "missing" in some rows and "zero" in others, and someone double-entered 38 orders. Analysis on top of that mess produces numbers nobody should trust.
+
+## Cleaning is a workflow, not a prompt
+
+The useful mental shift: AI cannot see your file, so it cannot clean it for you. What it can do — well — is help you **plan and generate** a cleanup you run and verify yourself. The loop has four moves:
+
+<StepReveal
+  steps={[
+    'Inventory the mess in words: list every problem you can find with its count — formats, blanks, duplicates, outliers.',
+    'Define the target: the exact column types, formats and conventions the cleaned sheet must have.',
+    'Fix in small passes, one change type per pass, so every step can be checked in isolation.',
+    'Never fill: a value that does not exist in the source becomes a visible marker, never a guess.',
+    'Spot-check before analysis: recount rows, compare totals before and after, and sample five rows against the original.',
+  ]}
+/>
+
+That last move is the one people skip — and it is the one that catches the pass that quietly changed 200 values. Treat the cleanup itself like a [dry run](/glossary/dry-run): show the list of intended changes before anything is applied permanently.
+
+## The never-fill rule
+
+A missing region, an empty price, a blank date — none of these have a value hiding in them. Producing one anyway is **imputation**, and silent imputation is how a clean-looking dataset starts lying. If a gap must be filled for the analysis, that is an explicit decision: keep the raw column untouched, fill a separate one under a documented rule, and report how many values it added.
+
+For AI-assisted work the rule becomes operational: gaps get a [placeholder](/glossary/placeholder) like [MISSING], and the cleanup report lists them. Asking for that marker is also the honest test — a model that would rather guess than mark is the wrong assistant for data work.
+
+## A bad example
+
+> **Ask:** "Here are my problems — dates, blanks, duplicates. Give me the formulas to fix everything and fill in the gaps so the summary is complete."
+>
+> "Fill in the gaps" authorises invention. You will get a complete-looking summary built partly on numbers that never existed, with no record of where they came from.
+
+## A better example
+
+> **Ask:** "Here are the problems with counts: mixed date formats in order_date (612 rows), blanks in region (214), suspected duplicates in order_id (38), mixed decimal separators in amount. Target: typed columns, ISO dates, nothing filled. Give me the fix steps in order, each with a verification check, and a list of the rows each step would change. Missing values become [MISSING]."
+>
+> Every step is now a claim you can check against the data — and the [MISSING] marker makes the remaining uncertainty visible instead of disguised.
+
+<CheckUnderstanding
+  id="cu-wk-clean"
+  question="A cleanup step replaces 214 blank region cells with the most common region so charts look complete. What is the verdict?"
+  options={[
+    { text: 'Good — a complete dataset is more useful than one with gaps', feedback: 'completeness bought with invented values is a chart that cannot be defended. The gaps were information; now they are fiction.' },
+    { text: 'Only defensible if the imputation is a recorded decision — with the raw column intact and the count reported', correct: true, feedback: 'imputation is not banned, it is governed: keep the original data, state the rule, report how many values it touched.' },
+    { text: 'Fine as long as you mention it casually in the meeting', feedback: 'a casual mention is not a record. If the choice is not in the file, the next reader inherits numbers they cannot trace.' },
+  ]}
+/>
+
+## Practice
+
+<ExerciseCard id="assemble-a-data-cleanup-prompt" />
+
+## Transfer
+
+- Before any analysis: write the problem inventory with counts — it doubles as your cleanup plan.
+- One change type per pass: format fixes, then duplicates, then types — never everything at once.
+- Compare totals before and after; a cleanup should not move the numbers, only the formats.
+- If a gap must be filled, fill a copy under a stated rule and keep the raw column.
+
+<KeyTakeaways
+  items={[
+    'Most of analysis is cleaning — and cleaning is a workflow you verify, not a prompt you trust.',
+    'The never-fill rule: missing values get a marker, never a guess.',
+    'Every cleanup pass needs its own check; spot-checks catch the pass that quietly changed values.',
+  ]}
+/>
+
+## Next
+
+That completes the work track. Keep going on the [practice floor](/practice), or check where you stand with the [skills check](/assessment). Terms: [dry run](/glossary/dry-run), [placeholder](/glossary/placeholder) and [rubric](/glossary/rubric).

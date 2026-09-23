@@ -1,0 +1,42 @@
+{
+  "engine": "build-prompt",
+  "title": "Assemble a data-cleanup prompt",
+  "scenario": "Your orders export has the usual damage: order_date mixes two date formats, region has 214 blanks, order_id contains 38 suspected duplicates, and amount mixes dot and comma as decimal separators. You need a cleanup plan you can run and verify — not a magic clean file.",
+  "task": "Fill the fields to assemble a cleanup request with the mess, the target state, the safety rules and the checks — then compare with a strong example.",
+  "fields": [
+    {
+      "id": "mess",
+      "label": "The mess — each problem with its count",
+      "placeholder": "Mixed date formats in order_date (612 rows); 214 blanks in region; 38 suspected duplicate order_id; mixed decimal separators in amount…",
+      "required": true
+    },
+    {
+      "id": "target",
+      "label": "The target — what the cleaned sheet must look like",
+      "placeholder": "Typed columns, ISO dates, one decimal separator, nothing filled, duplicates listed not deleted…",
+      "required": true
+    },
+    {
+      "id": "rules",
+      "label": "Safety rules — what the cleanup may never do",
+      "placeholder": "Never invent or impute values; missing becomes [MISSING]; list rows to change before applying…",
+      "required": true
+    },
+    {
+      "id": "check",
+      "label": "The check — how each step is verified",
+      "placeholder": "Every step ends with a count of affected rows and one spot-check against the original…",
+      "required": true
+    }
+  ],
+  "sampleSolution": "My orders export has these problems: order_date mixes two date formats across 612 rows; region has 214 blanks; order_id contains 38 suspected duplicates; amount mixes dot and comma as decimal separators.\n\nTarget state: typed columns with ISO dates (YYYY-MM-DD), one decimal separator, duplicates listed in a separate sheet rather than deleted, and no filled values anywhere.\n\nRules: never invent or impute a value — every missing value stays visible as [MISSING]; do not delete or merge duplicate rows, just report them with their row numbers; do not change anything I have not described.\n\nGive me the cleanup as ordered passes, one change type per pass (dates → decimal separators → duplicates → types). For each pass: the exact transformation or formula, the count of rows it would affect, and one spot-check I can run to confirm the pass did what it claims. Finish with a before/after comparison plan: which totals I should expect to stay identical.",
+  "hints": [
+    "Problems with counts turn vague cleaning into a testable plan — the counts are the specification.",
+    "The check field is where the cleanup stops being trust and becomes verification: counts, spot-checks, before/after totals."
+  ],
+  "explanation": "The assembled prompt converts \"clean this\" into a verified process: the inventory with counts, a target state, a never-fill rule and a check per pass. Each pass is an isolated change with its own count — so when a total moves that should not have moved, the pass that caused it is findable in minutes instead of discovered in a meeting.",
+  "skills": ["data cleanup", "spreadsheets", "verification"],
+  "difficulty": "intermediate",
+  "lessonRefs": ["ai-for-work/clean-messy-data"],
+  "draft": false
+}

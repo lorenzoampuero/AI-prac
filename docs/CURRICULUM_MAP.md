@@ -9,6 +9,9 @@
 > workflows track, **PR16** reusable templates and **WK14** job-search workflows live; all remaining MVP
 > lessons retrofitted with a teaching block + KeyTakeaways (new §11 rules enforced by tests); **/faq** and
 > **/llms.txt** shipped for answer engines. Details in `CONTENT_QA.md` v1.1 verdicts.
+> **Wave WK13 + SF05 (2026-09-23):** *Clean up messy data* (work, “ai for excel data analysis” pull) and
+> *Does ChatGPT train on your data?* (safety, H7 — dated OpenAI source + facts-registry row #7) shipped;
+> both carry a teaching block, a practice exercise and a checkable process.
 
 **Sources:** `research/CURRICULUM_OPPORTUNITY.md` (MVP mix), `research/KEYWORD_UNIVERSE.md` (cluster refs),
 master brief §7–15 (track allocation 12/20/15/12/12/10/10/9). Slugs are finalized per unit at authoring time;

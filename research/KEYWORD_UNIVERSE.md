@@ -28,7 +28,7 @@ the re-validation mechanism). Units below were authored/reordered with this evid
 | ai cover letter / tailor resume | “ai cover letter generator free”, “tailor resume with ai linkedin” | WK14 Job-search workflows (planned — strongest pull not yet served) |
 | chatgpt prompt templates | “chatgpt prompt templates free download” | PR16 Reusable prompt templates (planned) |
 | chatgpt excel formulas | “can chatgpt write excel formulas” | WK06 spreadsheets lesson exists; title/intent does not yet match the query — flagged |
-| ai for excel data analysis | “…free”, “dashboard” | WK13 Data cleanup (planned) |
+| ai for excel data analysis | “…free”, “dashboard” | **WK13 Clean up messy data (new)** |
 
 **Reading:** high-intent “tool/query” phrasing (“generator”, “free”, “tool”) surrounds every family — these
 searchers want a how-to, not a product. Lesson format (answer-first + exercise) is the honest match.
@@ -167,7 +167,7 @@ audience wants practical templates and verification over vendor walkthroughs.
 | H4 | work policies | can i use ai for work, ai at work rules | Informational | Lesson: judgment at work (no legal advice) | P2 |
 | H5 | bias & mistakes | ai bias examples, ai mistakes to watch | Informational | Covered in foundations + safety | P2 |
 | H6 | high-consequence decisions | should i trust ai for decisions, ai advice risks | Informational | Lesson: when not to rely on AI | P1 |
-| H7 | provider data handling | does chatgpt train on my data, ai privacy settings | Informational (current facts) | Glossary + lesson notes w/ dates + sources | P2 |
+| H7 | provider data handling | does chatgpt train on my data, ai privacy settings | Informational (current facts) | **SF05 Does ChatGPT train on your data (new, dated source)** | P2 |
 
 ## I. Tool & capability selection
 
