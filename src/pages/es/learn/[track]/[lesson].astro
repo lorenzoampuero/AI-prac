@@ -4,6 +4,9 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { getTrack } from '../../../../data/tracks';
 import { breadcrumbJsonLd, learningResourceJsonLd } from '../../../../seo/schema';
 import { SITE_ORIGIN } from '../../../../config/site';
+import NewsletterSignup from '../../../../components/NewsletterSignup.astro';
+import { promptSetPath, setForLesson } from '../../../../lib/prompts';
+import { uiStrings } from '../../../../i18n/ui';
 
 interface NavLesson {
   id: string;
@@ -57,6 +60,9 @@ type Props = { entry: CollectionEntry<'lessonsEs'>; prev: NavLesson | null; next
 const { entry, prev, next } = Astro.props as Props;
 
 const { Content, headings } = await render(entry);
+// Lessons that teach a task link to the matching copy-paste templates (and the templates link back).
+const promptSet = await setForLesson('es', entry.id);
+const promptStrings = uiStrings('es').promptLib;
 const trackInfo = getTrack(entry.data.track);
 const toc = headings.filter((heading) => heading.depth === 2);
 
@@ -127,6 +133,19 @@ const levelLabel = LEVEL_LABELS[entry.data.level] ?? entry.data.level;
 
         <Content />
       </article>
+
+      {promptSet && (
+        <aside class="offer-box">
+          <p class="eyebrow">{promptStrings.lessonTemplatesLabel}</p>
+          <p>
+            <a href={promptSetPath('es', promptSet.id)}>{promptSet.data.title}</a>
+            {' · '}
+            {promptStrings.templatesCount.replace('{n}', String(promptSet.data.templates.length))}
+          </p>
+        </aside>
+      )}
+
+      <NewsletterSignup locale="es" />
 
       <section class="lesson-finish" data-lesson-complete aria-label="Fin de la lección">
         <div>

@@ -1,0 +1,54 @@
+{
+  "order": 4,
+  "name": "Imágenes con IA",
+  "title": "Prompts para generar imágenes con IA",
+  "seoTitle": "Prompts para generar imágenes con IA",
+  "description": "Plantillas de prompts para crear imágenes con IA en Midjourney, DALL·E, Gemini y otros: fotos de producto, retratos, series coherentes y texto legible.",
+  "intro": "Un buen prompt de imagen nombra cuatro cosas por separado: sujeto, escena, estilo y encuadre. Estas plantillas mantienen esos huecos separados para que cambies uno cada vez y veas exactamente qué ha hecho.",
+  "lesson": "ai-images/subject-scene-style",
+  "templates": [
+    {
+      "id": "four-slot-base",
+      "title": "El prompt base de cuatro huecos",
+      "useWhen": "Cualquier imagen: empieza aquí y cambia un hueco cada vez.",
+      "prompt": "Sujeto: [QUIÉN O QUÉ, con 2–3 detalles concretos]\nEscena: [DÓNDE, hora del día, clima o detalles del lugar]\nEstilo: [FOTO / ILUSTRACIÓN / RENDER 3D + una referencia de calidad, p. ej. «foto editorial de revista»]\nEncuadre: [TIPO DE PLANO, p. ej. primer plano o plano general], [ÁNGULO DE CÁMARA], [PROPORCIÓN, p. ej. 4:5]\nLuz: [p. ej. luz suave de ventana desde la izquierda]",
+      "why": "Los huecos separados te dejan cambiar una variable cada vez. Los prompts vagos las mezclan y no sabes qué palabra cambió la imagen."
+    },
+    {
+      "id": "product-photo",
+      "title": "Foto de producto con fondo limpio",
+      "useWhen": "Fichas de tienda online, páginas de venta y anuncios.",
+      "prompt": "Foto de producto de [PRODUCTO, material, color], centrado, sobre un fondo continuo [COLOR DE FONDO]. Iluminación de estudio suave desde arriba con una sombra ligera bajo el producto. Enfoque nítido en [DETALLE CLAVE, p. ej. la etiqueta]. Ángulo frontal a la altura del producto. Formato cuadrado 1:1. Sin texto, sin accesorios, sin objetos extra.",
+      "why": "Las fotos de producto fallan por el desorden y por textos inventados. La línea «sin texto, sin accesorios» es una restricción negativa que la mayoría de generadores respeta."
+    },
+    {
+      "id": "natural-portrait",
+      "title": "Retrato natural",
+      "useWhen": "Avatares, páginas de equipo o personajes.",
+      "prompt": "Retrato de [PERSONA: rango de edad, expresión, ropa — nunca el nombre de una persona real], [LUGAR]. Encuadre de cabeza y hombros, a la altura de los ojos, aspecto de objetivo de 85 mm con el fondo suavemente desenfocado. [LUZ, p. ej. luz cálida de última hora de la tarde]. Textura de piel natural, proporciones realistas. Vertical 4:5.",
+      "why": "Las palabras de objetivo y encuadre son atajos que los generadores entienden. No usar nombres reales evita problemas de parecido y de normas de uso."
+    },
+    {
+      "id": "consistent-series",
+      "title": "Una serie de imágenes coherente",
+      "useWhen": "Varias imágenes tienen que parecer de la misma familia.",
+      "prompt": "Crea la imagen [N] de una serie. Mantén IDÉNTICO en toda la serie: [DESCRIPCIÓN DEL PERSONAJE O PRODUCTO], [PALETA DE COLORES], [ESTILO], [LUZ].\nCambia solo: [QUÉ CAMBIA EN ESTA IMAGEN, p. ej. la postura o el lugar].\n[Si tu herramienta lo permite, adjunta la imagen anterior como referencia.]",
+      "why": "La serie se desvía cuando reescribes cada prompt. Copiar el bloque fijo palabra por palabra y cambiar una sola línea mantiene el aspecto estable."
+    },
+    {
+      "id": "readable-text",
+      "title": "Póster o imagen con texto legible",
+      "useWhen": "Pósters, miniaturas y gráficos para redes con un titular.",
+      "prompt": "Póster, [ESTILO]. El único texto es el titular «[TEXTO EXACTO, máximo 5 palabras]» en [TIPO DE LETRA, p. ej. sans serif en negrita], [POSICIÓN, p. ej. tercio superior], con alto contraste sobre el fondo. Fondo: [ESCENA]. Ninguna otra palabra, letra ni logotipo.",
+      "why": "Los generadores escriben mal los textos largos. Un texto corto y exacto entre comillas, una sola posición y «ninguna otra palabra» dan las mejores probabilidades; revisa siempre la ortografía del resultado."
+    },
+    {
+      "id": "fix-one-thing",
+      "title": "Arreglar una sola cosa de una imagen",
+      "useWhen": "La imagen está casi bien.",
+      "prompt": "Mantén todo igual en esta imagen excepto: [UN CAMBIO, p. ej. que el cielo esté nublado].\nNo cambies: [LO QUE DEBE QUEDARSE — sujeto, composición, colores].\n[Adjunta la imagen y usa el modo de edición o «inpaint» de tu herramienta si lo tiene.]",
+      "why": "Editar una variable cada vez es la versión en imagen de iterar a partir del resultado. Decir qué debe quedarse evita que el modelo rehaga la imagen entera."
+    }
+  ],
+  "draft": false
+}

@@ -1,0 +1,54 @@
+{
+  "order": 7,
+  "name": "Presentaciones",
+  "title": "Prompts para hacer presentaciones con IA",
+  "seoTitle": "Prompts para presentaciones con IA",
+  "description": "Plantillas de prompts para preparar presentaciones con IA: índice de diapositivas, convertir un informe en presentación, notas del orador y preguntas difíciles.",
+  "intro": "La forma más rápida de tener una buena presentación es que la IA te ayude con la estructura, no con los datos. Estas plantillas parten de tu público y de tu mensaje, y mantienen cada cifra ligada a su fuente.",
+  "lesson": "ai-for-work/ai-for-presentations",
+  "templates": [
+    {
+      "id": "outline-from-one-message",
+      "title": "Índice de diapositivas a partir de un mensaje",
+      "useWhen": "Tienes que presentar y la presentación está en blanco.",
+      "prompt": "Voy a presentar ante [PÚBLICO] durante [MINUTOS] minutos. Lo único que deben recordar: [MENSAJE EN UNA FRASE]. Lo que quiero que hagan después: [ACCIÓN].\nCrea un índice diapositiva por diapositiva (como máximo [N] diapositivas): el título de cada una como frase completa que diga su idea, 2–3 viñetas de apoyo y qué prueba o visual va en ella. Marca con [FALTAN DATOS] cualquier diapositiva donde yo tenga que aportar cifras.",
+      "why": "Los títulos en forma de frase obligan a que cada diapositiva diga algo. Las marcas [FALTAN DATOS] impiden que el modelo invente cifras para rellenar."
+    },
+    {
+      "id": "report-to-slides",
+      "title": "Convertir un informe en diapositivas",
+      "useWhen": "El análisis existe; la presentación, no.",
+      "prompt": "Convierte el informe que está entre <<< y >>> en una presentación de [N] diapositivas para [PÚBLICO].\nReglas: toda cifra de una diapositiva debe aparecer en el informe — cítala exacta e indica de qué sección sale; la primera diapositiva es la conclusión, no un índice; el detalle va en las notas del orador, no en las diapositivas (máximo 25 palabras por diapositiva).\n\nInforme: <<<[PEGA]>>>",
+      "why": "Empezar por la conclusión respeta a un público ocupado, y la nota de origen hace que cada cifra se pueda rastrear cuando alguien pregunte «¿de dónde sale eso?»."
+    },
+    {
+      "id": "speaker-notes",
+      "title": "Notas del orador que suenen naturales",
+      "useWhen": "Conoces tus diapositivas pero no qué decir.",
+      "prompt": "Escribe las notas del orador para estas diapositivas: <<<[PEGA TÍTULOS Y VIÑETAS]>>>\nReglas: tono conversacional, como lo diría en voz alta; unos [SEGUNDOS] segundos por diapositiva; incluye una frase de transición a la siguiente; no leas las viñetas tal cual — explícalas.",
+      "why": "Unas notas que repiten la diapositiva te hacen leerla en voz alta. El tiempo y las transiciones hacen que la charla fluya."
+    },
+    {
+      "id": "tough-questions",
+      "title": "Prepararte para preguntas difíciles",
+      "useWhen": "El público es exigente, escéptico o ambas cosas.",
+      "prompt": "Este es el índice de mi presentación: <<<[PEGA]>>>\nPúblico: [PÚBLICO — sus prioridades y objeciones probables].\nEnumera las 8 preguntas más difíciles que podrían hacerme, ordenadas por probabilidad. Para cada una, un esquema de respuesta de dos frases basado solo en mi material, o «faltan datos» si mi material no puede responderla.",
+      "why": "Ensayar las preguntas incómodas es donde más tiempo ahorra la IA, y «faltan datos» te dice exactamente qué preparar."
+    },
+    {
+      "id": "simplify-a-slide",
+      "title": "Simplificar una diapositiva recargada",
+      "useWhen": "Una diapositiva se ha convertido en un muro de texto.",
+      "prompt": "Esta diapositiva tiene demasiado texto: <<<[PEGA EL TEXTO]>>>\nDame: un título en forma de frase con la idea principal; como máximo 3 viñetas de 8 palabras como máximo; un visual (tipo de gráfico o imagen) que pueda sustituir texto; y qué pasar a las notas del orador.",
+      "why": "Los límites estrictos obligan a priorizar: el modelo propone qué es secundario y tú lo apruebas."
+    },
+    {
+      "id": "choose-a-chart",
+      "title": "Elegir el gráfico adecuado",
+      "useWhen": "Tienes datos y una idea que demostrar.",
+      "prompt": "Quiero mostrar: [QUÉ DEBEN DEMOSTRAR LOS DATOS]. Datos: [COLUMNAS Y ALGUNAS FILAS DE EJEMPLO].\nRecomiéndame el tipo de gráfico, qué va en cada eje, qué destacar y un título que diga la conclusión. Dime también qué tipos de gráfico engañarían con estos datos y por qué.",
+      "why": "Es el mensaje el que debe elegir el gráfico, no la costumbre. Preguntar qué engañaría detecta a tiempo ejes recortados y tartas en 3D."
+    }
+  ],
+  "draft": false
+}

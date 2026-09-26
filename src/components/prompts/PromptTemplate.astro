@@ -1,0 +1,34 @@
+---
+import { uiStrings, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  id: string;
+  title: string;
+  useWhen: string;
+  prompt: string;
+  why: string;
+}
+
+const { locale, id, title, useWhen, prompt, why } = Astro.props;
+const s = uiStrings(locale).promptLib;
+const codeId = `prompt-${id}`;
+---
+
+<article class="prompt-template card" id={id}>
+  <h2 class="pt-title"><a href={`#${id}`}>{title}</a></h2>
+  <p class="pt-when"><strong>{s.useWhen}:</strong> {useWhen.charAt(0).toLowerCase() + useWhen.slice(1)}</p>
+  <div class="pt-body">
+    <pre><code id={codeId}>{prompt}</code></pre>
+    <button
+      class="button secondary pt-copy"
+      type="button"
+      data-copy-target={codeId}
+      data-copied-label={s.copied}
+      hidden
+    >
+      {s.copy}
+    </button>
+  </div>
+  <p class="pt-why"><strong>{s.why}:</strong> {why}</p>
+</article>

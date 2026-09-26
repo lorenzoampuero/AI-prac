@@ -152,4 +152,49 @@ const glossaryEs = defineCollection({
   schema: glossarySchema,
 });
 
-export const collections = { lessons, lessonsEs, exercises, exercisesEs, glossary, glossaryEs };
+// Prompt-template library — one JSON file per TASK (never per profession or tool: anti-doorway rule in
+// docs/POST_LAUNCH_LOOP.md). EN and ES share file slugs, so /prompts/{slug} ↔ /es/prompts/{slug} pair up.
+const promptSetSchema = z.object({
+  order: z.number().int().positive(),
+  /** Short label for cards and cross-links. */
+  name: z.string().max(40),
+  title: z.string().max(80),
+  seoTitle: z.string().min(15).max(50),
+  description: z.string().min(50).max(180),
+  intro: z.string().min(80),
+  /** Lesson that teaches the skill behind the templates — `{track}/{slug}` in the EN lessons collection. */
+  lesson: z.string(),
+  templates: z
+    .array(
+      z.object({
+        id: z.string().regex(/^[a-z0-9-]+$/),
+        title: z.string().max(80),
+        useWhen: z.string().max(140),
+        prompt: z.string().min(80),
+        why: z.string().min(60),
+      }),
+    )
+    .min(5),
+  draft: z.boolean().default(false),
+});
+
+const prompts = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/prompts' }),
+  schema: promptSetSchema,
+});
+
+const promptsEs = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/prompts-es' }),
+  schema: promptSetSchema,
+});
+
+export const collections = {
+  lessons,
+  lessonsEs,
+  exercises,
+  exercisesEs,
+  glossary,
+  glossaryEs,
+  prompts,
+  promptsEs,
+};

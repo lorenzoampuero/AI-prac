@@ -1,0 +1,54 @@
+{
+  "order": 3,
+  "name": "Excel y datos",
+  "title": "Prompts de ChatGPT para Excel y hojas de cálculo",
+  "seoTitle": "Prompts de ChatGPT para Excel: 6 plantillas",
+  "description": "Prompts de ChatGPT para Excel y Google Sheets: fórmulas, arreglar errores, limpiar datos desordenados, tablas dinámicas y revisar resultados antes de enviarlos.",
+  "intro": "La IA escribe fórmulas correctas cuando conoce la estructura exacta de tu hoja: letras de columna, fila de encabezados, tipos de datos y cómo es un caso raro. Cada plantilla empieza describiendo la hoja; ese paso evita la mayoría de fórmulas erróneas.",
+  "lesson": "ai-for-work/spreadsheets-describe-dont-guess",
+  "templates": [
+    {
+      "id": "write-a-formula",
+      "title": "Escribir una fórmula a partir de una descripción",
+      "useWhen": "Sabes el resultado que quieres pero no la fórmula.",
+      "prompt": "Uso [EXCEL / GOOGLE SHEETS] en [IDIOMA — los nombres de las funciones cambian según el idioma].\nEstructura: encabezados en la fila 1; datos en las filas 2–[ÚLTIMA FILA]. Columnas: A = [NOMBRE, TIPO], B = [NOMBRE, TIPO], C = [NOMBRE, TIPO].\nQuiero en la columna [X]: [QUÉ DEBE DAR EL RESULTADO].\nCasos raros: [CELDAS VACÍAS / TEXTO EN COLUMNAS DE NÚMEROS / DUPLICADOS].\nDame: la fórmula para la fila 2, una línea que explique cada parte y 3 filas de prueba (entrada → resultado esperado) para comprobarla.",
+      "why": "Las letras de columna, los tipos y los casos raros eliminan las suposiciones. Las filas de prueba te dejan verificar la fórmula antes de arrastrarla a miles de filas."
+    },
+    {
+      "id": "fix-a-formula",
+      "title": "Arreglar una fórmula que da error",
+      "useWhen": "Una fórmula muestra #¡VALOR!, #N/D o simplemente un número incorrecto.",
+      "prompt": "Esta fórmula devuelve [ERROR O RESULTADO INCORRECTO] en [EXCEL / SHEETS]:\n[PEGA LA FÓRMULA]\nLas celdas a las que hace referencia contienen: [VALORES DE EJEMPLO, p. ej. A2 = \"12/03/2025\" guardado como texto].\nResultado esperado para esa fila: [VALOR].\nExplica la causa en una frase, dame la fórmula corregida y dime si el problema está en los datos y no en la fórmula.",
+      "why": "La mayoría de «errores de fórmula» son problemas de tipo de dato. Con valores reales de ejemplo, el modelo diagnostica en lugar de reescribir al azar."
+    },
+    {
+      "id": "clean-a-messy-column",
+      "title": "Limpiar una columna desordenada",
+      "useWhen": "Fechas, nombres o importes escritos en formatos distintos.",
+      "prompt": "Estos son 20 valores de ejemplo de la columna [X], uno por línea: <<<[PEGA]>>>\nFormato objetivo: [p. ej. AAAA-MM-DD / nombres con mayúscula inicial / números sin símbolo de moneda].\n1) Agrupa los problemas que veas (por ejemplo, formatos de fecha mezclados o espacios de más).\n2) Dame una fórmula o un paso que arregle cada grupo.\n3) Enumera los valores que no puedes arreglar con seguridad — nunca adivines ni rellenes datos que faltan.",
+      "why": "Los ejemplos reales muestran el desorden de verdad. La regla de no rellenar evita que la limpieza se convierta en datos inventados."
+    },
+    {
+      "id": "plan-a-pivot",
+      "title": "Plantear una tabla resumen o tabla dinámica",
+      "useWhen": "Tienes filas en bruto y una pregunta que los datos deberían responder.",
+      "prompt": "Mi hoja tiene estas columnas: [LISTA DE COLUMNAS CON SU TIPO]. Unas [N] filas.\nLa pregunta que quiero responder: [p. ej. ¿qué región bajó más sus ventas de un mes a otro?]\nDime: cómo configurar la tabla dinámica (filas, columnas, valores, filtros) o qué fórmulas usar, qué opción es más sencilla aquí, y una forma de comprobar el resultado a mano con una muestra pequeña.",
+      "why": "Pedir la configuración y no la respuesta deja el cálculo dentro de tu hoja: el modelo planifica y la hoja calcula."
+    },
+    {
+      "id": "explain-a-formula",
+      "title": "Entender una fórmula heredada",
+      "useWhen": "Abres la hoja de otra persona y una fórmula es un misterio.",
+      "prompt": "Explica esta fórmula de [EXCEL / SHEETS] paso a paso, empezando por la función más interna:\n[PEGA LA FÓRMULA]\nDespués dime qué devuelve si una de las celdas de referencia está vacía y si existe una versión más simple. La versión simple debe comportarse exactamente igual.",
+      "why": "Explicar de dentro hacia fuera sigue el orden en que se calcula la fórmula, y la pregunta de la celda vacía saca el caso que suele romper las hojas heredadas."
+    },
+    {
+      "id": "sanity-check-numbers",
+      "title": "Revisar las cifras antes de compartirlas",
+      "useWhen": "Un informe está a punto de salir y quieres otro par de ojos.",
+      "prompt": "Esta es una tabla resumen que he hecho: <<<[PEGA LA TABLA]>>>\nSin recalcularla desde cero, revisa: totales que no cuadran, porcentajes por encima de 100 o que no suman 100 cuando deberían, saltos bruscos entre periodos y unidades que parezcan mezcladas.\nEnumera cada celda sospechosa y por qué. No corrijas las cifras — las comprobaré yo en el origen.",
+      "why": "Los modelos de lenguaje calculan mal, pero detectan bien patrones que no encajan. La regla deja cualquier corrección a los datos originales."
+    }
+  ],
+  "draft": false
+}

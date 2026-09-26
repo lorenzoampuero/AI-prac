@@ -1,0 +1,54 @@
+{
+  "order": 9,
+  "name": "Meetings",
+  "title": "AI prompts for meeting notes and action items",
+  "seoTitle": "Meeting Notes Prompts: 6 AI Templates",
+  "description": "Copy-paste prompts to turn meeting transcripts and notes into summaries, decisions and action items with owners and dates — without the AI inventing either.",
+  "intro": "Meeting summaries fail in two ways: action items without an owner, and owners or dates the AI made up. These templates only record what was actually said and flag everything that is missing.",
+  "lesson": "ai-for-work/meeting-notes-to-action-items",
+  "templates": [
+    {
+      "id": "notes-to-action-items",
+      "title": "Notes to action items",
+      "useWhen": "Right after any meeting with tasks.",
+      "prompt": "From the meeting notes between <<< and >>>, extract a table: action | owner | due date | source quote.\nRules: only include actions someone actually agreed to; if an owner or date wasn't stated, write “not assigned” or “no date” — never guess; the source quote is the line in the notes that supports the action.\n\nNotes: <<<[PASTE]>>>",
+      "why": "The source quote makes every item checkable, and “not assigned” turns a missing owner into a follow-up instead of a fiction."
+    },
+    {
+      "id": "decisions-and-open-questions",
+      "title": "Decisions and open questions",
+      "useWhen": "A long discussion where nobody is sure what was decided.",
+      "prompt": "From this transcript, list: 1) decisions made (and who made them), 2) questions raised but not resolved, 3) disagreements that were left open. Only what was said — don't infer decisions from discussion.\n\nTranscript: <<<[PASTE]>>>",
+      "why": "Discussion is not a decision. Three separate lists show what is actually settled."
+    },
+    {
+      "id": "recap-email",
+      "title": "Recap email to attendees",
+      "useWhen": "Everyone needs the same version of what happened.",
+      "prompt": "Write a recap email from these notes: <<<[PASTE]>>>\nStructure: one sentence on the purpose of the meeting; decisions as bullets; action items with owner and date (write “TBC” where missing); the next meeting if mentioned. Under 200 words. Ask attendees to reply with corrections by [DATE].",
+      "why": "Asking for corrections turns the recap into the source of truth — and catches the AI's mistakes early."
+    },
+    {
+      "id": "agenda-that-ends-on-time",
+      "title": "An agenda that ends on time",
+      "useWhen": "You are organising the meeting.",
+      "prompt": "Create an agenda for a [MINUTES]-minute meeting with [ATTENDEES OR ROLES]. Goal: by the end we will have decided [DECISION].\nFor each item: the question it answers, the owner, the minutes and any pre-reading. Put the decision item first. If the goal doesn't fit the time, tell me what to cut.",
+      "why": "Agenda items phrased as questions end in answers, and putting the decision first protects it from running out of time."
+    },
+    {
+      "id": "brief-someone-who-missed-it",
+      "title": "Brief someone who missed the meeting",
+      "useWhen": "A colleague was absent and needs only what affects them.",
+      "prompt": "[NAME] missed this meeting. From the notes below, write a 5-bullet brief of what matters for their role ([ROLE]): decisions that affect them, actions assigned to them and anything they need to respond to. Nothing else.\n\nNotes: <<<[PASTE]>>>",
+      "why": "A role-specific brief is far more useful than a generic summary, and the filter keeps it short."
+    },
+    {
+      "id": "clean-up-a-transcript",
+      "title": "Clean up a raw transcript",
+      "useWhen": "An automatic transcript is full of errors and filler.",
+      "prompt": "Clean up this automatic transcript: fix obvious speech-to-text errors, remove filler words, and split it into paragraphs by topic with short headings. Don't summarise, reword opinions or remove content. Mark words you couldn't make sense of as [unclear].\n\nTranscript: <<<[PASTE]>>>",
+      "why": "Cleaning is not summarising. Keeping the content intact and marking [unclear] preserves a faithful record."
+    }
+  ],
+  "draft": false
+}

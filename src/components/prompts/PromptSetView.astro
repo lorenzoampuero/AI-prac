@@ -1,0 +1,92 @@
+---
+// One task page of the prompt library (EN /prompts/{slug}, ES /es/prompts/{slug}).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsletterSignup from '../NewsletterSignup.astro';
+import ProPackCta from '../ProPackCta.astro';
+import PromptTemplate from './PromptTemplate.astro';
+import { SITE_ORIGIN } from '../../config/site';
+import { uiStrings, type Locale } from '../../i18n/ui';
+import { getPromptSets, promptSetPath, resolveLesson, type PromptSet } from '../../lib/prompts';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+interface Props {
+  locale: Locale;
+  set: PromptSet;
+}
+
+const { locale, set } = Astro.props;
+const s = uiStrings(locale).promptLib;
+const base = locale === 'es' ? '/es' : '';
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
+const path = promptSetPath(locale, set.id);
+const lesson = await resolveLesson(locale, set.data.lesson);
+const others = (await getPromptSets(locale)).filter((other) => other.id !== set.id);
+const crumbs = [
+  { name: s.home, path: base || '/' },
+  { name: s.hubCrumb, path: `${base}/prompts` },
+  { name: set.data.name, path },
+];
+---
+
+<BaseLayout
+  title={set.data.seoTitle}
+  description={set.data.description}
+  locale={locale}
+  structuredData={[breadcrumbJsonLd(crumbs, origin)]}
+>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href={base || '/'}>{s.home}</a></li>
+      <li><a href={`${base}/prompts`}>{s.hubCrumb}</a></li>
+      <li aria-current="page">{set.data.name}</li>
+    </ol>
+  </nav>
+
+  <h1>{set.data.title}</h1>
+  <p class="lede">{set.data.intro}</p>
+
+  <nav class="prompt-toc" aria-label={s.hubCrumb}>
+    <ol>
+      {set.data.templates.map((template) => (
+        <li><a href={`#${template.id}`}>{template.title}</a></li>
+      ))}
+    </ol>
+  </nav>
+
+  <div class="prompt-list">
+    {set.data.templates.map((template) => <PromptTemplate locale={locale} {...template} />)}
+  </div>
+
+  {
+    lesson && (
+      <aside class="offer-box">
+        <h2 class="offer-title">{s.learnSkillHeading}</h2>
+        <p>
+          <a href={lesson.href}>{lesson.title}</a>
+          {lesson.englishOnly && ` ${s.englishOnly}`}
+        </p>
+      </aside>
+    )
+  }
+
+  <ProPackCta locale={locale} />
+  <NewsletterSignup locale={locale} />
+
+  <section aria-labelledby="more-sets">
+    <h2 id="more-sets" class="section-title">{s.moreSets}</h2>
+    <ul class="grid prompt-set-grid">
+      {others.map((other) => (
+        <li>
+          <a class="card card--lift prompt-set-card" href={promptSetPath(locale, other.id)}>
+            <span class="psc-name">{other.data.name}</span>
+            <span class="meta-line">{s.templatesCount.replace('{n}', String(other.data.templates.length))}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <script>
+    import '../../scripts/copy-prompt';
+  </script>
+</BaseLayout>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../seo/schema';
-import { CONTACT_EMAIL, SITE_ORIGIN } from '../../config/site';
+import { CONTACT_EMAIL, NEWSLETTER_URL, PRO_PACK_URL, SITE_ORIGIN } from '../../config/site';
 
 const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
@@ -70,6 +70,17 @@ const origin = Astro.site ?? new URL(SITE_ORIGIN);
     Ese registro es a nivel de infraestructura e idéntico en cualquier sitio; este proyecto no lo lee,
     no lo usa para perfilar y no lo comparte.
   </p>
+
+  {(NEWSLETTER_URL || PRO_PACK_URL) && (
+    <>
+      <h2>Newsletter y compras</h2>
+      <p>
+        La suscripción a la newsletter (MailerLite) y la compra del pack de prompts (Lemon Squeezy) se hacen
+        en las páginas de esos proveedores, bajo sus políticas de privacidad. Este sitio solo enlaza a ellas:
+        nunca ve tu email ni tus datos de pago, y no añade ningún script ni cookie suyos a estas páginas.
+      </p>
+    </>
+  )}
 
   <h2>Correcciones y contacto</h2>
   <p>

@@ -1,0 +1,54 @@
+{
+  "order": 9,
+  "name": "Reuniones",
+  "title": "Prompts de IA para actas de reunión y tareas",
+  "seoTitle": "Prompts para actas de reunión con IA",
+  "description": "Prompts para convertir transcripciones y notas de reuniones en resúmenes, decisiones y tareas con responsable y fecha, sin que la IA se invente ninguna de las dos.",
+  "intro": "Los resúmenes de reuniones fallan de dos maneras: tareas sin responsable, y responsables o fechas que la IA se inventó. Estas plantillas solo recogen lo que se dijo de verdad y señalan todo lo que falta.",
+  "lesson": "ai-for-work/meeting-notes-to-action-items",
+  "templates": [
+    {
+      "id": "notes-to-action-items",
+      "title": "De notas a lista de tareas",
+      "useWhen": "Justo después de cualquier reunión con tareas.",
+      "prompt": "A partir de las notas de la reunión que están entre <<< y >>>, extrae una tabla: tarea | responsable | fecha límite | cita de origen.\nReglas: incluye solo tareas que alguien aceptó de verdad; si no se dijo el responsable o la fecha, escribe «sin asignar» o «sin fecha» — nunca adivines; la cita de origen es la línea de las notas que respalda la tarea.\n\nNotas: <<<[PEGA]>>>",
+      "why": "La cita de origen hace que cada tarea se pueda comprobar, y «sin asignar» convierte un responsable que falta en un seguimiento en lugar de una ficción."
+    },
+    {
+      "id": "decisions-and-open-questions",
+      "title": "Decisiones y preguntas abiertas",
+      "useWhen": "Una discusión larga en la que nadie sabe qué se decidió.",
+      "prompt": "A partir de esta transcripción, enumera: 1) decisiones tomadas (y quién las tomó), 2) preguntas planteadas pero no resueltas, 3) desacuerdos que quedaron abiertos. Solo lo que se dijo — no deduzcas decisiones de la conversación.\n\nTranscripción: <<<[PEGA]>>>",
+      "why": "Hablar de algo no es decidirlo. Tres listas separadas muestran qué está realmente cerrado."
+    },
+    {
+      "id": "recap-email",
+      "title": "Email de resumen para los asistentes",
+      "useWhen": "Todos necesitan la misma versión de lo que pasó.",
+      "prompt": "Escribe un email de resumen a partir de estas notas: <<<[PEGA]>>>\nEstructura: una frase con el objetivo de la reunión; decisiones en viñetas; tareas con responsable y fecha (escribe «por confirmar» donde falte); la próxima reunión si se mencionó. Menos de 200 palabras. Pide a los asistentes que respondan con correcciones antes del [FECHA].",
+      "why": "Pedir correcciones convierte el resumen en la versión oficial y detecta pronto los errores de la IA."
+    },
+    {
+      "id": "agenda-that-ends-on-time",
+      "title": "Un orden del día que termine a tiempo",
+      "useWhen": "Eres quien organiza la reunión.",
+      "prompt": "Crea un orden del día para una reunión de [MINUTOS] minutos con [ASISTENTES O ROLES]. Objetivo: al terminar habremos decidido [DECISIÓN].\nPara cada punto: la pregunta que responde, el responsable, los minutos y la lectura previa si la hay. Pon primero el punto de la decisión. Si el objetivo no cabe en el tiempo, dime qué recortar.",
+      "why": "Los puntos redactados como preguntas terminan en respuestas, y poner la decisión primero evita que se quede sin tiempo."
+    },
+    {
+      "id": "brief-someone-who-missed-it",
+      "title": "Poner al día a quien no fue",
+      "useWhen": "Un compañero faltó y solo necesita lo que le afecta.",
+      "prompt": "[NOMBRE] no estuvo en esta reunión. A partir de las notas de abajo, escribe un resumen de 5 viñetas con lo que importa para su puesto ([PUESTO]): decisiones que le afectan, tareas que se le asignaron y cualquier cosa a la que tenga que responder. Nada más.\n\nNotas: <<<[PEGA]>>>",
+      "why": "Un resumen pensado para un puesto es mucho más útil que uno genérico, y el filtro lo mantiene corto."
+    },
+    {
+      "id": "clean-up-a-transcript",
+      "title": "Limpiar una transcripción en bruto",
+      "useWhen": "Una transcripción automática está llena de errores y muletillas.",
+      "prompt": "Limpia esta transcripción automática: corrige los errores evidentes de reconocimiento de voz, quita las muletillas y divídela en párrafos por tema con títulos cortos. No resumas, no reformules opiniones ni elimines contenido. Marca como [ininteligible] las palabras que no tengan sentido.\n\nTranscripción: <<<[PEGA]>>>",
+      "why": "Limpiar no es resumir. Mantener el contenido intacto y marcar [ininteligible] conserva un registro fiel."
+    }
+  ],
+  "draft": false
+}

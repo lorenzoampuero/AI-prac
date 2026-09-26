@@ -1,0 +1,54 @@
+{
+  "order": 3,
+  "name": "Excel and data",
+  "title": "ChatGPT prompts for Excel and spreadsheets",
+  "seoTitle": "ChatGPT Prompts for Excel: 6 Formula Templates",
+  "description": "Copy-paste ChatGPT prompts for Excel and Google Sheets: formulas, fixing errors, cleaning messy data, pivot tables and sanity-checking results.",
+  "intro": "AI writes correct spreadsheet formulas when it knows your exact layout: column letters, the header row, data types and what an edge case looks like. Every template below starts by describing the sheet — that one step prevents most wrong formulas.",
+  "lesson": "ai-for-work/spreadsheets-describe-dont-guess",
+  "templates": [
+    {
+      "id": "write-a-formula",
+      "title": "Write a formula from a description",
+      "useWhen": "You know the result you want but not the formula.",
+      "prompt": "I use [EXCEL / GOOGLE SHEETS] in [LANGUAGE — function names differ by language].\nLayout: headers in row 1; data in rows 2–[LAST ROW]. Columns: A = [NAME, TYPE], B = [NAME, TYPE], C = [NAME, TYPE].\nI want in column [X]: [WHAT THE RESULT SHOULD BE].\nEdge cases: [BLANKS / TEXT IN NUMBER COLUMNS / DUPLICATES].\nGive me: the formula for row 2, a one-line explanation of each part, and 3 test rows (input → expected output) I can use to check it.",
+      "why": "Column letters, types and edge cases remove the guessing. The test rows let you verify the formula before you fill it down thousands of rows."
+    },
+    {
+      "id": "fix-a-formula",
+      "title": "Fix a formula that returns an error",
+      "useWhen": "A formula shows #VALUE!, #N/A or simply the wrong number.",
+      "prompt": "This formula returns [ERROR OR WRONG RESULT] in [EXCEL / SHEETS]:\n[PASTE FORMULA]\nThe cells it references contain: [EXAMPLE VALUES, e.g. A2 = \"12/03/2025\" stored as text].\nExpected result for that row: [VALUE].\nExplain the cause in one sentence, give the corrected formula, and tell me if the problem is in the data rather than the formula.",
+      "why": "Most formula “bugs” are data-type problems. Real example values let the model diagnose instead of rewriting at random."
+    },
+    {
+      "id": "clean-a-messy-column",
+      "title": "Clean a messy column",
+      "useWhen": "Dates, names or amounts were typed in inconsistent formats.",
+      "prompt": "Here are 20 sample values from column [X], one per line: <<<[PASTE]>>>\nTarget format: [e.g. YYYY-MM-DD / names in title case / numbers without currency symbols].\n1) Group the problems you see (for example mixed date formats or extra spaces).\n2) Give a formula or step that fixes each group.\n3) List the values you cannot fix with certainty — never guess or fill in missing data.",
+      "why": "Real samples reveal the actual mess. The never-fill-in rule stops cleaning from turning into silent fabrication."
+    },
+    {
+      "id": "plan-a-pivot",
+      "title": "Plan a summary table or pivot",
+      "useWhen": "You have raw rows and a question the data should answer.",
+      "prompt": "My sheet has these columns: [LIST COLUMNS WITH TYPES]. About [N] rows.\nThe question I want answered: [e.g. which region's sales dropped most month over month?]\nTell me: the pivot table setup (rows, columns, values, filters) or the formulas, which option is simpler here, and one way to double-check the answer by hand on a small sample.",
+      "why": "Asking for the setup rather than the answer keeps the calculation in your spreadsheet: the model plans, the spreadsheet computes."
+    },
+    {
+      "id": "explain-a-formula",
+      "title": "Explain an inherited formula",
+      "useWhen": "You opened someone else's sheet and a formula is a mystery.",
+      "prompt": "Explain this [EXCEL / SHEETS] formula step by step, innermost function first:\n[PASTE FORMULA]\nThen tell me what it returns when a referenced cell is blank, and whether there is a simpler equivalent. The simpler version must behave exactly the same.",
+      "why": "Explaining from the inside out mirrors how the formula is evaluated, and the blank-cell question surfaces the edge case that usually breaks inherited sheets."
+    },
+    {
+      "id": "sanity-check-numbers",
+      "title": "Sanity-check numbers before you share them",
+      "useWhen": "A report is about to go out and you want a second pair of eyes.",
+      "prompt": "Here is a summary table I built: <<<[PASTE TABLE]>>>\nWithout recalculating from scratch, check it for: totals that don't add up, percentages over 100 or not summing to 100 where they should, sudden jumps between periods, and units that look mixed.\nList each suspicious cell and why. Don't correct the numbers — I will check them in the source.",
+      "why": "Language models are unreliable calculators but good at spotting patterns that look wrong. The rule leaves every correction to the source data."
+    }
+  ],
+  "draft": false
+}

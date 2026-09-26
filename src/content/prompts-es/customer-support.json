@@ -1,0 +1,54 @@
+{
+  "order": 8,
+  "name": "Atención al cliente",
+  "title": "Prompts de IA para atención al cliente",
+  "seoTitle": "Prompts de atención al cliente con IA",
+  "description": "Plantillas de prompts de IA para atención al cliente: calmar a un cliente enfadado, rechazar un reembolso, respuestas de FAQ, clasificar mensajes y respuestas tipo.",
+  "intro": "En atención al cliente, el fallo peligroso de la IA no es un mal tono: es una promesa que tu política no permite. Cada plantilla incluye tu política y prohíbe compromisos fuera de ella.",
+  "lesson": "ai-for-work/support-replies-that-deescalate",
+  "templates": [
+    {
+      "id": "angry-customer",
+      "title": "Responder a un cliente enfadado",
+      "useWhen": "Un cliente está molesto y la respuesta tiene que calmar la situación.",
+      "prompt": "Escribe una respuesta al mensaje del cliente que está entre <<< y >>>.\nNuestra política sobre esto: <<<[PEGA LA POLÍTICA]>>>\nLo que realmente podemos ofrecer: [OPCIONES]\nReglas: la primera frase reconoce el problema concreto (no «disculpe las molestias»); explica qué pasará ahora, con plazos solo si la política los da; nunca prometas reembolsos, abonos ni fechas fuera de la política; menos de 120 palabras; sin culpar al cliente.\n\nMensaje: <<<[PEGA]>>>",
+      "why": "Reconocer el problema concreto calma; pegar la política limita lo que la respuesta puede prometer."
+    },
+    {
+      "id": "refuse-a-refund",
+      "title": "Decir que no a un reembolso con educación",
+      "useWhen": "La respuesta es no y debe seguir siendo amable.",
+      "prompt": "Un cliente ha pedido un reembolso que no podemos dar porque [MOTIVO]. Política: <<<[PEGA LA LÍNEA DE LA POLÍTICA]>>>\nEscribe una respuesta que diga la decisión con claridad en las dos primeras frases, explique el motivo con palabras sencillas citando la política, ofrezca [ALTERNATIVA, si la hay] y deje una puerta abierta ([CÓMO ESCALARLO]). Cordial, pero sin disculparte por la política en sí. Menos de 130 palabras.",
+      "why": "Un «no» vago genera un segundo email. Una decisión clara, el motivo y una alternativa cierran el tema."
+    },
+    {
+      "id": "policy-to-faq",
+      "title": "Convertir una política en una respuesta de FAQ",
+      "useWhen": "Los clientes repiten la misma pregunta.",
+      "prompt": "Convierte esta política interna en una respuesta de preguntas frecuentes para clientes: <<<[PEGA LA POLÍTICA]>>>\nFormato: la pregunta tal como la escribiría un cliente; una respuesta directa de una frase; después hasta 4 viñetas con condiciones o excepciones. Lenguaje sencillo, sin jerga interna. No añadas nada que la política no diga — si algo que preguntarán los clientes no está claro en la política, enuméralo aparte para mí.",
+      "why": "La respuesta directa primero encaja con cómo se leen las FAQ, y la lista de puntos confusos mejora la política, no solo el texto."
+    },
+    {
+      "id": "triage-messages",
+      "title": "Clasificar los mensajes que entran",
+      "useWhen": "La bandeja está llena y necesitas saber qué contestar primero.",
+      "prompt": "Clasifica cada mensaje de abajo en una de estas categorías: [CATEGORÍAS, p. ej. facturación, error, cómo se hace, baja, otros].\nPara cada mensaje: categoría, urgencia (alta = [TU DEFINICIÓN]), un resumen de una línea y si necesita a una persona.\nSi un mensaje no encaja en ninguna categoría, o encaja en dos, dilo — no lo fuerces.\n\nMensajes: <<<[PEGA, uno por línea con un ID]>>>",
+      "why": "Unas categorías definidas y una definición de «urgencia alta» hacen la clasificación coherente; permitir «no encaja» revela huecos en tus categorías."
+    },
+    {
+      "id": "reusable-macro",
+      "title": "Escribir una respuesta tipo reutilizable",
+      "useWhen": "La misma situación se repite cada semana.",
+      "prompt": "Escribe una plantilla de respuesta reutilizable para [SITUACIÓN, p. ej. entrega retrasada].\nPartes fijas: nuestra política <<<[PEGA]>>> y nuestro tono ([2–3 PALABRAS]).\nDeja huecos con nombre para lo variable: [NOMBRE DEL CLIENTE], [NÚMERO DE PEDIDO], [NUEVA FECHA], etc.\nAñade una lista de 3 cosas que el agente debe comprobar antes de enviarla.",
+      "why": "Las respuestas tipo aceleran la atención, pero fallan cuando se envían sin revisar. Los huecos con nombre y la lista previa mantienen velocidad y precisión."
+    },
+    {
+      "id": "complaint-to-bug-report",
+      "title": "Convertir una queja en un informe de error",
+      "useWhen": "Un cliente describe un problema que el equipo de producto debe arreglar.",
+      "prompt": "Convierte este mensaje de cliente en un informe de error para nuestros desarrolladores: <<<[PEGA]>>>\nFormato: título; pasos para reproducirlo (solo lo que el cliente dijo de verdad — marca lo desconocido como «desconocido»); comportamiento esperado frente a real; dispositivo o navegador si se menciona; una estimación de gravedad con el motivo.\nEscribe también 2 preguntas para el cliente que completen lo desconocido.",
+      "why": "Los desarrolladores necesitan pasos reproducibles. Marcar lo desconocido en vez de suponer evita búsquedas inútiles."
+    }
+  ],
+  "draft": false
+}

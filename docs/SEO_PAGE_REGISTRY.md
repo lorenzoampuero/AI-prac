@@ -29,6 +29,8 @@ comes from (BaseLayout appends ` · AI Practice` unless noted).
 | Glossary index | `/glossary` | literal | literal | yes | BreadcrumbList |
 | Glossary term | `/glossary/{id}` | `What is {term}?` (template) | `clipAtSentence(definition, 155)` | yes | BreadcrumbList, DefinedTerm |
 | FAQ | `/faq` | literal | literal | yes | BreadcrumbList, FAQPage |
+| Prompt library hub | `/prompts` (ES `/es/prompts`) | literal in `prompts/index.astro` | literal (live template count) | yes | BreadcrumbList |
+| Prompt set (one per task) | `/prompts/{slug}` (ES `/es/prompts/{slug}`) | JSON `seoTitle` (≤50) | JSON `description` | yes | BreadcrumbList |
 | Assessment | `/assessment` | literal | literal | yes | BreadcrumbList |
 | About | `/about` | literal | literal | yes | (none yet) |
 | Privacy | `/privacy` | literal | literal | yes | BreadcrumbList |

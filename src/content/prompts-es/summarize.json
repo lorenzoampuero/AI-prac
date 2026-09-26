@@ -1,0 +1,54 @@
+{
+  "order": 2,
+  "name": "Resúmenes",
+  "title": "Prompts para resumir textos con IA",
+  "seoTitle": "Prompts para resumir textos con IA (gratis)",
+  "description": "Prompts para copiar y pegar que resumen artículos, informes, PDF y textos largos con IA sin perder cifras, nombres ni la decisión que importa. Gratis.",
+  "intro": "Un resumen solo sirve si conserva lo importante y reconoce lo que ha dejado fuera. Estas plantillas fijan el lector, la longitud y las reglas de fidelidad, para que el modelo comprima el texto en lugar de reescribirlo.",
+  "lesson": "ai-for-work/summarize-without-losing-meaning",
+  "templates": [
+    {
+      "id": "decision-summary",
+      "title": "Resumen para quien tiene que decidir",
+      "useWhen": "Un jefe o un cliente necesita la idea y la decisión, no el documento entero.",
+      "prompt": "Resume el texto que está entre <<< y >>> para [LECTOR], que tiene que decidir [LA DECISIÓN].\nFormato: como máximo 5 viñetas y luego una línea que empiece por «Decisión necesaria:» o «No hace falta decidir».\nReglas: conserva todas las cifras, nombres y fechas exactamente como aparecen; marca con (incierto) lo que el texto presenta como dudoso; si al texto le falta algo que el lector necesita para decidir, di qué falta en vez de rellenarlo.\n\nTexto: <<<[PEGA]>>>",
+      "why": "Nombrar la decisión le dice al modelo qué es relevante. La regla de lo que falta convierte el error más común —rellenar huecos— en una respuesta visible."
+    },
+    {
+      "id": "long-document",
+      "title": "Resumir un documento demasiado largo para pegarlo de una vez",
+      "useWhen": "El documento no cabe en el chat o el modelo olvida el principio.",
+      "prompt": "Voy a pegar un documento largo en [N] partes. Por cada parte responde solo «Recibida la parte X» hasta que escriba «LISTO».\nDespués de LISTO: 1) un resumen de 5 viñetas del documento completo; 2) una tabla sección → idea clave → parte donde aparece; 3) contradicciones entre partes, si las hay.\nRegla: usa solo lo que está en las partes; si parece faltar una sección, dilo.",
+      "why": "Pegar por partes mantiene cada trozo dentro de la ventana de contexto, y la tabla te permite comprobar de dónde sale cada afirmación."
+    },
+    {
+      "id": "three-lengths",
+      "title": "Tres longitudes de resumen a la vez",
+      "useWhen": "No sabes cuánto detalle quiere tu lector.",
+      "prompt": "Resume el texto que está entre <<< y >>> en tres longitudes:\n1. Una frase (máximo 25 palabras)\n2. Un párrafo (máximo 80 palabras)\n3. Cinco viñetas con los detalles que lo sostienen\nLas tres versiones deben coincidir entre sí y usar solo datos del texto. Conserva las cifras exactas.\n\nTexto: <<<[PEGA]>>>",
+      "why": "Ver los tres niveles juntos muestra qué considera central el modelo. Si la frase y las viñetas no coinciden, vuelve a leer el original."
+    },
+    {
+      "id": "article-with-weak-claims",
+      "title": "Resumir un artículo y señalar lo que no tiene pruebas",
+      "useWhen": "Vas a compartir un artículo o basarte en él y quieres saber qué comprobar.",
+      "prompt": "Resume el artículo que está entre <<< y >>> en 5 viñetas. Después, por separado, enumera hasta 3 afirmaciones del artículo que se presentan sin pruebas ni fuente, citando cada una literalmente.\nNo añadas conocimiento externo ni tu opinión sobre el tema.\n\nArtículo: <<<[PEGA]>>>",
+      "why": "Separar el resumen de la revisión de pruebas mantiene el resumen fiel y aun así te dice qué verificar antes de repetirlo."
+    },
+    {
+      "id": "compare-two-documents",
+      "title": "Comparar dos documentos",
+      "useWhen": "Tienes dos propuestas, contratos o versiones que mirar lado a lado.",
+      "prompt": "Compara el documento A y el documento B con este fin: [PARA QUÉ, p. ej. elegir proveedor].\nDevuelve una tabla: tema | qué dice A | qué dice B | diferencia que importa.\nDespués, 3 viñetas con las diferencias más relevantes para [PARA QUÉ].\nReglas: cita las cifras exactas; si un documento no trata un tema, escribe «no aparece» — no lo deduzcas.\n\nA: <<<[PEGA]>>>\nB: <<<[PEGA]>>>",
+      "why": "La tabla obliga a comparar lo mismo con lo mismo, y «no aparece» impide que el modelo invente equivalencias entre documentos."
+    },
+    {
+      "id": "explain-to-a-beginner",
+      "title": "Resumir para alguien que empieza",
+      "useWhen": "Una persona sin formación tiene que entender un texto técnico.",
+      "prompt": "Explica el texto que está entre <<< y >>> a [PÚBLICO, p. ej. una persona nueva en el equipo sin conocimientos de X] en menos de [150] palabras.\nReglas: define cada término técnico la primera vez que aparezca, con palabras sencillas; no cambies las conclusiones del texto — simplifica las palabras, no las afirmaciones; termina con una pregunta que el lector debería hacerle a un experto.\n\nTexto: <<<[PEGA]>>>",
+      "why": "Simplificar suele distorsionar. «Simplifica las palabras, no las afirmaciones» y las definiciones sencillas mantienen la explicación honesta."
+    }
+  ],
+  "draft": false
+}

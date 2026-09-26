@@ -1,0 +1,73 @@
+---
+// Prompt library hub (EN /prompts, ES /es/prompts): the task cards plus how to use a template.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsletterSignup from '../NewsletterSignup.astro';
+import ProPackCta from '../ProPackCta.astro';
+import { SITE_ORIGIN } from '../../config/site';
+import { uiStrings, type Locale } from '../../i18n/ui';
+import { getPromptSets, promptSetPath } from '../../lib/prompts';
+import { breadcrumbJsonLd } from '../../seo/schema';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  heading: string;
+  lede: string;
+  howToHeading: string;
+  steps: string[];
+}
+
+const { locale, title, description, heading, lede, howToHeading, steps } = Astro.props;
+const s = uiStrings(locale).promptLib;
+const base = locale === 'es' ? '/es' : '';
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
+const sets = await getPromptSets(locale);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  structuredData={[
+    breadcrumbJsonLd(
+      [
+        { name: s.home, path: base || '/' },
+        { name: s.hubCrumb, path: `${base}/prompts` },
+      ],
+      origin,
+    ),
+  ]}
+>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href={base || '/'}>{s.home}</a></li>
+      <li aria-current="page">{s.hubCrumb}</li>
+    </ol>
+  </nav>
+
+  <h1>{heading}</h1>
+  <p class="lede">{lede}</p>
+
+  <ul class="grid prompt-set-grid">
+    {sets.map((set) => (
+      <li>
+        <a class="card card--lift prompt-set-card" href={promptSetPath(locale, set.id)}>
+          <span class="psc-name">{set.data.name}</span>
+          <span class="meta-line">{set.data.description}</span>
+          <span class="track-count">{s.templatesCount.replace('{n}', String(set.data.templates.length))} →</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <section aria-labelledby="how-to-use" class="prose">
+    <h2 id="how-to-use" class="section-title">{howToHeading}</h2>
+    <ol>
+      {steps.map((step) => <li>{step}</li>)}
+    </ol>
+  </section>
+
+  <ProPackCta locale={locale} />
+  <NewsletterSignup locale={locale} />
+</BaseLayout>

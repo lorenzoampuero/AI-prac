@@ -1,0 +1,24 @@
+---
+// Newsletter box — a plain link to the hosted MailerLite subscribe page (no third-party script or cookie
+// on this site). Renders nothing until NEWSLETTER_URL is set in src/config/site.ts.
+import { NEWSLETTER_URL } from '../config/site';
+import { uiStrings, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const s = uiStrings(Astro.props.locale).promptLib;
+---
+
+{
+  NEWSLETTER_URL && (
+    <aside class="offer-box" aria-label={s.newsletterTitle}>
+      <h2 class="offer-title">{s.newsletterTitle}</h2>
+      <p>{s.newsletterBody}</p>
+      <a class="button secondary" href={NEWSLETTER_URL} rel="noopener">
+        {s.newsletterButton}
+      </a>
+    </aside>
+  )
+}

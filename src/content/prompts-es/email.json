@@ -1,0 +1,54 @@
+{
+  "order": 1,
+  "name": "Email",
+  "title": "Prompts para escribir emails con ChatGPT",
+  "seoTitle": "Prompts para escribir emails con ChatGPT",
+  "description": "Plantillas de prompts gratis para escribir emails con ChatGPT, Claude o Gemini: respuestas, seguimientos, malas noticias y correos que suenan a ti.",
+  "intro": "Cada plantilla fija lo que suele salir mal en los emails escritos con IA —el tono, la longitud y los datos que el modelo no debe inventar— y deja huecos con nombre para lo que cambia. Rellena cada [HUECO]. Si no puedes rellenar uno, el email todavía no está listo para delegarlo.",
+  "lesson": "ai-for-work/email-that-sounds-like-you",
+  "templates": [
+    {
+      "id": "reply-in-your-voice",
+      "title": "Responder con tu propia voz",
+      "useWhen": "Necesitas una respuesta que no suene a plantilla.",
+      "prompt": "Escribe una respuesta al email que está entre <<< y >>>.\nObjetivo de mi respuesta: [QUÉ QUIERO QUE PASE DESPUÉS]\nMi voz — imita estos dos emails cortos que escribí yo: <<<[PEGA 2 EMAILS QUE HAYAS ENVIADO]>>>\nReglas: menos de [120] palabras; no uses saludos ni despedidas que yo no uso en los ejemplos; no prometas fechas, precios ni compromisos que no estén en mi objetivo. Si el email pregunta algo que mi objetivo no responde, ponlo como pregunta para mí en vez de adivinar.\n\nEmail: <<<[PEGA EL EMAIL]>>>",
+      "why": "Los ejemplos reales funcionan mejor que adjetivos como «cercano pero profesional». La regla de no prometer evita que el modelo invente compromisos que luego tendrías que cumplir."
+    },
+    {
+      "id": "follow-up",
+      "title": "Seguimiento educado cuando no responden",
+      "useWhen": "Alguien no contesta y necesitas una decisión.",
+      "prompt": "Escribe un email de seguimiento para [CARGO DEL DESTINATARIO], que no ha respondido a mi mensaje de hace [CUÁNTO TIEMPO].\nMensaje original: <<<[PEGA]>>>\nLo que necesito: [UNA ACCIÓN CONCRETA] antes del [FECHA].\nReglas: máximo tres frases; repite la petición en la primera frase; ponle fácil responder (una pregunta de sí/no o dos opciones); nada de frases que culpan como «vuelvo a escribirte porque no me has contestado».",
+      "why": "Los seguimientos fallan cuando la petición queda enterrada. Limitar la longitud y poner la acción primero le da al lector una decisión de diez segundos."
+    },
+    {
+      "id": "bad-news",
+      "title": "Dar una mala noticia con claridad",
+      "useWhen": "Hay que comunicar un retraso, un rechazo o un error.",
+      "prompt": "Redacta un email para decirle a [DESTINATARIOS] que [LA MALA NOTICIA].\nHechos que puedo confirmar: [LISTA DE HECHOS]\nQué pasa ahora / qué pueden hacer: [OPCIONES]\nReglas: da la noticia en las dos primeras frases; una frase de reconocimiento sincero, sin disculpas excesivas; no especules sobre las causas más allá de los hechos anteriores; termina con el único siguiente paso. Dame dos versiones: una directa y otra más cálida.",
+      "why": "Esconder una mala noticia genera desconfianza. La lista de hechos limita lo que el modelo puede afirmar, y las dos versiones te dejan elegir el tono sin volver a pedirlo."
+    },
+    {
+      "id": "shorten",
+      "title": "Recortar un email largo a la mitad",
+      "useWhen": "Tu borrador es tan largo que la gente deja de leer.",
+      "prompt": "Acorta el email que está entre <<< y >>> a un máximo de [LA MITAD DE PALABRAS] palabras.\nConserva: todas las fechas, cifras y nombres, y todas mis peticiones.\nQuita: repeticiones, rodeos y contexto que el lector ya conoce ([QUÉ SABE YA]).\nDespués, enumera en una línea cada cosa que hayas quitado y que quizá quiera recuperar.\n\nEmail: <<<[PEGA EL BORRADOR]>>>",
+      "why": "Al acortar, los modelos se comen datos sin avisar. La lista de lo que hay que conservar los protege y la lista de lo quitado hace que el recorte se pueda revisar."
+    },
+    {
+      "id": "ask-a-senior",
+      "title": "Pedirle algo a alguien importante y ocupado",
+      "useWhen": "Necesitas una aprobación, tiempo o una decisión de alguien sin tiempo.",
+      "prompt": "Escribe un email a [NOMBRE, CARGO] para pedirle [LA PETICIÓN].\nContexto que necesita (y nada más): [2–3 DATOS]\nPor qué le importa a esa persona: [SU INTERÉS, NO EL MÍO]\nReglas: asunto de menos de 8 palabras que diga la petición; la primera línea es la petición; menos de 100 palabras en total; ofrece el «sí» más pequeño posible (por ejemplo, una llamada de 15 minutos o una aprobación de una palabra).",
+      "why": "Quien tiene poco tiempo decide por el asunto y la primera frase. La plantilla sube la petición arriba del todo y la plantea desde su interés."
+    },
+    {
+      "id": "translate-keep-tone",
+      "title": "Traducir un email sin perder el tono",
+      "useWhen": "Escribes a alguien de otro idioma o país.",
+      "prompt": "Traduce el email que está entre <<< y >>> al [IDIOMA] para un lector de [PAÍS O REGIÓN].\nConserva: el nivel de formalidad ([FORMAL / NEUTRO / INFORMAL]) y todos los nombres, cifras, fechas y nombres de producto tal cual.\nAdapta: saludos, despedidas y expresiones a lo que escribiría de verdad un hablante nativo.\nDespués de la traducción, señala las frases donde el significado literal y la forma natural no coincidían, para que yo las revise.\n\nEmail: <<<[PEGA]>>>",
+      "why": "La traducción literal suena extranjera; la libre se desvía. Decir qué conservar y qué adaptar, más las frases señaladas, te deja el control."
+    }
+  ],
+  "draft": false
+}

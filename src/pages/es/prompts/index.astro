@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import PromptHubView from '../../../components/prompts/PromptHubView.astro';
+
+const sets = await getCollection('promptsEs', ({ data }) => !data.draft);
+const total = sets.reduce((sum, set) => sum + set.data.templates.length, 0);
+---
+
+<PromptHubView
+  locale="es"
+  title="Plantillas de prompts para ChatGPT (gratis)"
+  description={`${total} plantillas de prompts gratis para ChatGPT, Claude y Gemini, por tarea: email, resúmenes, Excel, imágenes, verificar respuestas, CV, presentaciones y más.`}
+  heading="Plantillas de prompts para copiar y usar con confianza"
+  lede={`${total} plantillas agrupadas por tarea. Cada una tiene [HUECOS] con nombre para lo que cambia y reglas fijas para lo que suele salir mal con la IA: datos inventados, cifras perdidas, el tono equivocado. Elige una tarea, rellena los huecos y pega.`}
+  howToHeading="Cómo usar una plantilla"
+  steps={[
+    'Sustituye cada [HUECO]. Si no puedes rellenar uno, la tarea aún no está lista para delegarla: la plantilla está haciendo su trabajo.',
+    'Pega tu propio material entre <<< y >>>, para que el modelo sepa exactamente dónde empieza y dónde acaba.',
+    'Revisa la respuesta con las reglas de la plantilla antes de usarla: cifras intactas, nada prometido ni inventado.',
+    'Funcionan en ChatGPT, Claude, Gemini, Copilot o cualquier asistente de chat: nada depende de un producto concreto.',
+  ]}
+/>

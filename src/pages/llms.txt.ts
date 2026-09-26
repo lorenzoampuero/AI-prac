@@ -11,6 +11,9 @@ export const GET: APIRoute = async ({ site }) => {
   const origin = site ?? new URL(SITE_ORIGIN);
   const lessons = await getCollection('lessons', ({ data }) => !data.draft);
   const terms = await getCollection('glossary', ({ data }) => !data.draft);
+  const promptSets = (await getCollection('prompts', ({ data }) => !data.draft)).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
 
   const url = (path: string) => new URL(path, origin).href;
   const lessonUrl = (entry: CollectionEntry<'lessons'>) =>
@@ -40,12 +43,17 @@ export const GET: APIRoute = async ({ site }) => {
 - [Home](${url('/')}): what the site is and where to begin
 - [Curriculum](${url('/learn')}): all eight tracks with lesson counts
 - [Practice floor](${url('/practice')}): every exercise, grouped by track
+- [Prompt templates](${url('/prompts')}): copy-paste prompt templates grouped by task
 - [Skills check](${url('/assessment')}): an 18-question diagnostic with per-track feedback
 - [AI questions, answered](${url('/faq')}): short answers to common AI questions, each linked to a lesson
 - [Glossary](${url('/glossary')}): ${terms.length} plain-language AI terms
 
 ## Lessons
 ${sections.join('\n\n')}
+
+## Prompt templates
+Copy-paste templates grouped by task; each links to the lesson that teaches the skill. Spanish versions live under /es/prompts.
+${promptSets.map((set) => `- [${set.data.title}](${url(`/prompts/${set.id}`)}): ${set.data.description}`).join('\n')}
 
 ## Glossary
 ${glossary.join('\n')}

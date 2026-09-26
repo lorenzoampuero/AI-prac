@@ -1,0 +1,54 @@
+{
+  "order": 2,
+  "name": "Summaries",
+  "title": "Prompts to summarize text with AI",
+  "seoTitle": "AI Summary Prompts: 6 Templates That Keep Facts",
+  "description": "Copy-paste prompts to summarize articles, reports, PDFs and long texts with AI without losing numbers, names or the actual decision. Free templates.",
+  "intro": "A summary is only useful if it keeps what matters and admits what it left out. These templates fix the reader, the length and the fidelity rules, so the model compresses the text instead of rewriting it.",
+  "lesson": "ai-for-work/summarize-without-losing-meaning",
+  "templates": [
+    {
+      "id": "decision-summary",
+      "title": "Summary for someone who has to decide",
+      "useWhen": "A manager or client needs the gist and the decision, not the whole document.",
+      "prompt": "Summarise the text between <<< and >>> for [READER], who needs to decide [THE DECISION].\nFormat: at most 5 bullets, then one line starting “Decision needed:” or “No decision needed”.\nRules: keep every number, name and date exactly as written; mark anything the text presents as uncertain with (uncertain); if the text lacks something the reader needs to decide, say what is missing instead of filling it in.\n\nText: <<<[PASTE]>>>",
+      "why": "Naming the decision tells the model what is relevant. The missing-information rule turns the most common failure — filling gaps — into a visible answer."
+    },
+    {
+      "id": "long-document",
+      "title": "Summarise a document too long to paste at once",
+      "useWhen": "The document is longer than the chat accepts or the model starts forgetting the beginning.",
+      "prompt": "I will paste a long document in [N] parts. For each part, reply only “Received part X” until I write “DONE”.\nAfter DONE: 1) a 5-bullet summary of the whole document; 2) a table of section → key claim → part where it appears; 3) contradictions between parts, if any.\nRule: only use what is in the parts; if a section seems to be missing, say so.",
+      "why": "Chunked input keeps every part inside the context window, and the section table lets you check any claim against where it came from."
+    },
+    {
+      "id": "three-lengths",
+      "title": "Three summary lengths at once",
+      "useWhen": "You are not sure how much detail your reader wants.",
+      "prompt": "Summarise the text between <<< and >>> at three lengths:\n1. One sentence (max 25 words)\n2. One paragraph (max 80 words)\n3. Five bullets with the supporting detail\nAll three must agree with each other and use only facts from the text. Keep numbers exact.\n\nText: <<<[PASTE]>>>",
+      "why": "Seeing the three levels side by side exposes what the model thinks is central. If the sentence and the bullets disagree, reread the source."
+    },
+    {
+      "id": "article-with-weak-claims",
+      "title": "Summarise an article and flag weak claims",
+      "useWhen": "You want to share or rely on an article and need to know what to double-check.",
+      "prompt": "Summarise the article between <<< and >>> in 5 bullets. Then, separately, list up to 3 claims in the article that are presented without evidence or a source, quoting each one exactly.\nDo not add outside knowledge or your opinion of the topic.\n\nArticle: <<<[PASTE]>>>",
+      "why": "Keeping the summary separate from the evidence check makes the summary faithful while still telling you what to verify before you repeat it."
+    },
+    {
+      "id": "compare-two-documents",
+      "title": "Compare two documents",
+      "useWhen": "Two proposals, contracts or versions need a side-by-side view.",
+      "prompt": "Compare document A and document B below for [PURPOSE, e.g. choosing a supplier].\nOutput a table: topic | what A says | what B says | difference that matters.\nThen 3 bullets: the differences most relevant to [PURPOSE].\nRules: quote numbers exactly; if a document does not cover a topic, write “not covered” — don't infer.\n\nA: <<<[PASTE]>>>\nB: <<<[PASTE]>>>",
+      "why": "Tables force a like-for-like comparison, and “not covered” stops the model from inventing parity between documents."
+    },
+    {
+      "id": "explain-to-a-beginner",
+      "title": "Summarise for a beginner",
+      "useWhen": "Someone without background has to understand a technical text.",
+      "prompt": "Explain the text between <<< and >>> to [AUDIENCE, e.g. a new team member with no background in X] in under [150] words.\nRules: define every technical term the first time it appears, in plain words; keep the text's conclusions unchanged — simplify the wording, not the claims; end with one question the reader should ask an expert.\n\nText: <<<[PASTE]>>>",
+      "why": "Simplifying often distorts. “Simplify the wording, not the claims” plus plain definitions keeps the explanation honest."
+    }
+  ],
+  "draft": false
+}

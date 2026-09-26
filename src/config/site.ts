@@ -11,3 +11,12 @@ export const SITE_ORIGIN = 'https://www.getaipractice.site';
 // until the owner chooses one: the footer link and the contact sentences on /about and /privacy render
 // only when it is set.
 export const CONTACT_EMAIL = '';
+
+// Prompt Pack Pro — the paid template pack (sold and taxed by Lemon Squeezy as merchant of record).
+// The buy box on /prompts pages renders only when the checkout URL is set.
+export const PRO_PACK_URL = '';
+export const PRO_PACK_PRICE = '$9';
+
+// Newsletter — the hosted MailerLite subscribe page. A plain link keeps this site free of third-party
+// scripts and cookies; the signup box renders only when the URL is set.
+export const NEWSLETTER_URL = '';
