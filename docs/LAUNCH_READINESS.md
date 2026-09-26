@@ -1,10 +1,11 @@
 # LAUNCH READINESS — AI Practice (Gate 11)
 
-**Date: 2026-09-19 · Updated 2026-09-22 · Status: LIVE — the site serves publicly at
-`https://getaipractice.site` (apex 308-redirects to `www.getaipractice.site`, which serves 200;
-canonical + sitemap use the apex origin). Repo state after the SEO/keyword sprint + ES wave: 62+12
-lessons, 235 built pages, 79 tests. Remaining owner actions (all in the section below): verify Search
-Console, submit the sitemap + request indexing, and align the primary domain.**
+**Date: 2026-09-19 · Updated 2026-09-26 · Status: LIVE at `https://www.getaipractice.site` (the apex
+`getaipractice.site` 308-redirects to `www`). **2026-09-26 fix:** canonical, sitemap, hreflang, robots and
+JSON-LD previously advertised the apex — a URL that redirects — which left Google with "Page with
+redirect" instead of indexable pages (≈0 impressions in the first week). Every origin now derives from
+`SITE_ORIGIN` (www) in `src/config/site.ts`, guarded by `tests/seo-geo.test.ts`. Remaining owner actions:
+the Search Console steps below (re-submit the sitemap and request indexing after the fix deploys).**
 
 ## What is verified (this session)
 
@@ -116,16 +117,20 @@ not been told it exists. Three actions, in order, unlock discovery.
    - `/es` and `/es/learn` (the Spanish wave)
 3. That is the whole Google-side setup; everything after it is wait time.
 
-### 3. Vercel — make the apex the primary domain (2 minutes)
+### 3. Primary domain — resolved in code (2026-09-26)
 
-Today `getaipractice.site` 308-redirects to `www`, while canonical + sitemap advertise the apex.
-Aligning the two removes the conflicting signal.
+Vercel serves `www` and redirects the apex; the build now uses `www` as its origin, so redirects and
+canonicals agree without touching the Vercel dashboard. Do **not** switch the primary domain to the apex
+now — that would re-introduce the mismatch. Check: `https://www.getaipractice.site` answers 200 and its
+`<link rel="canonical">` points at itself.
 
-1. Vercel dashboard → project **aipractice** → Settings → Domains.
-2. Select `getaipractice.site` → **Set as Primary** (from then on `www` redirects to the apex,
-   agreeing with the canonical origin).
-3. Re-check: `https://getaipractice.site` should answer 200 directly; `https://www.getaipractice.site`
-   should 308 to the apex.
+### 4. After the origin fix deploys (once)
+
+1. Search Console → **Sitemaps** → re-submit `sitemap-index.xml` (it now lists `www` URLs).
+2. **URL Inspection** → Request Indexing again for the URLs in step 2 — the inspection should report
+   "User-declared canonical" = the inspected URL.
+3. `npm run indexnow` (now defaults to the `www` origin).
+4. After 7 days: **Pages** report → "Indexed" should grow; "Page with redirect" should only list apex URLs.
 
 ### Honest expectations (unchanged)
 

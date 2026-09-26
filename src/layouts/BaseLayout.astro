@@ -4,7 +4,7 @@ import '@fontsource-variable/source-serif-4';
 import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
 import { getCollection } from 'astro:content';
-import { SITE_NAME } from '../config/site';
+import { CONTACT_EMAIL, SITE_NAME, SITE_ORIGIN } from '../config/site';
 import { localeOf, uiStrings, type Locale } from '../i18n/ui';
 import '../styles/global.css';
 
@@ -36,7 +36,7 @@ const s = uiStrings(locale);
 const base = locale === 'es' ? '/es' : '';
 const pageTitle = suffix && title !== SITE_NAME ? `${title} · ${SITE_NAME}` : title;
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const canonical = new URL(Astro.url.pathname, origin);
 const ogImage = new URL('/og.png', origin).href;
 
@@ -246,6 +246,7 @@ const siteMeta = {
             <li><a href="/progress">{s.footer.myProgress}</a></li>
             <li><a href={`${base}/about`}>{s.footer.howItWorks}</a></li>
             <li><a href={`${base}/privacy`}>{s.footer.privacy}</a></li>
+            {CONTACT_EMAIL && <li><a href={`mailto:${CONTACT_EMAIL}`}>{s.footer.contact}</a></li>}
           </ul>
         </div>
       </div>

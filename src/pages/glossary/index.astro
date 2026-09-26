@@ -3,11 +3,12 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../seo/schema';
 import { clipAtSentence } from '../../lib/seo-text';
+import { SITE_ORIGIN } from '../../config/site';
 
 const terms = await getCollection('glossary', ({ data }) => !data.draft);
 terms.sort((a, b) => a.data.term.localeCompare(b.data.term));
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
 
 <BaseLayout

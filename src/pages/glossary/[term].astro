@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd, definedTermJsonLd } from '../../seo/schema';
 import { clipAtSentence } from '../../lib/seo-text';
+import { SITE_ORIGIN } from '../../config/site';
 
 interface RelatedLink {
   title: string;
@@ -44,7 +45,7 @@ type Props = {
 };
 const { entry, relatedLessons, relatedExercises } = Astro.props as Props;
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const termPath = `/glossary/${entry.id}`;
 // "What is X?" — lowercase the first letter unless the term starts with an acronym (RAG, LLM…).
 const termLower = /^[A-Z]{2,}/.test(entry.data.term)

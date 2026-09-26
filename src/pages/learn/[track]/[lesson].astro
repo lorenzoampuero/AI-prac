@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getTrack } from '../../../data/tracks';
 import { breadcrumbJsonLd, learningResourceJsonLd } from '../../../seo/schema';
+import { SITE_ORIGIN } from '../../../config/site';
 
 interface NavLesson {
   id: string;
@@ -59,7 +60,7 @@ const { Content, headings } = await render(entry);
 const trackInfo = getTrack(entry.data.track);
 const toc = headings.filter((heading) => heading.depth === 2);
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const lessonPath = `/learn/${entry.data.track}/${entry.id.split('/').slice(1).join('/')}`;
 const breadcrumbs = [
   { name: 'Home', path: '/' },

@@ -59,6 +59,7 @@ export interface UiStrings {
     myProgress: string;
     howItWorks: string;
     privacy: string;
+    contact: string;
   };
   /** Label for the language switcher pointing at the OTHER language. */
   langSwitch: string;
@@ -110,6 +111,7 @@ const en: UiStrings = {
     myProgress: 'My progress',
     howItWorks: 'How it works',
     privacy: 'Privacy',
+    contact: 'Contact',
   },
   langSwitch: 'Español',
   langSwitchAria: 'Read this site in Spanish',
@@ -209,6 +211,7 @@ const es: UiStrings = {
     myProgress: 'Mi progreso',
     howItWorks: 'Cómo funciona',
     privacy: 'Privacidad',
+    contact: 'Contacto',
   },
   langSwitch: 'English',
   langSwitchAria: 'Read this site in English',

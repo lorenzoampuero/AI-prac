@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { ASSESSMENT_ITEMS } from '../data/assessment';
 import { TRACKS } from '../data/tracks';
 import { breadcrumbJsonLd } from '../seo/schema';
+import { SITE_ORIGIN } from '../config/site';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 
 const grouped = TRACKS.map((track) => ({
   track,
