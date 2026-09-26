@@ -9,7 +9,7 @@
 // for IndexNow. Keep it.
 
 const KEY = '5f3a9c1e7b2d4f8a6c0e2b9d1f7a3c5e';
-const ORIGIN = process.env.INDEXNOW_ORIGIN ?? 'https://getaipractice.site';
+const ORIGIN = process.env.INDEXNOW_ORIGIN ?? 'https://www.getaipractice.site';
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 
 async function main() {

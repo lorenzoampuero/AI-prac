@@ -1,13 +1,14 @@
 import type { APIRoute } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { TRACKS } from '../data/tracks';
+import { SITE_ORIGIN } from '../config/site';
 
 // /llms.txt — the llmstxt.org convention: a compact, link-rich map of the site for AI assistants and
 // answer engines. Generated from the content collections at build time, so it can never drift from
 // what is actually published. Nothing here is a ranking hack: it is the same structure a human gets
 // from the Learn hub, in plain text.
 export const GET: APIRoute = async ({ site }) => {
-  const origin = site ?? new URL('https://getaipractice.site');
+  const origin = site ?? new URL(SITE_ORIGIN);
   const lessons = await getCollection('lessons', ({ data }) => !data.draft);
   const terms = await getCollection('glossary', ({ data }) => !data.draft);
 

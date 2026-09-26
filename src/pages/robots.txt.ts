@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { SITE_ORIGIN } from '../config/site';
 
 // Robots policy: everything public is allowed — including AI crawlers. The explicit list below is a
 // courtesy signal for answer engines and assistants; it grants nothing beyond the wildcard allow, and
@@ -19,7 +20,7 @@ const AI_CRAWLERS = [
 ];
 
 export const GET: APIRoute = ({ site }) => {
-  const origin = site ?? new URL('https://getaipractice.site');
+  const origin = site ?? new URL(SITE_ORIGIN);
   const sitemap = new URL('sitemap-index.xml', origin).href;
   const llms = new URL('llms.txt', origin).href;
   const aiBlocks = AI_CRAWLERS.map((agent) => `User-agent: ${agent}\nAllow: /`).join('\n\n');

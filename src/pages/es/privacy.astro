@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../seo/schema';
+import { CONTACT_EMAIL, SITE_ORIGIN } from '../../config/site';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
 
 <BaseLayout
@@ -72,9 +73,13 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
 
   <h2>Correcciones y contacto</h2>
   <p>
-    Las correcciones son bienvenidas y el canal público se enlazará aquí en cuanto esté disponible.
-    Hasta entonces, los problemas detectados en las auditorías de contenido se corrigen en las
-    lecciones y quedan registrados en el historial de calidad del proyecto.
+    Las correcciones son bienvenidas. Los problemas detectados en las auditorías de contenido se
+    corrigen en las lecciones y quedan registrados en el historial de calidad del proyecto.
+    {CONTACT_EMAIL && (
+      <>
+        Para avisar de un error o preguntar por esta página, escribe a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      </>
+    )}
   </p>
 
   <h2 id="changes">Cambios en esta página</h2>

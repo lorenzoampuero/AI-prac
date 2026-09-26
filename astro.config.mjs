@@ -4,9 +4,10 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // `site` = production origin (canonical URLs, sitemap, robots). `PUBLIC_SITE_URL` overrides it for
-// staging/preview builds. Domain decided 2026-09-20: getaipractice.site (registrar purchase pending).
+// staging/preview builds. The default is the host Vercel serves (www — the apex 308-redirects to it);
+// keep it equal to SITE_ORIGIN in src/config/site.ts.
 const SITE_ORIGIN =
-  (process.env.PUBLIC_SITE_URL ?? '').trim().replace(/\/+$/, '') || 'https://getaipractice.site';
+  (process.env.PUBLIC_SITE_URL ?? '').trim().replace(/\/+$/, '') || 'https://www.getaipractice.site';
 
 export default defineConfig({
   site: SITE_ORIGIN,

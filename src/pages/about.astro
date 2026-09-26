@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../seo/schema';
+import { CONTACT_EMAIL, SITE_ORIGIN } from '../config/site';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
 
 <BaseLayout
@@ -66,5 +67,7 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
     re-reviewed on a schedule — the facts registry records a review date for each one (next full
     pass: December 2026).
   </p>
-  <!-- TODO(owner): add a public correction channel (email or issue tracker) when available. -->
+  {CONTACT_EMAIL && (
+    <p>Found an error? Write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  )}
 </BaseLayout>

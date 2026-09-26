@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NextTokenDemo from '../components/lesson/NextTokenDemo.astro';
 import { TRACKS } from '../data/tracks';
-import { SITE_NAME } from '../config/site';
+import { SITE_NAME, SITE_ORIGIN } from '../config/site';
 import { organizationJsonLd, websiteJsonLd } from '../seo/schema';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const description =
   'Learn AI skills with short, free lessons and hands-on exercises — prompting, verification, research and work. No account; progress stays on your device.';
 
