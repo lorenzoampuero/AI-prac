@@ -1,0 +1,26 @@
+---
+// Buy box for the paid Prompt Pack Pro. Renders nothing until PRO_PACK_URL is set in src/config/site.ts,
+// so no page ever advertises a product that cannot be bought.
+import { PRO_PACK_PRICE, PRO_PACK_URL } from '../config/site';
+import { uiStrings, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const s = uiStrings(Astro.props.locale).promptLib;
+---
+
+{
+  PRO_PACK_URL && (
+    <aside class="offer-box offer-box--pack" aria-label={s.packEyebrow}>
+      <p class="eyebrow">{s.packEyebrow}</p>
+      <h2 class="offer-title">{s.packTitle}</h2>
+      <p>{s.packBody}</p>
+      <a class="button" href={PRO_PACK_URL} rel="noopener">
+        {s.packButton.replace('{price}', PRO_PACK_PRICE)}
+      </a>
+      <p class="meta-line offer-note">{s.packNote}</p>
+    </aside>
+  )
+}

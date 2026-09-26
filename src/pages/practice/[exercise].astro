@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ExerciseCard from '../../components/ExerciseCard.astro';
 import { breadcrumbJsonLd, learningResourceJsonLd } from '../../seo/schema';
 import { clipAtSentence } from '../../lib/seo-text';
+import { SITE_ORIGIN } from '../../config/site';
 
 interface RelatedLesson {
   title: string;
@@ -35,7 +36,7 @@ export async function getStaticPaths() {
 type Props = { entry: CollectionEntry<'exercises'>; relatedLessons: RelatedLesson[] };
 const { entry, relatedLessons } = Astro.props as Props;
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const exercisePath = `/practice/${entry.id}`;
 const DIFFICULTY_LABELS: Record<string, string> = {
   beginner: 'Beginner',

@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NextTokenDemo from '../components/lesson/NextTokenDemo.astro';
 import { TRACKS } from '../data/tracks';
-import { SITE_NAME } from '../config/site';
+import { SITE_NAME, SITE_ORIGIN } from '../config/site';
 import { organizationJsonLd, websiteJsonLd } from '../seo/schema';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const description =
   'Learn AI skills with short, free lessons and hands-on exercises — prompting, verification, research and work. No account; progress stays on your device.';
 
@@ -99,6 +99,13 @@ const firstLessonHref = firstLesson
         ]}
       />
     </div>
+  </section>
+
+  <section class="offer-box" aria-labelledby="prompts-title">
+    <p class="eyebrow">Free prompt templates</p>
+    <h2 id="prompts-title" class="offer-title">Copy-paste prompts for email, Excel, summaries, images and more</h2>
+    <p>54 templates grouped by task, each with named slots and the rules that stop AI inventing facts.</p>
+    <a class="button secondary" href="/prompts">Browse the templates</a>
   </section>
 
   <section aria-labelledby="tracks-title">

@@ -1,0 +1,13 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import PromptSetView from '../../components/prompts/PromptSetView.astro';
+
+export async function getStaticPaths() {
+  const sets = await getCollection('prompts', ({ data }) => !data.draft);
+  return sets.map((set) => ({ params: { set: set.id }, props: { set } }));
+}
+
+const { set } = Astro.props as { set: CollectionEntry<'prompts'> };
+---
+
+<PromptSetView locale="en" set={set} />

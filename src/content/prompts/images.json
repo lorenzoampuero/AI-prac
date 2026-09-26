@@ -1,0 +1,54 @@
+{
+  "order": 4,
+  "name": "AI images",
+  "title": "AI image prompt templates",
+  "seoTitle": "AI Image Prompts: 6 Templates With Examples",
+  "description": "Free AI image prompt templates for Midjourney, DALL·E, Gemini and other generators: product shots, portraits, consistent series and readable text in images.",
+  "intro": "Strong image prompts name four things separately: subject, scene, style and framing. These templates keep those slots apart, so you can change one at a time and see exactly what it did.",
+  "lesson": "ai-images/subject-scene-style",
+  "templates": [
+    {
+      "id": "four-slot-base",
+      "title": "The four-slot base prompt",
+      "useWhen": "Any image — start here and change one slot at a time.",
+      "prompt": "Subject: [WHO OR WHAT, with 2–3 concrete details]\nScene: [WHERE, time of day, weather or setting details]\nStyle: [PHOTO / ILLUSTRATION / 3D RENDER + one reference quality, e.g. “editorial magazine photo”]\nFraming: [SHOT TYPE, e.g. close-up or wide], [CAMERA ANGLE], [ASPECT RATIO, e.g. 4:5]\nLighting: [e.g. soft window light from the left]",
+      "why": "Separate slots let you iterate one variable at a time. Vague prompts mix them, so you cannot tell which word changed the picture."
+    },
+    {
+      "id": "product-photo",
+      "title": "Product photo on a clean background",
+      "useWhen": "Shop listings, landing pages and ads.",
+      "prompt": "Product photo of [PRODUCT, material, colour], centred, on a seamless [BACKGROUND COLOUR] background. Soft studio lighting from above with a gentle shadow under the product. Sharp focus on [KEY DETAIL, e.g. the label]. Straight-on angle at product height. Square 1:1. No text, no props, no extra objects.",
+      "why": "Product shots fail on clutter and invented text. The explicit “no text, no props” line is a negative constraint most generators respect."
+    },
+    {
+      "id": "natural-portrait",
+      "title": "Natural portrait",
+      "useWhen": "Avatars, team pages or characters.",
+      "prompt": "Portrait of [PERSON: age range, expression, clothing — never a real person's name], [SETTING]. Head-and-shoulders framing, eye level, 85mm lens look with a softly blurred background. [LIGHTING, e.g. warm late-afternoon light]. Natural skin texture, realistic proportions. Vertical 4:5.",
+      "why": "Lens and framing words are shorthand generators understand. Leaving out real names avoids likeness and policy problems."
+    },
+    {
+      "id": "consistent-series",
+      "title": "A consistent series of images",
+      "useWhen": "Several images must look like they belong together.",
+      "prompt": "Create image [N] of a series. Keep IDENTICAL across the series: [CHARACTER OR PRODUCT DESCRIPTION], [COLOUR PALETTE], [STYLE], [LIGHTING].\nChange only: [WHAT CHANGES IN THIS IMAGE, e.g. the pose or the location].\n[If your tool supports it, attach the previous image as a reference.]",
+      "why": "Series drift happens when every prompt is rewritten. Copying the fixed block word for word and changing one line keeps the look stable."
+    },
+    {
+      "id": "readable-text",
+      "title": "Poster or image with readable text",
+      "useWhen": "Posters, thumbnails and social graphics with a headline.",
+      "prompt": "Poster, [STYLE]. The only text is the headline “[EXACT TEXT, max 5 words]” in [FONT STYLE, e.g. bold sans-serif], [POSITION, e.g. top third], high contrast against the background. Background: [SCENE]. No other words, letters or logos anywhere.",
+      "why": "Generators misspell long text. Short exact wording in quotes, one position and “no other words” give the best odds — always proofread the result."
+    },
+    {
+      "id": "fix-one-thing",
+      "title": "Fix one thing in an image",
+      "useWhen": "The image is almost right.",
+      "prompt": "Keep everything in this image the same except: [ONE CHANGE, e.g. make the sky overcast].\nDo not change: [THE PARTS THAT MUST STAY — subject, composition, colours].\n[Attach the image and use your tool's edit or inpaint mode if it has one.]",
+      "why": "Editing one variable at a time is the image version of iterating from the output. Listing what must stay stops the model re-rolling the whole picture."
+    }
+  ],
+  "draft": false
+}

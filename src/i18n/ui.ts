@@ -46,7 +46,7 @@ export interface UiStrings {
   skipLink: string;
   themeToggle: string;
   levelChip: string;
-  nav: { learn: string; practice: string; assessment: string; glossary: string; about: string };
+  nav: { learn: string; practice: string; prompts: string; assessment: string; glossary: string; about: string };
   footer: {
     tagline: string;
     learnHeading: string;
@@ -59,6 +59,30 @@ export interface UiStrings {
     myProgress: string;
     howItWorks: string;
     privacy: string;
+    contact: string;
+    promptTemplates: string;
+  };
+  /** Prompt-template library (/prompts), the Pro pack box and the newsletter box. */
+  promptLib: {
+    home: string;
+    hubCrumb: string;
+    useWhen: string;
+    why: string;
+    copy: string;
+    copied: string;
+    templatesCount: string;
+    learnSkillHeading: string;
+    englishOnly: string;
+    moreSets: string;
+    lessonTemplatesLabel: string;
+    packEyebrow: string;
+    packTitle: string;
+    packBody: string;
+    packButton: string;
+    packNote: string;
+    newsletterTitle: string;
+    newsletterBody: string;
+    newsletterButton: string;
   };
   /** Label for the language switcher pointing at the OTHER language. */
   langSwitch: string;
@@ -96,7 +120,7 @@ const en: UiStrings = {
   skipLink: 'Skip to content',
   themeToggle: 'Toggle dark mode',
   levelChip: 'Lv 1 · Curious',
-  nav: { learn: 'Learn', practice: 'Practice', assessment: 'Assessment', glossary: 'Glossary', about: 'About' },
+  nav: { learn: 'Learn', practice: 'Practice', prompts: 'Prompts', assessment: 'Assessment', glossary: 'Glossary', about: 'About' },
   footer: {
     tagline:
       'Practical AI skills, one exercise at a time. Free, no account — progress is stored on this device only.',
@@ -110,6 +134,30 @@ const en: UiStrings = {
     myProgress: 'My progress',
     howItWorks: 'How it works',
     privacy: 'Privacy',
+    contact: 'Contact',
+    promptTemplates: 'Prompt templates',
+  },
+  promptLib: {
+    home: 'Home',
+    hubCrumb: 'Prompt templates',
+    useWhen: 'Use it when',
+    why: 'Why it works',
+    copy: 'Copy prompt',
+    copied: 'Copied',
+    templatesCount: '{n} templates',
+    learnSkillHeading: 'Learn the skill behind these prompts',
+    englishOnly: '',
+    moreSets: 'More prompt templates',
+    lessonTemplatesLabel: 'Copy-paste templates for this skill',
+    packEyebrow: 'Prompt Pack Pro',
+    packTitle: '100 prompt templates in one printable pack',
+    packBody:
+      'The 54 templates on this site plus 46 exclusive ones for marketing, social media, studying, writing and personal productivity — in English and Spanish, with a one-page checklist for verifying AI answers.',
+    packButton: 'Get the pack — {price}',
+    packNote: 'One-time payment, instant PDF download. Checkout by Lemon Squeezy.',
+    newsletterTitle: 'One new template every week',
+    newsletterBody: 'A tested prompt template and a five-minute exercise in your inbox each week. Free; unsubscribe in one click.',
+    newsletterButton: 'Subscribe free',
   },
   langSwitch: 'Español',
   langSwitchAria: 'Read this site in Spanish',
@@ -195,7 +243,7 @@ const es: UiStrings = {
   skipLink: 'Saltar al contenido',
   themeToggle: 'Cambiar el tema claro/oscuro',
   levelChip: 'Nv 1 · Curioso',
-  nav: { learn: 'Aprender', practice: 'Practicar', assessment: 'Evaluación', glossary: 'Glosario', about: 'Acerca de' },
+  nav: { learn: 'Aprender', practice: 'Practicar', prompts: 'Plantillas', assessment: 'Evaluación', glossary: 'Glosario', about: 'Acerca de' },
   footer: {
     tagline:
       'Habilidades prácticas de IA, un ejercicio a la vez. Gratis, sin cuenta — tu progreso se guarda solo en este dispositivo.',
@@ -209,6 +257,30 @@ const es: UiStrings = {
     myProgress: 'Mi progreso',
     howItWorks: 'Cómo funciona',
     privacy: 'Privacidad',
+    contact: 'Contacto',
+    promptTemplates: 'Plantillas de prompts',
+  },
+  promptLib: {
+    home: 'Inicio',
+    hubCrumb: 'Plantillas de prompts',
+    useWhen: 'Úsalo cuando',
+    why: 'Por qué funciona',
+    copy: 'Copiar prompt',
+    copied: 'Copiado',
+    templatesCount: '{n} plantillas',
+    learnSkillHeading: 'Aprende la habilidad detrás de estos prompts',
+    englishOnly: '(lección en inglés)',
+    moreSets: 'Más plantillas de prompts',
+    lessonTemplatesLabel: 'Plantillas para copiar y pegar sobre esto',
+    packEyebrow: 'Pack Pro de prompts',
+    packTitle: '100 plantillas de prompts en un pack imprimible',
+    packBody:
+      'Las 54 plantillas de esta web más 46 exclusivas de marketing, redes sociales, estudio, escritura y productividad personal — en español e inglés, con una lista de una página para verificar respuestas de IA.',
+    packButton: 'Consigue el pack — {price}',
+    packNote: 'Pago único y descarga inmediata en PDF. Pago gestionado por Lemon Squeezy.',
+    newsletterTitle: 'Una plantilla nueva cada semana',
+    newsletterBody: 'Una plantilla de prompt probada y un ejercicio de cinco minutos en tu correo cada semana. Gratis; te das de baja con un clic.',
+    newsletterButton: 'Suscribirme gratis',
   },
   langSwitch: 'English',
   langSwitchAria: 'Read this site in English',

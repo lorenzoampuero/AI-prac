@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NextTokenDemo from '../../components/lesson/NextTokenDemo.astro';
 import { TRACKS } from '../../data/tracks';
-import { SITE_NAME } from '../../config/site';
+import { SITE_NAME, SITE_ORIGIN } from '../../config/site';
 import { organizationJsonLd, websiteJsonLd } from '../../seo/schema';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const description =
   'Aprende habilidades prácticas de IA con lecciones cortas y ejercicios: prompts, verificación, investigación y trabajo. Sin cuenta; tu progreso se queda en tu dispositivo.';
 
@@ -100,6 +100,13 @@ const firstLessonHref = firstLesson
         ]}
       />
     </div>
+  </section>
+
+  <section class="offer-box" aria-labelledby="prompts-title">
+    <p class="eyebrow">Plantillas de prompts gratis</p>
+    <h2 id="prompts-title" class="offer-title">Prompts para copiar y pegar: email, Excel, resúmenes, imágenes y más</h2>
+    <p>54 plantillas agrupadas por tarea, cada una con huecos con nombre y las reglas que evitan que la IA se invente datos.</p>
+    <a class="button secondary" href="/es/prompts">Ver las plantillas</a>
   </section>
 
   <section aria-labelledby="tracks-title">

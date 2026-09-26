@@ -1,0 +1,54 @@
+{
+  "order": 8,
+  "name": "Customer support",
+  "title": "AI prompts for customer support replies",
+  "seoTitle": "Customer Service Prompts: 6 AI Reply Templates",
+  "description": "Free AI prompt templates for customer support: calm replies to angry customers, refusing refunds, FAQ answers, triage and macros that never overpromise.",
+  "intro": "In support, the dangerous AI failure isn't a bad tone — it is a promise your policy does not allow. Each template pastes your policy in and forbids commitments outside it.",
+  "lesson": "ai-for-work/support-replies-that-deescalate",
+  "templates": [
+    {
+      "id": "angry-customer",
+      "title": "Reply to an angry customer",
+      "useWhen": "A customer is upset and the reply must calm things down.",
+      "prompt": "Write a reply to the customer message between <<< and >>>.\nOur policy on this: <<<[PASTE THE RELEVANT POLICY]>>>\nWhat we can actually offer: [OPTIONS]\nRules: the first sentence acknowledges the specific problem (not “sorry for any inconvenience”); explain what happens next, with a time frame only if the policy gives one; never promise refunds, credits or dates beyond the policy; under 120 words; no blame on the customer.\n\nMessage: <<<[PASTE]>>>",
+      "why": "Specific acknowledgement de-escalates; pasting the policy bounds what the reply can promise."
+    },
+    {
+      "id": "refuse-a-refund",
+      "title": "Say no to a refund politely",
+      "useWhen": "The answer is no and it has to stay polite.",
+      "prompt": "A customer asked for a refund we can't give because [REASON]. Policy: <<<[PASTE POLICY LINE]>>>\nWrite a reply that states the decision clearly in the first two sentences, explains the reason in plain words citing the policy, offers [ALTERNATIVE, if any] and leaves a door open ([HOW TO ESCALATE]). Warm, but no apology for the policy itself. Under 130 words.",
+      "why": "A vague “no” generates a second email. A clear decision, the reason and an alternative close the loop."
+    },
+    {
+      "id": "policy-to-faq",
+      "title": "Turn a policy into a FAQ answer",
+      "useWhen": "Customers keep asking the same question.",
+      "prompt": "Turn this internal policy into a customer-facing FAQ answer: <<<[PASTE POLICY]>>>\nFormat: the question as a customer would type it; a one-sentence direct answer; then up to 4 bullets with conditions or exceptions. Plain language, no internal jargon. Don't add anything the policy doesn't say — if something customers will ask is unclear in the policy, list it for me separately.",
+      "why": "A direct answer first matches how people scan FAQs, and the list of unclear points improves the policy, not just the copy."
+    },
+    {
+      "id": "triage-messages",
+      "title": "Triage incoming messages",
+      "useWhen": "The inbox is full and you need to know what to answer first.",
+      "prompt": "Classify each message below into one of these categories: [CATEGORIES, e.g. billing, bug, how-to, cancellation, other].\nFor each message: category, urgency (high = [YOUR DEFINITION]), a one-line summary, and whether it needs a human.\nIf a message fits no category, or two, say so — don't force it.\n\nMessages: <<<[PASTE, one per line with an ID]>>>",
+      "why": "Defined categories and a definition of “high urgency” keep classification consistent; allowing “doesn't fit” exposes gaps in your categories."
+    },
+    {
+      "id": "reusable-macro",
+      "title": "Write a reusable support macro",
+      "useWhen": "The same situation comes up every week.",
+      "prompt": "Write a reusable reply template for [SITUATION, e.g. delayed delivery].\nFixed parts: our policy <<<[PASTE]>>> and our tone ([2–3 WORDS]).\nLeave named slots for the variable parts: [CUSTOMER NAME], [ORDER NUMBER], [NEW DATE] and so on.\nAdd a checklist of 3 things the agent must verify before sending.",
+      "why": "Macros speed support up but go wrong when sent unchecked. Named slots plus a pre-send checklist keep both speed and accuracy."
+    },
+    {
+      "id": "complaint-to-bug-report",
+      "title": "Turn a complaint into a bug report",
+      "useWhen": "A customer describes a problem the product team must fix.",
+      "prompt": "Turn this customer message into a bug report for our developers: <<<[PASTE]>>>\nFormat: title; steps to reproduce (only what the customer actually said — mark unknowns as “unknown”); expected vs actual behaviour; device or browser if mentioned; a severity guess with the reason.\nAlso write 2 questions to ask the customer to fill in the unknowns.",
+      "why": "Developers need reproducible steps. Marking unknowns instead of guessing prevents wild-goose chases."
+    }
+  ],
+  "draft": false
+}

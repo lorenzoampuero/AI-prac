@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../seo/schema';
+import { CONTACT_EMAIL, SITE_ORIGIN } from '../../config/site';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
 
 <BaseLayout
@@ -76,5 +77,7 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
     específico de producto se revisa con un calendario — el registro de hechos guarda una fecha de
     revisión para cada uno (siguiente pasada completa: diciembre de 2026).
   </p>
-  <!-- TODO(owner): add a public correction channel (email or issue tracker) when available. -->
+  {CONTACT_EMAIL && (
+    <p>¿Has visto un error? Escribe a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  )}
 </BaseLayout>

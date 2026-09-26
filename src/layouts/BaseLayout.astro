@@ -4,7 +4,7 @@ import '@fontsource-variable/source-serif-4';
 import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
 import { getCollection } from 'astro:content';
-import { SITE_NAME } from '../config/site';
+import { CONTACT_EMAIL, SITE_NAME, SITE_ORIGIN } from '../config/site';
 import { localeOf, uiStrings, type Locale } from '../i18n/ui';
 import '../styles/global.css';
 
@@ -36,7 +36,7 @@ const s = uiStrings(locale);
 const base = locale === 'es' ? '/es' : '';
 const pageTitle = suffix && title !== SITE_NAME ? `${title} · ${SITE_NAME}` : title;
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 const canonical = new URL(Astro.url.pathname, origin);
 const ogImage = new URL('/og.png', origin).href;
 
@@ -53,7 +53,7 @@ const normalizedPath = pathname !== '/' ? pathname.replace(/\/+$/, '') : '/';
 const isEs = normalizedPath === '/es' || normalizedPath.startsWith('/es/');
 const enPath = isEs ? normalizedPath.replace(/^\/es/, '') || '/' : normalizedPath;
 const esPath = isEs ? normalizedPath : normalizedPath === '/' ? '/es' : `/es${normalizedPath}`;
-const ES_STATIC_PATHS = new Set(['/', '/learn', '/practice', '/glossary', '/faq', '/assessment', '/about', '/privacy']);
+const ES_STATIC_PATHS = new Set(['/', '/learn', '/practice', '/prompts', '/glossary', '/faq', '/assessment', '/about', '/privacy']);
 const esLessonsAll = await getCollection('lessonsEs', ({ data }) => !data.draft);
 const esExercisesAll = await getCollection('exercisesEs', ({ data }) => !data.draft);
 const esTermsAll = await getCollection('glossaryEs', ({ data }) => !data.draft);
@@ -66,11 +66,13 @@ for (const track of new Set(esLessonsAll.map((lesson) => lesson.data.track))) {
 }
 for (const exercise of esExercisesAll) esPathSet.add(`/practice/${exercise.id}`);
 for (const term of esTermsAll) esPathSet.add(`/glossary/${term.id}`);
+for (const set of await getCollection('promptsEs', ({ data }) => !data.draft)) esPathSet.add(`/prompts/${set.id}`);
 const hasEsCounterpart = isEs || esPathSet.has(normalizedPath);
 
 const NAV = [
   { href: `${base}/learn`, label: s.nav.learn },
   { href: `${base}/practice`, label: s.nav.practice },
+  { href: `${base}/prompts`, label: s.nav.prompts },
   { href: `${base}/assessment`, label: s.nav.assessment },
   { href: `${base}/glossary`, label: s.nav.glossary },
   { href: `${base}/about`, label: s.nav.about },
@@ -235,6 +237,7 @@ const siteMeta = {
           <ul>
             <li><a href={`${base}/learn`}>{s.footer.curriculum}</a></li>
             <li><a href={`${base}/practice`}>{s.footer.practice}</a></li>
+            <li><a href={`${base}/prompts`}>{s.footer.promptTemplates}</a></li>
             <li><a href={`${base}/assessment`}>{s.footer.skillsCheck}</a></li>
             <li><a href={`${base}/glossary`}>{s.footer.glossary}</a></li>
             <li><a href={`${base}/faq`}>{s.footer.aiQuestions}</a></li>
@@ -246,6 +249,7 @@ const siteMeta = {
             <li><a href="/progress">{s.footer.myProgress}</a></li>
             <li><a href={`${base}/about`}>{s.footer.howItWorks}</a></li>
             <li><a href={`${base}/privacy`}>{s.footer.privacy}</a></li>
+            {CONTACT_EMAIL && <li><a href={`mailto:${CONTACT_EMAIL}`}>{s.footer.contact}</a></li>}
           </ul>
         </div>
       </div>

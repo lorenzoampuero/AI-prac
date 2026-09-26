@@ -1,0 +1,54 @@
+{
+  "order": 6,
+  "name": "CV y empleo",
+  "title": "Prompts de ChatGPT para tu CV y la búsqueda de empleo",
+  "seoTitle": "Prompts para CV y carta de presentación con IA",
+  "description": "Prompts gratis para adaptar tu CV, escribir la carta de presentación, preparar la entrevista e investigar la empresa con IA, sin inventar experiencia que no tienes.",
+  "intro": "La IA es excelente para relacionar tu experiencia real con una oferta de empleo y peligrosa cuando se le permite inventar. Todas las plantillas incluyen una regla de no inventar: puede reformular lo que hiciste, nunca añadir lo que no hiciste.",
+  "lesson": "ai-for-work/job-search-workflows",
+  "templates": [
+    {
+      "id": "tailor-your-cv",
+      "title": "Adaptar tu CV a una oferta",
+      "useWhen": "En cada candidatura: un CV por oferta, no un CV para todas.",
+      "prompt": "Oferta de empleo: <<<[PEGA]>>>\nMi CV: <<<[PEGA]>>>\n1) Enumera los 6 requisitos principales de la oferta.\n2) Para cada uno, cita la línea de mi CV que lo demuestra, o escribe «hueco».\n3) Reescribe hasta 5 viñetas usando las palabras clave de la oferta cuando encajen de verdad.\nRegla: nunca añadas habilidades, herramientas, cifras ni cargos que no estén en mi CV. Si una viñeta mejoraría con una cifra que no te he dado, pídemela.",
+      "why": "El mapa requisito → prueba muestra tu encaje real y tus huecos reales; la regla de no inventar te protege en la entrevista."
+    },
+    {
+      "id": "cover-letter",
+      "title": "Una carta de presentación que no sea genérica",
+      "useWhen": "La oferta pide carta y quieres que la lean.",
+      "prompt": "Escribe una carta de presentación para el puesto de [PUESTO] en [EMPRESA].\nPor qué esta empresa (mi razón real): [TU RAZÓN]\nDos logros que destacar (de mi CV): [LOGRO 1], [LOGRO 2]\nReglas: menos de 250 palabras; empieza con la razón concreta, no con «Me dirijo a ustedes para…»; relaciona cada logro con un requisito de esta oferta: <<<[PEGA LA OFERTA]>>>; nada de tópicos como «apasionado», «trabajo en equipo» o «entorno dinámico».",
+      "why": "Las cartas genéricas salen de datos genéricos. Tu razón real y dos logros concretos son lo único que recuerda quien selecciona."
+    },
+    {
+      "id": "interview-star-answers",
+      "title": "Preparar respuestas de entrevista (método STAR)",
+      "useWhen": "Tienes una entrevista próximamente.",
+      "prompt": "Puesto: [PUESTO]. Oferta: <<<[PEGA]>>>\nEnumera las 6 preguntas que más probablemente me harán. Para cada pregunta de comportamiento, ayúdame a construir una respuesta STAR (Situación, Tarea, Acción, Resultado) con esta experiencia real: [DESCRIBE 2–3 SITUACIONES DE TU TRABAJO].\nPídeme los detalles que falten en vez de inventarlos. Cada respuesta debe durar menos de 90 segundos hablada (unas 200 palabras).",
+      "why": "STAR da la estructura; tus situaciones reales dan el contenido. Pedir los detalles que faltan hace que cada respuesta siga siendo tuya."
+    },
+    {
+      "id": "research-the-company",
+      "title": "Investigar la empresa antes de la entrevista",
+      "useWhen": "Quieres sonar informado, no genérico.",
+      "prompt": "Tengo una entrevista en [EMPRESA] para [PUESTO]. Dame una lista de investigación: qué buscar (productos, clientes, noticias recientes, competidores, señales de cultura) y dónde (web oficial, informe anual, prensa, opiniones de empleados).\nDespués dime lo que crees saber de la empresa, indicando lo actualizado que puede estar — lo verificaré todo antes de usarlo.",
+      "why": "El modelo es mejor diciéndote qué comprobar que estando al día. Trata lo que sabe como una lista de pistas, no como hechos."
+    },
+    {
+      "id": "linkedin-about",
+      "title": "El «Acerca de» de LinkedIn",
+      "useWhen": "Tu perfil está vacío o parece una lista de palabras de moda.",
+      "prompt": "Escribe la sección «Acerca de» de mi perfil de LinkedIn.\nA qué me dedico ahora: [PUESTO, SECTOR]\nPruebas de trabajo real: [2–3 RESULTADOS, con cifras si las tienes]\nQué busco: [PUESTO O CLIENTES OBJETIVO]\nReglas: en primera persona; 120–180 palabras; las dos primeras líneas deben funcionar solas (es lo que se ve antes de «ver más»); sin listas de palabras de moda; termina diciendo sobre qué pueden contactarme.",
+      "why": "Por defecto solo se ven las dos primeras líneas. La plantilla hace que lleven el mensaje principal y apoya el resto en resultados reales."
+    },
+    {
+      "id": "negotiate-an-offer",
+      "title": "Negociar una oferta por email",
+      "useWhen": "Te han hecho una oferta y quieres pedir más.",
+      "prompt": "Ayúdame a responder a una oferta de trabajo. Oferta: [SALARIO, BENEFICIOS]. Lo que quiero: [OBJETIVO] porque [RAZONES: datos de mercado que encontraste, otra oferta, habilidades concretas].\nEscribe un email breve y cordial que agradezca la oferta, diga el objetivo una vez con las razones y pregunte si hay margen. Menos de 150 palabras. No inventes cifras de mercado: usa solo las razones que te he dado.",
+      "why": "Los emails de negociación fallan por vagos o por agresivos. Una cifra clara con razones reales, en un tono cordial, es lo profesional."
+    }
+  ],
+  "draft": false
+}

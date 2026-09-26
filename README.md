@@ -3,13 +3,13 @@
 Interactive, exercise-first platform for practical AI literacy: short lessons, hands-on
 practice, a glossary and a skills assessment. Static-first site built with Astro + TypeScript.
 
-> Working slug: `ai-practice`. The final brand/domain is decided in Gate 0 research — no
-> purchases, no deployment, no ads, no paid APIs without explicit approval.
+Live at **https://www.getaipractice.site** (Vercel, auto-deploy from `main`). No ads, paid APIs or
+new data collection without explicit owner approval.
 
 ## Status
 
-**Phase 0 — isolated repo bootstrap.** Progress is tracked in `docs/PROJECT_STATUS.md`
-(created as part of the foundation phase).
+Launched 2026-09-20; English at the root, Spanish under `/es`. Progress and gate evidence live in
+`docs/PROJECT_STATUS.md`; post-launch cadence in `docs/POST_LAUNCH_LOOP.md`.
 
 ## Commands
 

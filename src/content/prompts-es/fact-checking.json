@@ -1,0 +1,54 @@
+{
+  "order": 5,
+  "name": "Verificar respuestas",
+  "title": "Prompts para verificar las respuestas de la IA",
+  "seoTitle": "Cómo verificar respuestas de IA: 6 prompts",
+  "description": "Prompts para comprobar si ChatGPT tiene razón: separar afirmaciones, pedir nivel de confianza y fechas, revisar citas y contrastar dos herramientas de IA.",
+  "intro": "Las respuestas de la IA suenan igual de seguras cuando aciertan que cuando se inventan algo. Estos prompts obligan al modelo a mostrar su incertidumbre y te dan afirmaciones que puedes comprobar; la comprobación en sí se hace con fuentes reales.",
+  "lesson": "ai-research/cross-check-answers",
+  "templates": [
+    {
+      "id": "split-into-claims",
+      "title": "Dividir una respuesta en afirmaciones comprobables",
+      "useWhen": "Una respuesta parece correcta pero vas a depender de ella.",
+      "prompt": "Toma la respuesta que está entre <<< y >>> y enumera cada afirmación factual como una lista numerada. Para cada una indica: la afirmación en una frase; si es una cifra, una fecha, un nombre, una cita o una afirmación general; y qué tipo de fuente podría verificarla.\nTodavía no juzgues si son verdaderas.\n\nRespuesta: <<<[PEGA]>>>",
+      "why": "No se puede verificar un párrafo, solo afirmaciones. Separarlas primero convierte un vago «¿esto está bien?» en una lista de comprobación."
+    },
+    {
+      "id": "confidence-and-gaps",
+      "title": "Pedir nivel de confianza y lagunas",
+      "useWhen": "Antes de usar una respuesta para algo importante.",
+      "prompt": "Responde a esta pregunta: [PREGUNTA]\nDespués, para cada punto clave de tu respuesta, indica tu confianza (alta / media / baja) y por qué. Enumera qué cambiaría la respuesta y qué podrías estar pasando por alto por tu fecha de corte de entrenamiento. Si no lo sabes, dilo en lugar de estimar.",
+      "why": "Los modelos casi nunca admiten dudas por iniciativa propia. Preguntar punto por punto, y aceptar «no lo sé», saca a la luz las partes débiles."
+    },
+    {
+      "id": "check-citations",
+      "title": "Revisar las citas que te dio la IA",
+      "useWhen": "La respuesta incluye fuentes, estudios o enlaces.",
+      "prompt": "Para cada fuente citada en la respuesta de abajo, indica: el título exacto, el autor u organización, el año y la URL tal como aparecen, y la afirmación concreta que supuestamente respalda.\nDeja claro que no puedes confirmar que esas fuentes existan — las abriré yo una a una. Señala cualquier cita que parezca incompleta o sospechosa.\n\nRespuesta: <<<[PEGA]>>>",
+      "why": "Las citas inventadas parecen completas. Ordenarlas afirmación por afirmación agiliza la comprobación manual, y el modelo no finge haber verificado nada."
+    },
+    {
+      "id": "is-it-out-of-date",
+      "title": "Comprobar si una respuesta está desactualizada",
+      "useWhen": "Hay precios, leyes, funciones de productos, cargos o estadísticas.",
+      "prompt": "Pregunta: [PREGUNTA]\nAntes de responder, dime si depende de información que cambia con el tiempo (precios, leyes, funciones de productos, cargos de personas, estadísticas). Si es así, indica aproximadamente de cuándo es probable que sea tu información, qué puede haber cambiado desde entonces y dónde consultar la versión actual. Después responde.",
+      "why": "Los datos caducados son el error silencioso más frecuente. Preguntar primero por la actualidad pone la advertencia antes de la afirmación, no después."
+    },
+    {
+      "id": "cross-check-two-tools",
+      "title": "Contrastar las respuestas de dos IA",
+      "useWhen": "Preguntaste a dos herramientas y te dieron respuestas distintas.",
+      "prompt": "Estas son dos respuestas a la misma pregunta de herramientas diferentes.\nPregunta: [PREGUNTA]\nRespuesta A: <<<[PEGA]>>>\nRespuesta B: <<<[PEGA]>>>\nHaz una tabla: punto | qué dice A | qué dice B | ¿coinciden? Después enumera los desacuerdos que debo resolver con una fuente primaria, del más importante al menos. No elijas un ganador.",
+      "why": "Que dos modelos coincidan no es una prueba —comparten datos de entrenamiento—, pero un desacuerdo señala con precisión qué comprobar primero."
+    },
+    {
+      "id": "check-the-numbers",
+      "title": "Revisar las cifras de un texto",
+      "useWhen": "Un texto está lleno de estadísticas y porcentajes.",
+      "prompt": "Enumera cada cifra, porcentaje y estadística del texto que está entre <<< y >>>. Para cada una: qué mide, la unidad, el periodo y la fuente que cita el texto (o «sin fuente»). Señala las cifras que parezcan incoherentes entre sí.\n\nTexto: <<<[PEGA]>>>",
+      "why": "Las cifras sin periodo, unidad o fuente son donde se esconden las afirmaciones engañosas. La tabla hace visible cada dato que falta."
+    }
+  ],
+  "draft": false
+}

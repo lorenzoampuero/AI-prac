@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import PromptHubView from '../../components/prompts/PromptHubView.astro';
+
+const sets = await getCollection('prompts', ({ data }) => !data.draft);
+const total = sets.reduce((sum, set) => sum + set.data.templates.length, 0);
+---
+
+<PromptHubView
+  locale="en"
+  title="Free Prompt Templates for ChatGPT and Claude"
+  description={`${total} free, copy-paste prompt templates for ChatGPT, Claude and Gemini, grouped by task: email, summaries, Excel, images, fact-checking, CVs, slides and more.`}
+  heading="Prompt templates you can copy and trust"
+  lede={`${total} templates grouped by task. Each one has named [SLOTS] for what changes and fixed rules for what usually goes wrong with AI — invented facts, lost numbers, the wrong tone. Pick a task, fill the slots, paste.`}
+  howToHeading="How to use a template"
+  steps={[
+    'Replace every [SLOT]. If you cannot fill one, the task is not ready to delegate yet — that is the template doing its job.',
+    'Paste your own material between <<< and >>>, so the model knows exactly where it starts and ends.',
+    'Check the answer against the rules in the template before you use it: numbers kept, nothing promised or invented.',
+    'Works in ChatGPT, Claude, Gemini, Copilot or any chat assistant — nothing here depends on one product.',
+  ]}
+/>

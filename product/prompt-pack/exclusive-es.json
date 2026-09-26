@@ -1,0 +1,364 @@
+[
+  {
+    "slug": "marketing",
+    "order": 10,
+    "name": "Marketing y textos de venta",
+    "intro": "Los textos de marketing hechos con IA fallan de dos maneras: frases genéricas que podría decir cualquiera y promesas que no puedes demostrar. Estas plantillas parten de tu cliente real y de tus pruebas reales.",
+    "templates": [
+      {
+        "id": "value-proposition",
+        "title": "Encontrar tu propuesta de valor",
+        "useWhen": "Tu web o tu presentación dice qué haces, pero no por qué importa.",
+        "prompt": "Mi producto: [QUÉ ES, EN UNA FRASE]\nCliente: [QUIÉN LO COMPRA — rol, situación, el momento en que lo necesita]\nSu alternativa actual: [QUÉ HACE HOY EN SU LUGAR]\nPruebas que tengo: [RESULTADOS, CIFRAS, TESTIMONIOS — solo reales]\nEscribe 5 propuestas de valor distintas (máximo 15 palabras cada una), cada una basada en un beneficio diferente. Para cada una, indica qué prueba de arriba la respalda. No uses ninguna afirmación que mis pruebas no puedan sostener.",
+        "why": "Atar cada propuesta a una prueba mantiene el texto honesto y te dice qué afirmaciones puedes defender."
+      },
+      {
+        "id": "landing-page-sections",
+        "title": "Estructura de una página de venta",
+        "useWhen": "Necesitas una página de venta y no sabes qué poner ni dónde.",
+        "prompt": "Crea la estructura sección por sección de una página de venta de [PRODUCTO] dirigida a [CLIENTE].\nSecciones: titular + subtítulo, el problema con las palabras del cliente, cómo funciona (3 pasos), pruebas, precio, objeciones + respuestas, llamada a la acción final.\nUsa solo estos datos: <<<[PEGA FUNCIONES, PRECIO, PRUEBAS]>>>. Marca con [FALTA] cualquier sección donde necesites información que no te he dado.",
+        "why": "Un orden de secciones fijo es el esqueleto probado; las marcas [FALTA] muestran exactamente qué te queda por reunir."
+      },
+      {
+        "id": "headline-variants",
+        "title": "Diez titulares para probar",
+        "useWhen": "Quieres hacer un test A/B de un titular, un anuncio o un asunto de email.",
+        "prompt": "Escribe 10 titulares para [PÁGINA / ANUNCIO / EMAIL] sobre [OFERTA] para [CLIENTE].\nUsa 5 enfoques distintos, dos titulares por enfoque: 1) el resultado, 2) el dolor que se evita, 3) rapidez o facilidad, 4) una cifra concreta de mis pruebas ([PRUEBA]), 5) una pregunta.\nMáximo [10] palabras cada uno. Sin signos de exclamación y sin «revolucionario», «definitivo» ni «el mejor».",
+        "why": "Agrupar por enfoque convierte la intuición en un experimento: aprendes qué tipo de mensaje funciona, no solo qué frase."
+      },
+      {
+        "id": "customer-language",
+        "title": "Sacar el lenguaje del cliente de sus opiniones",
+        "useWhen": "Quieres textos que suenen a tus clientes, no a publicidad.",
+        "prompt": "Estas son opiniones, mensajes o respuestas de encuestas de clientes: <<<[PEGA]>>>\nExtrae: 1) las frases exactas que usan para describir el problema, 2) las frases exactas que usan para describir el resultado, 3) objeciones o dudas que mencionan. Cítalas literalmente, con cuántas veces aparece cada idea. No las parafrasees.",
+        "why": "El mejor texto muchas veces ya está en boca de tus clientes. Las citas exactas ganan a la paráfrasis del modelo."
+      },
+      {
+        "id": "product-description",
+        "title": "Descripción de producto para tienda online",
+        "useWhen": "Una ficha con especificaciones y ningún motivo para comprar.",
+        "prompt": "Escribe la descripción de [PRODUCTO] para [CLIENTE] que compra en [TIPO DE TIENDA].\nDatos (usa solo estos): <<<[PEGA MEDIDAS, MATERIALES, TALLAS, CUIDADOS]>>>\nEstructura: una frase sobre para quién es y su beneficio principal; 3–5 viñetas que conviertan especificaciones en beneficios («[dato] — para que [beneficio]»); una línea sobre qué incluye. Menos de 120 palabras. Nada de afirmaciones de salud, seguridad o certificaciones que no estén en los datos.",
+        "why": "El patrón dato → beneficio vende sin inventar; la regla de no afirmar evita problemas legales en sectores regulados."
+      },
+      {
+        "id": "email-campaign",
+        "title": "Secuencia de lanzamiento de tres emails",
+        "useWhen": "Lanzas un producto, un curso o una oferta a tu lista.",
+        "prompt": "Escribe una secuencia de 3 emails para lanzar [OFERTA] a [PÚBLICO] que ya me conoce por [CONTEXTO].\nEmail 1 (anuncio): qué es y para quién. Email 2 (prueba): una historia o resultado — usa solo esto: [HISTORIA/RESULTADO REAL]. Email 3 (última llamada): la fecha límite [FECHA] y la única razón para actuar ya.\nCada email: asunto de menos de 7 palabras, menos de 150 palabras, un enlace, una llamada a la acción. Estilo de texto sencillo.",
+        "why": "Tres emails con funciones distintas funcionan mejor que tres versiones del mismo discurso; el email de prueba vale lo que valga la historia real que le des."
+      },
+      {
+        "id": "competitor-comparison",
+        "title": "Comparación honesta con un competidor",
+        "useWhen": "Los clientes preguntan «¿por qué tú y no X?».",
+        "prompt": "Compara mi oferta con [COMPETIDOR] para un cliente que necesita [NECESIDAD].\nMi oferta: <<<[PEGA DATOS]>>>\nSu oferta (de su página pública): <<<[PEGA DATOS]>>>\nDevuelve una tabla con los factores que le importan a este cliente y después 3 frases sobre quién debería elegirme a mí y quién a ellos. Sé justo: di dónde son mejores. No afirmes nada sobre ellos que no esté en los datos pegados.",
+        "why": "Las comparaciones honestas convencen más que los ataques y te alejan de afirmaciones falsas sobre la competencia."
+      },
+      {
+        "id": "faq-objections",
+        "title": "Convertir objeciones en preguntas frecuentes",
+        "useWhen": "La gente duda antes de comprar y no sabes por qué.",
+        "prompt": "Mi producto: [PRODUCTO, PRECIO]. Cliente: [CLIENTE].\nEnumera las 8 objeciones más probables antes de comprar (precio, confianza, tiempo, encaje, riesgo…). Para cada una, una respuesta breve y honesta usando solo estos datos: <<<[PEGA GARANTÍAS, POLÍTICAS, PRUEBAS]>>>. Si una objeción no se puede responder con mis datos, escribe «necesita una respuesta real» en vez de inventarla.",
+        "why": "Las objeciones sin respuesta son información sobre el producto, no un problema de redacción: la plantilla separa las dos cosas."
+      },
+      {
+        "id": "ad-copy",
+        "title": "Textos cortos de anuncio con límites",
+        "useWhen": "Anuncios de pago con límites de caracteres estrictos.",
+        "prompt": "Escribe [N] variantes de anuncio para [PLATAFORMA] que promocionen [OFERTA] a [PÚBLICO].\nLímites: titular de máximo [30] caracteres, descripción de máximo [90] caracteres — cuéntalos y muestra el recuento.\nCada variante debe usar un beneficio distinto de esta lista: [BENEFICIOS]. Ninguna afirmación fuera de: <<<[DATOS]>>>. Evita palabras que las plataformas suelen rechazar («garantizado», «n.º 1», «el mejor») salvo que pueda demostrarlas.",
+        "why": "Pedir el recuento de caracteres hace que el modelo compruebe sus propios límites; beneficios distintos dan un contraste real a tu test."
+      },
+      {
+        "id": "brand-voice-guide",
+        "title": "Guía de voz de marca en una página",
+        "useWhen": "Varias personas (o herramientas) escriben para tu marca y cada vez suena distinto.",
+        "prompt": "Estos son 3 textos que suenan exactamente a nuestra marca: <<<[PEGA]>>>\nEscribe una guía de voz de una página: 4 rasgos (cada uno con «somos… / no somos…»), palabras que usamos y palabras que evitamos, longitud de frase y hábitos de puntuación, y una reescritura antes/después de esta frase genérica: «[FRASE GENÉRICA]».",
+        "why": "Una guía sacada de ejemplos reales es más coherente que adjetivos inventados desde cero, y puedes pegarla en cualquier prompt futuro."
+      }
+    ]
+  },
+  {
+    "slug": "social-media",
+    "order": 11,
+    "name": "Redes sociales",
+    "intro": "Las publicaciones escritas con IA suenan todas igual porque parten de la nada. Estas plantillas parten de tu idea real, tu público real y un formato adecuado a la plataforma.",
+    "templates": [
+      {
+        "id": "linkedin-post",
+        "title": "Publicación de LinkedIn a partir de una experiencia real",
+        "useWhen": "Aprendiste algo en el trabajo que merece la pena contar.",
+        "prompt": "Convierte esta experiencia en una publicación de LinkedIn: [QUÉ PASÓ, QUÉ APRENDÍ]\nPúblico: [QUIÉN DEBERÍA LEERLA]\nEstructura: una primera línea que haga parar el scroll (sin engaños); la situación en 2–3 líneas cortas; la lección; una pregunta que invite a comentar. Máximo 180 palabras, párrafos cortos, como mucho 3 hashtags, sin emojis al principio de las líneas. Respeta mis hechos; no añadas logros.",
+        "why": "La primera línea decide si alguien lee el resto. Una experiencia real con una lección clara es lo que se guarda y se comparte."
+      },
+      {
+        "id": "content-ideas",
+        "title": "30 ideas de contenido a partir de lo que sabes",
+        "useWhen": "Nunca sabes qué publicar.",
+        "prompt": "Trabajo como [ROL] y ayudo a [PÚBLICO] con [TEMA].\nGenera 30 ideas de publicación en 5 grupos: errores que veo, tutoriales, mitos, entre bastidores, opiniones. Para cada una: un gancho de una línea y el formato (texto, carrusel, vídeo corto). Marca las 5 que creas más útiles para mi público y por qué.",
+        "why": "Agrupar por tipo te da un calendario variado en lugar de 30 versiones del mismo consejo."
+      },
+      {
+        "id": "repurpose",
+        "title": "Convertir un contenido en cinco",
+        "useWhen": "Escribiste un artículo o grabaste un vídeo y quieres sacarle más partido.",
+        "prompt": "Este es mi contenido: <<<[PEGA ARTÍCULO O TRANSCRIPCIÓN]>>>\nConviértelo en: 1) una publicación de LinkedIn (máximo 180 palabras), 2) un hilo de 5 publicaciones cortas, 3) un carrusel de Instagram (título + 6 diapositivas, máximo 20 palabras cada una), 4) un guion de vídeo de 45 segundos, 5) un párrafo para newsletter. Usa solo ideas del original y conserva las cifras exactas.",
+        "why": "Reutilizar multiplica el alcance sin investigar de nuevo, y «solo ideas del original» mantiene todas las versiones coherentes."
+      },
+      {
+        "id": "carousel",
+        "title": "Carrusel para Instagram o LinkedIn",
+        "useWhen": "Quieres explicar un proceso o una lista de forma visual.",
+        "prompt": "Crea un carrusel sobre [TEMA] para [PÚBLICO].\nDiapositiva 1: una promesa que el carrusel cumpla (máximo 8 palabras). Diapositivas 2–[N]: una idea por diapositiva, máximo 20 palabras, empezando por un verbo. Última diapositiva: un resumen y una llamada a la acción ([ACCIÓN]).\nSugiere también un visual sencillo por diapositiva (icono, flecha, antes/después).",
+        "why": "Una idea por diapositiva y un límite estricto de palabras es lo que hace legible un carrusel en el móvil."
+      },
+      {
+        "id": "video-script",
+        "title": "Guion de vídeo corto (Reels, TikTok, Shorts)",
+        "useWhen": "Quieres grabar un vídeo vertical corto.",
+        "prompt": "Escribe un guion de [30/45/60] segundos sobre [TEMA] para [PÚBLICO].\nFormato: gancho en los 2 primeros segundos (dilo, no lo prepares); 3 bloques con una idea cada uno; una frase final con [LLAMADA A LA ACCIÓN]. Añade el texto en pantalla de cada bloque (máximo 6 palabras) y una nota de qué mostrar. Tono de conversación, como si hablara con una sola persona.",
+        "why": "El vídeo corto se juega en los dos primeros segundos; el texto en pantalla permite seguirlo sin sonido."
+      },
+      {
+        "id": "reply-to-comments",
+        "title": "Responder a comentarios, también a los negativos",
+        "useWhen": "Tu publicación tiene comentarios y algunos son críticos.",
+        "prompt": "Estos son comentarios a mi publicación sobre [TEMA]: <<<[PEGA LOS COMENTARIOS]>>>\nPara cada uno, redacta una respuesta: agradece y responde las preguntas sinceras; ante una crítica, reconoce la parte válida y aporta información (sin sarcasmo ni discusiones); ante spam o provocaciones, escribe «ignorar». Máximo 2 frases por respuesta. No prometas nada en nombre de [EMPRESA].",
+        "why": "Respuestas coherentes y tranquilas generan confianza en todos los que leen, no solo en quien comenta."
+      },
+      {
+        "id": "bio",
+        "title": "Biografía de perfil para cualquier red",
+        "useWhen": "Tu bio no dice qué haces ni por qué seguirte.",
+        "prompt": "Escribe 5 opciones de biografía para [PLATAFORMA] (máximo [150] caracteres, muestra el recuento).\nQuién soy: [ROL]. A quién ayudo: [PÚBLICO]. Con qué: [TEMA]. Prueba: [UN LOGRO O CREDENCIAL REAL]. Qué quiero que hagan quienes visitan mi perfil: [ACCIÓN].\nCada opción con un estilo distinto: directo, cercano, centrado en resultados, curioso, minimalista.",
+        "why": "Cinco estilos juntos te ayudan a elegir; el recuento de caracteres hace que todas se puedan usar."
+      },
+      {
+        "id": "content-calendar",
+        "title": "Calendario de contenido de un mes",
+        "useWhen": "Quieres publicar con constancia sin improvisar cada día.",
+        "prompt": "Planifica [N] publicaciones por semana durante [SEMANAS] semanas en [PLATAFORMA] para [PÚBLICO] sobre [TEMAS].\nTabla: fecha | tema | formato | gancho | objetivo (alcance, confianza o venta). Reglas: no más de 1 publicación de venta de cada 5; alterna formatos; agrupa los temas por semanas. Deja libres [FECHAS] (festivos, eventos).",
+        "why": "La regla de 1 de cada 5 mantiene útil tu perfil; los temas por semana facilitan crear publicaciones por tandas."
+      },
+      {
+        "id": "hashtags-keywords",
+        "title": "Palabras clave y hashtags con sentido",
+        "useWhen": "Eliges los hashtags al azar.",
+        "prompt": "Mi publicación trata de [TEMA] para [PÚBLICO] en [PLATAFORMA].\nSugiere: 3 hashtags amplios, 3 hashtags de nicho y 5 palabras clave para usar de forma natural en el texto o el vídeo. Para cada uno, di quién es probable que lo busque. Recuérdame comprobar su popularidad actual en el buscador de la plataforma, porque tú no ves datos en tiempo real.",
+        "why": "El modelo puede sugerir candidatos, pero no ve las tendencias de hoy; el recordatorio te hace comprobar los datos reales."
+      }
+    ]
+  },
+  {
+    "slug": "studying",
+    "order": 12,
+    "name": "Estudiar y aprender",
+    "intro": "La IA es un gran profesor particular si te hace pensar y uno malo si piensa por ti. Estas plantillas la convierten en examinadora, explicadora y planificadora de estudio, y siempre le piden que diga en qué no está segura.",
+    "templates": [
+      {
+        "id": "explain-like-tutor",
+        "title": "Explicar un concepto como un profesor particular",
+        "useWhen": "No entiendes un tema con tus apuntes o el libro.",
+        "prompt": "Explícame [CONCEPTO]. Mi nivel: [LO QUE YA SÉ]. Contexto: estoy estudiando [ASIGNATURA/EXAMEN].\nEstructura: una definición sencilla en una frase; una analogía cotidiana; un ejemplo resuelto; el error más común de los estudiantes. Después hazme una pregunta para comprobar que lo he entendido y espera mi respuesta antes de seguir.",
+        "why": "Terminar con una pregunta y esperar obliga a recordar activamente, que es lo que de verdad fija lo aprendido."
+      },
+      {
+        "id": "quiz-me",
+        "title": "Hazme un examen con mis apuntes",
+        "useWhen": "Antes de un examen.",
+        "prompt": "Estos son mis apuntes: <<<[PEGA]>>>\nHazme [10] preguntas, de una en una, mezclando tipo test y respuesta corta. Después de cada respuesta: dime si acerté, explica por qué en 2 frases y cita la parte de mis apuntes que la responde. Pregunta solo sobre lo que hay en los apuntes. Al final, enumera los temas que fallé.",
+        "why": "Una pregunta cada vez con corrección gana a releer los apuntes; citar los apuntes mantiene el examen ligado a lo que te van a preguntar."
+      },
+      {
+        "id": "flashcards",
+        "title": "Crear tarjetas de memoria a partir de un texto",
+        "useWhen": "Quieres repasar con repetición espaciada (Anki, Quizlet…).",
+        "prompt": "Crea [20] tarjetas de memoria a partir del texto que está entre <<< y >>>.\nFormato: pregunta ; respuesta (una por línea, separadas por punto y coma para poder importarlas).\nReglas: un dato por tarjeta; la pregunta debe entenderse sola; respuestas de menos de 15 palabras; nada de detalles triviales. Usa solo información del texto.\n\nTexto: <<<[PEGA]>>>",
+        "why": "Un dato por tarjeta y preguntas que se entienden solas son las dos reglas que hacen funcionar las tarjetas; el formato con punto y coma se importa directamente."
+      },
+      {
+        "id": "study-plan",
+        "title": "Plan de estudio hasta el examen",
+        "useWhen": "Tienes fecha de examen y demasiado temario.",
+        "prompt": "Examen: [ASIGNATURA] el [FECHA]. Hoy es [FECHA]. Temas: [LISTA, con mi seguridad en cada uno: baja/media/alta]. Tiempo disponible: [HORAS AL DÍA, días libres].\nCrea un plan día a día: más tiempo para los temas de seguridad baja, repasos espaciados (1, 3 y 7 días después de estudiar algo por primera vez), un simulacro completo [N] días antes del examen y un día ligero justo antes.",
+        "why": "Espaciar los repasos y dar más peso a lo que peor llevas aprovecha el tiempo donde importa; el simulacro muestra qué sigue flojo."
+      },
+      {
+        "id": "check-my-answer",
+        "title": "Revisar mi respuesta sin darme la solución",
+        "useWhen": "Resolviste un ejercicio y quieres corrección, no la respuesta.",
+        "prompt": "Problema: [PEGA EL PROBLEMA]\nMi respuesta y mi razonamiento: [PEGA]\nDime si mi razonamiento es correcto. Si hay un error, señala el paso donde ocurre y dame una pista — no me des la solución completa salvo que te la pida.",
+        "why": "Las pistas en lugar de soluciones hacen que el razonamiento lo pongas tú, que es lo que construye la habilidad."
+      },
+      {
+        "id": "summarize-chapter",
+        "title": "Resumen de un tema con términos clave",
+        "useWhen": "Un tema largo que tienes que dominar.",
+        "prompt": "Resume el tema que está entre <<< y >>> para repasar el examen.\nDevuelve: 1) las 5 ideas principales en una frase cada una; 2) los términos clave con una definición de una línea; 3) cómo se relacionan las ideas (un párrafo corto); 4) 3 preguntas de examen probables. Usa solo el tema; que las definiciones sean fieles al texto.\n\nTema: <<<[PEGA]>>>",
+        "why": "Ideas principales, términos y relaciones es lo que se evalúa; las definiciones fieles importan porque el examen usará las palabras del libro."
+      },
+      {
+        "id": "feynman",
+        "title": "Ponte a prueba con la técnica Feynman",
+        "useWhen": "Crees que entiendes algo pero no estás seguro.",
+        "prompt": "Voy a explicar [CONCEPTO] como si se lo contara a alguien de 12 años. Lee mi explicación y: señala cualquier afirmación incorrecta; señala dónde usé jerga en vez de explicar; hazme la pregunta que dejaría al descubierto el mayor hueco en mi comprensión.\n\nMi explicación: [ESCRÍBELA]",
+        "why": "Si no puedes explicarlo de forma sencilla, todavía no lo sabes: el modelo encuentra exactamente dónde se rompe la explicación."
+      },
+      {
+        "id": "language-practice",
+        "title": "Practicar un idioma conversando",
+        "useWhen": "Estás aprendiendo un idioma y no tienes con quién hablar.",
+        "prompt": "Vamos a practicar [IDIOMA] a nivel [A2/B1/B2…]. Tema: [TEMA].\nHáblame con mensajes cortos. Después de cada respuesta mía: primero contesta con naturalidad para seguir la conversación; después, aparte, corrige hasta 3 errores con una explicación breve. Usa vocabulario de mi nivel e introduce 2 palabras nuevas útiles por mensaje, en negrita.",
+        "why": "Separar la conversación de las correcciones mantiene el chat natural y aun así aprendes de cada error."
+      },
+      {
+        "id": "research-paper",
+        "title": "Entender un artículo científico",
+        "useWhen": "Tienes que leer un artículo académico para clase o trabajo.",
+        "prompt": "Este es un artículo (o su resumen, introducción y conclusión): <<<[PEGA]>>>\nExplica: la pregunta que se plantea; el método con palabras sencillas; el resultado principal con sus cifras; las limitaciones que reconocen los autores; y lo que el artículo NO demuestra. No añadas afirmaciones de fuera del artículo.",
+        "why": "«Lo que no demuestra» es la pregunta que casi todos los resúmenes se saltan, y la que evita que exageres un estudio."
+      }
+    ]
+  },
+  {
+    "slug": "writing",
+    "order": 13,
+    "name": "Escribir y corregir",
+    "intro": "Usa la IA como editora, no como negra: es excelente detectando lo que está poco claro, repetido o demasiado largo en tu texto, y mucho menos fiable cuando escribe tus ideas desde cero.",
+    "templates": [
+      {
+        "id": "edit-for-clarity",
+        "title": "Editar para que se entienda, sin perder mi voz",
+        "useWhen": "Tu texto es correcto pero cuesta leerlo.",
+        "prompt": "Edita el texto que está entre <<< y >>> para que sea más claro.\nConserva: mi voz, mis argumentos, todos los datos y cifras.\nHaz: acortar frases largas, cambiar la jerga por palabras sencillas, quitar repeticiones.\nMuestra el texto editado y después una lista de los 5 cambios más importantes y por qué. No añadas ideas nuevas.\n\nTexto: <<<[PEGA]>>>",
+        "why": "La lista de cambios te permite aceptarlos o rechazarlos, así que el texto sigue siendo tuyo."
+      },
+      {
+        "id": "structure-first",
+        "title": "Hacer el esquema antes de escribir",
+        "useWhen": "Tienes que escribir algo largo y no sabes por dónde empezar.",
+        "prompt": "Tengo que escribir [TIPO DE TEXTO] para [LECTOR] sobre [TEMA]. Mi idea principal: [UNA FRASE]. El material que tengo: [NOTAS, DATOS, FUENTES].\nPropón 2 esquemas distintos (títulos + una línea sobre qué va en cada uno). Para cada uno, di a qué tipo de lector le encaja mejor. No escribas el texto todavía.",
+        "why": "Elegir primero la estructura es lo que hace más fácil escribir; dos opciones te obligan a pensar en el lector."
+      },
+      {
+        "id": "proofread",
+        "title": "Corregir sin reescribir",
+        "useWhen": "Un texto está listo pero quieres una última revisión.",
+        "prompt": "Corrige el texto que está entre <<< y >>> en [IDIOMA/VARIANTE, p. ej. español de España].\nCorrige solo: ortografía, gramática, puntuación y erratas evidentes. No cambies el estilo, la elección de palabras ni la estructura.\nDevuelve una lista: original → corrección → motivo. Después, el texto corregido.\n\nTexto: <<<[PEGA]>>>",
+        "why": "Limitar la tarea a los errores evita que el modelo «mejore» tu estilo cuando solo querías una corrección."
+      },
+      {
+        "id": "change-tone",
+        "title": "Cambiar el tono de un texto",
+        "useWhen": "El contenido está bien, pero el tono no.",
+        "prompt": "Reescribe el texto que está entre <<< y >>> con un tono [TONO OBJETIVO, p. ej. más directo / más cercano / más formal] para [LECTOR].\nConserva cada dato, petición y cifra. Mantén la longitud con un margen de ±10 %.\nDespués enumera las 3 frases que más cambiaron, antes → después.\n\nTexto: <<<[PEGA]>>>",
+        "why": "Fijar datos y longitud aísla el cambio de tono, y la lista antes/después muestra qué significaba en la práctica «más cercano»."
+      },
+      {
+        "id": "critique",
+        "title": "Recibir una crítica exigente",
+        "useWhen": "Antes de publicar o enviar algo importante.",
+        "prompt": "Actúa como un editor exigente de [PUBLICACIÓN/LECTOR]. Critica el texto que está entre <<< y >>>.\nDame: las 3 mayores debilidades (argumento, estructura, pruebas, claridad), dónde está exactamente cada una (cítala) y una solución concreta para cada una. Después, una cosa que funciona bien y que hay que conservar. No reescribas el texto.\n\nTexto: <<<[PEGA]>>>",
+        "why": "Una crítica con citas y soluciones se puede aplicar; «no reescribas» deja la mejora en tus manos."
+      },
+      {
+        "id": "blog-post-draft",
+        "title": "Artículo de blog a partir de tus notas",
+        "useWhen": "Tienes ideas y notas y necesitas un primer borrador.",
+        "prompt": "Escribe un primer borrador de un artículo de blog para [LECTOR] a partir de mis notas: <<<[PEGA LAS NOTAS]>>>\nTítulo: 3 opciones. Estructura: introducción que plantee el problema, 3–5 secciones con subtítulos, conclusión con un siguiente paso. Usa solo ideas y ejemplos de mis notas — donde una sección necesite un ejemplo que no te he dado, escribe [FALTA EJEMPLO]. Unas [PALABRAS] palabras.",
+        "why": "Un borrador hecho con tus notas y con los huecos a la vista te da un texto que puedes terminar, no un artículo genérico que podría ser de cualquiera."
+      },
+      {
+        "id": "shorten-to-limit",
+        "title": "Recortar hasta un límite de palabras",
+        "useWhen": "Una solicitud, un resumen o un formulario con límite de palabras.",
+        "prompt": "Recorta el texto que está entre <<< y >>> a un máximo de [N] palabras (ahora tiene unas [M]).\nOrden de prioridad de lo que hay que conservar: [1. …, 2. …, 3. …].\nMuestra el recuento final. Después enumera lo que has quitado, para que pueda recuperar lo esencial.\n\nTexto: <<<[PEGA]>>>",
+        "why": "Un orden de prioridad le dice al modelo qué sacrificar primero, que es justo lo que si no adivinaría."
+      },
+      {
+        "id": "titles",
+        "title": "Títulos y asuntos",
+        "useWhen": "Tienes el texto pero no el título.",
+        "prompt": "Escribe 10 títulos para este texto: <<<[PEGA O RESUME]>>>\nLector: [LECTOR]. Dónde aparece: [BLOG / EMAIL / INFORME / VÍDEO].\nMezcla: 3 descriptivos, 3 centrados en el beneficio, 2 con una cifra, 2 preguntas. Máximo [N] palabras. El título solo puede prometer lo que el texto cumple.",
+        "why": "«Prometer solo lo que el texto cumple» evita el clickbait que daña la confianza y el posicionamiento."
+      },
+      {
+        "id": "consistency-check",
+        "title": "Revisar la coherencia de un documento largo",
+        "useWhen": "Un documento largo escrito en varios días o por varias personas.",
+        "prompt": "Revisa el documento que está entre <<< y >>> en busca de incoherencias: la misma cosa con nombres distintos, cifras o fechas que no coinciden entre secciones, afirmaciones que se contradicen y formato distinto en títulos y listas.\nEnumera cada problema con las dos citas y dónde aparecen. No los corrijas: decidiré yo.\n\nDocumento: <<<[PEGA]>>>",
+        "why": "Las incoherencias cuestan de ver en un texto largo propio y a un modelo le resulta fácil listarlas; la decisión sigue siendo tuya."
+      }
+    ]
+  },
+  {
+    "slug": "productivity",
+    "order": 14,
+    "name": "Productividad personal",
+    "intro": "La IA puede planificar, priorizar y dividir el trabajo siempre que trabaje con tus limitaciones reales. Estas plantillas siempre piden primero tu tiempo, tu energía y tus plazos de verdad.",
+    "templates": [
+      {
+        "id": "prioritise-week",
+        "title": "Priorizar tu semana",
+        "useWhen": "Demasiadas tareas y poco tiempo.",
+        "prompt": "Mis tareas de esta semana: [LISTA, con fecha límite y tiempo aproximado de cada una]\nMi tiempo disponible: [HORAS AL DÍA, reuniones, compromisos fijos]\nMi objetivo más importante esta semana: [OBJETIVO]\nClasifica las tareas en: hacer esta semana (con un día sugerido), delegar, aplazar, eliminar. Explica cada decisión en una línea. Si no cabe todo, dime con sinceridad qué no se va a hacer.",
+        "why": "Dar tus horas reales obliga a elegir de verdad, en vez de hacer un plan que solo funciona en el papel."
+      },
+      {
+        "id": "break-down-project",
+        "title": "Dividir un proyecto en pasos",
+        "useWhen": "Un proyecto grande que no paras de aplazar.",
+        "prompt": "Proyecto: [QUÉ], fecha límite [FECHA], mi tiempo: [HORAS POR SEMANA].\nDivídelo en pasos de 2 horas como máximo, en orden y con sus dependencias. Marca el primer paso que puedo hacer hoy en menos de 25 minutos. Añade 2 puntos de control para revisar el avance. Enumera la información que me falta para planificarlo bien.",
+        "why": "Pasos pequeños y una primera acción mínima vencen a la procrastinación; la lista de lo que falta evita planificar sobre suposiciones."
+      },
+      {
+        "id": "daily-plan",
+        "title": "Planificar el día por bloques de tiempo",
+        "useWhen": "Empiezas el día sin saber en qué centrarte.",
+        "prompt": "Hoy tengo: [REUNIONES/COMPROMISOS FIJOS CON HORA]. Tareas: [LISTA CON ESTIMACIÓN]. Tengo más energía [MOMENTO DEL DÍA].\nCrea un plan por bloques: la tarea más difícil en mi mejor momento, emails y gestiones agrupados en 1–2 bloques, 10 minutos de margen después de las reuniones y un descanso de verdad. Si no cabe todo, dime qué pasar a mañana.",
+        "why": "Poner el trabajo difícil en tus mejores horas y agrupar las tareas pequeñas es justo para lo que sirve planificar por bloques."
+      },
+      {
+        "id": "decision-matrix",
+        "title": "Tomar una decisión con una matriz clara",
+        "useWhen": "Estás atascado entre varias opciones.",
+        "prompt": "Tengo que decidir: [DECISIÓN]. Opciones: [A, B, C].\nLo que me importa (con peso del 1 al 5): [CRITERIOS].\nHaz una tabla puntuando cada opción en cada criterio con una línea de motivo y un total ponderado. Después dime qué tendría que ser cierto para que ganara la opción perdedora. Marca las puntuaciones que dependen de información que no te he dado.",
+        "why": "La matriz hace explícitas tus prioridades; «qué tendría que ser cierto» muestra lo frágil que es el resultado."
+      },
+      {
+        "id": "weekly-review",
+        "title": "Revisión semanal",
+        "useWhen": "Al final de la semana, antes de planificar la siguiente.",
+        "prompt": "Ayúdame a hacer una revisión semanal. Responderé a tus preguntas de una en una: qué terminé, qué no y por qué, qué me quitó tiempo, qué salió bien. Después resume: 3 aprendizajes, 1 cosa que dejar de hacer, 1 cosa que empezar y mis 3 prioridades para la semana que viene. Hazme ya la primera pregunta.",
+        "why": "Responder una pregunta cada vez convierte una reflexión difusa en una rutina de 15 minutos."
+      },
+      {
+        "id": "inbox-zero",
+        "title": "Vaciar la bandeja de entrada más rápido",
+        "useWhen": "Tu bandeja de entrada está desbordada.",
+        "prompt": "Estos son los asuntos y primeras líneas de mis emails sin leer: <<<[PEGA, uno por línea con un número]>>>\nClasifícalos en: responder hoy (y en cuántas palabras), responder esta semana, solo leer, archivar, darme de baja. Para «responder hoy», redacta una respuesta de 1–2 líneas si es sencilla. No inventes información para responder: márcalos como «necesita mi respuesta».",
+        "why": "Primero clasificar, después responder; los borradores cortos resuelven lo fácil y «necesita mi respuesta» señala el resto."
+      },
+      {
+        "id": "habit-plan",
+        "title": "Crear un hábito que dure",
+        "useWhen": "Quieres empezar un hábito y siempre lo dejas.",
+        "prompt": "Hábito que quiero: [HÁBITO]. Por qué: [MOTIVO]. Lo que me ha hecho abandonar antes: [OBSTÁCULOS].\nDiseña un plan de 4 semanas: una versión mínima para empezar (menos de 5 minutos), un disparador ligado a algo que ya hago a diario, cómo registrarlo, cómo hacerlo un poco más exigente cada semana y un plan para los días que falle. Que sea realista con mi horario: [HORARIO].",
+        "why": "Empezar en pequeño, un disparador existente y un plan para los fallos atacan las razones por las que los hábitos suelen fracasar."
+      },
+      {
+        "id": "meeting-or-email",
+        "title": "¿Reunión o email?",
+        "useWhen": "Estás a punto de convocar una reunión.",
+        "prompt": "Quiero [OBJETIVO] con [PERSONAS]. Contexto: [CONTEXTO].\nDime si esto necesita una reunión, un mensaje escrito o una llamada corta, y por qué. Si es un mensaje, redáctalo (menos de 150 palabras, con una pregunta o petición de decisión clara). Si es una reunión, dame un orden del día de 3 puntos y la duración razonable más corta.",
+        "why": "Muchas reuniones son mensajes disfrazados; decidir primero el formato ahorra tiempo a todos."
+      },
+      {
+        "id": "learn-a-tool",
+        "title": "Aprender rápido una herramienta nueva",
+        "useWhen": "Tienes que empezar a usar un programa nuevo.",
+        "prompt": "Necesito aprender [HERRAMIENTA] para [LO QUE NECESITO HACER CON ELLA]. Mi nivel: [PRINCIPIANTE/ALGO DE EXPERIENCIA CON HERRAMIENTAS PARECIDAS].\nDame: los 5 conceptos que debo entender primero, un plan de aprendizaje de 3 días con pequeñas tareas de práctica y las 5 funciones que puedo ignorar por ahora. Dime qué partes de tu respuesta pueden estar desactualizadas y remíteme a la documentación oficial para comprobarlo.",
+        "why": "Centrarse en los pocos conceptos que importan acelera el aprendizaje; el aviso de desactualización importa porque las herramientas cambian rápido."
+      }
+    ]
+  }
+]

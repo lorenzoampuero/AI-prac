@@ -1,0 +1,54 @@
+{
+  "order": 7,
+  "name": "Presentations",
+  "title": "AI prompts for presentations and slides",
+  "seoTitle": "AI Presentation Prompts: 6 Slide Templates",
+  "description": "Prompt templates to plan presentations with AI: slide outlines, turning a report into a deck, speaker notes, tough questions and choosing the right chart.",
+  "intro": "The fastest route to a good deck is letting AI help with structure, not with facts. These templates start from your audience and your one message, and keep every number tied to your source.",
+  "lesson": "ai-for-work/ai-for-presentations",
+  "templates": [
+    {
+      "id": "outline-from-one-message",
+      "title": "Slide outline from one message",
+      "useWhen": "You have a talk to give and a blank deck.",
+      "prompt": "I am presenting to [AUDIENCE] for [MINUTES] minutes. The one thing they must remember: [ONE-SENTENCE MESSAGE]. What I want them to do afterwards: [ACTION].\nCreate a slide-by-slide outline (at most [N] slides): each slide title as a full sentence stating its point, 2–3 supporting bullets, and what evidence or visual belongs on it. Mark any slide where I need to supply data with [DATA NEEDED].",
+      "why": "Sentence titles force every slide to make a point. The [DATA NEEDED] markers stop the model inventing figures to fill the slides."
+    },
+    {
+      "id": "report-to-slides",
+      "title": "Turn a report into slides",
+      "useWhen": "The analysis exists; the deck doesn't.",
+      "prompt": "Turn the report between <<< and >>> into a [N]-slide deck for [AUDIENCE].\nRules: every number on a slide must appear in the report — quote it exactly and note the section it came from; the first slide is the conclusion, not an agenda; put detail in the speaker notes, not on the slides (max 25 words per slide).\n\nReport: <<<[PASTE]>>>",
+      "why": "Conclusion-first respects busy audiences, and the source note makes every figure traceable when someone asks “where is that from?”."
+    },
+    {
+      "id": "speaker-notes",
+      "title": "Speaker notes that sound natural",
+      "useWhen": "You know your slides but not what to say.",
+      "prompt": "Write speaker notes for these slides: <<<[PASTE SLIDE TITLES AND BULLETS]>>>\nRules: conversational, as I would say it out loud; about [SECONDS] seconds per slide; include one transition sentence into the next slide; don't read the bullets word for word — explain them.",
+      "why": "Notes that repeat the slide make you read your slides aloud. Timing and transitions make the talk flow."
+    },
+    {
+      "id": "tough-questions",
+      "title": "Prepare for tough questions",
+      "useWhen": "The audience is senior, sceptical or both.",
+      "prompt": "Here is my presentation outline: <<<[PASTE]>>>\nAudience: [AUDIENCE — their priorities and likely objections].\nList the 8 hardest questions they could ask, ranked by likelihood. For each, a two-sentence answer outline based only on my material, or “needs data” if my material cannot answer it.",
+      "why": "Rehearsing the uncomfortable questions is where AI saves the most time, and “needs data” shows exactly what to prepare."
+    },
+    {
+      "id": "simplify-a-slide",
+      "title": "Simplify a crowded slide",
+      "useWhen": "A slide has become a wall of text.",
+      "prompt": "This slide is too dense: <<<[PASTE SLIDE TEXT]>>>\nGive me: a sentence-style title with the main point; at most 3 bullets of at most 8 words each; one visual (chart type or image) that could replace text; and what to move into the speaker notes.",
+      "why": "Hard limits force prioritisation — the model proposes what is secondary and you approve it."
+    },
+    {
+      "id": "choose-a-chart",
+      "title": "Choose the right chart",
+      "useWhen": "You have data and a point to prove.",
+      "prompt": "I want to show: [WHAT THE DATA SHOULD PROVE]. Data: [COLUMNS AND A FEW EXAMPLE ROWS].\nRecommend the chart type, what goes on each axis, what to highlight, and a title that states the takeaway. Also say which chart types would mislead with this data and why.",
+      "why": "The message should choose the chart, not habit. Asking what would mislead catches truncated axes and 3D pies early."
+    }
+  ],
+  "draft": false
+}

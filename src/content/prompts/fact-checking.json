@@ -1,0 +1,54 @@
+{
+  "order": 5,
+  "name": "Fact-checking",
+  "title": "Prompts to fact-check AI answers",
+  "seoTitle": "Fact-Check AI Answers: 6 Verification Prompts",
+  "description": "Copy-paste prompts to verify AI answers: split them into checkable claims, ask for confidence and dates, inspect citations and cross-check two tools.",
+  "intro": "AI answers sound equally confident when they are right and when they are invented. These prompts make the model expose its uncertainty and hand you checkable claims — the checking itself still happens against real sources.",
+  "lesson": "ai-research/cross-check-answers",
+  "templates": [
+    {
+      "id": "split-into-claims",
+      "title": "Break an answer into checkable claims",
+      "useWhen": "An AI answer looks right but you have to rely on it.",
+      "prompt": "Take the answer between <<< and >>> and list every factual claim in it as a numbered list. For each claim give: the claim in one sentence; whether it is a number, date, name, quote or general statement; and what kind of source could verify it.\nDon't judge whether the claims are true yet.\n\nAnswer: <<<[PASTE]>>>",
+      "why": "You can't verify a paragraph, only claims. Splitting first turns a vague “is this right?” into a checklist."
+    },
+    {
+      "id": "confidence-and-gaps",
+      "title": "Ask for confidence and gaps",
+      "useWhen": "Before you use an answer for anything important.",
+      "prompt": "Answer this question: [QUESTION]\nThen, for each key point in your answer, rate your confidence (high / medium / low) and say why. List what would change the answer and what you might be missing because of your training cutoff. If you don't know, say so rather than estimating.",
+      "why": "Models rarely volunteer uncertainty. Asking point by point, and making “I don't know” acceptable, surfaces the weak parts."
+    },
+    {
+      "id": "check-citations",
+      "title": "Check the citations an AI gave you",
+      "useWhen": "The answer includes sources, studies or links.",
+      "prompt": "For each source cited in the answer below, list: the exact title, author or organisation, year and URL as given, and the specific claim it is supposed to support.\nState clearly that you cannot confirm these sources exist — I will open each one. Flag any citation that looks incomplete or suspicious.\n\nAnswer: <<<[PASTE]>>>",
+      "why": "Fabricated citations look complete. Laying them out claim by claim makes the manual check fast, and the model is told not to pretend it verified anything."
+    },
+    {
+      "id": "is-it-out-of-date",
+      "title": "Check whether an answer is out of date",
+      "useWhen": "Prices, laws, product features, roles or statistics are involved.",
+      "prompt": "Question: [QUESTION]\nBefore answering, tell me whether this depends on information that changes over time (prices, laws, product features, people's roles, statistics). If it does, say roughly how old your information is likely to be, what may have changed since, and where to check the current version. Then answer.",
+      "why": "Stale facts are the most common silent error. Asking about freshness first puts the caveat before the claim instead of after it."
+    },
+    {
+      "id": "cross-check-two-tools",
+      "title": "Cross-check two AI answers",
+      "useWhen": "You asked two tools and got different answers.",
+      "prompt": "Here are two answers to the same question from different tools.\nQuestion: [QUESTION]\nAnswer A: <<<[PASTE]>>>\nAnswer B: <<<[PASTE]>>>\nMake a table: point | A says | B says | agree? Then list the disagreements I must resolve with a primary source, most important first. Don't pick a winner.",
+      "why": "Agreement between models is not proof — they share training data — but a disagreement points precisely at what to check first."
+    },
+    {
+      "id": "check-the-numbers",
+      "title": "Check the numbers in a text",
+      "useWhen": "A text is full of statistics and percentages.",
+      "prompt": "List every number, percentage and statistic in the text between <<< and >>>. For each one: what it measures, the unit, the time period and the source named in the text (or “no source given”). Flag numbers that look inconsistent with each other.\n\nText: <<<[PASTE]>>>",
+      "why": "Numbers without a period, a unit or a source are where misleading claims hide. The table makes each missing piece visible."
+    }
+  ],
+  "draft": false
+}

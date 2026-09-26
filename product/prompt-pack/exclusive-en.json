@@ -1,0 +1,364 @@
+[
+  {
+    "slug": "marketing",
+    "order": 10,
+    "name": "Marketing and copywriting",
+    "intro": "Marketing copy goes wrong with AI in two ways: generic claims anyone could make, and claims you cannot back up. These templates start from your real customer and your real proof.",
+    "templates": [
+      {
+        "id": "value-proposition",
+        "title": "Find your value proposition",
+        "useWhen": "Your homepage or pitch says what you do, not why it matters.",
+        "prompt": "My product: [WHAT IT IS, IN ONE SENTENCE]\nCustomer: [WHO BUYS IT — role, situation, the moment they need it]\nTheir current alternative: [WHAT THEY DO TODAY INSTEAD]\nProof I have: [RESULTS, NUMBERS, TESTIMONIALS — only real ones]\nWrite 5 different value propositions (max 15 words each), each built on a different benefit. For each, say which proof above supports it. Don't use any claim my proof can't support.",
+        "why": "Tying each proposition to a piece of proof keeps the copy honest and tells you which claims you can defend."
+      },
+      {
+        "id": "landing-page-sections",
+        "title": "Landing page outline",
+        "useWhen": "You need a sales page and don't know what to put where.",
+        "prompt": "Create the section-by-section outline of a landing page for [PRODUCT] aimed at [CUSTOMER].\nSections: headline + subheadline, the problem in the customer's words, how it works (3 steps), proof, pricing, objections + answers, final call to action.\nUse only these facts: <<<[PASTE FEATURES, PRICE, PROOF]>>>. Mark with [NEED] any section where you'd need information I didn't give.",
+        "why": "A fixed section order is the proven skeleton; [NEED] markers show exactly what you still have to gather."
+      },
+      {
+        "id": "headline-variants",
+        "title": "Ten headlines to test",
+        "useWhen": "You want to A/B test a headline, an ad or an email subject.",
+        "prompt": "Write 10 headlines for [PAGE / AD / EMAIL] about [OFFER] for [CUSTOMER].\nUse 5 different angles, two headlines each: 1) the outcome, 2) the pain avoided, 3) speed or ease, 4) a specific number from my proof ([PROOF]), 5) a question.\nMax [10] words each. No exclamation marks, no “revolutionary”, “ultimate” or “game-changer”.",
+        "why": "Grouping by angle turns guessing into an experiment: you learn which kind of message works, not just which sentence."
+      },
+      {
+        "id": "customer-language",
+        "title": "Mine reviews for customer language",
+        "useWhen": "You want copy that sounds like your customers, not like marketing.",
+        "prompt": "Here are reviews, messages or survey answers from customers: <<<[PASTE]>>>\nExtract: 1) the exact phrases they use to describe the problem, 2) the exact phrases they use to describe the result, 3) objections or doubts they mention. Quote them word for word, with how many times each idea appears. Don't paraphrase.",
+        "why": "The best copy often already exists in your customers' mouths. Exact quotes beat the model's paraphrase."
+      },
+      {
+        "id": "product-description",
+        "title": "Product description for an online shop",
+        "useWhen": "A product page with a list of specs and no reason to buy.",
+        "prompt": "Write a product description for [PRODUCT] for [CUSTOMER] shopping on [STORE TYPE].\nFacts (use only these): <<<[PASTE SPECS, MATERIALS, SIZES, CARE]>>>\nStructure: one sentence on who it's for and the main benefit; 3–5 bullets translating specs into benefits (“[spec] — so you [benefit]”); one line on what's included. Under 120 words. No claims about health, safety or certifications unless they appear in the facts.",
+        "why": "The spec-to-benefit pattern sells without inventing; the no-claims rule avoids legal trouble in regulated areas."
+      },
+      {
+        "id": "email-campaign",
+        "title": "Three-email launch sequence",
+        "useWhen": "Launching a product, a course or an offer to your list.",
+        "prompt": "Write a 3-email sequence to launch [OFFER] to [AUDIENCE] who already know me from [CONTEXT].\nEmail 1 (announcement): what it is and who it's for. Email 2 (proof): one story or result — use only this: [REAL STORY/RESULT]. Email 3 (last call): the deadline [DATE] and the one reason to act now.\nEach email: subject line under 7 words, under 150 words, one link, one call to action. Plain text style.",
+        "why": "Three emails with distinct jobs outperform three versions of the same pitch; the proof email is only as good as the real story you give it."
+      },
+      {
+        "id": "competitor-comparison",
+        "title": "Honest comparison with a competitor",
+        "useWhen": "Customers ask “why you and not X?”.",
+        "prompt": "Compare my offer with [COMPETITOR] for a customer who needs [NEED].\nMy offer: <<<[PASTE FACTS]>>>\nTheir offer (from their public page): <<<[PASTE FACTS]>>>\nOutput a table of the factors this customer cares about, then 3 sentences on who should choose me and who should choose them. Be fair — mention where they are better. Don't state anything about them that isn't in the pasted facts.",
+        "why": "Honest comparisons convert better than attacks and keep you clear of false claims about competitors."
+      },
+      {
+        "id": "faq-objections",
+        "title": "Turn objections into a FAQ",
+        "useWhen": "People hesitate before buying and you don't know why.",
+        "prompt": "My product: [PRODUCT, PRICE]. Customer: [CUSTOMER].\nList the 8 most likely objections before buying (price, trust, time, fit, risk…). For each, a short honest answer using only these facts: <<<[PASTE GUARANTEES, POLICIES, PROOF]>>>. If an objection can't be answered with my facts, write “needs a real answer” instead of inventing one.",
+        "why": "Unanswerable objections are product feedback, not copy problems — the template separates the two."
+      },
+      {
+        "id": "ad-copy",
+        "title": "Short ad copy with limits",
+        "useWhen": "Paid ads with strict character limits.",
+        "prompt": "Write [N] ad variations for [PLATFORM] promoting [OFFER] to [AUDIENCE].\nLimits: headline max [30] characters, description max [90] characters — count them and show the count.\nEach variation must use a different benefit from this list: [BENEFITS]. No claims beyond: <<<[FACTS]>>>. Avoid words that platforms often reject (“guaranteed”, “#1”, “best”) unless I can prove them.",
+        "why": "Asking for the character count makes the model check its own limits; varied benefits give your test real contrast."
+      },
+      {
+        "id": "brand-voice-guide",
+        "title": "One-page brand voice guide",
+        "useWhen": "Several people (or tools) write for your brand and it sounds different each time.",
+        "prompt": "Here are 3 texts that sound exactly like our brand: <<<[PASTE]>>>\nWrite a one-page voice guide: 4 traits (each with “we are… / we are not…”), words we use and words we avoid, sentence length and punctuation habits, and a before/after rewrite of this generic sentence: “[GENERIC SENTENCE]”.",
+        "why": "A guide extracted from real examples is more consistent than adjectives invented from scratch — and you can paste it into any future prompt."
+      }
+    ]
+  },
+  {
+    "slug": "social-media",
+    "order": 11,
+    "name": "Social media",
+    "intro": "Social posts written by AI all sound the same because they start from nothing. These templates start from your real idea, your real audience and a format that suits the platform.",
+    "templates": [
+      {
+        "id": "linkedin-post",
+        "title": "LinkedIn post from a real experience",
+        "useWhen": "You learned something at work worth sharing.",
+        "prompt": "Turn this experience into a LinkedIn post: [WHAT HAPPENED, WHAT I LEARNED]\nAudience: [WHO SHOULD READ IT]\nStructure: first line that makes someone stop scrolling (no clickbait); the situation in 2–3 short lines; the lesson; one question to invite comments. Max 180 words, short paragraphs, no hashtag walls (max 3), no emojis at the start of lines. Keep my facts; don't add achievements.",
+        "why": "The first line decides whether anyone reads the rest. Real experience plus a clear lesson is what gets saved and shared."
+      },
+      {
+        "id": "content-ideas",
+        "title": "30 content ideas from your expertise",
+        "useWhen": "You never know what to post.",
+        "prompt": "I work as [ROLE] and help [AUDIENCE] with [TOPIC].\nGenerate 30 post ideas in 5 groups: mistakes I see, how-tos, myths, behind the scenes, opinions. For each: a one-line hook and the format (text, carousel, short video). Mark the 5 you think are most useful for my audience and why.",
+        "why": "Grouping by type gives you a varied calendar instead of 30 versions of the same tip."
+      },
+      {
+        "id": "repurpose",
+        "title": "Turn one piece into five",
+        "useWhen": "You wrote an article or recorded a video and want more out of it.",
+        "prompt": "Here is my content: <<<[PASTE ARTICLE OR TRANSCRIPT]>>>\nTurn it into: 1) a LinkedIn post (max 180 words), 2) a thread of 5 short posts, 3) an Instagram carousel (title + 6 slides, max 20 words each), 4) a 45-second video script, 5) a newsletter paragraph. Use only ideas from the original; keep any numbers exact.",
+        "why": "Repurposing multiplies reach without new research, and “only ideas from the original” keeps every version consistent."
+      },
+      {
+        "id": "carousel",
+        "title": "Instagram or LinkedIn carousel",
+        "useWhen": "You want to explain a process or a list visually.",
+        "prompt": "Create a carousel on [TOPIC] for [AUDIENCE].\nSlide 1: a promise the carousel keeps (max 8 words). Slides 2–[N]: one idea per slide, max 20 words, starting with a verb. Last slide: a summary and one call to action ([ACTION]).\nAlso suggest one simple visual per slide (icon, arrow, before/after).",
+        "why": "One idea per slide and a hard word limit are what make carousels readable on a phone."
+      },
+      {
+        "id": "video-script",
+        "title": "Short video script (Reels, TikTok, Shorts)",
+        "useWhen": "You want to record a short vertical video.",
+        "prompt": "Write a [30/45/60]-second script about [TOPIC] for [AUDIENCE].\nFormat: hook in the first 2 seconds (say it, don't build up to it); 3 beats with one idea each; a closing line with [CALL TO ACTION]. Add the on-screen text for each beat (max 6 words) and a note on what to show. Conversational, like I'm talking to one person.",
+        "why": "Short video lives or dies in the first two seconds; separate on-screen text lets viewers follow with the sound off."
+      },
+      {
+        "id": "reply-to-comments",
+        "title": "Reply to comments, including negative ones",
+        "useWhen": "Your post got comments and some are critical.",
+        "prompt": "Here are comments on my post about [TOPIC]: <<<[PASTE COMMENTS]>>>\nFor each, draft a reply: thank genuine questions and answer them; for criticism, acknowledge the valid part and add information (no sarcasm, no arguing); for spam or trolling, write “ignore”. Max 2 sentences per reply. Don't promise anything on behalf of [COMPANY].",
+        "why": "Consistent, calm replies build trust with everyone reading — not just with the commenter."
+      },
+      {
+        "id": "bio",
+        "title": "Profile bio for any platform",
+        "useWhen": "Your bio doesn't say what you do or why to follow you.",
+        "prompt": "Write 5 bio options for [PLATFORM] (max [150] characters, show the count).\nWho I am: [ROLE]. Who I help: [AUDIENCE]. With what: [TOPIC]. Proof: [ONE REAL CREDENTIAL OR RESULT]. What I want visitors to do: [ACTION].\nEach option with a different style: direct, friendly, results-first, curious, minimal.",
+        "why": "Five styles side by side help you choose; the character count keeps each one usable."
+      },
+      {
+        "id": "content-calendar",
+        "title": "One-month content calendar",
+        "useWhen": "You want to post consistently without improvising every day.",
+        "prompt": "Plan [N] posts per week for [WEEKS] weeks on [PLATFORM] for [AUDIENCE], about [TOPICS].\nTable: date | topic | format | hook | goal (reach, trust or sale). Rules: no more than 1 sales post in 5; alternate formats; group topics into weekly themes. Leave [DATES] free (holidays, events).",
+        "why": "The 1-in-5 rule keeps your feed useful; weekly themes make it easier to batch-create posts."
+      },
+      {
+        "id": "hashtags-keywords",
+        "title": "Keywords and hashtags that make sense",
+        "useWhen": "You pick hashtags at random.",
+        "prompt": "My post is about [TOPIC] for [AUDIENCE] on [PLATFORM].\nSuggest: 3 broad hashtags, 3 niche hashtags and 5 keywords to use naturally in the text or video. For each, say who is likely to search it. Remind me to check current popularity in the platform's search, since you can't see live data.",
+        "why": "The model can suggest candidates but can't see trends today; the reminder keeps you checking the real numbers."
+      }
+    ]
+  },
+  {
+    "slug": "studying",
+    "order": 12,
+    "name": "Studying and learning",
+    "intro": "AI is a great tutor if it makes you think and a bad one if it thinks for you. These templates turn it into a quiz master, an explainer and a study planner, and always ask it to show what it is unsure about.",
+    "templates": [
+      {
+        "id": "explain-like-tutor",
+        "title": "Explain a concept like a tutor",
+        "useWhen": "You don't understand a topic from your notes or book.",
+        "prompt": "Explain [CONCEPT] to me. My level: [WHAT I ALREADY KNOW]. Context: I'm studying [COURSE/EXAM].\nStructure: a one-sentence plain definition; an everyday analogy; a worked example; the most common mistake students make. Then ask me one question to check I understood — wait for my answer before continuing.",
+        "why": "Ending with a question and waiting forces active recall, which is what actually makes things stick."
+      },
+      {
+        "id": "quiz-me",
+        "title": "Quiz me on my notes",
+        "useWhen": "Before an exam.",
+        "prompt": "Here are my notes: <<<[PASTE]>>>\nQuiz me with [10] questions, one at a time, mixing multiple choice and short answer. After each answer: say if I'm right, explain why in 2 sentences, and quote the part of my notes that answers it. Only ask about what's in the notes. At the end, list the topics I got wrong.",
+        "why": "One question at a time with feedback beats reading your notes again; quoting the notes keeps the quiz tied to what you'll be examined on."
+      },
+      {
+        "id": "flashcards",
+        "title": "Make flashcards from a text",
+        "useWhen": "You want to review with spaced repetition (Anki, Quizlet…).",
+        "prompt": "Create [20] flashcards from the text between <<< and >>>.\nFormat: question ; answer (one per line, separated by a semicolon so I can import them).\nRules: one fact per card; the question must make sense on its own; answers under 15 words; no cards about trivial details. Use only information from the text.\n\nText: <<<[PASTE]>>>",
+        "why": "One fact per card and self-contained questions are the two rules that make flashcards work; the semicolon format imports directly."
+      },
+      {
+        "id": "study-plan",
+        "title": "Study plan until the exam",
+        "useWhen": "You have an exam date and too much material.",
+        "prompt": "Exam: [SUBJECT] on [DATE]. Today is [DATE]. Topics: [LIST, with how confident I feel in each: low/medium/high]. Time available: [HOURS PER DAY, days off].\nCreate a day-by-day plan: more time for low-confidence topics, review sessions spaced out (1, 3 and 7 days after first study), a full practice test [N] days before the exam, and one light day before it.",
+        "why": "Spacing and weighting by confidence use your time where it matters; a practice test before the exam shows what's still weak."
+      },
+      {
+        "id": "check-my-answer",
+        "title": "Check my answer without giving me the solution",
+        "useWhen": "You solved an exercise and want feedback, not the answer.",
+        "prompt": "Problem: [PASTE PROBLEM]\nMy answer and reasoning: [PASTE]\nTell me whether my reasoning is correct. If there's a mistake, point to the step where it happens and give me a hint — don't give me the full solution unless I ask for it.",
+        "why": "Hints instead of solutions keep you doing the thinking — the part that builds the skill."
+      },
+      {
+        "id": "summarize-chapter",
+        "title": "Chapter summary with key terms",
+        "useWhen": "A long chapter you need to master.",
+        "prompt": "Summarise the chapter between <<< and >>> for exam revision.\nOutput: 1) the 5 main ideas in one sentence each; 2) key terms with a one-line definition; 3) how the ideas connect (one short paragraph); 4) 3 likely exam questions. Use only the chapter; keep definitions faithful to the text.\n\nChapter: <<<[PASTE]>>>",
+        "why": "Main ideas, terms and connections are what exams test; faithful definitions matter because the exam will use the book's wording."
+      },
+      {
+        "id": "feynman",
+        "title": "Test yourself with the Feynman technique",
+        "useWhen": "You think you understand something but aren't sure.",
+        "prompt": "I'm going to explain [CONCEPT] as if to a 12-year-old. Read my explanation and: point out any wrong statement; point out where I used jargon instead of explaining; ask me the one question that would expose the biggest gap in my understanding.\n\nMy explanation: [WRITE IT]",
+        "why": "If you can't explain it simply you don't know it yet — the model finds exactly where the explanation breaks."
+      },
+      {
+        "id": "language-practice",
+        "title": "Practise a foreign language by conversation",
+        "useWhen": "You're learning a language and have no one to talk to.",
+        "prompt": "Let's practise [LANGUAGE] at level [A2/B1/B2…]. Topic: [TOPIC].\nTalk to me in short messages. After each of my replies: first answer naturally to keep the conversation going; then, separately, correct up to 3 mistakes with a short explanation. Use vocabulary at my level and introduce 2 new useful words per message, marked in bold.",
+        "why": "Keeping conversation and corrections separate keeps the chat natural while you still learn from every mistake."
+      },
+      {
+        "id": "research-paper",
+        "title": "Understand an academic paper",
+        "useWhen": "You need to read a paper for a course or work.",
+        "prompt": "Here is a paper (or its abstract, introduction and conclusion): <<<[PASTE]>>>\nExplain: the question it asks; the method in plain words; the main finding with its numbers; the limitations the authors admit; and what the paper does NOT show. Don't add claims from outside the paper.",
+        "why": "“What it does not show” is the question most summaries skip — and the one that stops you overstating a study."
+      }
+    ]
+  },
+  {
+    "slug": "writing",
+    "order": 13,
+    "name": "Writing and editing",
+    "intro": "Use AI as an editor, not a ghostwriter: it is excellent at spotting what is unclear, repeated or too long in your text, and much less reliable when it writes your ideas from scratch.",
+    "templates": [
+      {
+        "id": "edit-for-clarity",
+        "title": "Edit for clarity, keep my voice",
+        "useWhen": "Your text is correct but hard to read.",
+        "prompt": "Edit the text between <<< and >>> for clarity.\nKeep: my voice, my arguments, all facts and numbers.\nDo: shorten long sentences, replace jargon with plain words, remove repetition.\nShow the edited text, then a list of the 5 most important changes and why. Don't add new ideas.\n\nText: <<<[PASTE]>>>",
+        "why": "Listing the changes lets you accept or reject them, so the text stays yours."
+      },
+      {
+        "id": "structure-first",
+        "title": "Outline before you write",
+        "useWhen": "You have to write something long and don't know where to start.",
+        "prompt": "I need to write [TYPE OF TEXT] for [READER] about [TOPIC]. My main point: [ONE SENTENCE]. The material I have: [NOTES, DATA, SOURCES].\nPropose 2 different outlines (headings + one line on what goes under each). For each, say what kind of reader it suits better. Don't write the text yet.",
+        "why": "Choosing the structure first is where writing gets easier; two options make you think about the reader."
+      },
+      {
+        "id": "proofread",
+        "title": "Proofread without rewriting",
+        "useWhen": "A text is ready but you want a final check.",
+        "prompt": "Proofread the text between <<< and >>> in [LANGUAGE/VARIANT, e.g. British English].\nOnly fix: spelling, grammar, punctuation and obvious typos. Do not change style, word choice or structure.\nOutput a list: original → correction → reason. Then the corrected text.\n\nText: <<<[PASTE]>>>",
+        "why": "Restricting the task to errors stops the model from “improving” your style when you only wanted a proofread."
+      },
+      {
+        "id": "change-tone",
+        "title": "Change the tone of a text",
+        "useWhen": "The content is right but the tone isn't.",
+        "prompt": "Rewrite the text between <<< and >>> in a [TARGET TONE, e.g. more direct / warmer / more formal] tone for [READER].\nKeep every fact, request and number. Keep the length within ±10%.\nThen list the 3 phrases that changed the most, before → after.\n\nText: <<<[PASTE]>>>",
+        "why": "Fixing facts and length isolates the tone change, and the before/after list shows what “warmer” actually meant."
+      },
+      {
+        "id": "critique",
+        "title": "Get a tough critique",
+        "useWhen": "Before you publish or send something important.",
+        "prompt": "Act as a demanding editor for [PUBLICATION/READER]. Critique the text between <<< and >>>.\nGive: the 3 biggest weaknesses (argument, structure, evidence, clarity), where exactly each happens (quote it), and a concrete fix for each. Then one thing that works well and should be kept. Don't rewrite the text.\n\nText: <<<[PASTE]>>>",
+        "why": "A critique with quotes and fixes is actionable; “don't rewrite” keeps the improvement in your hands."
+      },
+      {
+        "id": "blog-post-draft",
+        "title": "Blog post from your own notes",
+        "useWhen": "You have ideas and notes and need a first draft.",
+        "prompt": "Write a first draft of a blog post for [READER] from my notes: <<<[PASTE NOTES]>>>\nTitle: 3 options. Structure: intro that states the problem, 3–5 sections with headings, conclusion with one next step. Use only ideas and examples from my notes — where a section needs an example I didn't give, write [EXAMPLE NEEDED]. About [WORDS] words.",
+        "why": "Drafting from your notes, with visible gaps, gives you a text you can finish — not a generic article that could be anyone's."
+      },
+      {
+        "id": "shorten-to-limit",
+        "title": "Cut to a hard word limit",
+        "useWhen": "An application, abstract or form with a word limit.",
+        "prompt": "Cut the text between <<< and >>> to at most [N] words (currently about [M]).\nPriority order of what to keep: [1. …, 2. …, 3. …].\nShow the final word count. Then list what you cut, so I can put back anything essential.\n\nText: <<<[PASTE]>>>",
+        "why": "A priority order tells the model what to sacrifice first — the part it otherwise guesses."
+      },
+      {
+        "id": "titles",
+        "title": "Titles and subject lines",
+        "useWhen": "You have the text but not the title.",
+        "prompt": "Write 10 titles for this text: <<<[PASTE OR SUMMARISE]>>>\nReader: [READER]. Where it appears: [BLOG / EMAIL / REPORT / VIDEO].\nMix: 3 descriptive, 3 benefit-led, 2 with a number, 2 questions. Max [N] words. The title must promise only what the text delivers.",
+        "why": "“Promise only what the text delivers” prevents clickbait that damages trust — and search rankings."
+      },
+      {
+        "id": "consistency-check",
+        "title": "Consistency check for long documents",
+        "useWhen": "A long document written over several days or by several people.",
+        "prompt": "Check the document between <<< and >>> for inconsistencies: the same thing named differently, numbers or dates that don't match between sections, contradicting statements, and inconsistent formatting of headings and lists.\nList each issue with both quotes and where they appear. Don't fix them — I'll decide.\n\nDocument: <<<[PASTE]>>>",
+        "why": "Inconsistencies are hard to spot in your own long text and easy for a model to list; you keep the decision."
+      }
+    ]
+  },
+  {
+    "slug": "productivity",
+    "order": 14,
+    "name": "Personal productivity",
+    "intro": "AI can plan, prioritise and break work down — as long as it works with your real constraints. These templates always ask for your actual time, energy and deadlines first.",
+    "templates": [
+      {
+        "id": "prioritise-week",
+        "title": "Prioritise your week",
+        "useWhen": "Too many tasks and not enough time.",
+        "prompt": "My tasks this week: [LIST, with deadline and rough time for each]\nMy available time: [HOURS PER DAY, meetings, fixed commitments]\nMy most important goal this week: [GOAL]\nSort the tasks into: do this week (with a suggested day), delegate, postpone, drop. Explain each decision in one line. If it doesn't fit, tell me honestly what won't get done.",
+        "why": "Giving your real hours forces honest trade-offs instead of a plan that only works on paper."
+      },
+      {
+        "id": "break-down-project",
+        "title": "Break a project into steps",
+        "useWhen": "A big project you keep putting off.",
+        "prompt": "Project: [WHAT], deadline [DATE], my time: [HOURS PER WEEK].\nBreak it into steps of at most 2 hours each, in order, with dependencies. Mark the very first step I can do today in under 25 minutes. Add 2 checkpoints where I should review progress. List the information I'm missing to plan it properly.",
+        "why": "Small steps and a tiny first action beat procrastination; the missing-info list stops the plan being built on guesses."
+      },
+      {
+        "id": "daily-plan",
+        "title": "Plan your day in time blocks",
+        "useWhen": "You start the day without knowing what to focus on.",
+        "prompt": "Today I have: [FIXED MEETINGS/COMMITMENTS WITH TIMES]. Tasks: [LIST WITH ESTIMATES]. My energy is best at [TIME OF DAY].\nCreate a time-blocked plan: hardest task in my best-energy slot, emails and admin batched in 1–2 blocks, 10-minute buffers after meetings, one real break. If everything doesn't fit, tell me what to move to tomorrow.",
+        "why": "Matching hard work to your best hours and batching small tasks is what time-blocking is for."
+      },
+      {
+        "id": "decision-matrix",
+        "title": "Make a decision with a clear matrix",
+        "useWhen": "You're stuck between options.",
+        "prompt": "I have to decide: [DECISION]. Options: [A, B, C].\nWhat matters to me (with weight 1–5): [CRITERIA].\nMake a table scoring each option on each criterion with a one-line reason, and a weighted total. Then tell me what would have to be true for the losing option to win. Mark scores that depend on information I haven't given.",
+        "why": "The matrix makes your priorities explicit; “what would have to be true” shows how fragile the result is."
+      },
+      {
+        "id": "weekly-review",
+        "title": "Weekly review",
+        "useWhen": "End of the week, before planning the next one.",
+        "prompt": "Help me do a weekly review. I'll answer your questions one at a time: what I finished, what I didn't and why, what drained my time, what went well. Then summarise: 3 lessons, 1 thing to stop, 1 thing to start, and my top 3 priorities for next week. Ask the first question now.",
+        "why": "Answering one question at a time turns a vague reflection into a routine that takes 15 minutes."
+      },
+      {
+        "id": "inbox-zero",
+        "title": "Clear your inbox faster",
+        "useWhen": "Your inbox is overflowing.",
+        "prompt": "Here are the subjects and first lines of my unread emails: <<<[PASTE, one per line with a number]>>>\nSort them into: reply today (and in how many words), reply this week, just read, archive, unsubscribe. For “reply today”, draft a 1–2 line answer if it's simple. Don't invent information to answer — mark those “needs my input”.",
+        "why": "Triage first, reply second; short drafts handle the easy ones and “needs my input” flags the rest."
+      },
+      {
+        "id": "habit-plan",
+        "title": "Build a habit that sticks",
+        "useWhen": "You want to start a habit and always give up.",
+        "prompt": "Habit I want: [HABIT]. Why: [REASON]. What has made me quit before: [OBSTACLES].\nDesign a 4-week plan: a tiny starting version (under 5 minutes), a trigger linked to something I already do daily, how to track it, how to make it slightly harder each week, and a plan for the days I miss. Keep it realistic for my schedule: [SCHEDULE].",
+        "why": "Tiny start, an existing trigger and a plan for missed days address the reasons habits usually fail."
+      },
+      {
+        "id": "meeting-or-email",
+        "title": "Should this be a meeting or an email?",
+        "useWhen": "You're about to schedule a meeting.",
+        "prompt": "I want to [GOAL] with [PEOPLE]. Background: [CONTEXT].\nTell me whether this needs a meeting, a written message or a short call — and why. If it's a message, draft it (under 150 words, with a clear question or decision request). If it's a meeting, give a 3-item agenda and the shortest reasonable duration.",
+        "why": "Many meetings are messages in disguise; deciding the format first saves everyone's time."
+      },
+      {
+        "id": "learn-a-tool",
+        "title": "Learn a new tool fast",
+        "useWhen": "You have to start using new software.",
+        "prompt": "I need to learn [TOOL] to [WHAT I NEED TO DO WITH IT]. My level: [BEGINNER/SOME EXPERIENCE WITH SIMILAR TOOLS].\nGive me: the 5 concepts I must understand first, a 3-day learning plan with small practice tasks, and the 5 features I can ignore for now. Tell me which parts of your answer may be outdated and point me to the official documentation to check.",
+        "why": "Focusing on the few concepts that matter speeds up learning; the outdated-info warning matters because tools change fast."
+      }
+    ]
+  }
+]

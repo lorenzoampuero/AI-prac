@@ -1,0 +1,54 @@
+{
+  "order": 1,
+  "name": "Email",
+  "title": "ChatGPT prompts for email",
+  "seoTitle": "ChatGPT Email Prompts: 6 Copy-Paste Templates",
+  "description": "Free copy-paste prompt templates for writing emails with ChatGPT, Claude or Gemini: replies, follow-ups, bad news and emails that sound like you.",
+  "intro": "Each template fixes the parts that make AI emails go wrong — tone, length, and facts the model must not invent — and leaves named slots for what changes. Fill every [SLOT]. If you can't fill one, the email isn't ready to delegate yet.",
+  "lesson": "ai-for-work/email-that-sounds-like-you",
+  "templates": [
+    {
+      "id": "reply-in-your-voice",
+      "title": "Reply in your own voice",
+      "useWhen": "You need a reply that does not sound like a template.",
+      "prompt": "Write a reply to the email between <<< and >>>.\nGoal of my reply: [WHAT I WANT TO HAPPEN NEXT]\nMy voice — match these two short emails I wrote: <<<[PASTE 2 EMAILS YOU SENT]>>>\nRules: under [120] words; no greetings or sign-offs I don't use in the samples; do not promise dates, prices or commitments that are not in my goal. If the email asks something my goal doesn't answer, list it as a question for me instead of guessing.\n\nEmail: <<<[PASTE EMAIL]>>>",
+      "why": "Real samples beat adjectives like “friendly but professional”. The no-promises rule stops the model inventing commitments you would then have to honour."
+    },
+    {
+      "id": "follow-up",
+      "title": "Polite follow-up after no reply",
+      "useWhen": "Someone has not answered and you need a decision.",
+      "prompt": "Write a follow-up email to [RECIPIENT ROLE] who has not replied to my message from [HOW LONG AGO].\nOriginal message: <<<[PASTE]>>>\nWhat I need from them: [ONE SPECIFIC ACTION] by [DATE].\nRules: three sentences maximum; restate the ask in the first sentence; make replying easy (a yes/no question or two options); no guilt-tripping phrases like “just circling back” or “as per my last email”.",
+      "why": "Follow-ups fail when the ask is buried. Fixing the length and putting the action first gives the reader a ten-second decision."
+    },
+    {
+      "id": "bad-news",
+      "title": "Deliver bad news clearly",
+      "useWhen": "A delay, a refusal or a mistake has to be communicated.",
+      "prompt": "Draft an email telling [AUDIENCE] that [THE BAD NEWS].\nFacts I can confirm: [LIST THE FACTS]\nWhat happens next / what they can do: [OPTIONS]\nRules: state the news in the first two sentences; one sentence of genuine acknowledgement, no over-apologising; do not speculate about causes beyond the facts above; end with the single next step. Give me two versions: one direct, one warmer.",
+      "why": "Burying bad news breeds distrust. The facts list bounds what the model may claim, and two versions let you choose the tone without re-prompting."
+    },
+    {
+      "id": "shorten",
+      "title": "Cut a long email in half",
+      "useWhen": "Your draft is too long and people stop reading.",
+      "prompt": "Shorten the email between <<< and >>> to at most [HALF THE WORDS] words.\nKeep: every date, number, name, and every request I make.\nCut: repetition, hedging, and background the reader already knows ([WHAT THEY KNOW]).\nThen list, one line each, anything you removed that I might want back.\n\nEmail: <<<[PASTE DRAFT]>>>",
+      "why": "Shortening is where models silently drop facts. The keep-list protects them and the removal list makes the edit auditable."
+    },
+    {
+      "id": "ask-a-senior",
+      "title": "Ask a busy senior person for something",
+      "useWhen": "You need approval, time or a decision from someone with no time.",
+      "prompt": "Write an email to [NAME, ROLE] asking for [THE REQUEST].\nContext they need (and nothing more): [2–3 FACTS]\nWhy it matters to them: [THEIR INTEREST, NOT MINE]\nRules: subject line under 8 words that states the ask; first line = the ask; under 100 words in total; offer the smallest possible yes (for example a 15-minute call or a one-word approval).",
+      "why": "Senior readers triage by subject line and first sentence. The template forces the ask to the top and frames it in their interest."
+    },
+    {
+      "id": "translate-keep-tone",
+      "title": "Translate an email and keep the tone",
+      "useWhen": "You write to someone in another language or country.",
+      "prompt": "Translate the email between <<< and >>> into [LANGUAGE] for a reader in [COUNTRY OR REGION].\nKeep: the level of formality ([FORMAL / NEUTRAL / CASUAL]) and all names, numbers, dates and product names exactly.\nAdapt: greetings, sign-offs and idioms to what a native speaker would actually write.\nAfter the translation, list any phrase where the literal meaning and the natural phrasing differed, so I can check it.\n\nEmail: <<<[PASTE]>>>",
+      "why": "Literal translation reads as foreign; free translation drifts. Naming what to keep and what to adapt, plus the flagged phrases, keeps you in control."
+    }
+  ],
+  "draft": false
+}

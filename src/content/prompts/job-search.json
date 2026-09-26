@@ -1,0 +1,54 @@
+{
+  "order": 6,
+  "name": "CV and job search",
+  "title": "ChatGPT prompts for your CV and job search",
+  "seoTitle": "ChatGPT Prompts for CVs and Cover Letters",
+  "description": "Free prompts to tailor your CV, write a cover letter, prepare interview answers and research a company with AI — without inventing experience you do not have.",
+  "intro": "AI is excellent at matching your real experience to a job description and dangerous when it is allowed to invent. Every template below includes a no-invention rule: it may rephrase what you did, never add what you didn't.",
+  "lesson": "ai-for-work/job-search-workflows",
+  "templates": [
+    {
+      "id": "tailor-your-cv",
+      "title": "Tailor your CV to a job offer",
+      "useWhen": "Every application — one CV per job, not one CV for all.",
+      "prompt": "Job description: <<<[PASTE]>>>\nMy CV: <<<[PASTE]>>>\n1) List the job's top 6 requirements.\n2) For each, quote the line of my CV that proves it, or write “gap”.\n3) Rewrite up to 5 bullet points using the job's keywords where they honestly match.\nRule: never add skills, tools, numbers or job titles that are not in my CV. If a stronger bullet needs a number I didn't give, ask me for it.",
+      "why": "The requirement-to-evidence map shows your real fit and your real gaps; the no-invention rule protects you in the interview."
+    },
+    {
+      "id": "cover-letter",
+      "title": "A cover letter that isn't generic",
+      "useWhen": "The job asks for a cover letter and you want it read.",
+      "prompt": "Write a cover letter for [ROLE] at [COMPANY].\nWhy this company (my real reason): [YOUR REASON]\nTwo achievements to feature (from my CV): [ACHIEVEMENT 1], [ACHIEVEMENT 2]\nRules: under 250 words; open with the specific reason, not “I am writing to apply”; connect each achievement to a requirement in this job: <<<[PASTE JOB DESCRIPTION]>>>; no clichés like “passionate”, “team player” or “fast-paced”.",
+      "why": "Generic letters come from generic inputs. Your real reason and two concrete achievements are the only parts a recruiter remembers."
+    },
+    {
+      "id": "interview-star-answers",
+      "title": "Prepare interview answers (STAR)",
+      "useWhen": "You have an interview coming up.",
+      "prompt": "Role: [ROLE]. Job description: <<<[PASTE]>>>\nList the 6 questions I am most likely to be asked. For each behavioural question, help me build a STAR answer (Situation, Task, Action, Result) using this real experience: [DESCRIBE 2–3 SITUATIONS FROM YOUR WORK].\nAsk me for missing details instead of inventing them. Keep each answer under 90 seconds spoken (about 200 words).",
+      "why": "STAR gives the structure; your real situations give the substance. Asking for missing details keeps every answer yours."
+    },
+    {
+      "id": "research-the-company",
+      "title": "Research a company before an interview",
+      "useWhen": "You want to sound informed, not generic.",
+      "prompt": "I have an interview at [COMPANY] for [ROLE]. Give me a research checklist: what to look up (products, customers, recent news, competitors, culture signals) and where (official site, annual report, news, employee reviews).\nThen tell me what you think you know about the company, marking how current it may be — I will verify everything before relying on it.",
+      "why": "The model is better at telling you what to check than at being current. Treat what it knows as a list of leads, not as facts."
+    },
+    {
+      "id": "linkedin-about",
+      "title": "LinkedIn About section",
+      "useWhen": "Your profile is empty or reads like a list of buzzwords.",
+      "prompt": "Write a LinkedIn “About” section for me.\nWhat I do now: [ROLE, FIELD]\nProof from real work: [2–3 RESULTS, with numbers if you have them]\nWhat I want next: [TARGET ROLE OR CLIENTS]\nRules: first person; 120–180 words; the first two lines must work on their own (that is what shows before “see more”); no list of buzzwords; end with what people should contact me about.",
+      "why": "Only the first two lines are visible by default. The template makes them carry the pitch and grounds the rest in real results."
+    },
+    {
+      "id": "negotiate-an-offer",
+      "title": "Negotiate an offer by email",
+      "useWhen": "You received an offer and want to ask for more.",
+      "prompt": "Help me reply to a job offer. Offer: [SALARY, BENEFITS]. What I want: [TARGET] because [REASONS: market data you found, a competing offer, specific skills].\nWrite a short, warm email that thanks them, states the target once with the reasons, and asks whether there is flexibility. Under 150 words. Don't invent market figures — use only the reasons I gave.",
+      "why": "Negotiation emails fail by being vague or aggressive. One clear number with real reasons, in a warm frame, is the professional default."
+    }
+  ],
+  "draft": false
+}

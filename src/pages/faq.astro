@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd, faqJsonLd } from '../seo/schema';
+import { SITE_ORIGIN } from '../config/site';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 
 // Answer-first, one honest paragraph per question, then a link to the lesson that goes deep.
 // Kept deliberately short: the FAQ answers the question, the lesson teaches the skill.

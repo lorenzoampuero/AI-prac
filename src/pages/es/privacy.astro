@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../seo/schema';
+import { CONTACT_EMAIL, NEWSLETTER_URL, PRO_PACK_URL, SITE_ORIGIN } from '../../config/site';
 
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
 
 <BaseLayout
@@ -70,11 +71,26 @@ const origin = Astro.site ?? new URL('https://getaipractice.site');
     no lo usa para perfilar y no lo comparte.
   </p>
 
+  {(NEWSLETTER_URL || PRO_PACK_URL) && (
+    <>
+      <h2>Newsletter y compras</h2>
+      <p>
+        La suscripción a la newsletter (MailerLite) y la compra del pack de prompts (Lemon Squeezy) se hacen
+        en las páginas de esos proveedores, bajo sus políticas de privacidad. Este sitio solo enlaza a ellas:
+        nunca ve tu email ni tus datos de pago, y no añade ningún script ni cookie suyos a estas páginas.
+      </p>
+    </>
+  )}
+
   <h2>Correcciones y contacto</h2>
   <p>
-    Las correcciones son bienvenidas y el canal público se enlazará aquí en cuanto esté disponible.
-    Hasta entonces, los problemas detectados en las auditorías de contenido se corrigen en las
-    lecciones y quedan registrados en el historial de calidad del proyecto.
+    Las correcciones son bienvenidas. Los problemas detectados en las auditorías de contenido se
+    corrigen en las lecciones y quedan registrados en el historial de calidad del proyecto.
+    {CONTACT_EMAIL && (
+      <>
+        Para avisar de un error o preguntar por esta página, escribe a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      </>
+    )}
   </p>
 
   <h2 id="changes">Cambios en esta página</h2>

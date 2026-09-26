@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getTrack } from '../../../data/tracks';
 import { breadcrumbJsonLd, courseJsonLd } from '../../../seo/schema';
+import { SITE_ORIGIN } from '../../../config/site';
 
 export async function getStaticPaths() {
   const lessons = await getCollection('lessonsEs', ({ data }) => !data.draft);
@@ -22,7 +23,7 @@ type Props = { lessons: CollectionEntry<'lessonsEs'>[] };
 const { lessons } = Astro.props as Props;
 const { track: trackId } = Astro.params;
 const info = getTrack(trackId ?? '');
-const origin = Astro.site ?? new URL('https://getaipractice.site');
+const origin = Astro.site ?? new URL(SITE_ORIGIN);
 ---
 
 <BaseLayout
